@@ -20,7 +20,7 @@ const Laboratories = () => {
       
       <main className="pt-24 pb-12 px-4">
         <div className="container mx-auto">
-          <div className="mb-8">
+          <div className="mb-8 fade-in-up">
             <h1 className="text-3xl font-bold mb-2">Laboratoriya ishlari</h1>
             <p className="text-muted-foreground">
               Tajribani tanlang, nazariyani o'qing va jadvalga qiymatlarni kiritib natijalarni kuzating
@@ -29,7 +29,7 @@ const Laboratories = () => {
 
           <div className="grid lg:grid-cols-[280px_1fr] gap-6">
             {/* Sidebar - Lab List */}
-            <div className="space-y-2">
+            <div className="space-y-2 slide-in-left">
               <h2 className="text-sm font-medium text-muted-foreground mb-4 px-2">
                 LABORATORIYA ISHLARI
               </h2>
@@ -39,15 +39,16 @@ const Laboratories = () => {
                     key={lab.id}
                     onClick={() => setSelectedLab(lab)}
                     className={cn(
-                      "w-full text-left px-4 py-3 rounded-lg transition-all duration-200",
-                      "hover:bg-secondary/80",
+                      "w-full text-left px-4 py-3 rounded-lg transition-all duration-300",
+                      "hover:bg-secondary/80 hover:translate-x-1",
                       selectedLab.id === lab.id
-                        ? "bg-primary/10 border border-primary/30 text-primary"
+                        ? "bg-primary/10 border border-primary/30 text-primary scale-[1.02]"
                         : "bg-card border border-transparent text-foreground"
                     )}
+                    style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-xs font-mono">
+                      <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-xs font-mono group-hover:bg-primary/20 transition-colors">
                         {index + 1}
                       </span>
                       <span className="text-sm font-medium">{lab.titleUz}</span>
@@ -60,17 +61,17 @@ const Laboratories = () => {
             {/* Main Content */}
             <div className="space-y-6">
               {/* Lab Header */}
-              <div className="glass-card p-6 glow-border">
+              <div className="glass-card p-6 glow-border scale-in" key={selectedLab.id}>
                 <h2 className="text-2xl font-bold">{selectedLab.titleUz}</h2>
               </div>
 
               {/* Lab Sections */}
               <Accordion type="multiple" defaultValue={["purpose", "equipment", "theory", "procedure", "table"]} className="space-y-4">
                 {/* Purpose */}
-                <AccordionItem value="purpose" className="glass-card border-none">
-                  <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                <AccordionItem value="purpose" className="glass-card border-none slide-in-bottom" style={{ animationDelay: '0.1s' }}>
+                  <AccordionTrigger className="px-6 py-4 hover:no-underline group">
                     <div className="flex items-center gap-3">
-                      <Target className="w-5 h-5 text-primary" />
+                      <Target className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                       <span className="font-semibold">Ishning maqsadi</span>
                     </div>
                   </AccordionTrigger>
@@ -80,17 +81,17 @@ const Laboratories = () => {
                 </AccordionItem>
 
                 {/* Equipment */}
-                <AccordionItem value="equipment" className="glass-card border-none">
-                  <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                <AccordionItem value="equipment" className="glass-card border-none slide-in-bottom" style={{ animationDelay: '0.15s' }}>
+                  <AccordionTrigger className="px-6 py-4 hover:no-underline group">
                     <div className="flex items-center gap-3">
-                      <Wrench className="w-5 h-5 text-primary" />
+                      <Wrench className="w-5 h-5 text-primary group-hover:rotate-12 transition-transform" />
                       <span className="font-semibold">Kerakli asbob va uskunalar</span>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-4">
                     <ul className="space-y-2">
                       {selectedLab.equipmentUz.map((item, i) => (
-                        <li key={i} className="flex items-center gap-2">
+                        <li key={i} className="flex items-center gap-2 fade-in-up" style={{ animationDelay: `${i * 0.05}s` }}>
                           <span className="w-2 h-2 rounded-full bg-primary" />
                           <span>{item}</span>
                         </li>
@@ -100,10 +101,10 @@ const Laboratories = () => {
                 </AccordionItem>
 
                 {/* Theory */}
-                <AccordionItem value="theory" className="glass-card border-none">
-                  <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                <AccordionItem value="theory" className="glass-card border-none slide-in-bottom" style={{ animationDelay: '0.2s' }}>
+                  <AccordionTrigger className="px-6 py-4 hover:no-underline group">
                     <div className="flex items-center gap-3">
-                      <BookOpen className="w-5 h-5 text-primary" />
+                      <BookOpen className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                       <span className="font-semibold">Nazariy qism</span>
                     </div>
                   </AccordionTrigger>
@@ -113,17 +114,17 @@ const Laboratories = () => {
                 </AccordionItem>
 
                 {/* Procedure */}
-                <AccordionItem value="procedure" className="glass-card border-none">
-                  <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                <AccordionItem value="procedure" className="glass-card border-none slide-in-bottom" style={{ animationDelay: '0.25s' }}>
+                  <AccordionTrigger className="px-6 py-4 hover:no-underline group">
                     <div className="flex items-center gap-3">
-                      <ListOrdered className="w-5 h-5 text-primary" />
+                      <ListOrdered className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                       <span className="font-semibold">Ishni bajarish tartibi</span>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-4">
                     <ol className="space-y-3">
                       {selectedLab.procedureUz.map((step, i) => (
-                        <li key={i} className="flex gap-3">
+                        <li key={i} className="flex gap-3 fade-in-up" style={{ animationDelay: `${i * 0.05}s` }}>
                           <span className="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-sm font-mono shrink-0">
                             {i + 1}
                           </span>
@@ -135,10 +136,10 @@ const Laboratories = () => {
                 </AccordionItem>
 
                 {/* Table */}
-                <AccordionItem value="table" className="glass-card border-none">
-                  <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                <AccordionItem value="table" className="glass-card border-none slide-in-bottom" style={{ animationDelay: '0.3s' }}>
+                  <AccordionTrigger className="px-6 py-4 hover:no-underline group">
                     <div className="flex items-center gap-3">
-                      <Table className="w-5 h-5 text-primary" />
+                      <Table className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                       <span className="font-semibold">Natijalar jadvali</span>
                     </div>
                   </AccordionTrigger>

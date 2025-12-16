@@ -14,34 +14,34 @@ const Index = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
         
         <div className="container mx-auto relative">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-8 fade-in-up">
               <Sparkles className="w-4 h-4" />
               Interaktiv fizika platformasi
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in-up stagger-1">
               <span className="gradient-text">Fizikani</span>
               <br />
               <span className="text-foreground">mustaqil o'rganing</span>
             </h1>
             
-            <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto fade-in-up stagger-2">
               20+ interaktiv animatsiya va laboratoriya ishlari bilan fizika qonunlarini 
               amaliy o'rganing. Parametrlarni o'zgartiring va natijalarni real vaqtda kuzating.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-up stagger-3">
               <Link to="/animations">
-                <Button variant="glow" size="lg" className="w-full sm:w-auto">
-                  <Atom className="w-5 h-5 mr-2" />
+                <Button variant="glow" size="lg" className="w-full sm:w-auto group">
+                  <Atom className="w-5 h-5 mr-2 group-hover:rotate-180 transition-transform duration-500" />
                   Animatsiyalar
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link to="/laboratories">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  <FlaskConical className="w-5 h-5 mr-2" />
+                <Button variant="outline" size="lg" className="w-full sm:w-auto group">
+                  <FlaskConical className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                   Laboratoriyalar
                 </Button>
               </Link>
@@ -54,26 +54,20 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <FeatureCard
-              icon="🎯"
-              title="Interaktiv simulyatsiyalar"
-              description="Mayatnik, erkin tushish, to'lqin harakati va boshqa mavzularda real vaqtda animatsiyalar"
-            />
-            <FeatureCard
-              icon="🔬"
-              title="Virtual laboratoriyalar"
-              description="Maqsad, nazariya, asboblar va avtomatik hisoblashli jadvallar bilan to'liq laboratoriya ishlari"
-            />
-            <FeatureCard
-              icon="⚡"
-              title="Parametrlarni boshqarish"
-              description="Massa, uzunlik, tezlik va boshqa parametrlarni o'zgartirib, natijalarni kuzating"
-            />
-            <FeatureCard
-              icon="📊"
-              title="Avtomatik hisoblash"
-              description="Boshlang'ich qiymatlarni kiriting va tizim formulalar asosida natijalarni hisoblaydi"
-            />
+            {[
+              { icon: "🎯", title: "Interaktiv simulyatsiyalar", description: "Mayatnik, erkin tushish, to'lqin harakati va boshqa mavzularda real vaqtda animatsiyalar" },
+              { icon: "🔬", title: "Virtual laboratoriyalar", description: "Maqsad, nazariya, asboblar va avtomatik hisoblashli jadvallar bilan to'liq laboratoriya ishlari" },
+              { icon: "⚡", title: "Parametrlarni boshqarish", description: "Massa, uzunlik, tezlik va boshqa parametrlarni o'zgartirib, natijalarni kuzating" },
+              { icon: "📊", title: "Avtomatik hisoblash", description: "Boshlang'ich qiymatlarni kiriting va tizim formulalar asosida natijalarni hisoblaydi" },
+            ].map((feature, i) => (
+              <FeatureCard
+                key={feature.title}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                delay={i}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -81,7 +75,7 @@ const Index = () => {
       {/* Topics Preview */}
       <section className="py-20 px-4 bg-card/50">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 slide-in-bottom">
             Mavzular ro'yxati
           </h2>
           
@@ -98,19 +92,19 @@ const Index = () => {
             ].map((topic, i) => (
               <div
                 key={topic}
-                className="glass-card p-4 text-center hover:glow-border transition-all duration-300"
-                style={{ animationDelay: `${i * 0.1}s` }}
+                className="glass-card p-4 text-center hover:glow-border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 fade-in-up cursor-pointer group"
+                style={{ animationDelay: `${i * 0.08}s` }}
               >
-                <span className="text-sm">{topic}</span>
+                <span className="text-sm group-hover:text-primary transition-colors">{topic}</span>
               </div>
             ))}
           </div>
           
-          <div className="text-center mt-8">
+          <div className="text-center mt-8 fade-in-up" style={{ animationDelay: '0.5s' }}>
             <Link to="/animations">
-              <Button variant="ghost" className="text-primary">
+              <Button variant="ghost" className="text-primary group">
                 Barcha mavzularni ko'rish
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
               </Button>
             </Link>
           </div>
@@ -131,12 +125,17 @@ const FeatureCard = ({
   icon,
   title,
   description,
+  delay,
 }: {
   icon: string;
   title: string;
   description: string;
+  delay: number;
 }) => (
-  <div className="glass-card p-6 hover:glow-border transition-all duration-500 group cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 relative overflow-hidden">
+  <div 
+    className="glass-card p-6 hover:glow-border transition-all duration-500 group cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 relative overflow-hidden fade-in-up"
+    style={{ animationDelay: `${delay * 0.1}s` }}
+  >
     <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-accent/10 transition-all duration-500" />
     <div className="relative z-10">
       <div className="text-4xl mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 inline-block">{icon}</div>
