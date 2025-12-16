@@ -264,6 +264,11 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               Boshlash
             </span>
           </button>
+          
+          {/* Keyboard hint */}
+          <p className="mt-3 text-xs text-muted-foreground/60 animate-pulse">
+            yoki <kbd className="px-1.5 py-0.5 rounded bg-muted/30 border border-muted/50 text-muted-foreground/80 font-mono text-[10px]">Enter</kbd> bosing
+          </p>
         </div>
 
         {/* Floating formulas */}
