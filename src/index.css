@@ -348,6 +348,67 @@
       opacity: 1;
     }
   }
+
+  @keyframes slow-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pendulum {
+    0%, 100% {
+      transform: rotate(-25deg);
+    }
+    50% {
+      transform: rotate(25deg);
+    }
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -10;
+    }
+  }
+
+  @keyframes draw-wave {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes satellite-orbit {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg) translateX(180px) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg) translateX(180px) rotate(-360deg);
+    }
+  }
+
+  @keyframes spectrum-spread {
+    from {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    to {
+      opacity: 0.6;
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
 }
 
 /* KaTeX Custom Styling */
