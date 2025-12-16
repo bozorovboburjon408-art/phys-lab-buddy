@@ -3,37 +3,73 @@ import { LabExperiment } from "@/types/physics";
 export const laboratories: LabExperiment[] = [
   {
     id: "lab-1-pendulum",
-    title: "Determining Pendulum Period",
+    title: "Determining Gravitational Acceleration with Mathematical Pendulum",
     titleUz: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash",
-    purpose: "To determine gravitational acceleration using a mathematical pendulum.",
-    purposeUz: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash.",
+    purpose: "To determine gravitational acceleration using a mathematical pendulum and verify the relationship between pendulum length and period.",
+    purposeUz: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash va mayatnik uzunligi bilan davri orasidagi bog'lanishni tekshirish.",
     equipment: [
-      "Mathematical pendulum",
-      "Ruler",
-      "Stopwatch",
-      "Stand with clamp"
+      "Mathematical pendulum (thread with small ball)",
+      "Ruler or measuring tape (1-2 m)",
+      "Stopwatch with 0.1 s precision",
+      "Stand with clamp",
+      "Protractor for measuring deflection angle"
     ],
     equipmentUz: [
-      "Matematik mayatnik",
-      "Chizg'ich",
-      "Sekundomer",
-      "Shtativ"
+      "Matematik mayatnik (ip bilan kichik shar)",
+      "Chizgich yoki metr lentasi (1-2 m)",
+      "Sekundomer (0,1 s aniqlikda)",
+      "Qisqichli shtativ",
+      "Burchakni olchash uchun transportir"
     ],
-    theory: "The period T of a simple pendulum is given by T = 2π√(L/g), where L is the length and g is gravitational acceleration. By measuring T and L, we can calculate g = 4π²L/T².",
-    theoryUz: "Matematik mayatnikning T davri T = 2π√(L/g) formula bilan aniqlanadi, bu yerda L - mayatnik uzunligi, g - erkin tushish tezlanishi. T va L ni o'lchab, g = 4π²L/T² formula yordamida g ni hisoblash mumkin.",
+    theory: `Matematik mayatnik - bu massasi e'tiborga olinmaydigan cho'zilmaydigan ipga osilgan moddiy nuqtadir. Kichik burchaklar (10° dan kam) uchun mayatnikning tebranish davri quyidagi formula bilan aniqlanadi:
+
+T = 2π√(L/g)
+
+bu yerda:
+- T - tebranish davri (s)
+- L - mayatnik uzunligi (m)  
+- g - erkin tushish tezlanishi (m/s²)
+
+Bu formuladan erkin tushish tezlanishini aniqlash mumkin:
+
+g = 4π²L/T²
+
+Mayatnik davri faqat uning uzunligi va erkin tushish tezlanishiga bog'liq, massaga bog'liq emas. Bu xususiyat Galiley tomonidan kashf etilgan.
+
+Tajribada n ta tebranish vaqti o'lchanilib, bitta tebranish davri T = t/n formula bilan hisoblanadi.`,
+    theoryUz: `Matematik mayatnik - bu massasi e'tiborga olinmaydigan cho'zilmaydigan ipga osilgan moddiy nuqtadir. Kichik burchaklar (10° dan kam) uchun mayatnikning tebranish davri quyidagi formula bilan aniqlanadi:
+
+T = 2π√(L/g)
+
+bu yerda:
+- T - tebranish davri (s)
+- L - mayatnik uzunligi (m)
+- g - erkin tushish tezlanishi (m/s²)
+
+Bu formuladan erkin tushish tezlanishini aniqlash mumkin:
+
+g = 4π²L/T²
+
+Mayatnik davri faqat uning uzunligi va erkin tushish tezlanishiga bog'liq, massaga bog'liq emas. Bu xususiyat Galiley tomonidan kashf etilgan.
+
+Tajribada n ta tebranish vaqti o'lchanilib, bitta tebranish davri T = t/n formula bilan hisoblanadi.`,
     procedure: [
-      "Mayatnikni o'lchangan L uzunlikda o'rnating",
-      "Mayatnikni kichik burchakka (< 10°) burib qo'yib yuboring",
-      "n ta to'liq tebranish vaqtini o'lchang",
-      "Davrni T = t/n formula bilan hisoblang",
-      "g = 4π²L/T² formula yordamida g ni hisoblang"
+      "Mayatnikni shtativga mahkamlang va ipning uzunligini L o'lchang (osish nuqtasidan sharning markazigacha)",
+      "Mayatnikni muvozanat holatidan 5-10° ga og'iring va qo'yib yuboring",
+      "Sekundomer yordamida n = 20-30 ta to'liq tebranish vaqtini o'lchang",
+      "Tebranish davrini T = t/n formula bilan hisoblang",
+      "g = 4π²L/T² formula yordamida erkin tushish tezlanishini hisoblang",
+      "Tajribani 3-5 marta turli uzunliklar uchun takrorlang",
+      "O'rtacha qiymatni va nisbiy xatolikni hisoblang"
     ],
     procedureUz: [
-      "Mayatnikni o'lchangan L uzunlikda o'rnating",
-      "Mayatnikni kichik burchakka (< 10°) burib qo'yib yuboring",
-      "n ta to'liq tebranish vaqtini o'lchang",
-      "Davrni T = t/n formula bilan hisoblang",
-      "g = 4π²L/T² formula yordamida g ni hisoblang"
+      "Mayatnikni shtativga mahkamlang va ipning uzunligini L o'lchang (osish nuqtasidan sharning markazigacha)",
+      "Mayatnikni muvozanat holatidan 5-10° ga og'iring va qo'yib yuboring",
+      "Sekundomer yordamida n = 20-30 ta to'liq tebranish vaqtini o'lchang",
+      "Tebranish davrini T = t/n formula bilan hisoblang",
+      "g = 4π²L/T² formula yordamida erkin tushish tezlanishini hisoblang",
+      "Tajribani 3-5 marta turli uzunliklar uchun takrorlang",
+      "O'rtacha qiymatni va nisbiy xatolikni hisoblang"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
@@ -56,35 +92,75 @@ export const laboratories: LabExperiment[] = [
     id: "lab-2-free-fall",
     title: "Free Fall Acceleration Measurement",
     titleUz: "Erkin tushish tezlanishini o'lchash",
-    purpose: "To measure the acceleration due to gravity using free fall motion.",
-    purposeUz: "Erkin tushish harakati yordamida tortishish tezlanishini o'lchash.",
+    purpose: "To measure the acceleration due to gravity using free fall motion and verify the laws of uniformly accelerated motion.",
+    purposeUz: "Erkin tushish harakati yordamida tortishish tezlanishini o'lchash va tekis tezlanuvchan harakat qonunlarini tekshirish.",
     equipment: [
-      "Steel ball",
+      "Steel ball (small, dense)",
       "Electromagnetic release mechanism",
-      "Timer with sensors",
-      "Measuring tape"
+      "Electronic timer with photoelectric sensors",
+      "Vertical stand with height scale",
+      "Receiving pad"
     ],
     equipmentUz: [
-      "Po'lat shar",
-      "Elektromagnit mexanizm",
-      "Sensorli taymer",
-      "O'lchov lentasi"
+      "Po'lat shar (kichik, zich)",
+      "Elektromagnit qo'yib yuborish mexanizmi",
+      "Fotoelektrik sensorli elektron taymer",
+      "Balandlik shkalali vertikal shtativ",
+      "Qabul qiluvchi taglik"
     ],
-    theory: "In free fall, the distance h traveled is given by h = ½gt², where g is gravitational acceleration and t is time. Therefore, g = 2h/t².",
-    theoryUz: "Erkin tushishda bosib o'tilgan h masofa h = ½gt² formula bilan aniqlanadi, bu yerda g - tortishish tezlanishi, t - vaqt. Demak, g = 2h/t².",
+    theory: `Erkin tushish - bu faqat og'irlik kuchi ta'sirida sodir bo'ladigan harakat. Yer sirtida havo qarshiligini hisobga olmaganda, barcha jismlar bir xil tezlanish bilan tushadi.
+
+Tekis tezlanuvchan harakat qonuniga ko'ra:
+h = v₀t + ½gt²
+
+Boshlang'ich tezlik v₀ = 0 bo'lganda:
+h = ½gt²
+
+Bu yerdan erkin tushish tezlanishi:
+g = 2h/t²
+
+bu yerda:
+- h - tushish balandligi (m)
+- t - tushish vaqti (s)
+- g - erkin tushish tezlanishi (m/s²)
+
+Yer sirtida g ≈ 9.8 m/s² (kenglik va balandlikka qarab 9.78 - 9.83 m/s² oralig'ida o'zgaradi).`,
+    theoryUz: `Erkin tushish - bu faqat og'irlik kuchi ta'sirida sodir bo'ladigan harakat. Yer sirtida havo qarshiligini hisobga olmaganda, barcha jismlar bir xil tezlanish bilan tushadi.
+
+Tekis tezlanuvchan harakat qonuniga ko'ra:
+h = v₀t + ½gt²
+
+Boshlang'ich tezlik v₀ = 0 bo'lganda:
+h = ½gt²
+
+Bu yerdan erkin tushish tezlanishi:
+g = 2h/t²
+
+bu yerda:
+- h - tushish balandligi (m)
+- t - tushish vaqti (s)
+- g - erkin tushish tezlanishi (m/s²)
+
+Yer sirtida g ≈ 9.8 m/s² (kenglik va balandlikka qarab 9.78 - 9.83 m/s² oralig'ida o'zgaradi).`,
     procedure: [
-      "Sharni o'lchangan h balandlikka o'rnating",
-      "Sharni elektromagnit mexanizm yordamida qo'yib yuboring",
-      "Tushish vaqti t ni yozib oling",
-      "g = 2h/t² ni hisoblang",
-      "O'rtacha qiymatni toping"
+      "Shtativni vertikal holatda o'rnating va tekisligini tekshiring",
+      "Sharni elektromagnit mexanizmga mahkamlang",
+      "Sharning tushish balandligini h ni chizg'ich bilan o'lchang",
+      "Elektromagnitni o'chirib, sharni qo'yib yuboring va vaqtni o'lchang",
+      "Har bir balandlik uchun tajribani 5 marta takrorlang",
+      "g = 2h/t² formula bilan hisoblang",
+      "Turli balandliklar uchun tajribani qaytaring",
+      "O'rtacha qiymat va xatolikni hisoblang"
     ],
     procedureUz: [
-      "Sharni o'lchangan h balandlikka o'rnating",
-      "Sharni elektromagnit mexanizm yordamida qo'yib yuboring",
-      "Tushish vaqti t ni yozib oling",
-      "g = 2h/t² ni hisoblang",
-      "O'rtacha qiymatni toping"
+      "Shtativni vertikal holatda o'rnating va tekisligini tekshiring",
+      "Sharni elektromagnit mexanizmga mahkamlang",
+      "Sharning tushish balandligini h ni chizg'ich bilan o'lchang",
+      "Elektromagnitni o'chirib, sharni qo'yib yuboring va vaqtni o'lchang",
+      "Har bir balandlik uchun tajribani 5 marta takrorlang",
+      "g = 2h/t² formula bilan hisoblang",
+      "Turli balandliklar uchun tajribani qaytaring",
+      "O'rtacha qiymat va xatolikni hisoblang"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
@@ -101,37 +177,85 @@ export const laboratories: LabExperiment[] = [
   },
   {
     id: "lab-3-hookes-law",
-    title: "Hooke's Law and Spring Constant",
-    titleUz: "Guk qonuni va prujina bikrligi",
-    purpose: "To verify Hooke's Law and determine the spring constant k.",
-    purposeUz: "Guk qonunini tekshirish va prujina bikrligi k ni aniqlash.",
+    title: "Verification of Hooke's Law and Spring Constant",
+    titleUz: "Guk qonunini tekshirish va prujina bikrligi",
+    purpose: "To verify Hooke's Law for elastic deformation and determine the spring constant experimentally.",
+    purposeUz: "Elastik deformatsiya uchun Guk qonunini tekshirish va prujina bikrlik koeffitsientini tajribada aniqlash.",
     equipment: [
-      "Spring",
-      "Set of masses",
-      "Ruler with stand",
-      "Mass holder"
+      "Helical spring (steel or brass)",
+      "Set of calibrated masses (50g - 500g)",
+      "Vertical ruler with millimeter scale",
+      "Mass holder and hook",
+      "Stand with clamp"
     ],
     equipmentUz: [
-      "Prujina",
-      "Yuklar to'plami",
-      "Shtativli chizg'ich",
-      "Yuk ushlagich"
+      "Spiral prujina (po'lat yoki bronza)",
+      "Kalibrlangan yuklar to'plami (50g - 500g)",
+      "Millimetrli shkala bilan vertikal chizg'ich",
+      "Yuk ushlagich va ilgak",
+      "Qisqichli shtativ"
     ],
-    theory: "Hooke's Law states F = kx, where F is the applied force (mg), k is spring constant, and x is extension. The spring constant k = F/x = mg/x.",
-    theoryUz: "Guk qonuni F = kx ko'rinishda, bu yerda F - qo'yilgan kuch (mg), k - prujina bikrligi, x - cho'zilish. Prujina bikrligi k = F/x = mg/x.",
+    theory: `Guk qonuni elastik deformatsiya uchun kuch va cho'zilish o'rtasidagi chiziqli bog'lanishni ifodalaydi:
+
+F = kx
+
+bu yerda:
+- F - prujinaga ta'sir etuvchi kuch (N)
+- k - prujina bikrlik koeffitsienti (N/m)
+- x - cho'zilish (m)
+
+Og'irlik kuchi ta'sirida:
+F = mg
+
+bu yerda m - yuk massasi, g - erkin tushish tezlanishi.
+
+Prujina bikrligi:
+k = F/x = mg/x
+
+Guk qonuni faqat elastiklik chegarasigacha amal qiladi. Elastiklik chegarasidan oshganda plastik deformatsiya sodir bo'ladi va jism avvalgi shakliga qaytmaydi.
+
+Prujinaning potensial energiyasi:
+E = kx²/2`,
+    theoryUz: `Guk qonuni elastik deformatsiya uchun kuch va cho'zilish o'rtasidagi chiziqli bog'lanishni ifodalaydi:
+
+F = kx
+
+bu yerda:
+- F - prujinaga ta'sir etuvchi kuch (N)
+- k - prujina bikrlik koeffitsienti (N/m)
+- x - cho'zilish (m)
+
+Og'irlik kuchi ta'sirida:
+F = mg
+
+bu yerda m - yuk massasi, g - erkin tushish tezlanishi.
+
+Prujina bikrligi:
+k = F/x = mg/x
+
+Guk qonuni faqat elastiklik chegarasigacha amal qiladi. Elastiklik chegarasidan oshganda plastik deformatsiya sodir bo'ladi va jism avvalgi shakliga qaytmaydi.
+
+Prujinaning potensial energiyasi:
+E = kx²/2`,
     procedure: [
-      "Prujinaning boshlang'ich uzunligini (L₀) o'lchang",
-      "Ma'lum m massali yukni osing",
-      "Yangi L uzunlikni o'lchang",
-      "x = L - L₀ cho'zilishni hisoblang",
-      "k = mg/x ni hisoblang"
+      "Prujinani shtativga osilgan holatda mustahkamlang",
+      "Prujinaning boshlang'ich uzunligini L₀ ni o'lchang (yuksiz)",
+      "Birinchi yukni (masalan, 50g) osing va yangi uzunlikni L o'lchang",
+      "Cho'zilishni x = L - L₀ formula bilan hisoblang",
+      "Yukni bosqichma-bosqich oshiring (100g, 150g, 200g, ...)",
+      "Har bir yuk uchun cho'zilishni yozib boring",
+      "k = mg/x formula bilan bikrlikni hisoblang",
+      "F(x) grafigini chizing va uning chiziqliligini tekshiring"
     ],
     procedureUz: [
-      "Prujinaning boshlang'ich uzunligini (L₀) o'lchang",
-      "Ma'lum m massali yukni osing",
-      "Yangi L uzunlikni o'lchang",
-      "x = L - L₀ cho'zilishni hisoblang",
-      "k = mg/x ni hisoblang"
+      "Prujinani shtativga osilgan holatda mustahkamlang",
+      "Prujinaning boshlang'ich uzunligini L₀ ni o'lchang (yuksiz)",
+      "Birinchi yukni (masalan, 50g) osing va yangi uzunlikni L o'lchang",
+      "Cho'zilishni x = L - L₀ formula bilan hisoblang",
+      "Yukni bosqichma-bosqich oshiring (100g, 150g, 200g, ...)",
+      "Har bir yuk uchun cho'zilishni yozib boring",
+      "k = mg/x formula bilan bikrlikni hisoblang",
+      "F(x) grafigini chizing va uning chiziqliligini tekshiring"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
@@ -155,93 +279,215 @@ export const laboratories: LabExperiment[] = [
   },
   {
     id: "lab-4-young-modulus",
-    title: "Young's Modulus by Bending Method",
+    title: "Determination of Young's Modulus by Bending Method",
     titleUz: "Egilish usuli orqali Yung modulini aniqlash",
-    purpose: "To determine the elastic modulus of a solid using the bending deformation method.",
+    purpose: "To determine the elastic modulus (Young's modulus) of a solid material using the bending deformation method.",
     purposeUz: "Qattiq jismning (sterjenning) elastiklik modulini egilish deformatsiyasi metodi bilan aniqlashni o'rganish.",
     equipment: [
-      "Two support prisms",
-      "Test rod (metal or plastic)",
+      "Two support prisms (triangular cross-section)",
+      "Test rod (metal or plastic beam)",
       "Set of 0.5 kg weights (4 pieces)",
-      "Scale ruler",
-      "Vernier caliper"
+      "Scale ruler (millimeter precision)",
+      "Vernier caliper (0.1 mm precision)"
     ],
     equipmentUz: [
-      "Ikkita tayanch prizma",
-      "Tekshiriluvchi sterjen (metalldan yoki plastmassadan)",
+      "Ikkita tayanch prizma (uchburchak kesimli)",
+      "Tekshiriluvchi sterjen (metall yoki plastmassa)",
       "4 ta 0,5 kg li toshlar",
-      "Masshtabli lineyka",
-      "Shtangensirkul"
+      "Masshtabli lineyka (mm aniqlikda)",
+      "Shtangensirkul (0,1 mm aniqlikda)"
     ],
-    theory: "Elastic modulus (Young's modulus) E characterizes the material's resistance to deformation. According to Hooke's law: σ = Eε, where σ is stress and ε is relative deformation. For a beam bent by a central load: E = Fl³/(48If), where F is force, l is span length, I is moment of inertia, f is deflection.",
-    theoryUz: "Elastiklik moduli (Yung moduli) E - materialning deformatsiyaga qarshiligini xarakterlaydigan kattalik. Guk qonuniga ko'ra: σ = Eε, bu yerda σ - kuchlanganlik, ε - nisbiy deformatsiya. Markaziy yuk bilan egilgan sterjen uchun: E = Fl³/(48If), bu yerda F - kuch, l - tayanch oraligi, I - inersiya momenti, f - egilish.",
+    theory: `Elastiklik nazariyasida deformatsiya deb tashqi kuch ta'sirida qattiq jism zarralarining bir-biriga nisbatan vaziyatini o'zgarishi tushuniladi. Deformatsiya elastik va plastik bo'ladi.
+
+Elastik deformatsiya - tashqi kuch olib tashlanganda jism avvalgi shakli va o'lchamini tiklaydi. Plastik deformatsiya - jism avvalgi shakliga qaytmaydi.
+
+Deformatsiya turlari: cho'zilish, siqilish, siljish, buralish, egilish.
+
+Nisbiy deformatsiya:
+ε = Δl/l
+
+Mexanik kuchlanganlik:
+σ = F/S
+
+Guk qonuni:
+σ = Eε  yoki  E = σ/ε
+
+bu yerda E - Yung moduli (elastiklik moduli), [E] = Pa = N/m².
+
+Yung moduli son jihatidan jism uzunligini ikki marta uzaytirish uchun kerak bo'lgan kuchlanganlikka teng.
+
+Egilish usulida sterjen ikkita tayanchga qo'yiladi va o'rtasiga yuk osiladi. Egilish kattaligi (strelasi):
+
+λ = 4Pl³/(3Eab³)
+
+bu yerda:
+- l - tayanch nuqtalari orasidagi masofa
+- P = mg - egiluvchi kuch
+- a - sterjen eni
+- b - sterjen qalinligi
+
+Yung moduli:
+E = 4Pl³/(3λab³)`,
+    theoryUz: `Elastiklik nazariyasida deformatsiya deb tashqi kuch ta'sirida qattiq jism zarralarining bir-biriga nisbatan vaziyatini o'zgarishi tushuniladi. Deformatsiya elastik va plastik bo'ladi.
+
+Elastik deformatsiya - tashqi kuch olib tashlanganda jism avvalgi shakli va o'lchamini tiklaydi. Plastik deformatsiya - jism avvalgi shakliga qaytmaydi.
+
+Deformatsiya turlari: cho'zilish, siqilish, siljish, buralish, egilish.
+
+Nisbiy deformatsiya:
+ε = Δl/l
+
+Mexanik kuchlanganlik:
+σ = F/S
+
+Guk qonuni:
+σ = Eε  yoki  E = σ/ε
+
+bu yerda E - Yung moduli (elastiklik moduli), [E] = Pa = N/m².
+
+Yung moduli son jihatidan jism uzunligini ikki marta uzaytirish uchun kerak bo'lgan kuchlanganlikka teng.
+
+Egilish usulida sterjen ikkita tayanchga qo'yiladi va o'rtasiga yuk osiladi. Egilish kattaligi (strelasi):
+
+λ = 4Pl³/(3Eab³)
+
+bu yerda:
+- l - tayanch nuqtalari orasidagi masofa
+- P = mg - egiluvchi kuch
+- a - sterjen eni
+- b - sterjen qalinligi
+
+Yung moduli:
+E = 4Pl³/(3λab³)`,
     procedure: [
-      "Sterjen o'lchamlarini shtangensirkul bilan o'lchang",
-      "Sterjenni tayanch prizmalarga joylashtiring",
-      "Sterjen markaziga yuk osing va egilishni o'lchang",
-      "Yukni o'zgartirib, o'lchashlarni takrorlang",
-      "E = Fl³/(48If) formula bilan Yung modulini hisoblang"
+      "Shtangensirkul bilan sterjen enini (a) va qalinligini (b) 4 joyidan o'lchab, o'rtacha qiymatni toping",
+      "Sterjenni A va B prizmalar ustiga o'rnating va ikkita tayanch nuqtalari orasidagi masofani (l) o'lchang",
+      "Sterjen o'rtasiga halqa osib, shtangensirkul bo'yicha boshlang'ich holatni belgilang (n₀)",
+      "Halqaga 0,5 kg, 1,0 kg, 1,5 kg, 2,0 kg massali toshlarni ketma-ket joylashtiring",
+      "Har bir yuk uchun shtangensirkul ko'rsatishini (nᵢ) yozing va egilish λ = nᵢ - n₀ ni hisoblang",
+      "P = mg (g = 9,8 m/s²) kuchni hisoblang",
+      "E = 4Pl³/(3λab³) formula bilan Yung modulini hisoblang",
+      "Yukni bittadan kamaytirib, o'lchashlarni takrorlang va o'rtacha qiymatni toping"
     ],
     procedureUz: [
-      "Sterjen o'lchamlarini shtangensirkul bilan o'lchang",
-      "Sterjenni tayanch prizmalarga joylashtiring",
-      "Sterjen markaziga yuk osing va egilishni o'lchang",
-      "Yukni o'zgartirib, o'lchashlarni takrorlang",
-      "E = Fl³/(48If) formula bilan Yung modulini hisoblang"
+      "Shtangensirkul bilan sterjen enini (a) va qalinligini (b) 4 joyidan o'lchab, o'rtacha qiymatni toping",
+      "Sterjenni A va B prizmalar ustiga o'rnating va ikkita tayanch nuqtalari orasidagi masofani (l) o'lchang",
+      "Sterjen o'rtasiga halqa osib, shtangensirkul bo'yicha boshlang'ich holatni belgilang (n₀)",
+      "Halqaga 0,5 kg, 1,0 kg, 1,5 kg, 2,0 kg massali toshlarni ketma-ket joylashtiring",
+      "Har bir yuk uchun shtangensirkul ko'rsatishini (nᵢ) yozing va egilish λ = nᵢ - n₀ ni hisoblang",
+      "P = mg (g = 9,8 m/s²) kuchni hisoblang",
+      "E = 4Pl³/(3λab³) formula bilan Yung modulini hisoblang",
+      "Yukni bittadan kamaytirib, o'lchashlarni takrorlang va o'rtacha qiymatni toping"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
       { id: "mass", name: "Mass m", nameUz: "Massa m", unit: "kg", isInput: true },
       { id: "length", name: "Span l", nameUz: "Oraliq l", unit: "m", isInput: true },
-      { id: "width", name: "Width b", nameUz: "Kengligi b", unit: "m", isInput: true },
-      { id: "height", name: "Height h", nameUz: "Balandligi h", unit: "m", isInput: true },
-      { id: "deflection", name: "Deflection f", nameUz: "Egilish f", unit: "m", isInput: true },
-      { id: "youngModulus", name: "E", nameUz: "E", unit: "Pa", isInput: false },
+      { id: "width", name: "Width a", nameUz: "Eni a", unit: "mm", isInput: true },
+      { id: "thickness", name: "Thickness b", nameUz: "Qalinligi b", unit: "mm", isInput: true },
+      { id: "deflection", name: "Deflection λ", nameUz: "Egilish λ", unit: "mm", isInput: true },
+      { id: "youngModulus", name: "E", nameUz: "E", unit: "GPa", isInput: false },
     ],
     calculations: (inputs) => {
       const force = inputs.mass * 9.8;
-      const momentOfInertia = (inputs.width * Math.pow(inputs.height, 3)) / 12;
-      const youngModulus = inputs.deflection > 0 
-        ? (force * Math.pow(inputs.length, 3)) / (48 * momentOfInertia * inputs.deflection)
+      const a = inputs.width / 1000;
+      const b = inputs.thickness / 1000;
+      const lambda = inputs.deflection / 1000;
+      const youngModulus = lambda > 0 
+        ? (4 * force * Math.pow(inputs.length, 3)) / (3 * lambda * a * Math.pow(b, 3))
         : 0;
       return {
-        youngModulus: Math.round(youngModulus / 1e9 * 100) / 100 * 1e9,
+        youngModulus: Math.round(youngModulus / 1e9 * 100) / 100,
       };
     },
   },
   {
     id: "lab-5-physical-pendulum",
-    title: "Physical Pendulum - Ring Method",
+    title: "Physical Pendulum - Ring Method for Gravitational Acceleration",
     titleUz: "Tebranma harakat qonunlarini (halqa yordamida) o'rganish",
-    purpose: "To determine gravitational acceleration using a physical pendulum (ring).",
-    purposeUz: "Halqa yordamida tortishish kuchi tezlanishini aniqlash.",
+    purpose: "To determine gravitational acceleration using a physical pendulum (ring) and study the laws of oscillatory motion.",
+    purposeUz: "Halqa yordamida tortishish kuchi tezlanishini aniqlash va tebranma harakat qonunlarini o'rganish.",
     equipment: [
-      "Ring (physical pendulum)",
-      "Vernier caliper",
-      "Stopwatch",
-      "Stand"
+      "Ring (metal, uniform thickness)",
+      "Vernier caliper (0.1 mm precision)",
+      "Stopwatch (0.1 s precision)",
+      "Physical pendulum stand with knife edge support"
     ],
     equipmentUz: [
-      "Halqa",
-      "Shtangensirkul",
-      "Sekundomer",
-      "Fizik mayatnik stendi"
+      "Halqa (metall, bir tekis qalinlikda)",
+      "Shtangensirkul (0,1 mm aniqlikda)",
+      "Sekundomer (0,1 s aniqlikda)",
+      "Pichoqsimon tayanchli fizik mayatnik stendi"
     ],
-    theory: "A physical pendulum oscillates under the influence of gravity. Period: T = 2π√(K/(mgl)), where K is moment of inertia, l is distance from pivot to center of mass. For a ring: K = ½m(R₁² + R₂²) + mR₁², so g = 4π²K/(mlT²).",
-    theoryUz: "Fizik mayatnik og'irlik kuchi ta'sirida tebranadi. Davri: T = 2π√(K/(mgl)), bu yerda K - inersiya momenti, l - osilgan nuqtadan og'irlik markazigacha masofa. Halqa uchun: K = ½m(R₁² + R₂²) + mR₁², demak g = 4π²K/(mlT²).",
+    theory: `Fizik mayatnik - bu og'irlik markazidan o'tmagan gorizontal o'qqa osilgan qattiq jism. Og'irlik markaziga qo'yilgan M moment ta'sirida tebranma harakat qiladi:
+
+M = mgl·sinφ
+
+bu yerda l - og'irlik markazi bilan osilgan o'q orasidagi masofa.
+
+Fizik mayatnik tebranish davri:
+T = 2π√(K/(mgl))
+
+bu yerda K - osilgan o'qqa nisbatan inersiya momenti.
+
+Halqa uchun Shteyner teoremasiga ko'ra:
+K = Kc + mR₁²
+
+bu yerda Kc = ½m(R₁² + R₂²) - og'irlik markaziga nisbatan inersiya momenti.
+
+Demak:
+K = ½m(R₁² + R₂²) + mR₁² = ½m(3R₁² + R₂²)
+
+Erkin tushish tezlanishi:
+g = 4π²K/(mlT²)
+
+Halqa ichki radiusdan osilganda l = R₁, demak:
+g = 4π²(3R₁² + R₂²)/(2R₁T²)`,
+    theoryUz: `Fizik mayatnik - bu og'irlik markazidan o'tmagan gorizontal o'qqa osilgan qattiq jism. Og'irlik markaziga qo'yilgan M moment ta'sirida tebranma harakat qiladi:
+
+M = mgl·sinφ
+
+bu yerda l - og'irlik markazi bilan osilgan o'q orasidagi masofa.
+
+Fizik mayatnik tebranish davri:
+T = 2π√(K/(mgl))
+
+bu yerda K - osilgan o'qqa nisbatan inersiya momenti.
+
+Halqa uchun Shteyner teoremasiga ko'ra:
+K = Kc + mR₁²
+
+bu yerda Kc = ½m(R₁² + R₂²) - og'irlik markaziga nisbatan inersiya momenti.
+
+Demak:
+K = ½m(R₁² + R₂²) + mR₁² = ½m(3R₁² + R₂²)
+
+Erkin tushish tezlanishi:
+g = 4π²K/(mlT²)
+
+Halqa ichki radiusdan osilganda l = R₁, demak:
+g = 4π²(3R₁² + R₂²)/(2R₁T²)`,
     procedure: [
-      "Halqaning ichki va tashqi diametrlarini o'lchang",
-      "R₁ va R₂ radiuslarini hisoblang",
-      "Halqani osilgan nuqtadan tebrantirib, n ta tebranish vaqtini o'lchang",
+      "Shtangensirkul yordamida halqaning ichki diametrini d₁ ni bir necha joyidan o'lchang",
+      "Tashqi diametr d₂ ni ham bir necha joyidan o'lchang",
+      "R₁ = d₁/2 va R₂ = d₂/2 radiuslarni hisoblang",
+      "Halqani ichki tomonidan pichoqsimon tayanchga osing",
+      "Halqani kichik burchakka (5-10°) og'irib qo'yib yuboring",
+      "n = 20-30 ta to'liq tebranish vaqtini t o'lchang",
       "Davrni T = t/n formula bilan hisoblang",
-      "g = 4π²K/(mlT²) formula bilan g ni hisoblang"
+      "g = 4π²(3R₁² + R₂²)/(2R₁T²) formula bilan hisoblang",
+      "Tajribani 3-5 marta takrorlang va o'rtacha qiymatni toping"
     ],
     procedureUz: [
-      "Halqaning ichki va tashqi diametrlarini o'lchang",
-      "R₁ va R₂ radiuslarini hisoblang",
-      "Halqani osilgan nuqtadan tebrantirib, n ta tebranish vaqtini o'lchang",
+      "Shtangensirkul yordamida halqaning ichki diametrini d₁ ni bir necha joyidan o'lchang",
+      "Tashqi diametr d₂ ni ham bir necha joyidan o'lchang",
+      "R₁ = d₁/2 va R₂ = d₂/2 radiuslarni hisoblang",
+      "Halqani ichki tomonidan pichoqsimon tayanchga osing",
+      "Halqani kichik burchakka (5-10°) og'irib qo'yib yuboring",
+      "n = 20-30 ta to'liq tebranish vaqtini t o'lchang",
       "Davrni T = t/n formula bilan hisoblang",
-      "g = 4π²K/(mlT²) formula bilan g ni hisoblang"
+      "g = 4π²(3R₁² + R₂²)/(2R₁T²) formula bilan hisoblang",
+      "Tajribani 3-5 marta takrorlang va o'rtacha qiymatni toping"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
@@ -260,8 +506,7 @@ export const laboratories: LabExperiment[] = [
       const period = inputs.time / inputs.oscillations;
       const r1m = r1 / 1000;
       const r2m = r2 / 1000;
-      const inertiaCoeff = 0.5 * (r1m * r1m + r2m * r2m) + r1m * r1m;
-      const gravity = (4 * Math.PI * Math.PI * inertiaCoeff) / (r1m * period * period);
+      const gravity = (4 * Math.PI * Math.PI * (3 * r1m * r1m + r2m * r2m)) / (2 * r1m * period * period);
       return {
         r1: Math.round(r1 * 100) / 100,
         r2: Math.round(r2 * 100) / 100,
@@ -272,108 +517,225 @@ export const laboratories: LabExperiment[] = [
   },
   {
     id: "lab-6-sound-speed",
-    title: "Speed of Sound in Air",
+    title: "Measurement of Sound Speed in Air",
     titleUz: "Tovushning havoda tarqalish tezligini o'lchash",
-    purpose: "To determine the speed of sound propagation in air at room temperature.",
-    purposeUz: "Xona haroratida tovushning tarqalish tezligini aniqlash.",
+    purpose: "To determine the speed of sound propagation in air at room temperature and verify its temperature dependence.",
+    purposeUz: "Xona haroratida tovushning tarqalish tezligini aniqlash va uning haroratga bog'liqligini tekshirish.",
     equipment: [
-      "12V power source",
-      "Cobra3 base unit",
-      "RS 232 cable",
-      "Timer/counter",
-      "Microphone",
-      "9V battery",
-      "Connecting wires",
-      "Personal computer"
+      "12V DC power source",
+      "Cobra3 base unit with RS-232 cable",
+      "Timer/counter module",
+      "Microphone with amplifier",
+      "9V battery for microphone",
+      "Circular supports and connecting wires",
+      "Personal computer with measurement software",
+      "Laboratory thermometer"
     ],
     equipmentUz: [
       "12 V li tok manbai",
-      "Cobra3 bazaviy bloki",
-      "RS 232 tipli kabel",
-      "Taymer/hisoblagich",
-      "Mikrofon",
-      "9V li batareya",
-      "Ulovchi simlar",
-      "Personal kompyuter"
+      "Cobra3 bazaviy bloki va RS-232 tipli kabel",
+      "Taymer/hisoblagich moduli",
+      "Kuchaytirgichli mikrofon",
+      "9V li batareya (mikrofon uchun)",
+      "Aylana tayanchlar va ulovchi simlar",
+      "O'lchash dasturi bilan personal kompyuter",
+      "Laboratoriya termometri"
     ],
-    theory: "Sound travels through air at a constant speed that depends on temperature. At 0°C, v₀ = 331.8 m/s. Temperature dependence: vT = v₀√(T/273), where T is absolute temperature in Kelvin.",
-    theoryUz: "Tovush havoda doimiy tezlik bilan tarqaladi, bu tezlik haroratga bog'liq. 0°C da v₀ = 331.8 m/s. Haroratga bog'liqligi: vT = v₀√(T/273), bu yerda T - Kelvin shkalasidagi mutlaq harorat.",
+    theory: `Tovush - bu muhitda tarqaluvchi mexanik to'lqindir. Havoda tovush bo'ylama to'lqin sifatida tarqaladi.
+
+Tovush tezligi haroratga bog'liq:
+vT = v₀√(T/273)
+
+bu yerda:
+- v₀ = 331,8 m/s - 0°C dagi tovush tezligi
+- T - mutlaq harorat (Kelvin)
+
+Selsiy bo'yicha:
+vt = v₀√(1 + t/273) ≈ v₀(1 + t/546)
+
+yoki taxminiy formula:
+vt = 331,8 + 0,6t (m/s)
+
+bu yerda t - harorat (°C).
+
+18°C da nazariy tezlik: v = 342,6 m/s
+
+Tovush tezligi muhit xossalariga ham bog'liq. Qattiq jismlarda va suyuqliklarda tovush havodagiga qaraganda tezroq tarqaladi.
+
+Tajribada masofa va vaqtni o'lchab, tezlik v = S/t formula bilan aniqlanadi.`,
+    theoryUz: `Tovush - bu muhitda tarqaluvchi mexanik to'lqindir. Havoda tovush bo'ylama to'lqin sifatida tarqaladi.
+
+Tovush tezligi haroratga bog'liq:
+vT = v₀√(T/273)
+
+bu yerda:
+- v₀ = 331,8 m/s - 0°C dagi tovush tezligi
+- T - mutlaq harorat (Kelvin)
+
+Selsiy bo'yicha:
+vt = v₀√(1 + t/273) ≈ v₀(1 + t/546)
+
+yoki taxminiy formula:
+vt = 331,8 + 0,6t (m/s)
+
+bu yerda t - harorat (°C).
+
+18°C da nazariy tezlik: v = 342,6 m/s
+
+Tovush tezligi muhit xossalariga ham bog'liq. Qattiq jismlarda va suyuqliklarda tovush havodagiga qaraganda tezroq tarqaladi.
+
+Tajribada masofa va vaqtni o'lchab, tezlik v = S/t formula bilan aniqlanadi.`,
     procedure: [
       "Qurilmani sxema bo'yicha yig'ing",
-      "Tovushni tarqatish va qabul qilish oralig'ini 30-40 sm qilib belgilang",
-      "Tovush tezligini o'lchang",
-      "O'lchashni 5 marta takrorlang",
-      "Mikrofonni 10-15 sm ga o'zgartiring va takrorlang",
-      "O'rtacha tezlikni hisoblang"
+      "Cobra3 blokidagi 'Taymer 1' kirish qismini mikrofon-kuchaytirgich chiqishi bilan ulang",
+      "'Timer/counter' dasturini ishga tushiring va parametrlarni sozlang",
+      "Tovush uzatgich va qabul qilgich orasidagi masofani S = 30-40 sm qilib belgilang",
+      "Tovush tezligini o'lchang (tajribani 5 marta takrorlang)",
+      "Mikrofon masofasini 10-15 sm ga o'zgartiring va o'lchashlarni takrorlang",
+      "Masofani 60-70 sm qilib ham o'lchashlarni bajaring",
+      "Xona haroratini termometr bilan o'lchang",
+      "O'rtacha tezlikni hisoblang va nazariy qiymat bilan solishtiring"
     ],
     procedureUz: [
       "Qurilmani sxema bo'yicha yig'ing",
-      "Tovushni tarqatish va qabul qilish oralig'ini 30-40 sm qilib belgilang",
-      "Tovush tezligini o'lchang",
-      "O'lchashni 5 marta takrorlang",
-      "Mikrofonni 10-15 sm ga o'zgartiring va takrorlang",
-      "O'rtacha tezlikni hisoblang"
+      "Cobra3 blokidagi 'Taymer 1' kirish qismini mikrofon-kuchaytirgich chiqishi bilan ulang",
+      "'Timer/counter' dasturini ishga tushiring va parametrlarni sozlang",
+      "Tovush uzatgich va qabul qilgich orasidagi masofani S = 30-40 sm qilib belgilang",
+      "Tovush tezligini o'lchang (tajribani 5 marta takrorlang)",
+      "Mikrofon masofasini 10-15 sm ga o'zgartiring va o'lchashlarni takrorlang",
+      "Masofani 60-70 sm qilib ham o'lchashlarni bajaring",
+      "Xona haroratini termometr bilan o'lchang",
+      "O'rtacha tezlikni hisoblang va nazariy qiymat bilan solishtiring"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
       { id: "distance", name: "Distance S", nameUz: "Masofa S", unit: "m", isInput: true },
       { id: "time", name: "Time t", nameUz: "Vaqt t", unit: "ms", isInput: true },
       { id: "temperature", name: "Temp T", nameUz: "Harorat T", unit: "°C", isInput: true },
-      { id: "velocity", name: "v", nameUz: "v", unit: "m/s", isInput: false },
+      { id: "velocity", name: "v (exp)", nameUz: "v (tajriba)", unit: "m/s", isInput: false },
       { id: "theoreticalV", name: "v (theory)", nameUz: "v (nazariy)", unit: "m/s", isInput: false },
+      { id: "error", name: "ε", nameUz: "ε", unit: "%", isInput: false },
     ],
     calculations: (inputs) => {
       const velocity = inputs.distance / (inputs.time / 1000);
       const tempK = inputs.temperature + 273;
       const theoreticalV = 331.8 * Math.sqrt(tempK / 273);
+      const error = Math.abs((velocity - theoreticalV) / theoreticalV) * 100;
       return {
         velocity: Math.round(velocity * 10) / 10,
         theoreticalV: Math.round(theoreticalV * 10) / 10,
+        error: Math.round(error * 10) / 10,
       };
     },
   },
   {
     id: "lab-7-adiabatic-expansion",
-    title: "Adiabatic Expansion - Heat Capacity Ratio",
+    title: "Heat Capacity Ratio by Adiabatic Expansion (Clement-Desormes Method)",
     titleUz: "Havoning issiqlik sig'imlari nisbatini adiabatik kengayish yordamida aniqlash",
-    purpose: "To determine the ratio of specific heat capacities of gases using adiabatic expansion and compare with theoretical values.",
-    purposeUz: "Gazlarning solishtirma issiqlik sig'imlari nisbatini tajribada aniqlash va molekulyar kinetik nazariyaga asoslanib hisoblangan qiymati bilan solishtirish.",
+    purpose: "To experimentally determine the ratio of specific heat capacities of air and compare with the theoretical value from molecular kinetic theory.",
+    purposeUz: "Gazlarning solishtirma issiqlik sig'imlari nisbatini tajribada aniqlash va molekulyar kinetik nazariyaga asoslanib hisoblangan qiymat bilan solishtirish.",
     equipment: [
-      "Large glass vessel",
-      "Water manometer",
+      "Large glass vessel (12-20 liters)",
+      "Water manometer (U-tube with colored water)",
       "Hand pump",
-      "Valves C and D"
+      "Valves C and D (quick-release type)"
     ],
     equipmentUz: [
-      "Katta shisha idish",
-      "Suvli manometr",
+      "Katta shisha idish (12-20 litr)",
+      "Suvli manometr (rangli suvli U-simon naycha)",
       "Qo'l nasosi",
-      "C va D jumraklar"
+      "C va D jumraklar (tez ochiluvchi)"
     ],
-    theory: "The ratio of heat capacities γ = Cp/Cv = (i+2)/i, where i is degrees of freedom (3 for monatomic, 5 for diatomic gases). For air (diatomic), γ ≈ 1.4. Using adiabatic expansion: γ = h₁/(h₁-h₂), where h₁ is initial excess pressure, h₂ is final excess pressure.",
-    theoryUz: "Issiqlik sig'imlari nisbati γ = Cp/Cv = (i+2)/i, bu yerda i - erkinlik darajasi (bir atomli gazlar uchun 3, ikki atomli gazlar uchun 5). Havo (ikki atomli) uchun γ ≈ 1.4. Adiabatik kengayish yordamida: γ = h₁/(h₁-h₂), bu yerda h₁ - boshlang'ich ortiqcha bosim, h₂ - oxirgi ortiqcha bosim.",
+    theory: `Jismning haroratini 1K ga ko'tarish uchun ketgan issiqlik miqdori shu jismning issiqlik sig'imi deyiladi:
+C = dQ/dT
+
+Solishtirma issiqlik sig'imi (birlik massa uchun):
+c = C/m = dQ/(mdT)
+
+Molyar issiqlik sig'imi (bir mol uchun):
+Cμ = C/ν
+
+O'zgarmas hajmda: Cv = (i/2)R/μ
+O'zgarmas bosimda: Cp = ((i+2)/2)R/μ
+
+bu yerda i - erkinlik darajasi (bir atomli gaz uchun i=3, ikki atomli uchun i=5).
+
+Puasson koeffitsienti (adiabata ko'rsatkichi):
+γ = Cp/Cv = (i+2)/i
+
+Havo uchun (ikki atomli): γ = 7/5 = 1,4
+
+Adiabatik jarayon tenglamasi (Puasson tenglamasi):
+PVᵞ = const
+
+Klement-Dezorm usuli:
+
+1-holat: Idishga havo damlanadi, bosim p₁ = p₀ + h₁
+2-holat: Jumrak tez ochilib, bosim p₀ ga tushadi (adiabatik kengayish)
+3-holat: Harorat tenglashgandan keyin bosim p₂ = p₀ + h₂
+
+Puasson formulasini qo'llab:
+γ = h₁/(h₁ - h₂)`,
+    theoryUz: `Jismning haroratini 1K ga ko'tarish uchun ketgan issiqlik miqdori shu jismning issiqlik sig'imi deyiladi:
+C = dQ/dT
+
+Solishtirma issiqlik sig'imi (birlik massa uchun):
+c = C/m = dQ/(mdT)
+
+Molyar issiqlik sig'imi (bir mol uchun):
+Cμ = C/ν
+
+O'zgarmas hajmda: Cv = (i/2)R/μ
+O'zgarmas bosimda: Cp = ((i+2)/2)R/μ
+
+bu yerda i - erkinlik darajasi (bir atomli gaz uchun i=3, ikki atomli uchun i=5).
+
+Puasson koeffitsienti (adiabata ko'rsatkichi):
+γ = Cp/Cv = (i+2)/i
+
+Havo uchun (ikki atomli): γ = 7/5 = 1,4
+
+Adiabatik jarayon tenglamasi (Puasson tenglamasi):
+PVᵞ = const
+
+Klement-Dezorm usuli:
+
+1-holat: Idishga havo damlanadi, bosim p₁ = p₀ + h₁
+2-holat: Jumrak tez ochilib, bosim p₀ ga tushadi (adiabatik kengayish)
+3-holat: Harorat tenglashgandan keyin bosim p₂ = p₀ + h₂
+
+Puasson formulasini qo'llab:
+γ = h₁/(h₁ - h₂)`,
     procedure: [
-      "C jumrakni yopiq holda D jumrakni ochib, idishga havo damlang",
-      "Manometrda h₁ = 20-25 sm farqga erishgunga qadar damlang",
-      "D jumrakni yoping va harorat tenglashishini kuting",
-      "C jumrakni tez ochib, bosimni atmosfera bosimiga tenglashtiring",
-      "C ni yoping va harorat tenglashgach h₂ ni o'lchang",
-      "γ = h₁/(h₁-h₂) formula bilan hisoblang"
+      "C va D jumraklarni oching, manometrdagi ustunlar bir xil bo'lsin",
+      "C jumrakni yoping, nasos bilan manometrdagi ustunlar farqi h₁ = 20-25 sm bo'lguncha havo damlang",
+      "D jumrakni yoping va havoning harorati atrofdagiga tenglashishini kuting (1-2 minut)",
+      "Manometrdagi h₁ qiymatini yozib oling",
+      "C jumrakni tez oching - idishdagi bosim atmosfera bosimiga tushadi",
+      "Havo butunlay chiqib bo'lmasdan C jumrakni tez yoping",
+      "Harorat tenglashgandan keyin (1-2 minut) h₂ qiymatini o'lchang",
+      "γ = h₁/(h₁ - h₂) formula bilan hisoblang",
+      "Tajribani 3-5 marta takrorlang va o'rtacha qiymatni toping",
+      "Nazariy qiymat (γ = 1,4) bilan solishtiring va nisbiy xatolikni hisoblang"
     ],
     procedureUz: [
-      "C jumrakni yopiq holda D jumrakni ochib, idishga havo damlang",
-      "Manometrda h₁ = 20-25 sm farqga erishgunga qadar damlang",
-      "D jumrakni yoping va harorat tenglashishini kuting",
-      "C jumrakni tez ochib, bosimni atmosfera bosimiga tenglashtiring",
-      "C ni yoping va harorat tenglashgach h₂ ni o'lchang",
-      "γ = h₁/(h₁-h₂) formula bilan hisoblang"
+      "C va D jumraklarni oching, manometrdagi ustunlar bir xil bo'lsin",
+      "C jumrakni yoping, nasos bilan manometrdagi ustunlar farqi h₁ = 20-25 sm bo'lguncha havo damlang",
+      "D jumrakni yoping va havoning harorati atrofdagiga tenglashishini kuting (1-2 minut)",
+      "Manometrdagi h₁ qiymatini yozib oling",
+      "C jumrakni tez oching - idishdagi bosim atmosfera bosimiga tushadi",
+      "Havo butunlay chiqib bo'lmasdan C jumrakni tez yoping",
+      "Harorat tenglashgandan keyin (1-2 minut) h₂ qiymatini o'lchang",
+      "γ = h₁/(h₁ - h₂) formula bilan hisoblang",
+      "Tajribani 3-5 marta takrorlang va o'rtacha qiymatni toping",
+      "Nazariy qiymat (γ = 1,4) bilan solishtiring va nisbiy xatolikni hisoblang"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
       { id: "h1", name: "h₁", nameUz: "h₁", unit: "cm", isInput: true },
       { id: "h2", name: "h₂", nameUz: "h₂", unit: "cm", isInput: true },
       { id: "gamma", name: "γ", nameUz: "γ", unit: "", isInput: false },
-      { id: "error", name: "Δγ", nameUz: "Δγ", unit: "%", isInput: false },
+      { id: "error", name: "ε", nameUz: "ε", unit: "%", isInput: false },
     ],
     calculations: (inputs) => {
       const gamma = inputs.h1 / (inputs.h1 - inputs.h2);
@@ -387,37 +749,81 @@ export const laboratories: LabExperiment[] = [
   },
   {
     id: "lab-8-surface-tension",
-    title: "Surface Tension Coefficient",
-    titleUz: "Sirt taranglik koeffitsientini aniqlash",
-    purpose: "To determine the surface tension coefficient of a liquid using the capillary method.",
+    title: "Surface Tension Coefficient by Capillary Method",
+    titleUz: "Kapillyar usul bilan sirt taranglik koeffitsientini aniqlash",
+    purpose: "To determine the surface tension coefficient of a liquid using the capillary rise method.",
     purposeUz: "Kapillyar usul yordamida suyuqlikning sirt taranglik koeffitsientini aniqlash.",
     equipment: [
-      "Capillary tubes of different diameters",
-      "Vessel with liquid",
-      "Traveling microscope",
-      "Ruler"
+      "Set of capillary tubes with different diameters (0.5-2 mm)",
+      "Vessel with test liquid (water, alcohol)",
+      "Traveling microscope or cathetometer",
+      "Ruler with millimeter scale",
+      "Thermometer"
     ],
     equipmentUz: [
-      "Turli diametrli kapillyar naylar",
-      "Suyuqlikli idish",
-      "Ko'chma mikroskop",
-      "Chizg'ich"
+      "Turli diametrli kapillyar naychalar to'plami (0,5-2 mm)",
+      "Sinov suyuqligi bilan idish (suv, spirt)",
+      "Sayohat mikroskopi yoki katetometr",
+      "Millimetrli shkala bilan chizg'ich",
+      "Termometr"
     ],
-    theory: "Surface tension causes liquid to rise in a capillary tube. The height h is related to surface tension σ by: h = 2σcosθ/(ρgr), where ρ is liquid density, g is gravity, r is tube radius, θ is contact angle. For water θ ≈ 0, so σ = ρghr/2.",
-    theoryUz: "Sirt taranglik suyuqlikning kapillyar naychada ko'tarilishiga sabab bo'ladi. Balandlik h va sirt taranglik σ o'rtasidagi bog'lanish: h = 2σcosθ/(ρgr), bu yerda ρ - suyuqlik zichligi, g - erkin tushish tezlanishi, r - naycha radiusi, θ - ho'llash burchagi. Suv uchun θ ≈ 0, demak σ = ρghr/2.",
+    theory: `Sirt taranglik - bu suyuqlik yuzasining qisqarishga intilish xossasidir. Sirt taranglik koeffitsienti σ birlik uzunlikdagi chiziq bo'ylab ta'sir etuvchi kuchga teng.
+
+Kapillyar hodisa - tor naychada suyuqlikning ko'tarilishi yoki tushishi. Ho'llovchi suyuqliklar (suv) ko'tariladi, ho'llamaydigan suyuqliklar (simob) tushadi.
+
+Kapillyarda suyuqlik balandligi:
+h = 2σcosθ/(ρgr)
+
+bu yerda:
+- σ - sirt taranglik koeffitsienti (N/m)
+- θ - ho'llash burchagi (suv uchun θ ≈ 0)
+- ρ - suyuqlik zichligi (kg/m³)
+- r - kapillyar radiusi (m)
+
+Suv uchun (θ = 0, cosθ = 1):
+σ = ρghr/2
+
+yoki diametr orqali:
+σ = ρghd/4
+
+20°C da suvning sirt taranglik koeffitsienti: σ ≈ 0.0728 N/m`,
+    theoryUz: `Sirt taranglik - bu suyuqlik yuzasining qisqarishga intilish xossasidir. Sirt taranglik koeffitsienti σ birlik uzunlikdagi chiziq bo'ylab ta'sir etuvchi kuchga teng.
+
+Kapillyar hodisa - tor naychada suyuqlikning ko'tarilishi yoki tushishi. Ho'llovchi suyuqliklar (suv) ko'tariladi, ho'llamaydigan suyuqliklar (simob) tushadi.
+
+Kapillyarda suyuqlik balandligi:
+h = 2σcosθ/(ρgr)
+
+bu yerda:
+- σ - sirt taranglik koeffitsienti (N/m)
+- θ - ho'llash burchagi (suv uchun θ ≈ 0)
+- ρ - suyuqlik zichligi (kg/m³)
+- r - kapillyar radiusi (m)
+
+Suv uchun (θ = 0, cosθ = 1):
+σ = ρghr/2
+
+yoki diametr orqali:
+σ = ρghd/4
+
+20°C da suvning sirt taranglik koeffitsienti: σ ≈ 0.0728 N/m`,
     procedure: [
-      "Kapillyar naychaning ichki diametrini o'lchang",
-      "Naychani suyuqlikka tushiring",
-      "Suyuqlikning ko'tarilish balandligini o'lchang",
-      "Turli diametrli naychalar uchun takrorlang",
-      "σ = ρghr/2 formula bilan hisoblang"
+      "Kapillyar naychaning ichki diametrini mikroskop yordamida o'lchang",
+      "Naychani vertikal holatda suyuqlikka tushiring",
+      "Suyuqlikning ko'tarilish balandligini h katetometr bilan o'lchang",
+      "Suyuqlik haroratini va zichligini aniqlang",
+      "σ = ρghd/4 formula bilan sirt taranglikni hisoblang",
+      "Turli diametrli naychalar uchun tajribani takrorlang",
+      "O'rtacha qiymatni va xatolikni hisoblang"
     ],
     procedureUz: [
-      "Kapillyar naychaning ichki diametrini o'lchang",
-      "Naychani suyuqlikka tushiring",
-      "Suyuqlikning ko'tarilish balandligini o'lchang",
-      "Turli diametrli naychalar uchun takrorlang",
-      "σ = ρghr/2 formula bilan hisoblang"
+      "Kapillyar naychaning ichki diametrini mikroskop yordamida o'lchang",
+      "Naychani vertikal holatda suyuqlikka tushiring",
+      "Suyuqlikning ko'tarilish balandligini h katetometr bilan o'lchang",
+      "Suyuqlik haroratini va zichligini aniqlang",
+      "σ = ρghd/4 formula bilan sirt taranglikni hisoblang",
+      "Turli diametrli naychalar uchun tajribani takrorlang",
+      "O'rtacha qiymatni va xatolikni hisoblang"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
@@ -427,9 +833,9 @@ export const laboratories: LabExperiment[] = [
       { id: "surfaceTension", name: "σ", nameUz: "σ", unit: "N/m", isInput: false },
     ],
     calculations: (inputs) => {
-      const radius = (inputs.diameter / 2) / 1000;
-      const height = inputs.height / 1000;
-      const surfaceTension = (inputs.density * 9.8 * height * radius) / 2;
+      const d = inputs.diameter / 1000;
+      const h = inputs.height / 1000;
+      const surfaceTension = (inputs.density * 9.8 * h * d) / 4;
       return {
         surfaceTension: Math.round(surfaceTension * 10000) / 10000,
       };
@@ -437,39 +843,99 @@ export const laboratories: LabExperiment[] = [
   },
   {
     id: "lab-9-viscosity",
-    title: "Liquid Viscosity - Stokes Method",
+    title: "Liquid Viscosity by Stokes Method (Falling Ball)",
     titleUz: "Suyuqlikning qovushoqligini Stoks usulida aniqlash",
-    purpose: "To determine the viscosity coefficient of a liquid using Stokes method (falling ball).",
-    purposeUz: "Stoks usuli (tushuvchi shar) yordamida suyuqlikning qovushoqlik koeffitsientini aniqlash.",
+    purpose: "To determine the viscosity coefficient of a liquid using Stokes method with a falling ball.",
+    purposeUz: "Stoks usuli (tushuvchi sharcha) yordamida suyuqlikning qovushoqlik koeffitsientini aniqlash.",
     equipment: [
-      "Tall glass cylinder with viscous liquid",
-      "Small steel balls",
-      "Micrometer",
-      "Stopwatch",
+      "Tall glass cylinder with viscous liquid (glycerin, oil)",
+      "Set of small steel balls (different diameters)",
+      "Micrometer (0.01 mm precision)",
+      "Stopwatch (0.1 s precision)",
+      "Ruler with millimeter scale",
       "Thermometer"
     ],
     equipmentUz: [
-      "Qovushoq suyuqlikli baland silindr",
-      "Kichik po'lat sharlar",
-      "Mikrometr",
-      "Sekundomer",
+      "Qovushoq suyuqlikli (glitserin, moy) baland shisha silindr",
+      "Kichik po'lat sharchalar to'plami (turli diametrli)",
+      "Mikrometr (0,01 mm aniqlikda)",
+      "Sekundomer (0,1 s aniqlikda)",
+      "Millimetrli shkala bilan chizg'ich",
       "Termometr"
     ],
-    theory: "A sphere falling through a viscous liquid reaches terminal velocity when gravitational force equals drag force. Stokes formula: η = 2r²(ρs-ρl)g/(9v), where r is sphere radius, ρs and ρl are densities of sphere and liquid, v is terminal velocity.",
-    theoryUz: "Qovushoq suyuqlikda tushayotgan shar, og'irlik kuchi qarshilik kuchiga tenglashganda, doimiy tezlikka erishadi. Stoks formulasi: η = 2r²(ρs-ρl)g/(9v), bu yerda r - shar radiusi, ρs va ρl - shar va suyuqlik zichliklari, v - doimiy tezlik.",
+    theory: `Qovushoqlik (ichki ishqalanish) - suyuqlik yoki gazning oqishiga qarshilik ko'rsatish xossasidir.
+
+Nyuton qonuni:
+F = η·S·(dv/dx)
+
+bu yerda:
+- F - ichki ishqalanish kuchi
+- η - dinamik qovushoqlik koeffitsienti (Pa·s)
+- S - qatlamlar orasidagi yuza
+- dv/dx - tezlik gradienti
+
+Qovushoq suyuqlikda tushayotgan sharga uchta kuch ta'sir etadi:
+1. Og'irlik kuchi: Fg = (4/3)πr³ρs·g
+2. Arximed kuchi: Fa = (4/3)πr³ρl·g
+3. Stoks qarshilik kuchi: Fs = 6πηrv
+
+Doimiy tezlikda (Fg = Fa + Fs):
+η = 2r²(ρs - ρl)g/(9v)
+
+bu yerda:
+- r - shar radiusi
+- ρs - shar zichligi
+- ρl - suyuqlik zichligi
+- v = L/t - shar tezligi
+
+Stoks formulasi Reynolds soni Re < 0.5 bo'lganda amal qiladi.`,
+    theoryUz: `Qovushoqlik (ichki ishqalanish) - suyuqlik yoki gazning oqishiga qarshilik ko'rsatish xossasidir.
+
+Nyuton qonuni:
+F = η·S·(dv/dx)
+
+bu yerda:
+- F - ichki ishqalanish kuchi
+- η - dinamik qovushoqlik koeffitsienti (Pa·s)
+- S - qatlamlar orasidagi yuza
+- dv/dx - tezlik gradienti
+
+Qovushoq suyuqlikda tushayotgan sharga uchta kuch ta'sir etadi:
+1. Og'irlik kuchi: Fg = (4/3)πr³ρs·g
+2. Arximed kuchi: Fa = (4/3)πr³ρl·g
+3. Stoks qarshilik kuchi: Fs = 6πηrv
+
+Doimiy tezlikda (Fg = Fa + Fs):
+η = 2r²(ρs - ρl)g/(9v)
+
+bu yerda:
+- r - shar radiusi
+- ρs - shar zichligi
+- ρl - suyuqlik zichligi
+- v = L/t - shar tezligi
+
+Stoks formulasi Reynolds soni Re < 0.5 bo'lganda amal qiladi.`,
     procedure: [
-      "Shar diametrini mikrometr bilan o'lchang",
-      "Silindrdagi belgilangan masofani o'lchang",
-      "Sharni suyuqlik yuzasiga qo'ying",
-      "Shar belgilangan masofani bosib o'tish vaqtini o'lchang",
-      "η = 2r²(ρs-ρl)g/(9v) formula bilan hisoblang"
+      "Silindrdagi suyuqlik haroratini termometr bilan o'lchang",
+      "Shar diametrini mikrometr bilan bir necha joyidan o'lchang",
+      "Silindrda o'lchash boshlang'ich va oxirgi belgilarini belgilang (L masofani o'lchang)",
+      "Sharni suyuqlik yuzasiga sekin qo'ying",
+      "Shar belgilangan L masofani bosib o'tish vaqtini t o'lchang",
+      "v = L/t tezlikni hisoblang",
+      "η = 2r²(ρs - ρl)g/(9v) formula bilan qovushoqlikni hisoblang",
+      "Turli diametrli sharlar uchun tajribani takrorlang",
+      "O'rtacha qiymat va xatolikni hisoblang"
     ],
     procedureUz: [
-      "Shar diametrini mikrometr bilan o'lchang",
-      "Silindrdagi belgilangan masofani o'lchang",
-      "Sharni suyuqlik yuzasiga qo'ying",
-      "Shar belgilangan masofani bosib o'tish vaqtini o'lchang",
-      "η = 2r²(ρs-ρl)g/(9v) formula bilan hisoblang"
+      "Silindrdagi suyuqlik haroratini termometr bilan o'lchang",
+      "Shar diametrini mikrometr bilan bir necha joyidan o'lchang",
+      "Silindrda o'lchash boshlang'ich va oxirgi belgilarini belgilang (L masofani o'lchang)",
+      "Sharni suyuqlik yuzasiga sekin qo'ying",
+      "Shar belgilangan L masofani bosib o'tish vaqtini t o'lchang",
+      "v = L/t tezlikni hisoblang",
+      "η = 2r²(ρs - ρl)g/(9v) formula bilan qovushoqlikni hisoblang",
+      "Turli diametrli sharlar uchun tajribani takrorlang",
+      "O'rtacha qiymat va xatolikni hisoblang"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
@@ -493,43 +959,105 @@ export const laboratories: LabExperiment[] = [
   },
   {
     id: "lab-10-wheatstone-bridge",
-    title: "Wheatstone Bridge - Resistance Measurement",
+    title: "Resistance Measurement with Wheatstone Bridge",
     titleUz: "O'tkazgichning qarshiligini o'zgarmas tok ko'prigi yordamida aniqlash",
-    purpose: "To study the laws of branched electrical circuits and determine unknown resistance using Wheatstone bridge.",
+    purpose: "To study the laws of branched electrical circuits and determine unknown resistance using Wheatstone bridge method.",
     purposeUz: "Tarmoqlangan elektr zanjirlari qonuniyatlarini o'rganish va Uitston ko'prigi yordamida noma'lum qarshilikni aniqlash.",
     equipment: [
-      "Rheochord (slide wire bridge)",
-      "Galvanometer",
-      "Resistance box",
+      "Rheochord (slide wire bridge, 1 m length)",
+      "Galvanometer (sensitive, with zero center)",
+      "Resistance box (decade type)",
       "Set of unknown resistances",
-      "Power source",
-      "Switch and connecting wires"
+      "DC power source (2-4 V)",
+      "Switch (key) and connecting wires"
     ],
     equipmentUz: [
-      "Reoxord",
-      "Galvanometr",
-      "Qarshiliklar magazini",
+      "Reoxord (1 m uzunlikdagi sim ko'prik)",
+      "Galvanometr (sezgir, nol markazli)",
+      "Qarshiliklar magazini (o'nlik tipli)",
       "Noma'lum qarshiliklar to'plami",
-      "Tok manbai",
+      "O'zgarmas tok manbai (2-4 V)",
       "Kalit va ulovchi simlar"
     ],
-    theory: "Wheatstone bridge uses Kirchhoff's laws for precise resistance measurement. At balance: Rx/R0 = l1/l2, where Rx is unknown resistance, R0 is known resistance, l1 and l2 are bridge arm lengths. Therefore: Rx = R0(l1/l2).",
-    theoryUz: "Uitston ko'prigi Kirxgof qonunlariga asoslanib qarshilikni aniq o'lchash imkonini beradi. Muvozanat holatida: Rx/R0 = l1/l2, bu yerda Rx - noma'lum qarshilik, R0 - ma'lum qarshilik, l1 va l2 - ko'prik yelkalari uzunliklari. Demak: Rx = R0(l1/l2).",
+    theory: `Uitston ko'prigi - bu noma'lum qarshilikni aniq o'lchash qurilmasi. U Kirxgof qonunlariga asoslangan.
+
+Kirxgofning birinchi qonuni (tugunlar qonuni):
+Tugunga kiruvchi va chiquvchi toklarning algebraik yig'indisi nolga teng:
+ΣIk = 0
+
+Kirxgofning ikkinchi qonuni (konturlar qonuni):
+Yopiq konturda EYK yig'indisi kuchlanishlar tushumi yig'indisiga teng:
+ΣEk = ΣIkRk
+
+Uitston ko'prigi sxemasida (4 ta qarshilik: Rx, R0, R1, R2):
+- Rx - noma'lum qarshilik
+- R0 - ma'lum qarshilik (magazin)
+- R1 va R2 - reoxord yelkalari
+
+Ko'prik muvozanatda bo'lganda (galvanometrdan tok o'tmaydi):
+Rx/R0 = R1/R2
+
+Reoxordda qarshilik uzunlikka proporsional:
+R1/R2 = l1/l2
+
+Demak:
+Rx = R0·(l1/l2)
+
+bu yerda l1 va l2 - reoxord yelkalarining uzunliklari (santimetrda).
+
+Ketma-ket ulanganda: R = R1 + R2
+Parallel ulanganda: 1/R = 1/R1 + 1/R2`,
+    theoryUz: `Uitston ko'prigi - bu noma'lum qarshilikni aniq o'lchash qurilmasi. U Kirxgof qonunlariga asoslangan.
+
+Kirxgofning birinchi qonuni (tugunlar qonuni):
+Tugunga kiruvchi va chiquvchi toklarning algebraik yig'indisi nolga teng:
+ΣIk = 0
+
+Kirxgofning ikkinchi qonuni (konturlar qonuni):
+Yopiq konturda EYK yig'indisi kuchlanishlar tushumi yig'indisiga teng:
+ΣEk = ΣIkRk
+
+Uitston ko'prigi sxemasida (4 ta qarshilik: Rx, R0, R1, R2):
+- Rx - noma'lum qarshilik
+- R0 - ma'lum qarshilik (magazin)
+- R1 va R2 - reoxord yelkalari
+
+Ko'prik muvozanatda bo'lganda (galvanometrdan tok o'tmaydi):
+Rx/R0 = R1/R2
+
+Reoxordda qarshilik uzunlikka proporsional:
+R1/R2 = l1/l2
+
+Demak:
+Rx = R0·(l1/l2)
+
+bu yerda l1 va l2 - reoxord yelkalarining uzunliklari (santimetrda).
+
+Ketma-ket ulanganda: R = R1 + R2
+Parallel ulanganda: 1/R = 1/R1 + 1/R2`,
     procedure: [
-      "Sxemani yig'ing",
-      "D jilgichni reoxord o'rtasiga qo'ying",
-      "R0 qarshilikni tanlab, galvanometrda tok bo'lmasligiga erishing",
-      "Galvanometr strelkasi 0 ga kelguncha D jilgichni harakatlantiring",
-      "l1 va l2 uzunliklarni yozib oling",
-      "Rx = R0(l1/l2) formula bilan hisoblang"
+      "Sxemani rasmdagidek yig'ing va tekshiring",
+      "Sirpanuvchi D jilgichni reoxord o'rtasiga (50 sm) qo'ying",
+      "R0 qarshilikni shunday tanlangki, galvanometrda tok deyarli bo'lmasin",
+      "D jilgichni chap yoki o'ng tomonga siljitib, galvanometr strelkasini 0 ga keltiring",
+      "Reoxord yelkalarining l1 va l2 uzunliklarini yozing",
+      "Rx = R0·(l1/l2) formula bilan noma'lum qarshilikni hisoblang",
+      "R0 ni o'zgartirib, tajribani 3 marta takrorlang",
+      "O'rtacha qiymat va xatolikni hisoblang",
+      "Qarshiliklarni ketma-ket va parallel ulab, tajribani takrorlang",
+      "Natijalarni nazariy qiymatlar bilan solishtiring"
     ],
     procedureUz: [
-      "Sxemani yig'ing",
-      "D jilgichni reoxord o'rtasiga qo'ying",
-      "R0 qarshilikni tanlab, galvanometrda tok bo'lmasligiga erishing",
-      "Galvanometr strelkasi 0 ga kelguncha D jilgichni harakatlantiring",
-      "l1 va l2 uzunliklarni yozib oling",
-      "Rx = R0(l1/l2) formula bilan hisoblang"
+      "Sxemani rasmdagidek yig'ing va tekshiring",
+      "Sirpanuvchi D jilgichni reoxord o'rtasiga (50 sm) qo'ying",
+      "R0 qarshilikni shunday tanlangki, galvanometrda tok deyarli bo'lmasin",
+      "D jilgichni chap yoki o'ng tomonga siljitib, galvanometr strelkasini 0 ga keltiring",
+      "Reoxord yelkalarining l1 va l2 uzunliklarini yozing",
+      "Rx = R0·(l1/l2) formula bilan noma'lum qarshilikni hisoblang",
+      "R0 ni o'zgartirib, tajribani 3 marta takrorlang",
+      "O'rtacha qiymat va xatolikni hisoblang",
+      "Qarshiliklarni ketma-ket va parallel ulab, tajribani takrorlang",
+      "Natijalarni nazariy qiymatlar bilan solishtiring"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
