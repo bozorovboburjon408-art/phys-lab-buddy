@@ -7,6 +7,9 @@ import { FreeFallSimulation } from "./FreeFallSimulation";
 import { CollisionSimulation } from "./CollisionSimulation";
 import { InclinedPlaneSimulation } from "./InclinedPlaneSimulation";
 import { CircularMotionSimulation } from "./CircularMotionSimulation";
+import { ElectricFieldSimulation } from "./ElectricFieldSimulation";
+import { MagneticInductionSimulation } from "./MagneticInductionSimulation";
+import { RefractionSimulation } from "./RefractionSimulation";
 
 interface Props {
   simulationId: string;
@@ -23,6 +26,9 @@ export const SimulationRenderer = ({ simulationId, parameters }: Props) => {
     collision: CollisionSimulation,
     inclinedPlane: InclinedPlaneSimulation,
     circularMotion: CircularMotionSimulation,
+    electricField: ElectricFieldSimulation,
+    magneticInduction: MagneticInductionSimulation,
+    refraction: RefractionSimulation,
   };
 
   const SimulationComponent = simulations[simulationId];
