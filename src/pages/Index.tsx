@@ -136,10 +136,13 @@ const FeatureCard = ({
   title: string;
   description: string;
 }) => (
-  <div className="glass-card p-6 hover:glow-border transition-all duration-300 group">
-    <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{icon}</div>
-    <h3 className="text-lg font-semibold mb-2">{title}</h3>
-    <p className="text-muted-foreground text-sm">{description}</p>
+  <div className="glass-card p-6 hover:glow-border transition-all duration-500 group cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-accent/10 transition-all duration-500" />
+    <div className="relative z-10">
+      <div className="text-4xl mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 inline-block">{icon}</div>
+      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{title}</h3>
+      <p className="text-muted-foreground text-sm group-hover:text-foreground/80 transition-colors duration-300">{description}</p>
+    </div>
   </div>
 );
 
