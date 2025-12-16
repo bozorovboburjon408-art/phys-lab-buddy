@@ -40,6 +40,8 @@ Mayatnikning energiyasi tebranish davomida kinetik va potensial energiya o'rtasi
       { id: "angle", name: "Launch Angle", nameUz: "Otish burchagi", min: 10, max: 80, step: 1, value: 45, unit: "°" },
       { id: "gravity", name: "Gravity", nameUz: "Erkin tushish tezlanishi", min: 1, max: 25, step: 0.1, value: 9.8, unit: "m/s²" },
       { id: "height", name: "Initial Height", nameUz: "Boshlang'ich balandlik", min: 0, max: 20, step: 0.5, value: 0, unit: "m" },
+      { id: "mass", name: "Mass", nameUz: "Jism massasi", min: 0.1, max: 10, step: 0.1, value: 1, unit: "kg" },
+      { id: "airResistance", name: "Air Resistance", nameUz: "Havo qarshiligi", min: 0, max: 0.5, step: 0.05, value: 0, unit: "" },
     ],
     theoryUz: `Gorizontal otilgan jism harakati - bu jism boshlang'ich tezlik bilan burchak ostida otilganda hosil bo'ladigan harakat. Bu harakat ikki mustaqil komponentdan iborat:
 
@@ -120,6 +122,7 @@ To'lqin tezligi v = λf formula bilan aniqlanadi. Bu universal formula barcha to
       { id: "mass", name: "Mass", nameUz: "Massa", min: 0.1, max: 10, step: 0.1, value: 1, unit: "kg" },
       { id: "gravity", name: "Gravity", nameUz: "Erkin tushish tezlanishi", min: 1, max: 25, step: 0.1, value: 9.8, unit: "m/s²" },
       { id: "airResistance", name: "Air Resistance", nameUz: "Havo qarshiligi", min: 0, max: 1, step: 0.05, value: 0, unit: "" },
+      { id: "initialVelocity", name: "Initial Velocity", nameUz: "Boshlang'ich tezlik", min: 0, max: 20, step: 1, value: 0, unit: "m/s" },
     ],
     theoryUz: `Erkin tushish - bu jismning faqat og'irlik kuchi ta'sirida harakati. Vakuumda barcha jismlar massasidan qat'i nazar bir xil tezlanish bilan tushadi.
 
@@ -145,6 +148,7 @@ Yerda erkin tushish tezlanishi g ≈ 9.8 m/s².`,
       { id: "mass2", name: "Mass 2", nameUz: "2-jism massasi", min: 0.5, max: 5, step: 0.1, value: 2, unit: "kg" },
       { id: "velocity1", name: "Velocity 1", nameUz: "1-jism tezligi", min: -10, max: 10, step: 0.5, value: 5, unit: "m/s" },
       { id: "velocity2", name: "Velocity 2", nameUz: "2-jism tezligi", min: -10, max: 10, step: 0.5, value: -2, unit: "m/s" },
+      { id: "restitution", name: "Coefficient of Restitution", nameUz: "Qaytish koeffitsienti", min: 0, max: 1, step: 0.1, value: 1, unit: "" },
     ],
     theoryUz: `Elastik to'qnashuv - bu to'qnashuvda ham impuls, ham kinetik energiya saqlanadigan to'qnashuv turi.
 
@@ -170,6 +174,8 @@ Impulsning saqlanish qonuni: m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'`,
       { id: "mass", name: "Mass", nameUz: "Massa", min: 0.5, max: 10, step: 0.5, value: 2, unit: "kg" },
       { id: "friction", name: "Friction Coefficient", nameUz: "Ishqalanish koeffitsienti", min: 0, max: 1, step: 0.05, value: 0.2, unit: "" },
       { id: "gravity", name: "Gravity", nameUz: "Erkin tushish tezlanishi", min: 1, max: 25, step: 0.1, value: 9.8, unit: "m/s²" },
+      { id: "initialVelocity", name: "Initial Velocity", nameUz: "Boshlang'ich tezlik", min: 0, max: 10, step: 0.5, value: 0, unit: "m/s" },
+      { id: "planeLength", name: "Plane Length", nameUz: "Tekislik uzunligi", min: 5, max: 30, step: 1, value: 10, unit: "m" },
     ],
     theoryUz: `Qiya tekislik - bu oddiy mexanizmlardan biri. Jism qiya tekislikda joylashganda, og'irlik kuchi ikki komponentga ajraladi.
 
@@ -194,6 +200,7 @@ Jism harakati uchun tanθ > μ bo'lishi kerak.`,
       { id: "radius", name: "Radius", nameUz: "Radius", min: 0.5, max: 5, step: 0.1, value: 2, unit: "m" },
       { id: "angularVelocity", name: "Angular Velocity", nameUz: "Burchak tezligi", min: 0.5, max: 10, step: 0.1, value: 2, unit: "rad/s" },
       { id: "mass", name: "Mass", nameUz: "Massa", min: 0.1, max: 5, step: 0.1, value: 1, unit: "kg" },
+      { id: "initialAngle", name: "Initial Angle", nameUz: "Boshlang'ich burchak", min: 0, max: 360, step: 15, value: 0, unit: "°" },
     ],
     theoryUz: `Tekis aylana bo'ylab harakat - bu jism bir xil tezlik bilan aylana bo'ylab harakatlangandagi harakat turi.
 
@@ -218,6 +225,7 @@ Markazga intilma tezlanish doimo aylana markaziga yo'nalgan.`,
       { id: "charge1", name: "Charge 1", nameUz: "1-zaryad", min: -5, max: 5, step: 0.5, value: 2, unit: "µC" },
       { id: "charge2", name: "Charge 2", nameUz: "2-zaryad", min: -5, max: 5, step: 0.5, value: -2, unit: "µC" },
       { id: "distance", name: "Distance", nameUz: "Masofa", min: 1, max: 10, step: 0.5, value: 5, unit: "m" },
+      { id: "fieldLines", name: "Field Lines", nameUz: "Maydon chiziqlari soni", min: 8, max: 24, step: 2, value: 12, unit: "" },
     ],
     theoryUz: `Elektr maydon - bu zaryadli jism atrofidagi fazoda mavjud bo'lgan maydon. U boshqa zaryadlarga kuch ta'sir qilish qobiliyatiga ega.
 
@@ -242,6 +250,7 @@ Kulon qonuni zaryadlar orasidagi kuchni tavsiflaydi. Bir nomdagi zaryadlar itari
       { id: "current", name: "Current", nameUz: "Tok kuchi", min: 0, max: 10, step: 0.5, value: 5, unit: "A" },
       { id: "coilTurns", name: "Coil Turns", nameUz: "O'ramlar soni", min: 5, max: 30, step: 1, value: 15, unit: "" },
       { id: "velocity", name: "Animation Speed", nameUz: "Animatsiya tezligi", min: 0.5, max: 3, step: 0.1, value: 1, unit: "" },
+      { id: "coilLength", name: "Coil Length", nameUz: "G'altak uzunligi", min: 5, max: 30, step: 1, value: 15, unit: "sm" },
     ],
     theoryUz: `Magnit induksiya - bu elektr tokining magnit maydon hosil qilishi va magnit maydon o'zgarishi natijasida elektr toki paydo bo'lishi hodisasi.
 
@@ -266,6 +275,7 @@ Solenoid ichida bir jinsli magnit maydon hosil bo'ladi. Faradey qonuni elektroma
       { id: "incidentAngle", name: "Incident Angle", nameUz: "Tushish burchagi", min: 0, max: 89, step: 1, value: 45, unit: "°" },
       { id: "n1", name: "Refractive Index 1", nameUz: "Sindirish ko'rsatkichi 1", min: 1, max: 2.5, step: 0.1, value: 1.5, unit: "" },
       { id: "n2", name: "Refractive Index 2", nameUz: "Sindirish ko'rsatkichi 2", min: 1, max: 2.5, step: 0.1, value: 1, unit: "" },
+      { id: "rayIntensity", name: "Ray Intensity", nameUz: "Nur intensivligi", min: 0.3, max: 1, step: 0.1, value: 0.8, unit: "" },
     ],
     theoryUz: `Nur sinishi - bu yorug'likning bir muhitdan ikkinchi muhitga o'tishda yo'nalishini o'zgartirishi.
 
@@ -317,6 +327,7 @@ Linza formulasi 1/f = 1/d₀ + 1/dᵢ linza orqali tasvir hosil bo'lishini tavsi
       { id: "temperature", name: "Temperature", nameUz: "Harorat", min: 100, max: 600, step: 10, value: 300, unit: "K" },
       { id: "volume", name: "Volume", nameUz: "Hajm", min: 50, max: 200, step: 10, value: 100, unit: "L" },
       { id: "particles", name: "Particles", nameUz: "Zarrachalar soni", min: 10, max: 100, step: 5, value: 50, unit: "" },
+      { id: "pressure", name: "Pressure", nameUz: "Bosim", min: 0.5, max: 5, step: 0.5, value: 1, unit: "atm" },
     ],
     theoryUz: `Ideal gaz - bu zarrachalari o'zaro ta'sirlashmaydigan va o'lchamlari e'tiborga olinmaydigan nazariy gaz modeli.
 
@@ -343,6 +354,7 @@ Zarrachalar tezligi haroratga proporsional: v ∝ √T`,
       { id: "wavelength", name: "Wavelength", nameUz: "To'lqin uzunligi", min: 20, max: 100, step: 5, value: 50, unit: "nm" },
       { id: "slitDistance", name: "Slit Distance", nameUz: "Tirqishlar oralig'i", min: 5, max: 30, step: 1, value: 15, unit: "mm" },
       { id: "frequency", name: "Animation Speed", nameUz: "Animatsiya tezligi", min: 0.5, max: 3, step: 0.1, value: 1, unit: "" },
+      { id: "screenDistance", name: "Screen Distance", nameUz: "Ekran masofasi", min: 50, max: 200, step: 10, value: 100, unit: "sm" },
     ],
     theoryUz: `Interferensiya - bu ikki yoki undan ortiq to'lqinlarning ustma-ust tushishi natijasida kuchayish yoki susayish hodisasi.
 
@@ -394,6 +406,7 @@ Saqlanadigan energiya W = ½CU² formula bilan hisoblanadi.`,
       { id: "sourceSpeed", name: "Source Speed", nameUz: "Manba tezligi", min: 0, max: 100, step: 5, value: 30, unit: "m/s" },
       { id: "waveSpeed", name: "Wave Speed", nameUz: "To'lqin tezligi", min: 200, max: 400, step: 10, value: 340, unit: "m/s" },
       { id: "frequency", name: "Source Frequency", nameUz: "Manba chastotasi", min: 1, max: 10, step: 0.5, value: 5, unit: "Hz" },
+      { id: "observerSpeed", name: "Observer Speed", nameUz: "Kuzatuvchi tezligi", min: 0, max: 50, step: 5, value: 0, unit: "m/s" },
     ],
     theoryUz: `Dopler effekti - bu to'lqin manbasi yoki kuzatuvchi harakatlanayotganda chastotaning o'zgarishi hodisasi.
 
