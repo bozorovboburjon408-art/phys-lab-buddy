@@ -9,6 +9,12 @@ export interface SimulationParameter {
   unit: string;
 }
 
+export interface SimulationFormula {
+  formula: string;
+  description: string;
+  descriptionUz: string;
+}
+
 export interface PhysicsSimulation {
   id: string;
   title: string;
@@ -17,6 +23,9 @@ export interface PhysicsSimulation {
   descriptionUz: string;
   parameters: SimulationParameter[];
   icon: string;
+  theory?: string;
+  theoryUz?: string;
+  formulas?: SimulationFormula[];
 }
 
 export interface LabExperiment {
