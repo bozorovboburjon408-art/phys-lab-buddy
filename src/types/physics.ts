@@ -16,6 +16,13 @@ export interface SimulationFormula {
   descriptionUz: string;
 }
 
+export interface SimulationPreset {
+  id: string;
+  nameUz: string;
+  description: string;
+  values: Record<string, number>;
+}
+
 export interface PhysicsSimulation {
   id: string;
   title: string;
@@ -27,6 +34,7 @@ export interface PhysicsSimulation {
   theory?: string;
   theoryUz?: string;
   formulas?: SimulationFormula[];
+  presets?: SimulationPreset[];
 }
 
 export interface LabExperiment {

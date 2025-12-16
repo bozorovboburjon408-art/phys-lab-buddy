@@ -14,6 +14,14 @@ export const simulations: PhysicsSimulation[] = [
       { id: "gravity", name: "Gravity", nameUz: "Erkin tushish tezlanishi", min: 1, max: 25, step: 0.1, value: 9.8, unit: "m/s²" },
       { id: "angle", name: "Initial Angle", nameUz: "Boshlang'ich burchak", min: 5, max: 45, step: 1, value: 20, unit: "°" },
     ],
+    presets: [
+      { id: "earth", nameUz: "🌍 Yer", description: "Yerdagi standart gravitatsiya", values: { gravity: 9.8 } },
+      { id: "moon", nameUz: "🌙 Oy", description: "Oydagi gravitatsiya (g=1.62)", values: { gravity: 1.62 } },
+      { id: "mars", nameUz: "🔴 Mars", description: "Marsdagi gravitatsiya (g=3.71)", values: { gravity: 3.71 } },
+      { id: "jupiter", nameUz: "🟤 Yupiter", description: "Yupiterdagi gravitatsiya (g=24.79)", values: { gravity: 24.79 } },
+      { id: "longPendulum", nameUz: "📏 Uzun mayatnik", description: "3 metrlik uzun mayatnik", values: { length: 3, angle: 15 } },
+      { id: "heavyBob", nameUz: "⚫ Og'ir yuk", description: "5 kg og'ir yuk bilan", values: { mass: 5, length: 1.5 } },
+    ],
     theoryUz: `Oddiy mayatnik - bu og'irlik kuchi ta'sirida tebranuvchi, cho'zilmaydigan ipga osilgan nuqtaviy jism. Mayatnik kichik burchaklarda (< 15°) garmonik tebranish hosil qiladi.
 
 Mayatnikning tebranish davri T faqat ip uzunligi L va erkin tushish tezlanishi g ga bog'liq bo'lib, yuk massasiga bog'liq emas. Bu xususiyat Galiley tomonidan kashf qilingan.
@@ -43,6 +51,14 @@ Mayatnikning energiyasi tebranish davomida kinetik va potensial energiya o'rtasi
       { id: "mass", name: "Mass", nameUz: "Jism massasi", min: 0.1, max: 10, step: 0.1, value: 1, unit: "kg" },
       { id: "airResistance", name: "Air Resistance", nameUz: "Havo qarshiligi", min: 0, max: 0.5, step: 0.05, value: 0, unit: "" },
     ],
+    presets: [
+      { id: "maxRange", nameUz: "📏 Maksimal masofa", description: "45° burchakda maksimal uzoqlik", values: { angle: 45, velocity: 30 } },
+      { id: "highAngle", nameUz: "🔼 Yuqori burchak", description: "Baland traektoriya", values: { angle: 70, velocity: 25 } },
+      { id: "lowAngle", nameUz: "🔽 Past burchak", description: "Past traektoriya", values: { angle: 20, velocity: 35 } },
+      { id: "moonLanding", nameUz: "🌙 Oyda otish", description: "Oy gravitatsiyasida", values: { gravity: 1.62, velocity: 15, angle: 45 } },
+      { id: "heavyObject", nameUz: "🏋️ Og'ir jism", description: "Og'ir jism havo qarshiligi bilan", values: { mass: 10, airResistance: 0.1 } },
+      { id: "basketball", nameUz: "🏀 Basketbol", description: "To'p tashlash", values: { velocity: 8, angle: 50, height: 2 } },
+    ],
     theoryUz: `Gorizontal otilgan jism harakati - bu jism boshlang'ich tezlik bilan burchak ostida otilganda hosil bo'ladigan harakat. Bu harakat ikki mustaqil komponentdan iborat:
 
 1. Gorizontal harakat - tekis harakat (tezlanishsiz)
@@ -71,6 +87,14 @@ Traektoriya parabolik shaklga ega. Maksimal uzoqlik 45° burchakda erishiladi.`,
       { id: "amplitude", name: "Amplitude", nameUz: "Amplituda", min: 0.05, max: 0.5, step: 0.01, value: 0.2, unit: "m" },
       { id: "damping", name: "Damping", nameUz: "So'nish koeffitsienti", min: 0, max: 1, step: 0.05, value: 0.1, unit: "" },
     ],
+    presets: [
+      { id: "stiff", nameUz: "🔩 Qattiq prujina", description: "Yuqori bikrlikli prujina", values: { springConstant: 200, mass: 1 } },
+      { id: "soft", nameUz: "🧵 Yumshoq prujina", description: "Past bikrlikli prujina", values: { springConstant: 20, mass: 1 } },
+      { id: "heavyMass", nameUz: "⚫ Og'ir yuk", description: "Og'ir yuk bilan tebranish", values: { mass: 5, springConstant: 100 } },
+      { id: "undamped", nameUz: "♾️ So'nmasdan", description: "So'nishsiz ideal tebranish", values: { damping: 0, amplitude: 0.3 } },
+      { id: "overdamped", nameUz: "🛑 Kuchli so'nish", description: "Tez so'nadigan tebranish", values: { damping: 0.8, amplitude: 0.4 } },
+      { id: "carSuspension", nameUz: "🚗 Avtomobil amortizatori", description: "Real amortizator", values: { springConstant: 80, damping: 0.3, mass: 2 } },
+    ],
     theoryUz: `Prujinali tebranish - bu Guk qonuniga bo'ysunadigan elastik kuch ta'sirida hosil bo'ladigan garmonik tebranish.
 
 Guk qonuni: F = -kx (bu yerda k - prujina bikrligi, x - cho'zilish)
@@ -98,6 +122,13 @@ Tebranish davri faqat prujina bikrligi va yuk massasiga bog'liq, amplitudaga bog
       { id: "frequency", name: "Frequency", nameUz: "Chastota", min: 0.5, max: 5, step: 0.1, value: 1, unit: "Hz" },
       { id: "speed", name: "Wave Speed", nameUz: "To'lqin tezligi", min: 50, max: 300, step: 10, value: 150, unit: "px/s" },
     ],
+    presets: [
+      { id: "lowFreq", nameUz: "📻 Past chastota", description: "Sekin to'lqin", values: { frequency: 0.5, wavelength: 250 } },
+      { id: "highFreq", nameUz: "📡 Yuqori chastota", description: "Tez to'lqin", values: { frequency: 4, wavelength: 80 } },
+      { id: "highAmplitude", nameUz: "📈 Katta amplituda", description: "Baland to'lqin", values: { amplitude: 70, frequency: 1.5 } },
+      { id: "longWave", nameUz: "〰️ Uzun to'lqin", description: "Radio to'lqinlar kabi", values: { wavelength: 300, frequency: 0.8 } },
+      { id: "shortWave", nameUz: "∿ Qisqa to'lqin", description: "Rentgen nurlari kabi", values: { wavelength: 60, frequency: 3 } },
+    ],
     theoryUz: `To'lqin - bu tebranishlarning muhitda tarqalishi. Ko'ndalang to'lqinlarda zarralar to'lqin tarqalish yo'nalishiga perpendikulyar tebranadi.
 
 To'lqin tezligi v = λf formula bilan aniqlanadi. Bu universal formula barcha to'lqin turlari uchun amal qiladi.`,
@@ -123,6 +154,14 @@ To'lqin tezligi v = λf formula bilan aniqlanadi. Bu universal formula barcha to
       { id: "gravity", name: "Gravity", nameUz: "Erkin tushish tezlanishi", min: 1, max: 25, step: 0.1, value: 9.8, unit: "m/s²" },
       { id: "airResistance", name: "Air Resistance", nameUz: "Havo qarshiligi", min: 0, max: 1, step: 0.05, value: 0, unit: "" },
       { id: "initialVelocity", name: "Initial Velocity", nameUz: "Boshlang'ich tezlik", min: 0, max: 20, step: 1, value: 0, unit: "m/s" },
+    ],
+    presets: [
+      { id: "earthVacuum", nameUz: "🌍 Yer (vakuum)", description: "Havo qarshilisisiz erkin tushish", values: { gravity: 9.8, airResistance: 0 } },
+      { id: "moonFall", nameUz: "🌙 Oyda tushish", description: "Oy gravitatsiyasi", values: { gravity: 1.62, airResistance: 0 } },
+      { id: "marsFall", nameUz: "🔴 Marsda tushish", description: "Mars gravitatsiyasi va atmosferasi", values: { gravity: 3.71, airResistance: 0.3 } },
+      { id: "featherEarth", nameUz: "🪶 Patda tushish", description: "Havo qarshiligi bilan yengil jism", values: { mass: 0.1, airResistance: 0.8 } },
+      { id: "skydiver", nameUz: "🪂 Parashyutchi", description: "Parashyutsiz sakrash", values: { height: 200, mass: 80, airResistance: 0.2, initialVelocity: 0 } },
+      { id: "throwDown", nameUz: "⬇️ Pastga otish", description: "Boshlang'ich tezlik bilan", values: { initialVelocity: 15, height: 150 } },
     ],
     theoryUz: `Erkin tushish - bu jismning faqat og'irlik kuchi ta'sirida harakati. Vakuumda barcha jismlar massasidan qat'i nazar bir xil tezlanish bilan tushadi.
 
@@ -150,6 +189,14 @@ Yerda erkin tushish tezlanishi g ≈ 9.8 m/s².`,
       { id: "velocity2", name: "Velocity 2", nameUz: "2-jism tezligi", min: -10, max: 10, step: 0.5, value: -2, unit: "m/s" },
       { id: "restitution", name: "Coefficient of Restitution", nameUz: "Qaytish koeffitsienti", min: 0, max: 1, step: 0.1, value: 1, unit: "" },
     ],
+    presets: [
+      { id: "elastic", nameUz: "🎱 Elastik to'qnashuv", description: "Ideal elastik to'qnashuv", values: { restitution: 1 } },
+      { id: "inelastic", nameUz: "🧱 Noelastik", description: "To'liq noelastik to'qnashuv", values: { restitution: 0 } },
+      { id: "billiard", nameUz: "🎱 Bilyard", description: "Bilyard to'plari", values: { mass1: 1, mass2: 1, velocity1: 5, velocity2: 0, restitution: 0.95 } },
+      { id: "heavyVsLight", nameUz: "⚖️ Og'ir va yengil", description: "Massa farqi katta", values: { mass1: 5, mass2: 0.5, velocity1: 3, velocity2: 0 } },
+      { id: "headOn", nameUz: "💥 Qarama-qarshi", description: "Bir-biriga qarab harakat", values: { velocity1: 5, velocity2: -5, mass1: 2, mass2: 2 } },
+      { id: "carCrash", nameUz: "🚗 Avtomobil", description: "Avtomobil to'qnashuvi", values: { mass1: 1.5, mass2: 2, velocity1: 8, velocity2: -3, restitution: 0.3 } },
+    ],
     theoryUz: `Elastik to'qnashuv - bu to'qnashuvda ham impuls, ham kinetik energiya saqlanadigan to'qnashuv turi.
 
 Impulsning saqlanish qonuni: m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'`,
@@ -176,6 +223,14 @@ Impulsning saqlanish qonuni: m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'`,
       { id: "gravity", name: "Gravity", nameUz: "Erkin tushish tezlanishi", min: 1, max: 25, step: 0.1, value: 9.8, unit: "m/s²" },
       { id: "initialVelocity", name: "Initial Velocity", nameUz: "Boshlang'ich tezlik", min: 0, max: 10, step: 0.5, value: 0, unit: "m/s" },
       { id: "planeLength", name: "Plane Length", nameUz: "Tekislik uzunligi", min: 5, max: 30, step: 1, value: 10, unit: "m" },
+    ],
+    presets: [
+      { id: "frictionless", nameUz: "🧊 Muz ustida", description: "Ishqalanishsiz sirt", values: { friction: 0, angle: 30 } },
+      { id: "steepIcy", nameUz: "🏔️ Tik tog'", description: "Qor-muzli tik qiyalik", values: { angle: 45, friction: 0.1 } },
+      { id: "gentleSlope", nameUz: "🛝 Sekin qiyalik", description: "Past burchakli sirt", values: { angle: 15, friction: 0.3 } },
+      { id: "roughSurface", nameUz: "🪨 Dag'al sirt", description: "Yuqori ishqalanish", values: { friction: 0.7, angle: 40 } },
+      { id: "skiSlope", nameUz: "⛷️ Chang'i yo'li", description: "Qor ustida sirpanish", values: { angle: 25, friction: 0.05, planeLength: 20 } },
+      { id: "skateboard", nameUz: "🛹 Skeytbord rampa", description: "Skeytbord uchun rampa", values: { angle: 35, friction: 0.15, initialVelocity: 2 } },
     ],
     theoryUz: `Qiya tekislik - bu oddiy mexanizmlardan biri. Jism qiya tekislikda joylashganda, og'irlik kuchi ikki komponentga ajraladi.
 
@@ -329,6 +384,13 @@ Linza formulasi 1/f = 1/d₀ + 1/dᵢ linza orqali tasvir hosil bo'lishini tavsi
       { id: "particles", name: "Particles", nameUz: "Zarrachalar soni", min: 10, max: 100, step: 5, value: 50, unit: "" },
       { id: "pressure", name: "Pressure", nameUz: "Bosim", min: 0.5, max: 5, step: 0.5, value: 1, unit: "atm" },
     ],
+    presets: [
+      { id: "roomTemp", nameUz: "🏠 Xona harorati", description: "Standart sharoitlar (25°C)", values: { temperature: 298, pressure: 1 } },
+      { id: "coldGas", nameUz: "❄️ Sovuq gaz", description: "Past haroratli gaz", values: { temperature: 150, pressure: 0.5 } },
+      { id: "hotGas", nameUz: "🔥 Issiq gaz", description: "Yuqori haroratli gaz", values: { temperature: 500, pressure: 3 } },
+      { id: "compressed", nameUz: "💪 Siqilgan gaz", description: "Yuqori bosimli kichik hajm", values: { volume: 50, pressure: 4, particles: 80 } },
+      { id: "expanded", nameUz: "🎈 Kengaygan gaz", description: "Katta hajm, past bosim", values: { volume: 200, pressure: 0.5, particles: 30 } },
+    ],
     theoryUz: `Ideal gaz - bu zarrachalari o'zaro ta'sirlashmaydigan va o'lchamlari e'tiborga olinmaydigan nazariy gaz modeli.
 
 Ideal gaz holat tenglamasi: PV = nRT
@@ -407,6 +469,13 @@ Saqlanadigan energiya W = ½CU² formula bilan hisoblanadi.`,
       { id: "waveSpeed", name: "Wave Speed", nameUz: "To'lqin tezligi", min: 200, max: 400, step: 10, value: 340, unit: "m/s" },
       { id: "frequency", name: "Source Frequency", nameUz: "Manba chastotasi", min: 1, max: 10, step: 0.5, value: 5, unit: "Hz" },
       { id: "observerSpeed", name: "Observer Speed", nameUz: "Kuzatuvchi tezligi", min: 0, max: 50, step: 5, value: 0, unit: "m/s" },
+    ],
+    presets: [
+      { id: "ambulance", nameUz: "🚑 Tez yordam", description: "Tez yordamning sirena ovozi", values: { sourceSpeed: 30, frequency: 8 } },
+      { id: "train", nameUz: "🚂 Poyezd", description: "O'tayotgan poyezd", values: { sourceSpeed: 50, frequency: 3 } },
+      { id: "car", nameUz: "🚗 Avtomobil", description: "Tez harakatlanuvchi avtomobil", values: { sourceSpeed: 25, frequency: 5 } },
+      { id: "supersonic", nameUz: "✈️ Tovushdan tez", description: "Tovush tezligiga yaqin", values: { sourceSpeed: 95, waveSpeed: 340 } },
+      { id: "movingObserver", nameUz: "🏃 Harakatdagi kuzatuvchi", description: "Kuzatuvchi ham harakat qiladi", values: { observerSpeed: 20, sourceSpeed: 40 } },
     ],
     theoryUz: `Dopler effekti - bu to'lqin manbasi yoki kuzatuvchi harakatlanayotganda chastotaning o'zgarishi hodisasi.
 
