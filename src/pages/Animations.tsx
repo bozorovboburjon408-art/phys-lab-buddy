@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { SimulationRenderer } from "@/components/simulations/SimulationRenderer";
+import { SimulationPreview } from "@/components/simulations/SimulationPreview";
 import { ParameterControl } from "@/components/simulations/ParameterControl";
 import { simulations } from "@/data/simulations";
 import { SimulationParameter } from "@/types/physics";
@@ -59,26 +60,28 @@ const Animations = () => {
                 <button
                   key={sim.id}
                   onClick={() => handleSimulationSelect(sim)}
-                  className="glass-card p-5 text-left hover:glow-border transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 fade-in-up"
+                  className="glass-card p-4 text-left hover:glow-border transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 fade-in-up"
                   style={{ animationDelay: `${index * 0.03}s` }}
                 >
-                  <div className="flex items-start gap-3">
-                    <span className="text-4xl group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                  {/* Preview Animation */}
+                  <div className="mb-3 flex justify-center">
+                    <SimulationPreview simulationId={sim.id} />
+                  </div>
+                  
+                  <div className="flex items-start gap-2">
+                    <span className="text-2xl group-hover:scale-110 transition-transform shrink-0">
                       {sim.icon}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                      <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2">
                         {sim.titleUz}
                       </h3>
-                      <p className="text-xs text-muted-foreground line-clamp-2 mt-1">
-                        {sim.descriptionUz}
-                      </p>
                     </div>
                   </div>
                   
-                  <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-between">
+                  <div className="mt-3 pt-2 border-t border-border/50 flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">
-                      {sim.parameters.length} ta parametr
+                      {sim.parameters.length} parametr
                     </span>
                     <span className="text-xs text-primary group-hover:translate-x-1 transition-transform">
                       Ochish →
