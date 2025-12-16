@@ -3,23 +3,23 @@ import { LabExperiment } from "@/types/physics";
 export const laboratories: LabExperiment[] = [
   {
     id: "lab-1-pendulum",
-    title: "Determining Gravitational Acceleration with Mathematical Pendulum",
+    title: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash",
     titleUz: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash",
-    purpose: "To determine gravitational acceleration using a mathematical pendulum and verify the relationship between pendulum length and period.",
+    purpose: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash va mayatnik uzunligi bilan davri orasidagi bog'lanishni tekshirish.",
     purposeUz: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash va mayatnik uzunligi bilan davri orasidagi bog'lanishni tekshirish.",
     equipment: [
-      "Mathematical pendulum (thread with small ball)",
-      "Ruler or measuring tape (1-2 m)",
-      "Stopwatch with 0.1 s precision",
-      "Stand with clamp",
-      "Protractor for measuring deflection angle"
+      "Matematik mayatnik (ip bilan kichik shar)",
+      "Chizg'ich yoki metr lentasi (1-2 m)",
+      "Sekundomer (0,1 s aniqlikda)",
+      "Qisqichli shtativ",
+      "Burchakni o'lchash uchun transportir"
     ],
     equipmentUz: [
       "Matematik mayatnik (ip bilan kichik shar)",
-      "Chizgich yoki metr lentasi (1-2 m)",
+      "Chizg'ich yoki metr lentasi (1-2 m)",
       "Sekundomer (0,1 s aniqlikda)",
       "Qisqichli shtativ",
-      "Burchakni olchash uchun transportir"
+      "Burchakni o'lchash uchun transportir"
     ],
     theory: `Matematik mayatnik - bu massasi e'tiborga olinmaydigan cho'zilmaydigan ipga osilgan moddiy nuqtadir. Kichik burchaklar (10° dan kam) uchun mayatnikning tebranish davri quyidagi formula bilan aniqlanadi:
 
@@ -73,10 +73,10 @@ Tajribada n ta tebranish vaqti o'lchanilib, bitta tebranish davri T = t/n formul
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "length", name: "Length L", nameUz: "Uzunlik L", unit: "m", isInput: true },
-      { id: "oscillations", name: "Number n", nameUz: "Soni n", unit: "", isInput: true },
-      { id: "time", name: "Time t", nameUz: "Vaqt t", unit: "s", isInput: true },
-      { id: "period", name: "Period T", nameUz: "Davr T", unit: "s", isInput: false },
+      { id: "length", name: "Uzunlik L", nameUz: "Uzunlik L", unit: "m", isInput: true },
+      { id: "oscillations", name: "Soni n", nameUz: "Soni n", unit: "", isInput: true },
+      { id: "time", name: "Vaqt t", nameUz: "Vaqt t", unit: "s", isInput: true },
+      { id: "period", name: "Davr T", nameUz: "Davr T", unit: "s", isInput: false },
       { id: "gravity", name: "g", nameUz: "g", unit: "m/s²", isInput: false },
     ],
     calculations: (inputs) => {
@@ -90,16 +90,16 @@ Tajribada n ta tebranish vaqti o'lchanilib, bitta tebranish davri T = t/n formul
   },
   {
     id: "lab-2-free-fall",
-    title: "Free Fall Acceleration Measurement",
+    title: "Erkin tushish tezlanishini o'lchash",
     titleUz: "Erkin tushish tezlanishini o'lchash",
-    purpose: "To measure the acceleration due to gravity using free fall motion and verify the laws of uniformly accelerated motion.",
+    purpose: "Erkin tushish harakati yordamida tortishish tezlanishini o'lchash va tekis tezlanuvchan harakat qonunlarini tekshirish.",
     purposeUz: "Erkin tushish harakati yordamida tortishish tezlanishini o'lchash va tekis tezlanuvchan harakat qonunlarini tekshirish.",
     equipment: [
-      "Steel ball (small, dense)",
-      "Electromagnetic release mechanism",
-      "Electronic timer with photoelectric sensors",
-      "Vertical stand with height scale",
-      "Receiving pad"
+      "Po'lat shar (kichik, zich)",
+      "Elektromagnit qo'yib yuborish mexanizmi",
+      "Fotoelektrik sensorli elektron taymer",
+      "Balandlik shkalali vertikal shtativ",
+      "Qabul qiluvchi taglik"
     ],
     equipmentUz: [
       "Po'lat shar (kichik, zich)",
@@ -164,8 +164,8 @@ Yer sirtida g ≈ 9.8 m/s² (kenglik va balandlikka qarab 9.78 - 9.83 m/s² oral
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "height", name: "Height h", nameUz: "Balandlik h", unit: "m", isInput: true },
-      { id: "time", name: "Time t", nameUz: "Vaqt t", unit: "s", isInput: true },
+      { id: "height", name: "Balandlik h", nameUz: "Balandlik h", unit: "m", isInput: true },
+      { id: "time", name: "Vaqt t", nameUz: "Vaqt t", unit: "s", isInput: true },
       { id: "gravity", name: "g", nameUz: "g", unit: "m/s²", isInput: false },
     ],
     calculations: (inputs) => {
@@ -177,16 +177,16 @@ Yer sirtida g ≈ 9.8 m/s² (kenglik va balandlikka qarab 9.78 - 9.83 m/s² oral
   },
   {
     id: "lab-3-hookes-law",
-    title: "Verification of Hooke's Law and Spring Constant",
+    title: "Guk qonunini tekshirish va prujina bikrligi",
     titleUz: "Guk qonunini tekshirish va prujina bikrligi",
-    purpose: "To verify Hooke's Law for elastic deformation and determine the spring constant experimentally.",
+    purpose: "Elastik deformatsiya uchun Guk qonunini tekshirish va prujina bikrlik koeffitsientini tajribada aniqlash.",
     purposeUz: "Elastik deformatsiya uchun Guk qonunini tekshirish va prujina bikrlik koeffitsientini tajribada aniqlash.",
     equipment: [
-      "Helical spring (steel or brass)",
-      "Set of calibrated masses (50g - 500g)",
-      "Vertical ruler with millimeter scale",
-      "Mass holder and hook",
-      "Stand with clamp"
+      "Spiral prujina (po'lat yoki bronza)",
+      "Kalibrlangan yuklar to'plami (50g - 500g)",
+      "Millimetrli shkala bilan vertikal chizg'ich",
+      "Yuk ushlagich va ilgak",
+      "Qisqichli shtativ"
     ],
     equipmentUz: [
       "Spiral prujina (po'lat yoki bronza)",
@@ -259,11 +259,11 @@ E = kx²/2`,
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "mass", name: "Mass m", nameUz: "Massa m", unit: "kg", isInput: true },
+      { id: "mass", name: "Massa m", nameUz: "Massa m", unit: "kg", isInput: true },
       { id: "initialLength", name: "L₀", nameUz: "L₀", unit: "m", isInput: true },
       { id: "finalLength", name: "L", nameUz: "L", unit: "m", isInput: true },
-      { id: "extension", name: "Extension x", nameUz: "Cho'zilish x", unit: "m", isInput: false },
-      { id: "force", name: "Force F", nameUz: "Kuch F", unit: "N", isInput: false },
+      { id: "extension", name: "Cho'zilish x", nameUz: "Cho'zilish x", unit: "m", isInput: false },
+      { id: "force", name: "Kuch F", nameUz: "Kuch F", unit: "N", isInput: false },
       { id: "springConstant", name: "k", nameUz: "k", unit: "N/m", isInput: false },
     ],
     calculations: (inputs) => {
@@ -279,16 +279,16 @@ E = kx²/2`,
   },
   {
     id: "lab-4-young-modulus",
-    title: "Determination of Young's Modulus by Bending Method",
+    title: "Egilish usuli orqali Yung modulini aniqlash",
     titleUz: "Egilish usuli orqali Yung modulini aniqlash",
-    purpose: "To determine the elastic modulus (Young's modulus) of a solid material using the bending deformation method.",
+    purpose: "Qattiq jismning (sterjenning) elastiklik modulini egilish deformatsiyasi metodi bilan aniqlashni o'rganish.",
     purposeUz: "Qattiq jismning (sterjenning) elastiklik modulini egilish deformatsiyasi metodi bilan aniqlashni o'rganish.",
     equipment: [
-      "Two support prisms (triangular cross-section)",
-      "Test rod (metal or plastic beam)",
-      "Set of 0.5 kg weights (4 pieces)",
-      "Scale ruler (millimeter precision)",
-      "Vernier caliper (0.1 mm precision)"
+      "Ikkita tayanch prizma (uchburchak kesimli)",
+      "Tekshiriluvchi sterjen (metall yoki plastmassa)",
+      "4 ta 0,5 kg li toshlar",
+      "Masshtabli lineyka (mm aniqlikda)",
+      "Shtangensirkul (0,1 mm aniqlikda)"
     ],
     equipmentUz: [
       "Ikkita tayanch prizma (uchburchak kesimli)",
@@ -381,11 +381,11 @@ E = 4Pl³/(3λab³)`,
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "mass", name: "Mass m", nameUz: "Massa m", unit: "kg", isInput: true },
-      { id: "length", name: "Span l", nameUz: "Oraliq l", unit: "m", isInput: true },
-      { id: "width", name: "Width a", nameUz: "Eni a", unit: "mm", isInput: true },
-      { id: "thickness", name: "Thickness b", nameUz: "Qalinligi b", unit: "mm", isInput: true },
-      { id: "deflection", name: "Deflection λ", nameUz: "Egilish λ", unit: "mm", isInput: true },
+      { id: "mass", name: "Massa m", nameUz: "Massa m", unit: "kg", isInput: true },
+      { id: "length", name: "Oraliq l", nameUz: "Oraliq l", unit: "m", isInput: true },
+      { id: "width", name: "Eni a", nameUz: "Eni a", unit: "mm", isInput: true },
+      { id: "thickness", name: "Qalinligi b", nameUz: "Qalinligi b", unit: "mm", isInput: true },
+      { id: "deflection", name: "Egilish λ", nameUz: "Egilish λ", unit: "mm", isInput: true },
       { id: "youngModulus", name: "E", nameUz: "E", unit: "GPa", isInput: false },
     ],
     calculations: (inputs) => {
@@ -403,15 +403,15 @@ E = 4Pl³/(3λab³)`,
   },
   {
     id: "lab-5-physical-pendulum",
-    title: "Physical Pendulum - Ring Method for Gravitational Acceleration",
+    title: "Tebranma harakat qonunlarini (halqa yordamida) o'rganish",
     titleUz: "Tebranma harakat qonunlarini (halqa yordamida) o'rganish",
-    purpose: "To determine gravitational acceleration using a physical pendulum (ring) and study the laws of oscillatory motion.",
+    purpose: "Halqa yordamida tortishish kuchi tezlanishini aniqlash va tebranma harakat qonunlarini o'rganish.",
     purposeUz: "Halqa yordamida tortishish kuchi tezlanishini aniqlash va tebranma harakat qonunlarini o'rganish.",
     equipment: [
-      "Ring (metal, uniform thickness)",
-      "Vernier caliper (0.1 mm precision)",
-      "Stopwatch (0.1 s precision)",
-      "Physical pendulum stand with knife edge support"
+      "Halqa (metall, bir tekis qalinlikda)",
+      "Shtangensirkul (0,1 mm aniqlikda)",
+      "Sekundomer (0,1 s aniqlikda)",
+      "Pichoqsimon tayanchli fizik mayatnik stendi"
     ],
     equipmentUz: [
       "Halqa (metall, bir tekis qalinlikda)",
@@ -517,19 +517,19 @@ g = 4π²(3R₁² + R₂²)/(2R₁T²)`,
   },
   {
     id: "lab-6-sound-speed",
-    title: "Measurement of Sound Speed in Air",
+    title: "Tovushning havoda tarqalish tezligini o'lchash",
     titleUz: "Tovushning havoda tarqalish tezligini o'lchash",
-    purpose: "To determine the speed of sound propagation in air at room temperature and verify its temperature dependence.",
+    purpose: "Xona haroratida tovushning tarqalish tezligini aniqlash va uning haroratga bog'liqligini tekshirish.",
     purposeUz: "Xona haroratida tovushning tarqalish tezligini aniqlash va uning haroratga bog'liqligini tekshirish.",
     equipment: [
-      "12V DC power source",
-      "Cobra3 base unit with RS-232 cable",
-      "Timer/counter module",
-      "Microphone with amplifier",
-      "9V battery for microphone",
-      "Circular supports and connecting wires",
-      "Personal computer with measurement software",
-      "Laboratory thermometer"
+      "12 V li tok manbai",
+      "Cobra3 bazaviy bloki va RS-232 tipli kabel",
+      "Taymer/hisoblagich moduli",
+      "Kuchaytirgichli mikrofon",
+      "9V li batareya (mikrofon uchun)",
+      "Aylana tayanchlar va ulovchi simlar",
+      "O'lchash dasturi bilan personal kompyuter",
+      "Laboratoriya termometri"
     ],
     equipmentUz: [
       "12 V li tok manbai",
@@ -588,7 +588,7 @@ Tajribada masofa va vaqtni o'lchab, tezlik v = S/t formula bilan aniqlanadi.`,
     procedure: [
       "Qurilmani sxema bo'yicha yig'ing",
       "Cobra3 blokidagi 'Taymer 1' kirish qismini mikrofon-kuchaytirgich chiqishi bilan ulang",
-      "'Timer/counter' dasturini ishga tushiring va parametrlarni sozlang",
+      "'Taymer/hisoblagich' dasturini ishga tushiring va parametrlarni sozlang",
       "Tovush uzatgich va qabul qilgich orasidagi masofani S = 30-40 sm qilib belgilang",
       "Tovush tezligini o'lchang (tajribani 5 marta takrorlang)",
       "Mikrofon masofasini 10-15 sm ga o'zgartiring va o'lchashlarni takrorlang",
@@ -599,7 +599,7 @@ Tajribada masofa va vaqtni o'lchab, tezlik v = S/t formula bilan aniqlanadi.`,
     procedureUz: [
       "Qurilmani sxema bo'yicha yig'ing",
       "Cobra3 blokidagi 'Taymer 1' kirish qismini mikrofon-kuchaytirgich chiqishi bilan ulang",
-      "'Timer/counter' dasturini ishga tushiring va parametrlarni sozlang",
+      "'Taymer/hisoblagich' dasturini ishga tushiring va parametrlarni sozlang",
       "Tovush uzatgich va qabul qilgich orasidagi masofani S = 30-40 sm qilib belgilang",
       "Tovush tezligini o'lchang (tajribani 5 marta takrorlang)",
       "Mikrofon masofasini 10-15 sm ga o'zgartiring va o'lchashlarni takrorlang",
@@ -609,11 +609,11 @@ Tajribada masofa va vaqtni o'lchab, tezlik v = S/t formula bilan aniqlanadi.`,
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "distance", name: "Distance S", nameUz: "Masofa S", unit: "m", isInput: true },
-      { id: "time", name: "Time t", nameUz: "Vaqt t", unit: "ms", isInput: true },
-      { id: "temperature", name: "Temp T", nameUz: "Harorat T", unit: "°C", isInput: true },
-      { id: "velocity", name: "v (exp)", nameUz: "v (tajriba)", unit: "m/s", isInput: false },
-      { id: "theoreticalV", name: "v (theory)", nameUz: "v (nazariy)", unit: "m/s", isInput: false },
+      { id: "distance", name: "Masofa S", nameUz: "Masofa S", unit: "m", isInput: true },
+      { id: "time", name: "Vaqt t", nameUz: "Vaqt t", unit: "ms", isInput: true },
+      { id: "temperature", name: "Harorat T", nameUz: "Harorat T", unit: "°C", isInput: true },
+      { id: "velocity", name: "v (tajriba)", nameUz: "v (tajriba)", unit: "m/s", isInput: false },
+      { id: "theoreticalV", name: "v (nazariy)", nameUz: "v (nazariy)", unit: "m/s", isInput: false },
       { id: "error", name: "ε", nameUz: "ε", unit: "%", isInput: false },
     ],
     calculations: (inputs) => {
@@ -630,15 +630,15 @@ Tajribada masofa va vaqtni o'lchab, tezlik v = S/t formula bilan aniqlanadi.`,
   },
   {
     id: "lab-7-adiabatic-expansion",
-    title: "Heat Capacity Ratio by Adiabatic Expansion (Clement-Desormes Method)",
+    title: "Havoning issiqlik sig'imlari nisbatini adiabatik kengayish yordamida aniqlash",
     titleUz: "Havoning issiqlik sig'imlari nisbatini adiabatik kengayish yordamida aniqlash",
-    purpose: "To experimentally determine the ratio of specific heat capacities of air and compare with the theoretical value from molecular kinetic theory.",
+    purpose: "Gazlarning solishtirma issiqlik sig'imlari nisbatini tajribada aniqlash va molekulyar kinetik nazariyaga asoslanib hisoblangan qiymat bilan solishtirish.",
     purposeUz: "Gazlarning solishtirma issiqlik sig'imlari nisbatini tajribada aniqlash va molekulyar kinetik nazariyaga asoslanib hisoblangan qiymat bilan solishtirish.",
     equipment: [
-      "Large glass vessel (12-20 liters)",
-      "Water manometer (U-tube with colored water)",
-      "Hand pump",
-      "Valves C and D (quick-release type)"
+      "Katta shisha idish (12-20 litr)",
+      "Suvli manometr (rangli suvli U-simon naycha)",
+      "Qo'l nasosi",
+      "C va D jumraklar (tez ochiluvchi)"
     ],
     equipmentUz: [
       "Katta shisha idish (12-20 litr)",
@@ -732,8 +732,8 @@ Puasson formulasini qo'llab:
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "h1", name: "h₁", nameUz: "h₁", unit: "cm", isInput: true },
-      { id: "h2", name: "h₂", nameUz: "h₂", unit: "cm", isInput: true },
+      { id: "h1", name: "h₁", nameUz: "h₁", unit: "sm", isInput: true },
+      { id: "h2", name: "h₂", nameUz: "h₂", unit: "sm", isInput: true },
       { id: "gamma", name: "γ", nameUz: "γ", unit: "", isInput: false },
       { id: "error", name: "ε", nameUz: "ε", unit: "%", isInput: false },
     ],
@@ -749,16 +749,16 @@ Puasson formulasini qo'llab:
   },
   {
     id: "lab-8-surface-tension",
-    title: "Surface Tension Coefficient by Capillary Method",
+    title: "Kapillyar usul bilan sirt taranglik koeffitsientini aniqlash",
     titleUz: "Kapillyar usul bilan sirt taranglik koeffitsientini aniqlash",
-    purpose: "To determine the surface tension coefficient of a liquid using the capillary rise method.",
+    purpose: "Kapillyar usul yordamida suyuqlikning sirt taranglik koeffitsientini aniqlash.",
     purposeUz: "Kapillyar usul yordamida suyuqlikning sirt taranglik koeffitsientini aniqlash.",
     equipment: [
-      "Set of capillary tubes with different diameters (0.5-2 mm)",
-      "Vessel with test liquid (water, alcohol)",
-      "Traveling microscope or cathetometer",
-      "Ruler with millimeter scale",
-      "Thermometer"
+      "Turli diametrli kapillyar naychalar to'plami (0,5-2 mm)",
+      "Sinov suyuqligi bilan idish (suv, spirt)",
+      "Sayohat mikroskopi yoki katetometr",
+      "Millimetrli shkala bilan chizg'ich",
+      "Termometr"
     ],
     equipmentUz: [
       "Turli diametrli kapillyar naychalar to'plami (0,5-2 mm)",
@@ -827,9 +827,9 @@ yoki diametr orqali:
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "diameter", name: "Diameter d", nameUz: "Diametr d", unit: "mm", isInput: true },
-      { id: "height", name: "Height h", nameUz: "Balandlik h", unit: "mm", isInput: true },
-      { id: "density", name: "Density ρ", nameUz: "Zichlik ρ", unit: "kg/m³", isInput: true },
+      { id: "diameter", name: "Diametr d", nameUz: "Diametr d", unit: "mm", isInput: true },
+      { id: "height", name: "Balandlik h", nameUz: "Balandlik h", unit: "mm", isInput: true },
+      { id: "density", name: "Zichlik ρ", nameUz: "Zichlik ρ", unit: "kg/m³", isInput: true },
       { id: "surfaceTension", name: "σ", nameUz: "σ", unit: "N/m", isInput: false },
     ],
     calculations: (inputs) => {
@@ -843,17 +843,17 @@ yoki diametr orqali:
   },
   {
     id: "lab-9-viscosity",
-    title: "Liquid Viscosity by Stokes Method (Falling Ball)",
+    title: "Suyuqlikning qovushoqligini Stoks usulida aniqlash",
     titleUz: "Suyuqlikning qovushoqligini Stoks usulida aniqlash",
-    purpose: "To determine the viscosity coefficient of a liquid using Stokes method with a falling ball.",
+    purpose: "Stoks usuli (tushuvchi sharcha) yordamida suyuqlikning qovushoqlik koeffitsientini aniqlash.",
     purposeUz: "Stoks usuli (tushuvchi sharcha) yordamida suyuqlikning qovushoqlik koeffitsientini aniqlash.",
     equipment: [
-      "Tall glass cylinder with viscous liquid (glycerin, oil)",
-      "Set of small steel balls (different diameters)",
-      "Micrometer (0.01 mm precision)",
-      "Stopwatch (0.1 s precision)",
-      "Ruler with millimeter scale",
-      "Thermometer"
+      "Qovushoq suyuqlikli (glitserin, moy) baland shisha silindr",
+      "Kichik po'lat sharchalar to'plami (turli diametrli)",
+      "Mikrometr (0,01 mm aniqlikda)",
+      "Sekundomer (0,1 s aniqlikda)",
+      "Millimetrli shkala bilan chizg'ich",
+      "Termometr"
     ],
     equipmentUz: [
       "Qovushoq suyuqlikli (glitserin, moy) baland shisha silindr",
@@ -939,9 +939,9 @@ Stoks formulasi Reynolds soni Re < 0.5 bo'lganda amal qiladi.`,
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "diameter", name: "Diameter d", nameUz: "Diametr d", unit: "mm", isInput: true },
-      { id: "distance", name: "Distance L", nameUz: "Masofa L", unit: "m", isInput: true },
-      { id: "time", name: "Time t", nameUz: "Vaqt t", unit: "s", isInput: true },
+      { id: "diameter", name: "Diametr d", nameUz: "Diametr d", unit: "mm", isInput: true },
+      { id: "distance", name: "Masofa L", nameUz: "Masofa L", unit: "m", isInput: true },
+      { id: "time", name: "Vaqt t", nameUz: "Vaqt t", unit: "s", isInput: true },
       { id: "sphereDensity", name: "ρs", nameUz: "ρs", unit: "kg/m³", isInput: true },
       { id: "liquidDensity", name: "ρl", nameUz: "ρl", unit: "kg/m³", isInput: true },
       { id: "velocity", name: "v", nameUz: "v", unit: "m/s", isInput: false },
@@ -959,17 +959,17 @@ Stoks formulasi Reynolds soni Re < 0.5 bo'lganda amal qiladi.`,
   },
   {
     id: "lab-10-wheatstone-bridge",
-    title: "Resistance Measurement with Wheatstone Bridge",
+    title: "O'tkazgichning qarshiligini o'zgarmas tok ko'prigi yordamida aniqlash",
     titleUz: "O'tkazgichning qarshiligini o'zgarmas tok ko'prigi yordamida aniqlash",
-    purpose: "To study the laws of branched electrical circuits and determine unknown resistance using Wheatstone bridge method.",
+    purpose: "Tarmoqlangan elektr zanjirlari qonuniyatlarini o'rganish va Uitston ko'prigi yordamida noma'lum qarshilikni aniqlash.",
     purposeUz: "Tarmoqlangan elektr zanjirlari qonuniyatlarini o'rganish va Uitston ko'prigi yordamida noma'lum qarshilikni aniqlash.",
     equipment: [
-      "Rheochord (slide wire bridge, 1 m length)",
-      "Galvanometer (sensitive, with zero center)",
-      "Resistance box (decade type)",
-      "Set of unknown resistances",
-      "DC power source (2-4 V)",
-      "Switch (key) and connecting wires"
+      "Reoxord (1 m uzunlikdagi sim ko'prik)",
+      "Galvanometr (sezgir, nol markazli)",
+      "Qarshiliklar magazini (o'nlik tipli)",
+      "Noma'lum qarshiliklar to'plami",
+      "O'zgarmas tok manbai (2-4 V)",
+      "Kalit va ulovchi simlar"
     ],
     equipmentUz: [
       "Reoxord (1 m uzunlikdagi sim ko'prik)",
@@ -1062,8 +1062,8 @@ Parallel ulanganda: 1/R = 1/R1 + 1/R2`,
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
       { id: "r0", name: "R₀", nameUz: "R₀", unit: "Ω", isInput: true },
-      { id: "l1", name: "l₁", nameUz: "l₁", unit: "cm", isInput: true },
-      { id: "l2", name: "l₂", nameUz: "l₂", unit: "cm", isInput: true },
+      { id: "l1", name: "l₁", nameUz: "l₁", unit: "sm", isInput: true },
+      { id: "l2", name: "l₂", nameUz: "l₂", unit: "sm", isInput: true },
       { id: "rx", name: "Rx", nameUz: "Rx", unit: "Ω", isInput: false },
     ],
     calculations: (inputs) => {
