@@ -17,36 +17,41 @@ const Index = () => {
         
         <div className="container mx-auto relative">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-8 fade-in-up">
-              <Sparkles className="w-4 h-4" />
-              Interaktiv fizika platformasi
-            </div>
+            {/* Semi-transparent backdrop for better readability */}
+            <div className="absolute inset-0 -mx-8 -my-4 bg-background/60 backdrop-blur-sm rounded-3xl" />
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in-up stagger-1">
-              <span className="gradient-text">Fizikani</span>
-              <br />
-              <span className="text-foreground">mustaqil o'rganing</span>
-            </h1>
-            
-            <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto fade-in-up stagger-2">
-              20+ interaktiv animatsiya va laboratoriya ishlari bilan fizika qonunlarini 
-              amaliy o'rganing. Parametrlarni o'zgartiring va natijalarni real vaqtda kuzating.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-up stagger-3">
-              <Link to="/animations">
-                <Button variant="glow" size="lg" className="w-full sm:w-auto group">
-                  <Atom className="w-5 h-5 mr-2 group-hover:rotate-180 transition-transform duration-500" />
-                  Animatsiyalar
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/laboratories">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto group">
-                  <FlaskConical className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                  Laboratoriyalar
-                </Button>
-              </Link>
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-8 fade-in-up">
+                <Sparkles className="w-4 h-4" />
+                Interaktiv fizika platformasi
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in-up stagger-1">
+                <span className="gradient-text drop-shadow-lg">Fizikani</span>
+                <br />
+                <span className="text-foreground drop-shadow-md">mustaqil o'rganing</span>
+              </h1>
+              
+              <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto fade-in-up stagger-2 drop-shadow-sm">
+                20+ interaktiv animatsiya va laboratoriya ishlari bilan fizika qonunlarini 
+                amaliy o'rganing. Parametrlarni o'zgartiring va natijalarni real vaqtda kuzating.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-up stagger-3">
+                <Link to="/animations">
+                  <Button variant="glow" size="lg" className="w-full sm:w-auto group">
+                    <Atom className="w-5 h-5 mr-2 group-hover:rotate-180 transition-transform duration-500" />
+                    Animatsiyalar
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Link to="/laboratories">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto group">
+                    <FlaskConical className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                    Laboratoriyalar
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
