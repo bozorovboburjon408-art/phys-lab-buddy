@@ -28,52 +28,72 @@ export const PhysicsBackground = () => {
       orbitRadius: number;
       opacity: number;
       color: string;
+      vx: number;
+      vy: number;
 
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.radius = Math.random() * 4 + 2;
-        this.electrons = Math.floor(Math.random() * 3) + 1;
+        this.radius = Math.random() * 8 + 6;
+        this.electrons = Math.floor(Math.random() * 3) + 2;
         this.rotation = Math.random() * Math.PI * 2;
-        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
-        this.orbitRadius = this.radius * (Math.random() * 3 + 4);
-        this.opacity = Math.random() * 0.3 + 0.1;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.04;
+        this.orbitRadius = this.radius * (Math.random() * 4 + 5);
+        this.opacity = Math.random() * 0.5 + 0.3;
         this.color = Math.random() > 0.5 ? "187, 92%, 50%" : "262, 83%, 58%";
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
       }
 
       draw() {
         if (!ctx) return;
+        
+        // Glow effect
+        ctx.shadowColor = `hsla(${this.color}, 0.5)`;
+        ctx.shadowBlur = 15;
         
         // Nucleus
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${this.color}, ${this.opacity})`;
         ctx.fill();
+        
+        ctx.shadowBlur = 0;
 
         // Orbits and electrons
         for (let i = 0; i < this.electrons; i++) {
           const angle = this.rotation + (i * Math.PI * 2) / this.electrons;
-          const orbitR = this.orbitRadius * (1 + i * 0.3);
+          const orbitR = this.orbitRadius * (1 + i * 0.4);
           
           // Orbit path
           ctx.beginPath();
-          ctx.ellipse(this.x, this.y, orbitR, orbitR * 0.3, i * 0.5, 0, Math.PI * 2);
-          ctx.strokeStyle = `hsla(${this.color}, ${this.opacity * 0.3})`;
-          ctx.lineWidth = 0.5;
+          ctx.ellipse(this.x, this.y, orbitR, orbitR * 0.4, i * 0.6, 0, Math.PI * 2);
+          ctx.strokeStyle = `hsla(${this.color}, ${this.opacity * 0.4})`;
+          ctx.lineWidth = 1;
           ctx.stroke();
 
-          // Electron
+          // Electron with glow
           const ex = this.x + Math.cos(angle) * orbitR;
-          const ey = this.y + Math.sin(angle) * orbitR * 0.3;
+          const ey = this.y + Math.sin(angle) * orbitR * 0.4;
+          
+          ctx.shadowColor = `hsla(${this.color}, 0.8)`;
+          ctx.shadowBlur = 8;
           ctx.beginPath();
-          ctx.arc(ex, ey, 2, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${this.color}, ${this.opacity * 2})`;
+          ctx.arc(ex, ey, 3, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${this.color}, ${this.opacity * 1.5})`;
           ctx.fill();
+          ctx.shadowBlur = 0;
         }
       }
 
       update() {
         this.rotation += this.rotationSpeed;
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // Bounce off edges
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
       }
     }
 
@@ -85,26 +105,34 @@ export const PhysicsBackground = () => {
       opacity: number;
       speed: number;
       size: number;
+      wobble: number;
+      wobbleSpeed: number;
 
       constructor() {
-        const formulas = ["E=mc²", "F=ma", "v=λf", "p=mv", "ω=2πf", "T=2π√(l/g)", "KE=½mv²", "W=Fd", "a=v²/r", "PV=nRT"];
+        const formulas = ["E=mc²", "F=ma", "v=λf", "p=mv", "ω=2πf", "T=2π√(l/g)", "KE=½mv²", "W=Fd", "a=v²/r", "PV=nRT", "ΔE=hf", "λ=h/p"];
         this.text = formulas[Math.floor(Math.random() * formulas.length)];
         this.x = Math.random() * canvas.width;
         this.y = canvas.height + 50;
-        this.opacity = Math.random() * 0.15 + 0.05;
-        this.speed = Math.random() * 0.3 + 0.1;
-        this.size = Math.random() * 14 + 12;
+        this.opacity = Math.random() * 0.25 + 0.15;
+        this.speed = Math.random() * 0.5 + 0.3;
+        this.size = Math.random() * 18 + 16;
+        this.wobble = 0;
+        this.wobbleSpeed = Math.random() * 0.02 + 0.01;
       }
 
       draw() {
         if (!ctx) return;
-        ctx.font = `${this.size}px 'JetBrains Mono', monospace`;
+        ctx.font = `bold ${this.size}px 'JetBrains Mono', monospace`;
         ctx.fillStyle = `hsla(187, 92%, 50%, ${this.opacity})`;
-        ctx.fillText(this.text, this.x, this.y);
+        ctx.shadowColor = `hsla(187, 92%, 50%, 0.3)`;
+        ctx.shadowBlur = 10;
+        ctx.fillText(this.text, this.x + Math.sin(this.wobble) * 10, this.y);
+        ctx.shadowBlur = 0;
       }
 
       update() {
         this.y -= this.speed;
+        this.wobble += this.wobbleSpeed;
         if (this.y < -50) {
           this.y = canvas.height + 50;
           this.x = Math.random() * canvas.width;
@@ -114,7 +142,6 @@ export const PhysicsBackground = () => {
 
     // Wave particle
     class Wave {
-      x: number;
       y: number;
       amplitude: number;
       wavelength: number;
@@ -124,12 +151,11 @@ export const PhysicsBackground = () => {
 
       constructor() {
         this.y = Math.random() * canvas.height;
-        this.x = 0;
-        this.amplitude = Math.random() * 20 + 10;
-        this.wavelength = Math.random() * 50 + 30;
+        this.amplitude = Math.random() * 30 + 15;
+        this.wavelength = Math.random() * 80 + 40;
         this.phase = Math.random() * Math.PI * 2;
-        this.speed = Math.random() * 0.02 + 0.01;
-        this.opacity = Math.random() * 0.1 + 0.05;
+        this.speed = Math.random() * 0.03 + 0.02;
+        this.opacity = Math.random() * 0.15 + 0.1;
       }
 
       draw() {
@@ -137,13 +163,13 @@ export const PhysicsBackground = () => {
         ctx.beginPath();
         ctx.moveTo(0, this.y);
         
-        for (let x = 0; x < canvas.width; x += 5) {
+        for (let x = 0; x < canvas.width; x += 3) {
           const y = this.y + Math.sin((x / this.wavelength) + this.phase) * this.amplitude;
           ctx.lineTo(x, y);
         }
         
         ctx.strokeStyle = `hsla(262, 83%, 58%, ${this.opacity})`;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 2;
         ctx.stroke();
       }
 
@@ -152,21 +178,61 @@ export const PhysicsBackground = () => {
       }
     }
 
+    // Floating particles
+    class Particle {
+      x: number;
+      y: number;
+      size: number;
+      speed: number;
+      opacity: number;
+      color: string;
+
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speed = Math.random() * 0.5 + 0.2;
+        this.opacity = Math.random() * 0.5 + 0.2;
+        this.color = Math.random() > 0.5 ? "187, 92%, 50%" : "262, 83%, 58%";
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${this.color}, ${this.opacity})`;
+        ctx.fill();
+      }
+
+      update() {
+        this.y -= this.speed;
+        if (this.y < -10) {
+          this.y = canvas.height + 10;
+          this.x = Math.random() * canvas.width;
+        }
+      }
+    }
+
     // Create particles
     const atoms: Atom[] = [];
     const formulas: Formula[] = [];
     const waves: Wave[] = [];
+    const particles: Particle[] = [];
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 12; i++) {
       atoms.push(new Atom());
     }
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 10; i++) {
       formulas.push(new Formula());
     }
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       waves.push(new Wave());
+    }
+
+    for (let i = 0; i < 30; i++) {
+      particles.push(new Particle());
     }
 
     // Animation loop
@@ -177,6 +243,11 @@ export const PhysicsBackground = () => {
       waves.forEach(wave => {
         wave.update();
         wave.draw();
+      });
+
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
       });
 
       atoms.forEach(atom => {
@@ -204,7 +275,7 @@ export const PhysicsBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.6 }}
+      style={{ opacity: 0.8 }}
     />
   );
 };
