@@ -36,19 +36,21 @@ export const ProjectileSimulation = ({ parameters }: Props) => {
     const launchAngle = (getParam("angle") * Math.PI) / 180;
     const gravity = getParam("gravity");
     const initialHeight = getParam("height");
+    const mass = getParam("mass");
+    const airResistance = getParam("airResistance");
 
-    const vx = velocity * Math.cos(launchAngle);
-    const vy = velocity * Math.sin(launchAngle);
+    const vx0 = velocity * Math.cos(launchAngle);
+    const vy0 = velocity * Math.sin(launchAngle);
     
     const scale = 3;
     const groundY = canvas.height - 40;
     const startX = 60;
     const startY = groundY - initialHeight * scale;
 
-    // Calculate theoretical values
-    const maxHeight = (vy * vy) / (2 * gravity) + initialHeight;
-    const flightTime = (vy + Math.sqrt(vy * vy + 2 * gravity * initialHeight)) / gravity;
-    const range = vx * flightTime;
+    // Calculate theoretical values (without air resistance for reference)
+    const maxHeight = (vy0 * vy0) / (2 * gravity) + initialHeight;
+    const flightTime = (vy0 + Math.sqrt(vy0 * vy0 + 2 * gravity * initialHeight)) / gravity;
+    const range = vx0 * flightTime;
 
     const animate = () => {
       ctx.fillStyle = "hsl(222, 47%, 9%)";
@@ -76,9 +78,22 @@ export const ProjectileSimulation = ({ parameters }: Props) => {
 
       const { time, trailPoints } = stateRef.current;
 
-      // Calculate position
-      const x = startX + vx * time * scale;
-      const y = startY - (vy * time - 0.5 * gravity * time * time) * scale;
+      // Calculate position with air resistance
+      let posX, posY;
+      if (airResistance > 0) {
+        // Simplified air resistance model
+        const k = airResistance / mass;
+        const vxT = vx0 * Math.exp(-k * time);
+        const vyT = (vy0 + gravity / k) * Math.exp(-k * time) - gravity / k;
+        posX = (vx0 / k) * (1 - Math.exp(-k * time));
+        posY = (1 / k) * ((vy0 + gravity / k) * (1 - Math.exp(-k * time))) - (gravity * time) / k;
+      } else {
+        posX = vx0 * time;
+        posY = vy0 * time - 0.5 * gravity * time * time;
+      }
+      
+      const x = startX + posX * scale;
+      const y = startY - posY * scale;
 
       // Draw trajectory path (predicted)
       ctx.strokeStyle = "hsla(262, 83%, 58%, 0.3)";
@@ -89,8 +104,8 @@ export const ProjectileSimulation = ({ parameters }: Props) => {
       let predY = startY;
       ctx.moveTo(startX, startY);
       while (predY <= groundY && predTime < 20) {
-        const px = startX + vx * predTime * scale;
-        const py = startY - (vy * predTime - 0.5 * gravity * predTime * predTime) * scale;
+        const px = startX + vx0 * predTime * scale;
+        const py = startY - (vy0 * predTime - 0.5 * gravity * predTime * predTime) * scale;
         if (py <= groundY) {
           ctx.lineTo(px, py);
           predY = py;

@@ -21,10 +21,11 @@ export const CircularMotionSimulation = ({ parameters }: Props) => {
     const radius = getParam("radius") * 50;
     const omega = getParam("angularVelocity");
     const mass = getParam("mass");
+    const initialAngle = (getParam("initialAngle") * Math.PI) / 180;
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    let angle = 0;
+    let angle = initialAngle;
     const trail: { x: number; y: number; alpha: number }[] = [];
 
     const animate = () => {

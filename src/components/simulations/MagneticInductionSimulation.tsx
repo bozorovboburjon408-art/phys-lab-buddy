@@ -25,6 +25,7 @@ export const MagneticInductionSimulation = ({ parameters }: Props) => {
     const current = getParamValue("current");
     const coilTurns = getParamValue("coilTurns");
     const velocity = getParamValue("velocity");
+    const coilLength = getParamValue("coilLength") || 15; // in cm
 
     const width = canvas.width;
     const height = canvas.height;
@@ -57,7 +58,7 @@ export const MagneticInductionSimulation = ({ parameters }: Props) => {
       }
 
       // Draw solenoid coils
-      const coilWidth = 200;
+      const coilWidth = Math.max(coilLength * 10, 100); // Scale coilLength to pixels
       const coilHeight = 80;
       const startX = centerX - coilWidth / 2;
       const spacing = coilWidth / coilTurns;
@@ -91,7 +92,9 @@ export const MagneticInductionSimulation = ({ parameters }: Props) => {
       }
 
       // Draw magnetic field lines inside solenoid
-      const B = mu0 * coilTurns * current / (coilWidth / 1000); // B field strength
+      // B = μ₀ × n × I, where n = N/L (turns per unit length)
+      const n = coilTurns / (coilLength / 100); // turns per meter
+      const B = mu0 * n * current; // B field strength in Tesla
       
       ctx.strokeStyle = "rgba(139, 92, 246, 0.8)";
       ctx.lineWidth = 2;
@@ -174,9 +177,9 @@ export const MagneticInductionSimulation = ({ parameters }: Props) => {
       ctx.textAlign = "left";
       ctx.fillText(`Tok kuchi I = ${current.toFixed(1)} A`, 20, 35);
       ctx.fillText(`O'ramlar soni N = ${coilTurns}`, 20, 55);
-      ctx.fillText(`B = μ₀nI`, 20, 75);
-      ctx.fillText(`B = ${(B * 1000).toFixed(3)} mT`, 20, 95);
-      ctx.fillText(`Φ = B·S (magnit oqimi)`, 20, 115);
+      ctx.fillText(`G'altak uzunligi L = ${coilLength} sm`, 20, 75);
+      ctx.fillText(`n = N/L = ${(coilTurns / (coilLength / 100)).toFixed(0)} o'ram/m`, 20, 95);
+      ctx.fillText(`B = μ₀nI = ${(B * 1000).toFixed(3)} mT`, 20, 115);
 
       animationRef.current = requestAnimationFrame(animate);
     };

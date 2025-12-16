@@ -17,7 +17,8 @@ export const FreeFallSimulation = ({ parameters }: Props) => {
   const getParam = (id: string) => parameters.find(p => p.id === id)?.value ?? 0;
 
   const resetSimulation = () => {
-    stateRef.current = { position: 0, velocity: 0, time: 0 };
+    const initialVelocity = getParam("initialVelocity");
+    stateRef.current = { position: 0, velocity: initialVelocity, time: 0 };
     setIsFinished(false);
   };
 
@@ -36,6 +37,12 @@ export const FreeFallSimulation = ({ parameters }: Props) => {
     const mass = getParam("mass");
     const gravity = getParam("gravity");
     const airResistance = getParam("airResistance");
+    const initialVelocity = getParam("initialVelocity");
+
+    // Initialize with initial velocity
+    if (stateRef.current.time === 0 && stateRef.current.velocity === 0) {
+      stateRef.current.velocity = initialVelocity;
+    }
 
     const scale = (canvas.height - 100) / initialHeight;
     const groundY = canvas.height - 40;

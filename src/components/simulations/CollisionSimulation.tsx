@@ -22,6 +22,7 @@ export const CollisionSimulation = ({ parameters }: Props) => {
     const m2 = getParam("mass2");
     const v1Initial = getParam("velocity1");
     const v2Initial = getParam("velocity2");
+    const restitution = getParam("restitution"); // 1 = elastic, 0 = inelastic
 
     const centerY = canvas.height / 2;
     const scale = 20;
@@ -55,11 +56,13 @@ export const CollisionSimulation = ({ parameters }: Props) => {
         ctx.stroke();
       }
 
-      // Check collision
+      // Check collision with restitution coefficient
       if (!hasCollided && Math.abs(x1 - x2) <= r1 + r2) {
         hasCollided = true;
-        const newV1 = ((m1 - m2) * v1 + 2 * m2 * v2) / (m1 + m2);
-        const newV2 = ((m2 - m1) * v2 + 2 * m1 * v1) / (m1 + m2);
+        // Collision formulas with coefficient of restitution (e)
+        // For e=1: fully elastic, e=0: fully inelastic
+        const newV1 = (m1 * v1 + m2 * v2 + m2 * restitution * (v2 - v1)) / (m1 + m2);
+        const newV2 = (m1 * v1 + m2 * v2 + m1 * restitution * (v1 - v2)) / (m1 + m2);
         v1 = newV1;
         v2 = newV2;
       }
@@ -134,6 +137,7 @@ export const CollisionSimulation = ({ parameters }: Props) => {
       ctx.fillText(`v₂ = ${v2.toFixed(1)} m/s`, 20, 50);
       ctx.fillText(`Σp = ${totalP.toFixed(1)} kg·m/s`, 20, 80);
       ctx.fillText(`ΣKE = ${totalKE.toFixed(1)} J`, 20, 100);
+      ctx.fillText(`e = ${restitution.toFixed(1)}`, 20, 120);
 
       animationRef.current = requestAnimationFrame(animate);
     };

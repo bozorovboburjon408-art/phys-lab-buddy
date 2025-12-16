@@ -25,6 +25,7 @@ export const RefractionSimulation = ({ parameters }: Props) => {
     const incidentAngle = getParamValue("incidentAngle") * Math.PI / 180;
     const n1 = getParamValue("n1");
     const n2 = getParamValue("n2");
+    const rayIntensity = getParamValue("rayIntensity") || 0.8;
 
     const width = canvas.width;
     const height = canvas.height;
@@ -84,7 +85,7 @@ export const RefractionSimulation = ({ parameters }: Props) => {
       const incidentStartY = interfaceY - rayLength * Math.cos(incidentAngle);
 
       // Draw incident ray with animation
-      ctx.strokeStyle = "#fbbf24";
+      ctx.strokeStyle = `rgba(251, 191, 36, ${rayIntensity})`;
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.moveTo(incidentStartX, incidentStartY);
@@ -92,7 +93,7 @@ export const RefractionSimulation = ({ parameters }: Props) => {
       ctx.stroke();
 
       // Draw light particles along incident ray
-      ctx.fillStyle = "#fbbf24";
+      ctx.fillStyle = `rgba(251, 191, 36, ${rayIntensity})`;
       for (let i = 0; i < 5; i++) {
         const progress = ((t * 2 + i * 0.2) % 1);
         const x = incidentStartX + (interfaceX - incidentStartX) * progress;
@@ -134,7 +135,7 @@ export const RefractionSimulation = ({ parameters }: Props) => {
         const refractedEndX = interfaceX + rayLength * Math.sin(refractedAngle);
         const refractedEndY = interfaceY + rayLength * Math.cos(refractedAngle);
 
-        ctx.strokeStyle = "#22c55e";
+        ctx.strokeStyle = `rgba(34, 197, 94, ${rayIntensity})`;
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(interfaceX, interfaceY);
@@ -142,7 +143,7 @@ export const RefractionSimulation = ({ parameters }: Props) => {
         ctx.stroke();
 
         // Draw particles along refracted ray
-        ctx.fillStyle = "#22c55e";
+        ctx.fillStyle = `rgba(34, 197, 94, ${rayIntensity})`;
         for (let i = 0; i < 5; i++) {
           const progress = ((t * (2 * n1 / n2) + i * 0.2) % 1);
           const x = interfaceX + (refractedEndX - interfaceX) * progress;

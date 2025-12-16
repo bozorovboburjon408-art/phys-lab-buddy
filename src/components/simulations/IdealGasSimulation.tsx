@@ -32,6 +32,7 @@ export const IdealGasSimulation = ({ parameters }: Props) => {
     const temperature = getParam("temperature");
     const volume = getParam("volume");
     const particleCount = Math.floor(getParam("particles"));
+    const pressure = getParam("pressure");
 
     // Container dimensions based on volume
     const containerWidth = 250 + volume * 2;
@@ -54,8 +55,9 @@ export const IdealGasSimulation = ({ parameters }: Props) => {
       }
     }
 
-    // Update particle speeds based on temperature
-    const speedFactor = Math.sqrt(temperature / 300) * 3;
+    // Update particle speeds based on temperature and pressure
+    // Higher pressure = faster movement
+    const speedFactor = Math.sqrt(temperature / 300) * Math.sqrt(pressure) * 2.5;
     particlesRef.current.forEach((p) => {
       const currentSpeed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
       if (currentSpeed > 0) {
@@ -218,7 +220,9 @@ export const IdealGasSimulation = ({ parameters }: Props) => {
   const temperature = getParam("temperature");
   const volume = getParam("volume");
   const particleCount = Math.floor(getParam("particles"));
-  const pressure = (particleCount * temperature) / (volume * 10);
+  const pressureParam = getParam("pressure");
+  // PV = nRT rearranged
+  const calculatedPressure = (particleCount * temperature) / (volume * 10);
 
   return (
     <div className="space-y-4">
@@ -253,7 +257,11 @@ export const IdealGasSimulation = ({ parameters }: Props) => {
           </div>
           <div>
             <span className="text-muted-foreground">Bosim (P):</span>
-            <p className="font-medium text-amber-400">{pressure.toFixed(2)} atm</p>
+            <p className="font-medium text-amber-400">{pressureParam.toFixed(2)} atm</p>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Hisoblangan P:</span>
+            <p className="font-medium text-green-400">{calculatedPressure.toFixed(2)} atm</p>
           </div>
         </div>
         <p className="text-xs text-muted-foreground mt-2">Zarrachalar tezligi haroratga proporsional</p>

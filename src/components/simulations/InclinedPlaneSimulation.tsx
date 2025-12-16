@@ -17,7 +17,8 @@ export const InclinedPlaneSimulation = ({ parameters }: Props) => {
   const getParam = (id: string) => parameters.find(p => p.id === id)?.value ?? 0;
 
   const resetSimulation = () => {
-    stateRef.current = { position: 0, velocity: 0, time: 0 };
+    const initialVelocity = getParam("initialVelocity");
+    stateRef.current = { position: 0, velocity: initialVelocity, time: 0 };
     setIsFinished(false);
   };
 
@@ -36,8 +37,15 @@ export const InclinedPlaneSimulation = ({ parameters }: Props) => {
     const mass = getParam("mass");
     const friction = getParam("friction");
     const gravity = getParam("gravity");
+    const initialVelocity = getParam("initialVelocity");
+    const planeLength = getParam("planeLength");
 
-    const rampLength = 350;
+    // Initialize with initial velocity
+    if (stateRef.current.time === 0 && stateRef.current.velocity === 0 && initialVelocity > 0) {
+      stateRef.current.velocity = initialVelocity;
+    }
+
+    const rampLength = Math.max(planeLength * 20, 150); // Scale for visualization
     const startX = 80;
     const startY = canvas.height - 60;
     const endX = startX + rampLength * Math.cos(angle);
