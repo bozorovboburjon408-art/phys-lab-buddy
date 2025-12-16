@@ -53,7 +53,7 @@ const Index = () => {
       {/* Features Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard
               icon="🎯"
               title="Interaktiv simulyatsiyalar"
@@ -73,16 +73,6 @@ const Index = () => {
               icon="📊"
               title="Avtomatik hisoblash"
               description="Boshlang'ich qiymatlarni kiriting va tizim formulalar asosida natijalarni hisoblaydi"
-            />
-            <FeatureCard
-              icon="📱"
-              title="Responsive dizayn"
-              description="Kompyuter, planshet va telefonlarda mukammal ishlaydi"
-            />
-            <FeatureCard
-              icon="🎨"
-              title="Zamonaviy interfeys"
-              description="Ko'zni yoqtiruvchi, tushunarli va foydalanish qulay dizayn"
             />
           </div>
         </div>
