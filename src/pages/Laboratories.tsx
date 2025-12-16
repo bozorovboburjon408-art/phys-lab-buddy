@@ -61,8 +61,7 @@ const Laboratories = () => {
             <div className="space-y-6">
               {/* Lab Header */}
               <div className="glass-card p-6 glow-border">
-                <h2 className="text-2xl font-bold mb-2">{selectedLab.titleUz}</h2>
-                <p className="text-muted-foreground">{selectedLab.title}</p>
+                <h2 className="text-2xl font-bold">{selectedLab.titleUz}</h2>
               </div>
 
               {/* Lab Sections */}
@@ -77,7 +76,6 @@ const Laboratories = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-4">
                     <p className="text-foreground">{selectedLab.purposeUz}</p>
-                    <p className="text-muted-foreground text-sm mt-2">{selectedLab.purpose}</p>
                   </AccordionContent>
                 </AccordionItem>
 
@@ -110,10 +108,7 @@ const Laboratories = () => {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-4">
-                    <p className="text-foreground leading-relaxed">{selectedLab.theoryUz}</p>
-                    <div className="mt-4 p-4 bg-secondary/50 rounded-lg">
-                      <p className="text-sm text-muted-foreground italic">{selectedLab.theory}</p>
-                    </div>
+                    <p className="text-foreground leading-relaxed whitespace-pre-line">{selectedLab.theoryUz}</p>
                   </AccordionContent>
                 </AccordionItem>
 
