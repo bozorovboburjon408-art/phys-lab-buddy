@@ -152,6 +152,7 @@ const Laboratories = () => {
                       Boshlang'ich qiymatlarni kiriting. Tizim avtomatik ravishda hisoblangan qiymatlarni to'ldiradi.
                     </p>
                     <LabTable
+                      labId={selectedLab.id}
                       columns={selectedLab.tableColumns}
                       calculations={selectedLab.calculations}
                     />

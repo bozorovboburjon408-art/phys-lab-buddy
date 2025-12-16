@@ -1,18 +1,97 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { TableColumn, TableRow as TableRowType } from "@/types/physics";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, Save, Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface Props {
+  labId: string;
   columns: TableColumn[];
   calculations: (inputs: Record<string, number>) => Record<string, number>;
 }
 
-export const LabTable = ({ columns, calculations }: Props) => {
+export const LabTable = ({ labId, columns, calculations }: Props) => {
   const [rows, setRows] = useState<TableRowType[]>([
     { id: "1", values: {} },
   ]);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+  const { toast } = useToast();
+
+  // Load saved data
+  const loadData = useCallback(async () => {
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from("lab_results")
+        .select("row_data")
+        .eq("user_id", user.id)
+        .eq("lab_id", labId)
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (data && Array.isArray(data.row_data) && data.row_data.length > 0) {
+        setRows(data.row_data as unknown as TableRowType[]);
+      }
+    } catch (error) {
+      console.error("Error loading data:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [user, labId]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  const saveData = async () => {
+    if (!user) {
+      toast({
+        title: "Xatolik",
+        description: "Saqlash uchun tizimga kiring",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setSaving(true);
+    try {
+      const { error } = await supabase
+        .from("lab_results")
+        .upsert({
+          user_id: user.id,
+          lab_id: labId,
+          row_data: rows as unknown as Record<string, unknown>[],
+        } as never, {
+          onConflict: "user_id,lab_id",
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Saqlandi",
+        description: "Natijalar muvaffaqiyatli saqlandi",
+      });
+    } catch (error) {
+      console.error("Error saving data:", error);
+      toast({
+        title: "Xatolik",
+        description: "Saqlashda xatolik yuz berdi",
+        variant: "destructive",
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const addRow = () => {
     setRows([...rows, { id: String(rows.length + 1), values: {} }]);
@@ -56,6 +135,14 @@ export const LabTable = ({ columns, calculations }: Props) => {
       })
     );
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -121,10 +208,31 @@ export const LabTable = ({ columns, calculations }: Props) => {
         </table>
       </div>
       
-      <Button onClick={addRow} variant="outline" className="w-full">
-        <Plus className="h-4 w-4 mr-2" />
-        Qator qo'shish
-      </Button>
+      <div className="flex gap-2">
+        <Button onClick={addRow} variant="outline" className="flex-1">
+          <Plus className="h-4 w-4 mr-2" />
+          Qator qo'shish
+        </Button>
+        {user && (
+          <Button onClick={saveData} disabled={saving} className="flex-1">
+            {saving ? (
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+            ) : (
+              <Save className="h-4 w-4 mr-2" />
+            )}
+            Saqlash
+          </Button>
+        )}
+      </div>
+
+      {!user && (
+        <p className="text-sm text-muted-foreground text-center">
+          Natijalarni saqlash uchun{" "}
+          <a href="/auth" className="text-primary hover:underline">
+            tizimga kiring
+          </a>
+        </p>
+      )}
 
       {rows.length > 1 && (
         <div className="glass-card p-4 mt-4">
