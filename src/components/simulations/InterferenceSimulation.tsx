@@ -134,30 +134,6 @@ export const InterferenceSimulation = ({ parameters }: Props) => {
       }
       ctx.stroke();
 
-      // Info panel
-      ctx.fillStyle = "rgba(30, 41, 59, 0.95)";
-      ctx.fillRect(15, 15, 300, 140);
-      ctx.strokeStyle = "rgba(100, 116, 139, 0.5)";
-      ctx.lineWidth = 1;
-      ctx.strokeRect(15, 15, 300, 140);
-
-      ctx.fillStyle = "#e2e8f0";
-      ctx.font = "bold 14px Inter, sans-serif";
-      ctx.textAlign = "left";
-      ctx.fillText("Ikki tirqishli interferensiya", 25, 40);
-
-      ctx.font = "13px Inter, sans-serif";
-      ctx.fillStyle = "#94a3b8";
-      ctx.fillText(`To'lqin uzunligi (λ): ${wavelength.toFixed(0)} nm`, 25, 65);
-      ctx.fillText(`Tirqishlar orasidagi masofa: ${slitDistance.toFixed(1)} mm`, 25, 85);
-      ctx.fillText(`Chastota: ${frequency.toFixed(1)} Hz`, 25, 105);
-
-      // Path difference formula
-      ctx.fillStyle = "#fbbf24";
-      ctx.font = "12px Inter, sans-serif";
-      ctx.fillText("Yo'l farqi: Δ = d·sin(θ)", 25, 130);
-      ctx.fillText("Konstruktiv: Δ = nλ, Destruktiv: Δ = (n+½)λ", 25, 145);
-
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -170,12 +146,42 @@ export const InterferenceSimulation = ({ parameters }: Props) => {
     };
   }, [parameters]);
 
+  const getParam = (id: string) =>
+    parameters.find((p) => p.id === id)?.value ?? 0;
+
+  const wavelength = getParam("wavelength");
+  const slitDistance = getParam("slitDistance");
+  const frequency = getParam("frequency");
+
   return (
-    <canvas
-      ref={canvasRef}
-      width={800}
-      height={450}
-      className="w-full rounded-xl border border-border"
-    />
+    <div className="space-y-4">
+      <canvas
+        ref={canvasRef}
+        width={800}
+        height={450}
+        className="w-full rounded-xl border border-border"
+      />
+      <div className="bg-card/80 backdrop-blur-sm border border-border rounded-lg p-4">
+        <h4 className="text-sm font-semibold text-primary mb-2">Ikki tirqishli interferensiya</h4>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+          <div>
+            <span className="text-muted-foreground">To'lqin uzunligi (λ):</span>
+            <p className="font-medium">{wavelength.toFixed(0)} nm</p>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Tirqishlar orasidagi masofa:</span>
+            <p className="font-medium">{slitDistance.toFixed(1)} mm</p>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Chastota:</span>
+            <p className="font-medium">{frequency.toFixed(1)} Hz</p>
+          </div>
+        </div>
+        <div className="mt-3 pt-3 border-t border-border text-sm">
+          <p className="text-amber-400">Yo'l farqi: Δ = d·sin(θ)</p>
+          <p className="text-muted-foreground text-xs mt-1">Konstruktiv: Δ = nλ, Destruktiv: Δ = (n+½)λ</p>
+        </div>
+      </div>
+    </div>
   );
 };

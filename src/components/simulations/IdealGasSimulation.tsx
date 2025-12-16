@@ -200,31 +200,6 @@ export const IdealGasSimulation = ({ parameters }: Props) => {
       // Calculate pressure (proportional to collision rate)
       const pressure = (particleCount * temperature) / (volume * 10);
 
-      // Info panel
-      ctx.fillStyle = "rgba(30, 41, 59, 0.9)";
-      ctx.fillRect(15, 15, 280, 160);
-      ctx.strokeStyle = "rgba(100, 116, 139, 0.5)";
-      ctx.lineWidth = 1;
-      ctx.strokeRect(15, 15, 280, 160);
-
-      ctx.fillStyle = "#e2e8f0";
-      ctx.font = "bold 14px Inter, sans-serif";
-      ctx.textAlign = "left";
-      ctx.fillText("Ideal gaz holat tenglamasi: PV = nRT", 25, 40);
-
-      ctx.font = "13px Inter, sans-serif";
-      ctx.fillStyle = "#94a3b8";
-      ctx.fillText(`Harorat (T): ${temperature.toFixed(0)} K`, 25, 65);
-      ctx.fillText(`Hajm (V): ${volume.toFixed(0)} L`, 25, 85);
-      ctx.fillText(`Zarrachalar soni: ${particleCount}`, 25, 105);
-      
-      ctx.fillStyle = "#fbbf24";
-      ctx.fillText(`Bosim (P): ${pressure.toFixed(2)} atm`, 25, 130);
-      
-      ctx.fillStyle = "#94a3b8";
-      ctx.font = "12px Inter, sans-serif";
-      ctx.fillText("Zarrachalar tezligi haroratga proporsional", 25, 155);
-
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -237,20 +212,52 @@ export const IdealGasSimulation = ({ parameters }: Props) => {
     };
   }, [parameters, isPlaying]);
 
+  const getParam = (id: string) =>
+    parameters.find((p) => p.id === id)?.value ?? 0;
+
+  const temperature = getParam("temperature");
+  const volume = getParam("volume");
+  const particleCount = Math.floor(getParam("particles"));
+  const pressure = (particleCount * temperature) / (volume * 10);
+
   return (
-    <div className="relative">
-      <canvas
-        ref={canvasRef}
-        width={800}
-        height={450}
-        className="w-full rounded-xl border border-border"
-      />
-      <button
-        onClick={() => setIsPlaying(!isPlaying)}
-        className="absolute bottom-4 right-4 px-4 py-2 bg-primary/80 hover:bg-primary text-primary-foreground rounded-lg transition-colors"
-      >
-        {isPlaying ? "⏸ To'xtatish" : "▶ Davom ettirish"}
-      </button>
+    <div className="space-y-4">
+      <div className="relative">
+        <canvas
+          ref={canvasRef}
+          width={800}
+          height={450}
+          className="w-full rounded-xl border border-border"
+        />
+        <button
+          onClick={() => setIsPlaying(!isPlaying)}
+          className="absolute bottom-4 right-4 px-4 py-2 bg-primary/80 hover:bg-primary text-primary-foreground rounded-lg transition-colors"
+        >
+          {isPlaying ? "⏸ To'xtatish" : "▶ Davom ettirish"}
+        </button>
+      </div>
+      <div className="bg-card/80 backdrop-blur-sm border border-border rounded-lg p-4">
+        <h4 className="text-sm font-semibold text-primary mb-2">Ideal gaz holat tenglamasi: PV = nRT</h4>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+          <div>
+            <span className="text-muted-foreground">Harorat (T):</span>
+            <p className="font-medium">{temperature.toFixed(0)} K</p>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Hajm (V):</span>
+            <p className="font-medium">{volume.toFixed(0)} L</p>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Zarrachalar soni:</span>
+            <p className="font-medium">{particleCount}</p>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Bosim (P):</span>
+            <p className="font-medium text-amber-400">{pressure.toFixed(2)} atm</p>
+          </div>
+        </div>
+        <p className="text-xs text-muted-foreground mt-2">Zarrachalar tezligi haroratga proporsional</p>
+      </div>
     </div>
   );
 };

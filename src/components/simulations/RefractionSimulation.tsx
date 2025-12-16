@@ -197,34 +197,6 @@ export const RefractionSimulation = ({ parameters }: Props) => {
         ctx.fillText(`θ₂ = ${(refractedAngle * 180 / Math.PI).toFixed(1)}°`, interfaceX + 70, interfaceY + 70);
       }
 
-      // Info panel
-      ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-      ctx.fillRect(10, 10, 230, 130);
-      ctx.strokeStyle = "rgba(139, 92, 246, 0.5)";
-      ctx.lineWidth = 1;
-      ctx.strokeRect(10, 10, 230, 130);
-
-      ctx.fillStyle = "#a78bfa";
-      ctx.font = "12px monospace";
-      ctx.textAlign = "left";
-      ctx.fillText(`Snell qonuni: n₁sin(θ₁) = n₂sin(θ₂)`, 20, 35);
-      ctx.fillText(`Tushish burchagi: ${(incidentAngle * 180 / Math.PI).toFixed(1)}°`, 20, 55);
-      
-      if (isTotalReflection) {
-        ctx.fillStyle = "#ef4444";
-        ctx.fillText(`To'liq ichki qaytish!`, 20, 75);
-        if (criticalAngle !== null) {
-          ctx.fillStyle = "#a78bfa";
-          ctx.fillText(`Kritik burchak: ${(criticalAngle * 180 / Math.PI).toFixed(1)}°`, 20, 95);
-        }
-      } else {
-        ctx.fillText(`Sinish burchagi: ${(refractedAngle * 180 / Math.PI).toFixed(1)}°`, 20, 75);
-        ctx.fillText(`Nur tezligi: v = c/n`, 20, 95);
-      }
-      
-      ctx.fillText(`v₁ = ${(300000 / n1).toFixed(0)} km/s`, 20, 115);
-      ctx.fillText(`v₂ = ${(300000 / n2).toFixed(0)} km/s`, 20, 135);
-
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -237,14 +209,43 @@ export const RefractionSimulation = ({ parameters }: Props) => {
     };
   }, [parameters]);
 
+  const incidentAngle = getParamValue("incidentAngle") * Math.PI / 180;
+  const n1 = getParamValue("n1");
+  const n2 = getParamValue("n2");
+  const sinRefracted = (n1 / n2) * Math.sin(incidentAngle);
+  const isTotalReflection = Math.abs(sinRefracted) > 1;
+  const refractedAngle = isTotalReflection ? 0 : Math.asin(sinRefracted);
+  const criticalAngle = n1 < n2 ? null : Math.asin(n2 / n1);
+
   return (
-    <div className="w-full">
+    <div className="w-full space-y-4">
       <canvas
         ref={canvasRef}
         width={600}
         height={400}
         className="w-full aspect-[3/2] rounded-xl border border-border"
       />
+      <div className="bg-card/80 backdrop-blur-sm border border-border rounded-lg p-4">
+        <h4 className="text-sm font-semibold text-primary mb-2">Snell qonuni: n₁sin(θ₁) = n₂sin(θ₂)</h4>
+        <div className="grid grid-cols-2 gap-2 text-sm text-muted-foreground">
+          <p>Tushish burchagi: {(incidentAngle * 180 / Math.PI).toFixed(1)}°</p>
+          {isTotalReflection ? (
+            <>
+              <p className="text-destructive font-medium">To'liq ichki qaytish!</p>
+              {criticalAngle !== null && (
+                <p>Kritik burchak: {(criticalAngle * 180 / Math.PI).toFixed(1)}°</p>
+              )}
+            </>
+          ) : (
+            <>
+              <p>Sinish burchagi: {(refractedAngle * 180 / Math.PI).toFixed(1)}°</p>
+              <p>Nur tezligi: v = c/n</p>
+            </>
+          )}
+          <p>v₁ = {(300000 / n1).toFixed(0)} km/s</p>
+          <p>v₂ = {(300000 / n2).toFixed(0)} km/s</p>
+        </div>
+      </div>
     </div>
   );
 };
