@@ -10,6 +10,11 @@ import { CircularMotionSimulation } from "./CircularMotionSimulation";
 import { ElectricFieldSimulation } from "./ElectricFieldSimulation";
 import { MagneticInductionSimulation } from "./MagneticInductionSimulation";
 import { RefractionSimulation } from "./RefractionSimulation";
+import { LensSimulation } from "./LensSimulation";
+import { IdealGasSimulation } from "./IdealGasSimulation";
+import { InterferenceSimulation } from "./InterferenceSimulation";
+import { CapacitorSimulation } from "./CapacitorSimulation";
+import { DopplerSimulation } from "./DopplerSimulation";
 
 interface Props {
   simulationId: string;
@@ -29,6 +34,11 @@ export const SimulationRenderer = ({ simulationId, parameters }: Props) => {
     electricField: ElectricFieldSimulation,
     magneticInduction: MagneticInductionSimulation,
     refraction: RefractionSimulation,
+    lens: LensSimulation,
+    idealGas: IdealGasSimulation,
+    interference: InterferenceSimulation,
+    capacitor: CapacitorSimulation,
+    doppler: DopplerSimulation,
   };
 
   const SimulationComponent = simulations[simulationId];

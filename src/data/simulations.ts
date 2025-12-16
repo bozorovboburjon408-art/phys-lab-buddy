@@ -279,4 +279,134 @@ To'liq ichki qaytish: Agar n₁ > n₂ va θ₁ > θc (kritik burchak), yorug'li
       { formula: "λ₂ = λ₁(n₁/n₂)", latex: "\\lambda_2 = \\lambda_1 \\frac{n_1}{n_2}", description: "Wavelength change", descriptionUz: "To'lqin uzunligi" },
     ],
   },
+  {
+    id: "lens",
+    title: "Thin Lens",
+    titleUz: "Yupqa linza",
+    description: "Study image formation through thin lenses.",
+    descriptionUz: "Yupqa linzalar orqali tasvir hosil bo'lishini o'rganing.",
+    icon: "🔍",
+    parameters: [
+      { id: "focalLength", name: "Focal Length", nameUz: "Fokus masofasi", min: 5, max: 50, step: 1, value: 20, unit: "sm" },
+      { id: "objectDistance", name: "Object Distance", nameUz: "Buyum masofasi", min: 10, max: 100, step: 1, value: 40, unit: "sm" },
+      { id: "objectHeight", name: "Object Height", nameUz: "Buyum balandligi", min: 5, max: 30, step: 1, value: 15, unit: "sm" },
+      { id: "lensType", name: "Lens Type", nameUz: "Linza turi", min: -1, max: 1, step: 2, value: 1, unit: "" },
+    ],
+    theoryUz: `Yupqa linza - bu qalinligi fokus masofasiga nisbatan juda kichik bo'lgan optik asbob.
+
+Yig'uvchi linza: Parallel nurlarni bir nuqtaga yig'adi (haqiqiy fokus).
+Sochuvchi linza: Parallel nurlarni sochib yuboradi (mavhum fokus).
+
+Linza formulasi 1/f = 1/d₀ + 1/dᵢ linza orqali tasvir hosil bo'lishini tavsiflaydi.`,
+    theory: `A thin lens is an optical device with thickness much smaller than its focal length. Converging lenses focus light to a real point; diverging lenses scatter it.`,
+    formulas: [
+      { formula: "1/f = 1/d₀ + 1/dᵢ", latex: "\\frac{1}{f} = \\frac{1}{d_o} + \\frac{1}{d_i}", description: "Lens equation", descriptionUz: "Linza formulasi" },
+      { formula: "m = -dᵢ/d₀", latex: "m = -\\frac{d_i}{d_o}", description: "Magnification", descriptionUz: "Kattalashtirish" },
+      { formula: "m = hᵢ/h₀", latex: "m = \\frac{h_i}{h_o}", description: "Height ratio", descriptionUz: "Balandliklar nisbati" },
+      { formula: "P = 1/f", latex: "P = \\frac{1}{f}", description: "Optical power (diopters)", descriptionUz: "Optik quvvat (dioptriya)" },
+    ],
+  },
+  {
+    id: "idealGas",
+    title: "Ideal Gas",
+    titleUz: "Ideal gaz",
+    description: "Visualize the kinetic theory of gases.",
+    descriptionUz: "Gazlarning kinetik nazariyasini vizualizatsiya qiling.",
+    icon: "💨",
+    parameters: [
+      { id: "temperature", name: "Temperature", nameUz: "Harorat", min: 100, max: 600, step: 10, value: 300, unit: "K" },
+      { id: "volume", name: "Volume", nameUz: "Hajm", min: 50, max: 200, step: 10, value: 100, unit: "L" },
+      { id: "particles", name: "Particles", nameUz: "Zarrachalar soni", min: 10, max: 100, step: 5, value: 50, unit: "" },
+    ],
+    theoryUz: `Ideal gaz - bu zarrachalari o'zaro ta'sirlashmaydigan va o'lchamlari e'tiborga olinmaydigan nazariy gaz modeli.
+
+Ideal gaz holat tenglamasi: PV = nRT
+Bu yerda P - bosim, V - hajm, n - mol soni, R - universal gaz doimiysi, T - harorat.
+
+Zarrachalar tezligi haroratga proporsional: v ∝ √T`,
+    theory: `Ideal gas is a theoretical model where particles don't interact and have negligible size. The ideal gas law PV = nRT describes its behavior.`,
+    formulas: [
+      { formula: "PV = nRT", latex: "PV = nRT", description: "Ideal gas law", descriptionUz: "Ideal gaz holat tenglamasi" },
+      { formula: "KE = 3/2 kT", latex: "KE = \\frac{3}{2}kT", description: "Average kinetic energy", descriptionUz: "O'rtacha kinetik energiya" },
+      { formula: "v = √(3kT/m)", latex: "v_{rms} = \\sqrt{\\frac{3kT}{m}}", description: "RMS velocity", descriptionUz: "O'rtacha kvadratik tezlik" },
+      { formula: "P = 1/3 ρv²", latex: "P = \\frac{1}{3}\\rho v^2", description: "Pressure from kinetic theory", descriptionUz: "Kinetik nazariyadan bosim" },
+    ],
+  },
+  {
+    id: "interference",
+    title: "Wave Interference",
+    titleUz: "To'lqin interferensiyasi",
+    description: "Explore double-slit interference patterns.",
+    descriptionUz: "Ikki tirqishli interferensiya rasmini o'rganing.",
+    icon: "🌀",
+    parameters: [
+      { id: "wavelength", name: "Wavelength", nameUz: "To'lqin uzunligi", min: 20, max: 100, step: 5, value: 50, unit: "nm" },
+      { id: "slitDistance", name: "Slit Distance", nameUz: "Tirqishlar oralig'i", min: 5, max: 30, step: 1, value: 15, unit: "mm" },
+      { id: "frequency", name: "Animation Speed", nameUz: "Animatsiya tezligi", min: 0.5, max: 3, step: 0.1, value: 1, unit: "" },
+    ],
+    theoryUz: `Interferensiya - bu ikki yoki undan ortiq to'lqinlarning ustma-ust tushishi natijasida kuchayish yoki susayish hodisasi.
+
+Konstruktiv interferensiya: to'lqinlar bir xil fazada bo'lsa (Δ = nλ)
+Destruktiv interferensiya: to'lqinlar qarama-qarshi fazada bo'lsa (Δ = (n+½)λ)
+
+Yung tajribasi yorug'likning to'lqin tabiatini isbotladi.`,
+    theory: `Interference occurs when two or more waves superpose, creating regions of constructive and destructive interference. Young's double-slit experiment demonstrated the wave nature of light.`,
+    formulas: [
+      { formula: "Δ = d·sinθ", latex: "\\Delta = d \\sin\\theta", description: "Path difference", descriptionUz: "Yo'l farqi" },
+      { formula: "d·sinθ = nλ", latex: "d \\sin\\theta = n\\lambda", description: "Constructive interference", descriptionUz: "Konstruktiv interferensiya" },
+      { formula: "d·sinθ = (n+½)λ", latex: "d \\sin\\theta = (n+\\frac{1}{2})\\lambda", description: "Destructive interference", descriptionUz: "Destruktiv interferensiya" },
+      { formula: "x = nλL/d", latex: "x_n = \\frac{n\\lambda L}{d}", description: "Fringe position", descriptionUz: "Yorug' chiziq joyi" },
+    ],
+  },
+  {
+    id: "capacitor",
+    title: "Capacitor",
+    titleUz: "Kondensator",
+    description: "Study capacitor charging and electric field.",
+    descriptionUz: "Kondensator zaryadlanishi va elektr maydonini o'rganing.",
+    icon: "🔋",
+    parameters: [
+      { id: "capacitance", name: "Capacitance", nameUz: "Sig'im", min: 1, max: 100, step: 1, value: 10, unit: "µF" },
+      { id: "voltage", name: "Voltage", nameUz: "Kuchlanish", min: 5, max: 50, step: 1, value: 12, unit: "V" },
+      { id: "plateDistance", name: "Plate Distance", nameUz: "Plastinalar oralig'i", min: 1, max: 20, step: 1, value: 5, unit: "mm" },
+      { id: "plateArea", name: "Plate Area", nameUz: "Plastina yuzasi", min: 10, max: 100, step: 5, value: 50, unit: "sm²" },
+    ],
+    theoryUz: `Kondensator - bu elektr energiyasini elektr maydon ko'rinishida saqlaydigan qurilma. Yassi kondensator ikkita parallel plastinadan iborat.
+
+Sig'im C = ε₀εᵣA/d formula bilan aniqlanadi.
+Saqlanadigan energiya W = ½CU² formula bilan hisoblanadi.`,
+    theory: `A capacitor stores electrical energy in an electric field. A parallel plate capacitor consists of two conducting plates separated by a dielectric material.`,
+    formulas: [
+      { formula: "C = ε₀εᵣA/d", latex: "C = \\frac{\\varepsilon_0 \\varepsilon_r A}{d}", description: "Capacitance", descriptionUz: "Sig'im" },
+      { formula: "Q = CU", latex: "Q = CU", description: "Charge", descriptionUz: "Zaryad" },
+      { formula: "W = ½CU²", latex: "W = \\frac{1}{2}CU^2", description: "Stored energy", descriptionUz: "Saqlanadigan energiya" },
+      { formula: "E = U/d", latex: "E = \\frac{U}{d}", description: "Electric field", descriptionUz: "Elektr maydon kuchlanganligi" },
+    ],
+  },
+  {
+    id: "doppler",
+    title: "Doppler Effect",
+    titleUz: "Dopler effekti",
+    description: "Visualize frequency shift due to motion.",
+    descriptionUz: "Harakat tufayli chastota o'zgarishini vizualizatsiya qiling.",
+    icon: "🚗",
+    parameters: [
+      { id: "sourceSpeed", name: "Source Speed", nameUz: "Manba tezligi", min: 0, max: 100, step: 5, value: 30, unit: "m/s" },
+      { id: "waveSpeed", name: "Wave Speed", nameUz: "To'lqin tezligi", min: 200, max: 400, step: 10, value: 340, unit: "m/s" },
+      { id: "frequency", name: "Source Frequency", nameUz: "Manba chastotasi", min: 1, max: 10, step: 0.5, value: 5, unit: "Hz" },
+    ],
+    theoryUz: `Dopler effekti - bu to'lqin manbasi yoki kuzatuvchi harakatlanayotganda chastotaning o'zgarishi hodisasi.
+
+Manba yaqinlashganda: chastota oshadi (tovush balandroq)
+Manba uzoqlashganda: chastota kamayadi (tovush pastroq)
+
+Bu effekt tibbiyotda (ultrazvuk), aviatsiyada va astronomiyada keng qo'llaniladi.`,
+    theory: `The Doppler effect is the change in frequency of a wave due to relative motion between source and observer. It's used in medical imaging, radar, and astronomy.`,
+    formulas: [
+      { formula: "f' = f₀(c/(c-v))", latex: "f' = f_0 \\frac{c}{c - v_s}", description: "Approaching source", descriptionUz: "Yaqinlashayotgan manba" },
+      { formula: "f' = f₀(c/(c+v))", latex: "f' = f_0 \\frac{c}{c + v_s}", description: "Receding source", descriptionUz: "Uzoqlashayotgan manba" },
+      { formula: "Δf/f = v/c", latex: "\\frac{\\Delta f}{f} = \\frac{v}{c}", description: "Relative frequency shift", descriptionUz: "Nisbiy chastota siljishi" },
+      { formula: "λ' = λ(c±v)/c", latex: "\\lambda' = \\lambda \\frac{c \\pm v_s}{c}", description: "Wavelength change", descriptionUz: "To'lqin uzunligi o'zgarishi" },
+    ],
+  },
 ];
