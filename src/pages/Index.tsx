@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/button";
 import { Atom, FlaskConical, Sparkles, ArrowRight } from "lucide-react";
+import { PhysicsBackground } from "@/components/animations/PhysicsBackground";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <PhysicsBackground />
       <Header />
       
       {/* Hero Section */}
