@@ -2,278 +2,381 @@ import { LabExperiment } from "@/types/physics";
 
 export const laboratories: LabExperiment[] = [
   {
-    id: "lab-1-pendulum",
-    title: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash",
-    titleUz: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash",
-    purpose: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash va mayatnik uzunligi bilan davri orasidagi bog'lanishni tekshirish.",
-    purposeUz: "Matematik mayatnik yordamida erkin tushish tezlanishini aniqlash va mayatnik uzunligi bilan davri orasidagi bog'lanishni tekshirish.",
+    id: "lab-1-projectile-motion",
+    title: "Gorizontga nisbatan burchak ostida otilgan jismning harakatini o'rganish",
+    titleUz: "Gorizontga nisbatan burchak ostida otilgan jismning harakatini o'rganish",
+    purpose: "Gorizontga nisbatan burchak ostida otilgan jismning harakatini o'rganish va harakat parametrlarini tajribada aniqlash.",
+    purposeUz: "Gorizontga nisbatan burchak ostida otilgan jismning harakatini o'rganish va harakat parametrlarini tajribada aniqlash.",
     equipment: [
-      "Matematik mayatnik (ip bilan kichik shar)",
-      "Chizg'ich yoki metr lentasi (1-2 m)",
-      "Sekundomer (0,1 s aniqlikda)",
-      "Qisqichli shtativ",
-      "Burchakni o'lchash uchun transportir"
+      "Ballistik qurilma (otish burchagini o'zgartirish imkoniyati bilan)",
+      "Po'lat sharcha",
+      "Masshtabli koordinata to'ri yoki millimetrli qog'oz",
+      "Transportir (burchakni o'lchash uchun)",
+      "Metr lentasi yoki chizg'ich",
+      "Sekundomer"
     ],
     equipmentUz: [
-      "Matematik mayatnik (ip bilan kichik shar)",
-      "Chizg'ich yoki metr lentasi (1-2 m)",
-      "Sekundomer (0,1 s aniqlikda)",
-      "Qisqichli shtativ",
-      "Burchakni o'lchash uchun transportir"
+      "Ballistik qurilma (otish burchagini o'zgartirish imkoniyati bilan)",
+      "Po'lat sharcha",
+      "Masshtabli koordinata to'ri yoki millimetrli qog'oz",
+      "Transportir (burchakni o'lchash uchun)",
+      "Metr lentasi yoki chizg'ich",
+      "Sekundomer"
     ],
-    theory: `Matematik mayatnik - bu massasi e'tiborga olinmaydigan cho'zilmaydigan ipga osilgan moddiy nuqtadir. Kichik burchaklar (10° dan kam) uchun mayatnikning tebranish davri quyidagi formula bilan aniqlanadi:
+    theory: `Gorizontga nisbatan α burchak ostida v₀ boshlang'ich tezlik bilan otilgan jism parabolik traektoriya bo'ylab harakat qiladi.
 
-T = 2π√(L/g)
+Harakat tenglamalari:
+- Gorizontal bo'yicha: x = v₀·cos(α)·t
+- Vertikal bo'yicha: y = v₀·sin(α)·t - gt²/2
 
-bu yerda:
-- T - tebranish davri (s)
-- L - mayatnik uzunligi (m)  
-- g - erkin tushish tezlanishi (m/s²)
+Asosiy formulalar:
 
-Bu formuladan erkin tushish tezlanishini aniqlash mumkin:
+1. Parvoz vaqti:
+   T = 2v₀·sin(α)/g
 
-g = 4π²L/T²
+2. Maksimal ko'tarilish balandligi:
+   H = v₀²·sin²(α)/(2g)
 
-Mayatnik davri faqat uning uzunligi va erkin tushish tezlanishiga bog'liq, massaga bog'liq emas. Bu xususiyat Galiley tomonidan kashf etilgan.
+3. Parvoz masofasi (uzoqligi):
+   L = v₀²·sin(2α)/g
 
-Tajribada n ta tebranish vaqti o'lchanilib, bitta tebranish davri T = t/n formula bilan hisoblanadi.`,
-    theoryUz: `Matematik mayatnik - bu massasi e'tiborga olinmaydigan cho'zilmaydigan ipga osilgan moddiy nuqtadir. Kichik burchaklar (10° dan kam) uchun mayatnikning tebranish davri quyidagi formula bilan aniqlanadi:
+4. Traektoriya tenglamasi:
+   y = x·tg(α) - gx²/(2v₀²cos²(α))
 
-T = 2π√(L/g)
+Maksimal uzoqlik α = 45° burchakda erishiladi.
 
-bu yerda:
-- T - tebranish davri (s)
-- L - mayatnik uzunligi (m)
-- g - erkin tushish tezlanishi (m/s²)
+Bir xil uzoqlikka α va (90° - α) burchaklarda otilganda erishiladi (masalan, 30° va 60°).
 
-Bu formuladan erkin tushish tezlanishini aniqlash mumkin:
+Boshlang'ich tezlik:
+v₀ = √(gL/sin(2α))`,
+    theoryUz: `Gorizontga nisbatan α burchak ostida v₀ boshlang'ich tezlik bilan otilgan jism parabolik traektoriya bo'ylab harakat qiladi.
 
-g = 4π²L/T²
+Harakat tenglamalari:
+- Gorizontal bo'yicha: x = v₀·cos(α)·t
+- Vertikal bo'yicha: y = v₀·sin(α)·t - gt²/2
 
-Mayatnik davri faqat uning uzunligi va erkin tushish tezlanishiga bog'liq, massaga bog'liq emas. Bu xususiyat Galiley tomonidan kashf etilgan.
+Asosiy formulalar:
 
-Tajribada n ta tebranish vaqti o'lchanilib, bitta tebranish davri T = t/n formula bilan hisoblanadi.`,
+1. Parvoz vaqti:
+   T = 2v₀·sin(α)/g
+
+2. Maksimal ko'tarilish balandligi:
+   H = v₀²·sin²(α)/(2g)
+
+3. Parvoz masofasi (uzoqligi):
+   L = v₀²·sin(2α)/g
+
+4. Traektoriya tenglamasi:
+   y = x·tg(α) - gx²/(2v₀²cos²(α))
+
+Maksimal uzoqlik α = 45° burchakda erishiladi.
+
+Bir xil uzoqlikka α va (90° - α) burchaklarda otilganda erishiladi (masalan, 30° va 60°).
+
+Boshlang'ich tezlik:
+v₀ = √(gL/sin(2α))`,
     procedure: [
-      "Mayatnikni shtativga mahkamlang va ipning uzunligini L o'lchang (osish nuqtasidan sharning markazigacha)",
-      "Mayatnikni muvozanat holatidan 5-10° ga og'iring va qo'yib yuboring",
-      "Sekundomer yordamida n = 20-30 ta to'liq tebranish vaqtini o'lchang",
-      "Tebranish davrini T = t/n formula bilan hisoblang",
-      "g = 4π²L/T² formula yordamida erkin tushish tezlanishini hisoblang",
-      "Tajribani 3-5 marta turli uzunliklar uchun takrorlang",
-      "O'rtacha qiymatni va nisbiy xatolikni hisoblang"
+      "Ballistik qurilmani gorizontal tekislikka o'rnating",
+      "Otish burchagini α = 30° ga sozlang",
+      "Sharchani otib, tushgan joyni belgilang",
+      "Parvoz masofasi L ni o'lchang",
+      "Tajribani 3-5 marta takrorlang va o'rtacha L ni toping",
+      "v₀ = √(gL/sin(2α)) formula bilan boshlang'ich tezlikni hisoblang",
+      "Burchakni 45° va 60° ga o'zgartirib tajribani takrorlang",
+      "Har bir burchak uchun H va T qiymatlarini hisoblang",
+      "Natijalarni taqqoslang va xulosalar chiqaring"
     ],
     procedureUz: [
-      "Mayatnikni shtativga mahkamlang va ipning uzunligini L o'lchang (osish nuqtasidan sharning markazigacha)",
-      "Mayatnikni muvozanat holatidan 5-10° ga og'iring va qo'yib yuboring",
-      "Sekundomer yordamida n = 20-30 ta to'liq tebranish vaqtini o'lchang",
-      "Tebranish davrini T = t/n formula bilan hisoblang",
-      "g = 4π²L/T² formula yordamida erkin tushish tezlanishini hisoblang",
-      "Tajribani 3-5 marta turli uzunliklar uchun takrorlang",
-      "O'rtacha qiymatni va nisbiy xatolikni hisoblang"
+      "Ballistik qurilmani gorizontal tekislikka o'rnating",
+      "Otish burchagini α = 30° ga sozlang",
+      "Sharchani otib, tushgan joyni belgilang",
+      "Parvoz masofasi L ni o'lchang",
+      "Tajribani 3-5 marta takrorlang va o'rtacha L ni toping",
+      "v₀ = √(gL/sin(2α)) formula bilan boshlang'ich tezlikni hisoblang",
+      "Burchakni 45° va 60° ga o'zgartirib tajribani takrorlang",
+      "Har bir burchak uchun H va T qiymatlarini hisoblang",
+      "Natijalarni taqqoslang va xulosalar chiqaring"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "length", name: "Uzunlik L", nameUz: "Uzunlik L", unit: "m", isInput: true },
-      { id: "oscillations", name: "Soni n", nameUz: "Soni n", unit: "", isInput: true },
-      { id: "time", name: "Vaqt t", nameUz: "Vaqt t", unit: "s", isInput: true },
-      { id: "period", name: "Davr T", nameUz: "Davr T", unit: "s", isInput: false },
-      { id: "gravity", name: "g", nameUz: "g", unit: "m/s²", isInput: false },
+      { id: "angle", name: "Burchak α", nameUz: "Burchak α", unit: "°", isInput: true },
+      { id: "distance", name: "Masofa L", nameUz: "Masofa L", unit: "m", isInput: true },
+      { id: "v0", name: "v₀", nameUz: "v₀", unit: "m/s", isInput: false },
+      { id: "height", name: "Balandlik H", nameUz: "Balandlik H", unit: "m", isInput: false },
+      { id: "flightTime", name: "Vaqt T", nameUz: "Vaqt T", unit: "s", isInput: false },
     ],
     calculations: (inputs) => {
-      const period = inputs.time / inputs.oscillations;
-      const gravity = (4 * Math.PI * Math.PI * inputs.length) / (period * period);
+      const angleRad = (inputs.angle * Math.PI) / 180;
+      const g = 9.8;
+      const v0 = Math.sqrt((g * inputs.distance) / Math.sin(2 * angleRad));
+      const height = (v0 * v0 * Math.sin(angleRad) * Math.sin(angleRad)) / (2 * g);
+      const flightTime = (2 * v0 * Math.sin(angleRad)) / g;
       return {
-        period: Math.round(period * 1000) / 1000,
-        gravity: Math.round(gravity * 100) / 100,
+        v0: Math.round(v0 * 100) / 100,
+        height: Math.round(height * 1000) / 1000,
+        flightTime: Math.round(flightTime * 1000) / 1000,
       };
     },
   },
   {
-    id: "lab-2-free-fall",
-    title: "Erkin tushish tezlanishini o'lchash",
-    titleUz: "Erkin tushish tezlanishini o'lchash",
-    purpose: "Erkin tushish harakati yordamida tortishish tezlanishini o'lchash va tekis tezlanuvchan harakat qonunlarini tekshirish.",
-    purposeUz: "Erkin tushish harakati yordamida tortishish tezlanishini o'lchash va tekis tezlanuvchan harakat qonunlarini tekshirish.",
+    id: "lab-2-ballistic-pendulum",
+    title: "Impulsning saqlanish qonunini ballistik mayatnik yordamida o'rganish",
+    titleUz: "Impulsning saqlanish qonunini ballistik mayatnik yordamida o'rganish",
+    purpose: "Ballistik mayatnik yordamida impulsning saqlanish qonunini tekshirish va o'q tezligini aniqlash.",
+    purposeUz: "Ballistik mayatnik yordamida impulsning saqlanish qonunini tekshirish va o'q tezligini aniqlash.",
     equipment: [
-      "Po'lat shar (kichik, zich)",
-      "Elektromagnit qo'yib yuborish mexanizmi",
-      "Fotoelektrik sensorli elektron taymer",
-      "Balandlik shkalali vertikal shtativ",
-      "Qabul qiluvchi taglik"
+      "Ballistik mayatnik (og'ir silindr yoki qum bilan to'ldirilgan quti)",
+      "Prujinali miltiq yoki havo to'pponchasI",
+      "Po'lat sharcha (o'q)",
+      "Burchak shkalali mayatnik tayanchi",
+      "Analitik tarozi",
+      "Metr lentasi"
     ],
     equipmentUz: [
-      "Po'lat shar (kichik, zich)",
-      "Elektromagnit qo'yib yuborish mexanizmi",
-      "Fotoelektrik sensorli elektron taymer",
-      "Balandlik shkalali vertikal shtativ",
-      "Qabul qiluvchi taglik"
+      "Ballistik mayatnik (og'ir silindr yoki qum bilan to'ldirilgan quti)",
+      "Prujinali miltiq yoki havo to'pponchasI",
+      "Po'lat sharcha (o'q)",
+      "Burchak shkalali mayatnik tayanchi",
+      "Analitik tarozi",
+      "Metr lentasi"
     ],
-    theory: `Erkin tushish - bu faqat og'irlik kuchi ta'sirida sodir bo'ladigan harakat. Yer sirtida havo qarshiligini hisobga olmaganda, barcha jismlar bir xil tezlanish bilan tushadi.
+    theory: `Ballistik mayatnik - o'q tezligini aniqlash uchun ishlatiladigan qurilma. U impulsning saqlanish qonuniga asoslangan.
 
-Tekis tezlanuvchan harakat qonuniga ko'ra:
-h = v₀t + ½gt²
+Impulsning saqlanish qonuni:
+Yopiq sistemada jismlar impulslarining vektoriy yig'indisi o'zgarmaydi:
+Σp = const  yoki  m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'
 
-Boshlang'ich tezlik v₀ = 0 bo'lganda:
-h = ½gt²
+Noelastik to'qnashuvda:
+O'q (m) mayatnikka (M) kirib qoladi va ular birgalikda harakat qiladi.
 
-Bu yerdan erkin tushish tezlanishi:
-g = 2h/t²
-
-bu yerda:
-- h - tushish balandligi (m)
-- t - tushish vaqti (s)
-- g - erkin tushish tezlanishi (m/s²)
-
-Yer sirtida g ≈ 9.8 m/s² (kenglik va balandlikka qarab 9.78 - 9.83 m/s² oralig'ida o'zgaradi).`,
-    theoryUz: `Erkin tushish - bu faqat og'irlik kuchi ta'sirida sodir bo'ladigan harakat. Yer sirtida havo qarshiligini hisobga olmaganda, barcha jismlar bir xil tezlanish bilan tushadi.
-
-Tekis tezlanuvchan harakat qonuniga ko'ra:
-h = v₀t + ½gt²
-
-Boshlang'ich tezlik v₀ = 0 bo'lganda:
-h = ½gt²
-
-Bu yerdan erkin tushish tezlanishi:
-g = 2h/t²
+Impuls saqlanishi:
+mv = (m + M)u
 
 bu yerda:
-- h - tushish balandligi (m)
-- t - tushish vaqti (s)
-- g - erkin tushish tezlanishi (m/s²)
+- m - o'q massasi
+- v - o'q tezligi
+- M - mayatnik massasi
+- u - to'qnashuvdan keyingi tezlik
 
-Yer sirtida g ≈ 9.8 m/s² (kenglik va balandlikka qarab 9.78 - 9.83 m/s² oralig'ida o'zgaradi).`,
+Energiya saqlanishi (mayatnik ko'tarilganda):
+(m + M)u²/2 = (m + M)gh
+
+Bu yerdan:
+u = √(2gh)
+
+O'q tezligi:
+v = (m + M)√(2gh)/m
+
+Agar mayatnik θ burchakka og'ilsa va ip uzunligi L bo'lsa:
+h = L(1 - cosθ)
+
+O'q tezligi:
+v = (m + M)√(2gL(1 - cosθ))/m`,
+    theoryUz: `Ballistik mayatnik - o'q tezligini aniqlash uchun ishlatiladigan qurilma. U impulsning saqlanish qonuniga asoslangan.
+
+Impulsning saqlanish qonuni:
+Yopiq sistemada jismlar impulslarining vektoriy yig'indisi o'zgarmaydi:
+Σp = const  yoki  m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'
+
+Noelastik to'qnashuvda:
+O'q (m) mayatnikka (M) kirib qoladi va ular birgalikda harakat qiladi.
+
+Impuls saqlanishi:
+mv = (m + M)u
+
+bu yerda:
+- m - o'q massasi
+- v - o'q tezligi
+- M - mayatnik massasi
+- u - to'qnashuvdan keyingi tezlik
+
+Energiya saqlanishi (mayatnik ko'tarilganda):
+(m + M)u²/2 = (m + M)gh
+
+Bu yerdan:
+u = √(2gh)
+
+O'q tezligi:
+v = (m + M)√(2gh)/m
+
+Agar mayatnik θ burchakka og'ilsa va ip uzunligi L bo'lsa:
+h = L(1 - cosθ)
+
+O'q tezligi:
+v = (m + M)√(2gL(1 - cosθ))/m`,
     procedure: [
-      "Shtativni vertikal holatda o'rnating va tekisligini tekshiring",
-      "Sharni elektromagnit mexanizmga mahkamlang",
-      "Sharning tushish balandligini h ni chizg'ich bilan o'lchang",
-      "Elektromagnitni o'chirib, sharni qo'yib yuboring va vaqtni o'lchang",
-      "Har bir balandlik uchun tajribani 5 marta takrorlang",
-      "g = 2h/t² formula bilan hisoblang",
-      "Turli balandliklar uchun tajribani qaytaring",
+      "O'q (sharcha) massasi m ni tarozida o'lchang",
+      "Mayatnik massasi M ni aniqlang",
+      "Mayatnik ipining uzunligi L ni o'lchang",
+      "Mayatnikni muvozanat holatiga keltiring",
+      "O'qni mayatnikka oting",
+      "Mayatnikning og'ilish burchagi θ yoki ko'tarilish balandligi h ni o'lchang",
+      "v = (m + M)√(2gL(1 - cosθ))/m formula bilan o'q tezligini hisoblang",
+      "Tajribani 5 marta takrorlang",
       "O'rtacha qiymat va xatolikni hisoblang"
     ],
     procedureUz: [
-      "Shtativni vertikal holatda o'rnating va tekisligini tekshiring",
-      "Sharni elektromagnit mexanizmga mahkamlang",
-      "Sharning tushish balandligini h ni chizg'ich bilan o'lchang",
-      "Elektromagnitni o'chirib, sharni qo'yib yuboring va vaqtni o'lchang",
-      "Har bir balandlik uchun tajribani 5 marta takrorlang",
-      "g = 2h/t² formula bilan hisoblang",
-      "Turli balandliklar uchun tajribani qaytaring",
+      "O'q (sharcha) massasi m ni tarozida o'lchang",
+      "Mayatnik massasi M ni aniqlang",
+      "Mayatnik ipining uzunligi L ni o'lchang",
+      "Mayatnikni muvozanat holatiga keltiring",
+      "O'qni mayatnikka oting",
+      "Mayatnikning og'ilish burchagi θ yoki ko'tarilish balandligi h ni o'lchang",
+      "v = (m + M)√(2gL(1 - cosθ))/m formula bilan o'q tezligini hisoblang",
+      "Tajribani 5 marta takrorlang",
       "O'rtacha qiymat va xatolikni hisoblang"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "height", name: "Balandlik h", nameUz: "Balandlik h", unit: "m", isInput: true },
-      { id: "time", name: "Vaqt t", nameUz: "Vaqt t", unit: "s", isInput: true },
-      { id: "gravity", name: "g", nameUz: "g", unit: "m/s²", isInput: false },
+      { id: "bulletMass", name: "m (o'q)", nameUz: "m (o'q)", unit: "g", isInput: true },
+      { id: "pendulumMass", name: "M (mayatnik)", nameUz: "M (mayatnik)", unit: "g", isInput: true },
+      { id: "length", name: "L (ip)", nameUz: "L (ip)", unit: "m", isInput: true },
+      { id: "angle", name: "θ (burchak)", nameUz: "θ (burchak)", unit: "°", isInput: true },
+      { id: "height", name: "h", nameUz: "h", unit: "m", isInput: false },
+      { id: "velocity", name: "v (o'q)", nameUz: "v (o'q)", unit: "m/s", isInput: false },
     ],
     calculations: (inputs) => {
-      const gravity = (2 * inputs.height) / (inputs.time * inputs.time);
+      const m = inputs.bulletMass / 1000;
+      const M = inputs.pendulumMass / 1000;
+      const L = inputs.length;
+      const angleRad = (inputs.angle * Math.PI) / 180;
+      const h = L * (1 - Math.cos(angleRad));
+      const g = 9.8;
+      const velocity = ((m + M) * Math.sqrt(2 * g * h)) / m;
       return {
-        gravity: Math.round(gravity * 100) / 100,
+        height: Math.round(h * 10000) / 10000,
+        velocity: Math.round(velocity * 100) / 100,
       };
     },
   },
   {
-    id: "lab-3-hookes-law",
-    title: "Guk qonunini tekshirish va prujina bikrligi",
-    titleUz: "Guk qonunini tekshirish va prujina bikrligi",
-    purpose: "Elastik deformatsiya uchun Guk qonunini tekshirish va prujina bikrlik koeffitsientini tajribada aniqlash.",
-    purposeUz: "Elastik deformatsiya uchun Guk qonunini tekshirish va prujina bikrlik koeffitsientini tajribada aniqlash.",
+    id: "lab-3-moment-of-inertia",
+    title: "Maxovik g'ildirakning inersiya momentini aniqlash",
+    titleUz: "Maxovik g'ildirakning inersiya momentini aniqlash",
+    purpose: "Maxovik g'ildirakning inersiya momentini tajribada aniqlash va aylanma harakat qonunlarini o'rganish.",
+    purposeUz: "Maxovik g'ildirakning inersiya momentini tajribada aniqlash va aylanma harakat qonunlarini o'rganish.",
     equipment: [
-      "Spiral prujina (po'lat yoki bronza)",
-      "Kalibrlangan yuklar to'plami (50g - 500g)",
-      "Millimetrli shkala bilan vertikal chizg'ich",
-      "Yuk ushlagich va ilgak",
-      "Qisqichli shtativ"
+      "Maxovik g'ildirak (o'qqa o'rnatilgan)",
+      "Yuklar to'plami (50g - 500g)",
+      "Ip va g'ildirak uchi",
+      "Shtangensirkul",
+      "Sekundomer",
+      "Metr lentasi"
     ],
     equipmentUz: [
-      "Spiral prujina (po'lat yoki bronza)",
-      "Kalibrlangan yuklar to'plami (50g - 500g)",
-      "Millimetrli shkala bilan vertikal chizg'ich",
-      "Yuk ushlagich va ilgak",
-      "Qisqichli shtativ"
+      "Maxovik g'ildirak (o'qqa o'rnatilgan)",
+      "Yuklar to'plami (50g - 500g)",
+      "Ip va g'ildirak uchi",
+      "Shtangensirkul",
+      "Sekundomer",
+      "Metr lentasi"
     ],
-    theory: `Guk qonuni elastik deformatsiya uchun kuch va cho'zilish o'rtasidagi chiziqli bog'lanishni ifodalaydi:
-
-F = kx
-
-bu yerda:
-- F - prujinaga ta'sir etuvchi kuch (N)
-- k - prujina bikrlik koeffitsienti (N/m)
-- x - cho'zilish (m)
-
-Og'irlik kuchi ta'sirida:
-F = mg
-
-bu yerda m - yuk massasi, g - erkin tushish tezlanishi.
-
-Prujina bikrligi:
-k = F/x = mg/x
-
-Guk qonuni faqat elastiklik chegarasigacha amal qiladi. Elastiklik chegarasidan oshganda plastik deformatsiya sodir bo'ladi va jism avvalgi shakliga qaytmaydi.
-
-Prujinaning potensial energiyasi:
-E = kx²/2`,
-    theoryUz: `Guk qonuni elastik deformatsiya uchun kuch va cho'zilish o'rtasidagi chiziqli bog'lanishni ifodalaydi:
-
-F = kx
+    theory: `Inersiya momenti - jismning aylanma harakatdagi "inertsiyasi"ning o'lchovidir. Moddiy nuqta uchun:
+I = mr²
 
 bu yerda:
-- F - prujinaga ta'sir etuvchi kuch (N)
-- k - prujina bikrlik koeffitsienti (N/m)
-- x - cho'zilish (m)
+- m - nuqta massasi
+- r - aylanish o'qigacha masofa
 
-Og'irlik kuchi ta'sirida:
-F = mg
+Qattiq jism uchun:
+I = Σmᵢrᵢ² = ∫r²dm
 
-bu yerda m - yuk massasi, g - erkin tushish tezlanishi.
+Aylanma harakat uchun Nyutonning ikkinchi qonuni:
+M = Iε
 
-Prujina bikrligi:
-k = F/x = mg/x
+bu yerda:
+- M - kuch momenti
+- ε - burchak tezlanishi
 
-Guk qonuni faqat elastiklik chegarasigacha amal qiladi. Elastiklik chegarasidan oshganda plastik deformatsiya sodir bo'ladi va jism avvalgi shakliga qaytmaydi.
+G'ildirakka osilgan yuk ta'sirida:
+- Yukka ta'sir etuvchi kuchlar: og'irlik kuchi mg va ip taranglik kuchi T
+- Nyuton qonuni (yuk uchun): ma = mg - T
+- G'ildirak uchun: Iε = Tr
 
-Prujinaning potensial energiyasi:
-E = kx²/2`,
+Agar a = εr (tangensal tezlanish) bo'lsa:
+I = mr(g - a)/ε = mr²(g - a)/a
+
+Yuk h balandlikdan t vaqtda tushsa:
+a = 2h/t²
+
+Inersiya momenti:
+I = mr²(gt² - 2h)/(2h)
+
+yoki soddaroq:
+I = m(grt² - 2hr)/(2h/r)`,
+    theoryUz: `Inersiya momenti - jismning aylanma harakatdagi "inertsiyasi"ning o'lchovidir. Moddiy nuqta uchun:
+I = mr²
+
+bu yerda:
+- m - nuqta massasi
+- r - aylanish o'qigacha masofa
+
+Qattiq jism uchun:
+I = Σmᵢrᵢ² = ∫r²dm
+
+Aylanma harakat uchun Nyutonning ikkinchi qonuni:
+M = Iε
+
+bu yerda:
+- M - kuch momenti
+- ε - burchak tezlanishi
+
+G'ildirakka osilgan yuk ta'sirida:
+- Yukka ta'sir etuvchi kuchlar: og'irlik kuchi mg va ip taranglik kuchi T
+- Nyuton qonuni (yuk uchun): ma = mg - T
+- G'ildirak uchun: Iε = Tr
+
+Agar a = εr (tangensal tezlanish) bo'lsa:
+I = mr(g - a)/ε = mr²(g - a)/a
+
+Yuk h balandlikdan t vaqtda tushsa:
+a = 2h/t²
+
+Inersiya momenti:
+I = mr²(gt² - 2h)/(2h)
+
+yoki soddaroq:
+I = m(grt² - 2hr)/(2h/r)`,
     procedure: [
-      "Prujinani shtativga osilgan holatda mustahkamlang",
-      "Prujinaning boshlang'ich uzunligini L₀ ni o'lchang (yuksiz)",
-      "Birinchi yukni (masalan, 50g) osing va yangi uzunlikni L o'lchang",
-      "Cho'zilishni x = L - L₀ formula bilan hisoblang",
-      "Yukni bosqichma-bosqich oshiring (100g, 150g, 200g, ...)",
-      "Har bir yuk uchun cho'zilishni yozib boring",
-      "k = mg/x formula bilan bikrlikni hisoblang",
-      "F(x) grafigini chizing va uning chiziqliligini tekshiring"
+      "G'ildirak o'qi radiusi r ni shtangensirkul bilan o'lchang",
+      "Ipni g'ildirak o'qiga o'rang va yukni osing",
+      "Yuk tushish balandligi h ni o'lchang",
+      "Yukni qo'yib yuborib, tushish vaqti t ni sekundomer bilan o'lchang",
+      "a = 2h/t² formula bilan tezlanishni hisoblang",
+      "I = mr²(gt² - 2h)/(2h) formula bilan inersiya momentini hisoblang",
+      "Turli yuklar bilan tajribani takrorlang",
+      "O'rtacha qiymat va xatolikni hisoblang"
     ],
     procedureUz: [
-      "Prujinani shtativga osilgan holatda mustahkamlang",
-      "Prujinaning boshlang'ich uzunligini L₀ ni o'lchang (yuksiz)",
-      "Birinchi yukni (masalan, 50g) osing va yangi uzunlikni L o'lchang",
-      "Cho'zilishni x = L - L₀ formula bilan hisoblang",
-      "Yukni bosqichma-bosqich oshiring (100g, 150g, 200g, ...)",
-      "Har bir yuk uchun cho'zilishni yozib boring",
-      "k = mg/x formula bilan bikrlikni hisoblang",
-      "F(x) grafigini chizing va uning chiziqliligini tekshiring"
+      "G'ildirak o'qi radiusi r ni shtangensirkul bilan o'lchang",
+      "Ipni g'ildirak o'qiga o'rang va yukni osing",
+      "Yuk tushish balandligi h ni o'lchang",
+      "Yukni qo'yib yuborib, tushish vaqti t ni sekundomer bilan o'lchang",
+      "a = 2h/t² formula bilan tezlanishni hisoblang",
+      "I = mr²(gt² - 2h)/(2h) formula bilan inersiya momentini hisoblang",
+      "Turli yuklar bilan tajribani takrorlang",
+      "O'rtacha qiymat va xatolikni hisoblang"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
       { id: "mass", name: "Massa m", nameUz: "Massa m", unit: "kg", isInput: true },
-      { id: "initialLength", name: "L₀", nameUz: "L₀", unit: "m", isInput: true },
-      { id: "finalLength", name: "L", nameUz: "L", unit: "m", isInput: true },
-      { id: "extension", name: "Cho'zilish x", nameUz: "Cho'zilish x", unit: "m", isInput: false },
-      { id: "force", name: "Kuch F", nameUz: "Kuch F", unit: "N", isInput: false },
-      { id: "springConstant", name: "k", nameUz: "k", unit: "N/m", isInput: false },
+      { id: "radius", name: "Radius r", nameUz: "Radius r", unit: "mm", isInput: true },
+      { id: "height", name: "Balandlik h", nameUz: "Balandlik h", unit: "m", isInput: true },
+      { id: "time", name: "Vaqt t", nameUz: "Vaqt t", unit: "s", isInput: true },
+      { id: "acceleration", name: "Tezlanish a", nameUz: "Tezlanish a", unit: "m/s²", isInput: false },
+      { id: "momentOfInertia", name: "I", nameUz: "I", unit: "kg·m²", isInput: false },
     ],
     calculations: (inputs) => {
-      const extension = inputs.finalLength - inputs.initialLength;
-      const force = inputs.mass * 9.8;
-      const springConstant = extension > 0 ? force / extension : 0;
+      const r = inputs.radius / 1000;
+      const h = inputs.height;
+      const t = inputs.time;
+      const m = inputs.mass;
+      const g = 9.8;
+      const acceleration = (2 * h) / (t * t);
+      const momentOfInertia = (m * r * r * (g * t * t - 2 * h)) / (2 * h);
       return {
-        extension: Math.round(extension * 1000) / 1000,
-        force: Math.round(force * 100) / 100,
-        springConstant: Math.round(springConstant * 10) / 10,
+        acceleration: Math.round(acceleration * 1000) / 1000,
+        momentOfInertia: Math.round(momentOfInertia * 100000) / 100000,
       };
     },
   },
@@ -748,103 +851,9 @@ Puasson formulasini qo'llab:
     },
   },
   {
-    id: "lab-8-surface-tension",
-    title: "Kapillyar usul bilan sirt taranglik koeffitsientini aniqlash",
-    titleUz: "Kapillyar usul bilan sirt taranglik koeffitsientini aniqlash",
-    purpose: "Kapillyar usul yordamida suyuqlikning sirt taranglik koeffitsientini aniqlash.",
-    purposeUz: "Kapillyar usul yordamida suyuqlikning sirt taranglik koeffitsientini aniqlash.",
-    equipment: [
-      "Turli diametrli kapillyar naychalar to'plami (0,5-2 mm)",
-      "Sinov suyuqligi bilan idish (suv, spirt)",
-      "Sayohat mikroskopi yoki katetometr",
-      "Millimetrli shkala bilan chizg'ich",
-      "Termometr"
-    ],
-    equipmentUz: [
-      "Turli diametrli kapillyar naychalar to'plami (0,5-2 mm)",
-      "Sinov suyuqligi bilan idish (suv, spirt)",
-      "Sayohat mikroskopi yoki katetometr",
-      "Millimetrli shkala bilan chizg'ich",
-      "Termometr"
-    ],
-    theory: `Sirt taranglik - bu suyuqlik yuzasining qisqarishga intilish xossasidir. Sirt taranglik koeffitsienti σ birlik uzunlikdagi chiziq bo'ylab ta'sir etuvchi kuchga teng.
-
-Kapillyar hodisa - tor naychada suyuqlikning ko'tarilishi yoki tushishi. Ho'llovchi suyuqliklar (suv) ko'tariladi, ho'llamaydigan suyuqliklar (simob) tushadi.
-
-Kapillyarda suyuqlik balandligi:
-h = 2σcosθ/(ρgr)
-
-bu yerda:
-- σ - sirt taranglik koeffitsienti (N/m)
-- θ - ho'llash burchagi (suv uchun θ ≈ 0)
-- ρ - suyuqlik zichligi (kg/m³)
-- r - kapillyar radiusi (m)
-
-Suv uchun (θ = 0, cosθ = 1):
-σ = ρghr/2
-
-yoki diametr orqali:
-σ = ρghd/4
-
-20°C da suvning sirt taranglik koeffitsienti: σ ≈ 0.0728 N/m`,
-    theoryUz: `Sirt taranglik - bu suyuqlik yuzasining qisqarishga intilish xossasidir. Sirt taranglik koeffitsienti σ birlik uzunlikdagi chiziq bo'ylab ta'sir etuvchi kuchga teng.
-
-Kapillyar hodisa - tor naychada suyuqlikning ko'tarilishi yoki tushishi. Ho'llovchi suyuqliklar (suv) ko'tariladi, ho'llamaydigan suyuqliklar (simob) tushadi.
-
-Kapillyarda suyuqlik balandligi:
-h = 2σcosθ/(ρgr)
-
-bu yerda:
-- σ - sirt taranglik koeffitsienti (N/m)
-- θ - ho'llash burchagi (suv uchun θ ≈ 0)
-- ρ - suyuqlik zichligi (kg/m³)
-- r - kapillyar radiusi (m)
-
-Suv uchun (θ = 0, cosθ = 1):
-σ = ρghr/2
-
-yoki diametr orqali:
-σ = ρghd/4
-
-20°C da suvning sirt taranglik koeffitsienti: σ ≈ 0.0728 N/m`,
-    procedure: [
-      "Kapillyar naychaning ichki diametrini mikroskop yordamida o'lchang",
-      "Naychani vertikal holatda suyuqlikka tushiring",
-      "Suyuqlikning ko'tarilish balandligini h katetometr bilan o'lchang",
-      "Suyuqlik haroratini va zichligini aniqlang",
-      "σ = ρghd/4 formula bilan sirt taranglikni hisoblang",
-      "Turli diametrli naychalar uchun tajribani takrorlang",
-      "O'rtacha qiymatni va xatolikni hisoblang"
-    ],
-    procedureUz: [
-      "Kapillyar naychaning ichki diametrini mikroskop yordamida o'lchang",
-      "Naychani vertikal holatda suyuqlikka tushiring",
-      "Suyuqlikning ko'tarilish balandligini h katetometr bilan o'lchang",
-      "Suyuqlik haroratini va zichligini aniqlang",
-      "σ = ρghd/4 formula bilan sirt taranglikni hisoblang",
-      "Turli diametrli naychalar uchun tajribani takrorlang",
-      "O'rtacha qiymatni va xatolikni hisoblang"
-    ],
-    tableColumns: [
-      { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "diameter", name: "Diametr d", nameUz: "Diametr d", unit: "mm", isInput: true },
-      { id: "height", name: "Balandlik h", nameUz: "Balandlik h", unit: "mm", isInput: true },
-      { id: "density", name: "Zichlik ρ", nameUz: "Zichlik ρ", unit: "kg/m³", isInput: true },
-      { id: "surfaceTension", name: "σ", nameUz: "σ", unit: "N/m", isInput: false },
-    ],
-    calculations: (inputs) => {
-      const d = inputs.diameter / 1000;
-      const h = inputs.height / 1000;
-      const surfaceTension = (inputs.density * 9.8 * h * d) / 4;
-      return {
-        surfaceTension: Math.round(surfaceTension * 10000) / 10000,
-      };
-    },
-  },
-  {
-    id: "lab-9-viscosity",
-    title: "Suyuqlikning qovushoqligini Stoks usulida aniqlash",
-    titleUz: "Suyuqlikning qovushoqligini Stoks usulida aniqlash",
+    id: "lab-8-viscosity",
+    title: "Suyuqlikning ichki ishqalanish koeffitsiyentini Stoks usuli bilan aniqlash",
+    titleUz: "Suyuqlikning ichki ishqalanish koeffitsiyentini Stoks usuli bilan aniqlash",
     purpose: "Stoks usuli (tushuvchi sharcha) yordamida suyuqlikning qovushoqlik koeffitsientini aniqlash.",
     purposeUz: "Stoks usuli (tushuvchi sharcha) yordamida suyuqlikning qovushoqlik koeffitsientini aniqlash.",
     equipment: [
@@ -958,118 +967,118 @@ Stoks formulasi Reynolds soni Re < 0.5 bo'lganda amal qiladi.`,
     },
   },
   {
-    id: "lab-10-wheatstone-bridge",
-    title: "O'tkazgichning qarshiligini o'zgarmas tok ko'prigi yordamida aniqlash",
-    titleUz: "O'tkazgichning qarshiligini o'zgarmas tok ko'prigi yordamida aniqlash",
-    purpose: "Tarmoqlangan elektr zanjirlari qonuniyatlarini o'rganish va Uitston ko'prigi yordamida noma'lum qarshilikni aniqlash.",
-    purposeUz: "Tarmoqlangan elektr zanjirlari qonuniyatlarini o'rganish va Uitston ko'prigi yordamida noma'lum qarshilikni aniqlash.",
+    id: "lab-9-incandescent-lamp",
+    title: "Cho'g'lanma lampaning quvvati va qarshiligini aniqlash",
+    titleUz: "Cho'g'lanma lampaning quvvati va qarshiligini aniqlash",
+    purpose: "Cho'g'lanma lampaning volt-amper xarakteristikasini o'rganish, quvvat va qarshilikni aniqlash.",
+    purposeUz: "Cho'g'lanma lampaning volt-amper xarakteristikasini o'rganish, quvvat va qarshilikni aniqlash.",
     equipment: [
-      "Reoxord (1 m uzunlikdagi sim ko'prik)",
-      "Galvanometr (sezgir, nol markazli)",
-      "Qarshiliklar magazini (o'nlik tipli)",
-      "Noma'lum qarshiliklar to'plami",
-      "O'zgarmas tok manbai (2-4 V)",
+      "Cho'g'lanma lampa (6V yoki 12V)",
+      "O'zgaruvchan kuchlanish manbai (0-12V)",
+      "Ampermetr (0-1A, 0,01A aniqlikda)",
+      "Voltmetr (0-15V, 0,1V aniqlikda)",
+      "Reostat",
       "Kalit va ulovchi simlar"
     ],
     equipmentUz: [
-      "Reoxord (1 m uzunlikdagi sim ko'prik)",
-      "Galvanometr (sezgir, nol markazli)",
-      "Qarshiliklar magazini (o'nlik tipli)",
-      "Noma'lum qarshiliklar to'plami",
-      "O'zgarmas tok manbai (2-4 V)",
+      "Cho'g'lanma lampa (6V yoki 12V)",
+      "O'zgaruvchan kuchlanish manbai (0-12V)",
+      "Ampermetr (0-1A, 0,01A aniqlikda)",
+      "Voltmetr (0-15V, 0,1V aniqlikda)",
+      "Reostat",
       "Kalit va ulovchi simlar"
     ],
-    theory: `Uitston ko'prigi - bu noma'lum qarshilikni aniq o'lchash qurilmasi. U Kirxgof qonunlariga asoslangan.
+    theory: `Cho'g'lanma lampaning spirali volfram simdan yasalgan. Volfram qarshiligi haroratga kuchli bog'liq.
 
-Kirxgofning birinchi qonuni (tugunlar qonuni):
-Tugunga kiruvchi va chiquvchi toklarning algebraik yig'indisi nolga teng:
-ΣIk = 0
+Om qonuni:
+U = IR  yoki  R = U/I
 
-Kirxgofning ikkinchi qonuni (konturlar qonuni):
-Yopiq konturda EYK yig'indisi kuchlanishlar tushumi yig'indisiga teng:
-ΣEk = ΣIkRk
+bu yerda:
+- U - kuchlanish (V)
+- I - tok kuchi (A)
+- R - qarshilik (Ω)
 
-Uitston ko'prigi sxemasida (4 ta qarshilik: Rx, R0, R1, R2):
-- Rx - noma'lum qarshilik
-- R0 - ma'lum qarshilik (magazin)
-- R1 va R2 - reoxord yelkalari
+Elektr quvvati:
+P = UI = I²R = U²/R
 
-Ko'prik muvozanatda bo'lganda (galvanometrdan tok o'tmaydi):
-Rx/R0 = R1/R2
+bu yerda P - quvvat (Vt).
 
-Reoxordda qarshilik uzunlikka proporsional:
-R1/R2 = l1/l2
+Metallar qarshiligining haroratga bog'liqligi:
+R = R₀(1 + αΔT)
 
-Demak:
-Rx = R0·(l1/l2)
+bu yerda:
+- R₀ - boshlang'ich haroratdagi qarshilik
+- α - qarshilikning harorat koeffitsienti
+- ΔT - harorat o'zgarishi
 
-bu yerda l1 va l2 - reoxord yelkalarining uzunliklari (santimetrda).
+Volfram uchun α ≈ 0,0045 K⁻¹
 
-Ketma-ket ulanganda: R = R1 + R2
-Parallel ulanganda: 1/R = 1/R1 + 1/R2`,
-    theoryUz: `Uitston ko'prigi - bu noma'lum qarshilikni aniq o'lchash qurilmasi. U Kirxgof qonunlariga asoslangan.
+Cho'g'lanma lampada spiral harorati 2500-3000 K ga yetadi, shuning uchun issiq holda qarshilik sovuq holatdagidan 10-15 marta katta bo'ladi.
 
-Kirxgofning birinchi qonuni (tugunlar qonuni):
-Tugunga kiruvchi va chiquvchi toklarning algebraik yig'indisi nolga teng:
-ΣIk = 0
+Volt-amper xarakteristikasi chiziqli emas (Om qonunidan og'ish).`,
+    theoryUz: `Cho'g'lanma lampaning spirali volfram simdan yasalgan. Volfram qarshiligi haroratga kuchli bog'liq.
 
-Kirxgofning ikkinchi qonuni (konturlar qonuni):
-Yopiq konturda EYK yig'indisi kuchlanishlar tushumi yig'indisiga teng:
-ΣEk = ΣIkRk
+Om qonuni:
+U = IR  yoki  R = U/I
 
-Uitston ko'prigi sxemasida (4 ta qarshilik: Rx, R0, R1, R2):
-- Rx - noma'lum qarshilik
-- R0 - ma'lum qarshilik (magazin)
-- R1 va R2 - reoxord yelkalari
+bu yerda:
+- U - kuchlanish (V)
+- I - tok kuchi (A)
+- R - qarshilik (Ω)
 
-Ko'prik muvozanatda bo'lganda (galvanometrdan tok o'tmaydi):
-Rx/R0 = R1/R2
+Elektr quvvati:
+P = UI = I²R = U²/R
 
-Reoxordda qarshilik uzunlikka proporsional:
-R1/R2 = l1/l2
+bu yerda P - quvvat (Vt).
 
-Demak:
-Rx = R0·(l1/l2)
+Metallar qarshiligining haroratga bog'liqligi:
+R = R₀(1 + αΔT)
 
-bu yerda l1 va l2 - reoxord yelkalarining uzunliklari (santimetrda).
+bu yerda:
+- R₀ - boshlang'ich haroratdagi qarshilik
+- α - qarshilikning harorat koeffitsienti
+- ΔT - harorat o'zgarishi
 
-Ketma-ket ulanganda: R = R1 + R2
-Parallel ulanganda: 1/R = 1/R1 + 1/R2`,
+Volfram uchun α ≈ 0,0045 K⁻¹
+
+Cho'g'lanma lampada spiral harorati 2500-3000 K ga yetadi, shuning uchun issiq holda qarshilik sovuq holatdagidan 10-15 marta katta bo'ladi.
+
+Volt-amper xarakteristikasi chiziqli emas (Om qonunidan og'ish).`,
     procedure: [
-      "Sxemani rasmdagidek yig'ing va tekshiring",
-      "Sirpanuvchi D jilgichni reoxord o'rtasiga (50 sm) qo'ying",
-      "R0 qarshilikni shunday tanlangki, galvanometrda tok deyarli bo'lmasin",
-      "D jilgichni chap yoki o'ng tomonga siljitib, galvanometr strelkasini 0 ga keltiring",
-      "Reoxord yelkalarining l1 va l2 uzunliklarini yozing",
-      "Rx = R0·(l1/l2) formula bilan noma'lum qarshilikni hisoblang",
-      "R0 ni o'zgartirib, tajribani 3 marta takrorlang",
-      "O'rtacha qiymat va xatolikni hisoblang",
-      "Qarshiliklarni ketma-ket va parallel ulab, tajribani takrorlang",
-      "Natijalarni nazariy qiymatlar bilan solishtiring"
+      "Sxemani rasmdagidek yig'ing: lampa, ampermetr ketma-ket, voltmetr lampaga parallel",
+      "Kuchlanishni 0 dan boshlab asta-sekin oshiring",
+      "Har bir kuchlanish qiymatida U va I ni yozib boring",
+      "Kuchlanishni nominal qiymatgacha (6V yoki 12V) oshiring",
+      "R = U/I formula bilan har bir holatda qarshilikni hisoblang",
+      "P = UI formula bilan quvvatni hisoblang",
+      "U(I) grafigini chizing (volt-amper xarakteristika)",
+      "R(U) yoki R(P) grafigini chizing",
+      "Sovuq va issiq holatlardagi qarshiliklarni solishtiring"
     ],
     procedureUz: [
-      "Sxemani rasmdagidek yig'ing va tekshiring",
-      "Sirpanuvchi D jilgichni reoxord o'rtasiga (50 sm) qo'ying",
-      "R0 qarshilikni shunday tanlangki, galvanometrda tok deyarli bo'lmasin",
-      "D jilgichni chap yoki o'ng tomonga siljitib, galvanometr strelkasini 0 ga keltiring",
-      "Reoxord yelkalarining l1 va l2 uzunliklarini yozing",
-      "Rx = R0·(l1/l2) formula bilan noma'lum qarshilikni hisoblang",
-      "R0 ni o'zgartirib, tajribani 3 marta takrorlang",
-      "O'rtacha qiymat va xatolikni hisoblang",
-      "Qarshiliklarni ketma-ket va parallel ulab, tajribani takrorlang",
-      "Natijalarni nazariy qiymatlar bilan solishtiring"
+      "Sxemani rasmdagidek yig'ing: lampa, ampermetr ketma-ket, voltmetr lampaga parallel",
+      "Kuchlanishni 0 dan boshlab asta-sekin oshiring",
+      "Har bir kuchlanish qiymatida U va I ni yozib boring",
+      "Kuchlanishni nominal qiymatgacha (6V yoki 12V) oshiring",
+      "R = U/I formula bilan har bir holatda qarshilikni hisoblang",
+      "P = UI formula bilan quvvatni hisoblang",
+      "U(I) grafigini chizing (volt-amper xarakteristika)",
+      "R(U) yoki R(P) grafigini chizing",
+      "Sovuq va issiq holatlardagi qarshiliklarni solishtiring"
     ],
     tableColumns: [
       { id: "n", name: "№", nameUz: "№", unit: "", isInput: false },
-      { id: "r0", name: "R₀", nameUz: "R₀", unit: "Ω", isInput: true },
-      { id: "l1", name: "l₁", nameUz: "l₁", unit: "sm", isInput: true },
-      { id: "l2", name: "l₂", nameUz: "l₂", unit: "sm", isInput: true },
-      { id: "rx", name: "Rx", nameUz: "Rx", unit: "Ω", isInput: false },
+      { id: "voltage", name: "Kuchlanish U", nameUz: "Kuchlanish U", unit: "V", isInput: true },
+      { id: "current", name: "Tok I", nameUz: "Tok I", unit: "A", isInput: true },
+      { id: "resistance", name: "Qarshilik R", nameUz: "Qarshilik R", unit: "Ω", isInput: false },
+      { id: "power", name: "Quvvat P", nameUz: "Quvvat P", unit: "Vt", isInput: false },
     ],
     calculations: (inputs) => {
-      const rx = inputs.r0 * (inputs.l1 / inputs.l2);
+      const resistance = inputs.current > 0 ? inputs.voltage / inputs.current : 0;
+      const power = inputs.voltage * inputs.current;
       return {
-        rx: Math.round(rx * 100) / 100,
+        resistance: Math.round(resistance * 100) / 100,
+        power: Math.round(power * 1000) / 1000,
       };
     },
   },
