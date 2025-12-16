@@ -27,10 +27,10 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-              <Atom className="w-6 h-6 text-primary" />
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+              <Atom className="w-6 h-6 text-primary group-hover:rotate-180 transition-transform duration-700" />
             </div>
-            <span className="font-semibold text-lg gradient-text">PhysicsLab</span>
+            <span className="font-semibold text-lg gradient-text group-hover:opacity-80 transition-opacity">PhysicsLab</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -40,11 +40,12 @@ export const Header = () => {
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  "nav-link",
+                  "nav-link relative overflow-hidden group",
                   location.pathname === link.path && "active"
                 )}
               >
-                {link.label}
+                <span className="relative z-10 group-hover:text-primary transition-colors duration-300">{link.label}</span>
+                <span className="absolute inset-0 bg-primary/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg" />
               </Link>
             ))}
           </nav>
