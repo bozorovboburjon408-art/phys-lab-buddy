@@ -1,6 +1,18 @@
 // Web Audio API based sound effects generator
 
 let audioContext: AudioContext | null = null;
+let isMuted = false;
+
+// Mute controls
+export const setAudioMuted = (muted: boolean) => {
+  isMuted = muted;
+  localStorage.setItem("splashAudioMuted", muted ? "true" : "false");
+};
+
+export const getAudioMuted = (): boolean => {
+  const stored = localStorage.getItem("splashAudioMuted");
+  return stored === "true";
+};
 
 const getAudioContext = (): AudioContext => {
   if (!audioContext) {
@@ -11,6 +23,7 @@ const getAudioContext = (): AudioContext => {
 
 // Sci-fi whoosh/sweep sound
 export const playWhoosh = (duration = 0.8) => {
+  if (isMuted) return;
   const ctx = getAudioContext();
   const now = ctx.currentTime;
 
@@ -41,6 +54,7 @@ export const playWhoosh = (duration = 0.8) => {
 
 // Electron orbit hum
 export const playElectronHum = (duration = 3) => {
+  if (isMuted) return;
   const ctx = getAudioContext();
   const now = ctx.currentTime;
 
@@ -85,6 +99,7 @@ export const playElectronHum = (duration = 3) => {
 
 // Energy charge up sound
 export const playChargeUp = (duration = 1.5) => {
+  if (isMuted) return;
   const ctx = getAudioContext();
   const now = ctx.currentTime;
 
@@ -115,6 +130,7 @@ export const playChargeUp = (duration = 1.5) => {
 
 // Sparkle/shimmer effect
 export const playSparkle = () => {
+  if (isMuted) return;
   const ctx = getAudioContext();
   const now = ctx.currentTime;
 
@@ -141,6 +157,11 @@ export const playSparkle = () => {
 
 // Complete splash screen audio sequence
 export const playSplashAudio = async () => {
+  // Initialize mute state from localStorage
+  isMuted = getAudioMuted();
+  
+  if (isMuted) return;
+  
   try {
     // Resume audio context (required for autoplay policy)
     const ctx = getAudioContext();

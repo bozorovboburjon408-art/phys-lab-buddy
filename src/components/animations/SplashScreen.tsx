@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { playSplashAudio } from "@/lib/audioEffects";
+import { playSplashAudio, setAudioMuted, getAudioMuted } from "@/lib/audioEffects";
+import { Volume2, VolumeX } from "lucide-react";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -7,6 +8,13 @@ interface SplashScreenProps {
 
 export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const [phase, setPhase] = useState<"enter" | "build" | "logo" | "exit">("enter");
+  const [isMuted, setIsMuted] = useState(() => getAudioMuted());
+
+  const toggleMute = () => {
+    const newMuted = !isMuted;
+    setIsMuted(newMuted);
+    setAudioMuted(newMuted);
+  };
 
   useEffect(() => {
     // Start audio sequence
@@ -263,6 +271,19 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
           </div>
         ))}
       </div>
+
+      {/* Sound toggle button */}
+      <button
+        onClick={toggleMute}
+        className="absolute top-6 right-6 z-10 p-3 rounded-full bg-background/20 backdrop-blur-sm border border-primary/20 hover:bg-background/30 transition-all duration-300 group"
+        title={isMuted ? "Ovozni yoqish" : "Ovozni o'chirish"}
+      >
+        {isMuted ? (
+          <VolumeX className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+        ) : (
+          <Volume2 className="w-5 h-5 text-primary animate-pulse" />
+        )}
+      </button>
 
       {/* Corner decorations */}
       {phase !== "enter" && (
