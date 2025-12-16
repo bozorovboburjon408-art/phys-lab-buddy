@@ -3,8 +3,9 @@ import { Header } from "@/components/layout/Header";
 import { SimulationRenderer } from "@/components/simulations/SimulationRenderer";
 import { SimulationPreview } from "@/components/simulations/SimulationPreview";
 import { ParameterControl } from "@/components/simulations/ParameterControl";
+import { PresetSelector } from "@/components/simulations/PresetSelector";
 import { simulations } from "@/data/simulations";
-import { SimulationParameter } from "@/types/physics";
+import { SimulationParameter, SimulationPreset } from "@/types/physics";
 import { cn } from "@/lib/utils";
 import { RotateCcw, BookOpen, Calculator, ChevronDown, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,14 @@ const Animations = () => {
     setParameters(
       parameters.map((p) =>
         p.id === parameterId ? { ...p, value } : p
+      )
+    );
+  };
+
+  const handlePresetSelect = (preset: SimulationPreset) => {
+    setParameters(
+      parameters.map((p) =>
+        preset.values[p.id] !== undefined ? { ...p, value: preset.values[p.id] } : p
       )
     );
   };
@@ -137,14 +146,22 @@ const Animations = () => {
             </div>
 
             {/* Parameters Panel */}
-            <div className="glass-card p-4 slide-in-right h-fit">
-              <div className="flex items-center justify-between mb-4">
+            <div className="glass-card p-4 slide-in-right h-fit space-y-4">
+              <div className="flex items-center justify-between">
                 <h3 className="font-semibold">Parametrlar</h3>
                 <Button variant="ghost" size="sm" onClick={resetParameters} className="group h-8 text-xs">
                   <RotateCcw className="w-3 h-3 mr-1 group-hover:rotate-180 transition-transform duration-500" />
                   Qaytarish
                 </Button>
               </div>
+
+              {/* Presets */}
+              {selectedSimulation.presets && selectedSimulation.presets.length > 0 && (
+                <PresetSelector 
+                  presets={selectedSimulation.presets} 
+                  onSelect={handlePresetSelect} 
+                />
+              )}
               
               <div className="space-y-4">
                 {parameters.map((param) => (
