@@ -24,6 +24,7 @@ export const DopplerSimulation = ({ parameters }: Props) => {
     const sourceSpeed = getParam("sourceSpeed");
     const waveSpeed = getParam("waveSpeed");
     const frequency = getParam("frequency");
+    const observerSpeed = getParam("observerSpeed");
 
     const waves: { x: number; y: number; radius: number; time: number }[] = [];
     let sourceX = 100;
@@ -170,9 +171,11 @@ export const DopplerSimulation = ({ parameters }: Props) => {
       ctx.fill();
       ctx.fillText("👂", observer2X, sourceY + 5);
 
-      // Calculate observed frequencies
-      const observedFreq1 = frequency * (waveSpeed / (waveSpeed - sourceSpeed));
-      const observedFreq2 = frequency * (waveSpeed / (waveSpeed + sourceSpeed));
+      // Calculate observed frequencies (with observer motion)
+      // f' = f₀ × (c + v_observer) / (c - v_source) for approaching
+      // f' = f₀ × (c - v_observer) / (c + v_source) for receding
+      const observedFreq1 = frequency * ((waveSpeed + observerSpeed) / (waveSpeed - sourceSpeed));
+      const observedFreq2 = frequency * ((waveSpeed - observerSpeed) / (waveSpeed + sourceSpeed));
 
       // Labels for observers
       ctx.font = "bold 12px Inter, sans-serif";
@@ -213,16 +216,16 @@ export const DopplerSimulation = ({ parameters }: Props) => {
 
       ctx.font = "13px Inter, sans-serif";
       ctx.fillStyle = "#94a3b8";
-      ctx.fillText(`Manba tezligi (v): ${sourceSpeed.toFixed(0)} m/s`, 25, 65);
-      ctx.fillText(`Tovush tezligi (c): ${waveSpeed.toFixed(0)} m/s`, 25, 85);
-      ctx.fillText(`Manba chastotasi (f₀): ${frequency.toFixed(0)} Hz`, 25, 105);
+      ctx.fillText(`Manba tezligi (vₛ): ${sourceSpeed.toFixed(0)} m/s`, 25, 65);
+      ctx.fillText(`Kuzatuvchi tezligi (vₒ): ${observerSpeed.toFixed(0)} m/s`, 25, 85);
+      ctx.fillText(`Tovush tezligi (c): ${waveSpeed.toFixed(0)} m/s`, 25, 105);
+      ctx.fillText(`Manba chastotasi (f₀): ${frequency.toFixed(0)} Hz`, 25, 125);
 
       ctx.fillStyle = "#fbbf24";
       ctx.font = "12px Inter, sans-serif";
-      ctx.fillText("f' = f₀ · c / (c ± v)", 25, 130);
+      ctx.fillText("f' = f₀ · (c ± vₒ) / (c ∓ vₛ)", 25, 145);
       ctx.fillStyle = "#94a3b8";
-      ctx.fillText("Yaqinlashganda: -v (chastota ↑)", 25, 150);
-      ctx.fillText("Uzoqlashganda: +v (chastota ↓)", 25, 165);
+      ctx.fillText("Yaqinlashganda: chastota ↑", 25, 160);
 
       animationRef.current = requestAnimationFrame(animate);
     };

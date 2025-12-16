@@ -23,11 +23,15 @@ export const InterferenceSimulation = ({ parameters }: Props) => {
     const wavelength = getParam("wavelength");
     const slitDistance = getParam("slitDistance");
     const frequency = getParam("frequency");
+    const screenDistance = getParam("screenDistance") || 100;
 
     const source1X = canvas.width / 4;
     const source2X = canvas.width / 4;
     const source1Y = canvas.height / 2 - slitDistance * 5;
     const source2Y = canvas.height / 2 + slitDistance * 5;
+    
+    // Screen position based on screenDistance parameter
+    const screenX = Math.min(canvas.width - 50, source1X + screenDistance * 3);
 
     const animate = () => {
       timeRef.current += 0.05 * frequency;
@@ -110,9 +114,9 @@ export const InterferenceSimulation = ({ parameters }: Props) => {
       ctx.arc(source2X, source2Y, 8, 0, Math.PI * 2);
       ctx.fill();
 
-      // Draw screen on right side
+      // Draw screen on right side (based on screenDistance)
       ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-      ctx.fillRect(canvas.width - 50, 0, 50, canvas.height);
+      ctx.fillRect(screenX, 0, canvas.width - screenX, canvas.height);
 
       // Intensity pattern on screen
       ctx.strokeStyle = "#22c55e";
@@ -120,16 +124,16 @@ export const InterferenceSimulation = ({ parameters }: Props) => {
       ctx.beginPath();
       
       for (let y = 0; y < canvas.height; y += 2) {
-        const d1 = Math.sqrt((canvas.width - 30 - source1X) ** 2 + (y - source1Y) ** 2);
-        const d2 = Math.sqrt((canvas.width - 30 - source2X) ** 2 + (y - source2Y) ** 2);
+        const d1 = Math.sqrt((screenX + 10 - source1X) ** 2 + (y - source1Y) ** 2);
+        const d2 = Math.sqrt((screenX + 10 - source2X) ** 2 + (y - source2Y) ** 2);
         const pathDiff = Math.abs(d1 - d2);
         const intensity = Math.cos((pathDiff / wavelength) * Math.PI) ** 2;
         const barWidth = intensity * 40;
         
         if (y === 0) {
-          ctx.moveTo(canvas.width - 50 + barWidth, y);
+          ctx.moveTo(screenX + barWidth, y);
         } else {
-          ctx.lineTo(canvas.width - 50 + barWidth, y);
+          ctx.lineTo(screenX + barWidth, y);
         }
       }
       ctx.stroke();
@@ -152,6 +156,7 @@ export const InterferenceSimulation = ({ parameters }: Props) => {
   const wavelength = getParam("wavelength");
   const slitDistance = getParam("slitDistance");
   const frequency = getParam("frequency");
+  const screenDistance = getParam("screenDistance") || 100;
 
   return (
     <div className="space-y-4">
@@ -173,8 +178,8 @@ export const InterferenceSimulation = ({ parameters }: Props) => {
             <p className="font-medium">{slitDistance.toFixed(1)} mm</p>
           </div>
           <div>
-            <span className="text-muted-foreground">Chastota:</span>
-            <p className="font-medium">{frequency.toFixed(1)} Hz</p>
+            <span className="text-muted-foreground">Ekran masofasi:</span>
+            <p className="font-medium">{screenDistance.toFixed(0)} sm</p>
           </div>
         </div>
         <div className="mt-3 pt-3 border-t border-border text-sm">

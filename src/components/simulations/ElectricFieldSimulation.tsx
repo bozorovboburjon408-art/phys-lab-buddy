@@ -24,6 +24,7 @@ export const ElectricFieldSimulation = ({ parameters }: Props) => {
     const charge1 = getParamValue("charge1");
     const charge2 = getParamValue("charge2");
     const distance = getParamValue("distance");
+    const fieldLines = getParamValue("fieldLines") || 12;
 
     const width = canvas.width;
     const height = canvas.height;
@@ -112,7 +113,7 @@ export const ElectricFieldSimulation = ({ parameters }: Props) => {
 
       // Draw field lines
       ctx.lineWidth = 1.5;
-      const numLines = 12;
+      const numLines = Math.floor(fieldLines);
 
       // Lines from charge 1
       if (charge1 !== 0) {
