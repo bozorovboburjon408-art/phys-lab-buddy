@@ -5,10 +5,10 @@ import { ParameterControl } from "@/components/simulations/ParameterControl";
 import { simulations } from "@/data/simulations";
 import { SimulationParameter } from "@/types/physics";
 import { cn } from "@/lib/utils";
-import { RotateCcw, BookOpen, Calculator, ChevronDown, ChevronUp } from "lucide-react";
+import { RotateCcw, BookOpen, Calculator, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "katex/dist/katex.min.css";
-import { InlineMath, BlockMath } from "react-katex";
+import { BlockMath } from "react-katex";
 
 const Animations = () => {
   const [selectedSimulation, setSelectedSimulation] = useState(simulations[0]);
@@ -16,6 +16,7 @@ const Animations = () => {
     simulations[0].parameters
   );
   const [showTheory, setShowTheory] = useState(false);
+  const [showFormulas, setShowFormulas] = useState(false);
 
   const handleSimulationChange = (id: string) => {
     const simulation = simulations.find((s) => s.id === id);
@@ -42,38 +43,38 @@ const Animations = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="pt-24 pb-12 px-4">
+      <main className="pt-20 pb-8 px-4">
         <div className="container mx-auto">
-          <div className="mb-8 fade-in-up">
-            <h1 className="text-3xl font-bold mb-2">Fizika animatsiyalari</h1>
-            <p className="text-muted-foreground">
+          {/* Header */}
+          <div className="mb-6 fade-in-up">
+            <h1 className="text-2xl font-bold mb-1">Fizika animatsiyalari</h1>
+            <p className="text-muted-foreground text-sm">
               Mavzuni tanlang va parametrlarni o'zgartirib, fizika qonunlarini interaktiv o'rganing
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-[280px_1fr] gap-6">
+          <div className="grid lg:grid-cols-[240px_1fr] gap-4">
             {/* Sidebar - Simulation List */}
-            <div className="space-y-2 slide-in-left">
-              <h2 className="text-sm font-medium text-muted-foreground mb-4 px-2">
+            <div className="slide-in-left">
+              <h2 className="text-xs font-medium text-muted-foreground mb-3 px-2">
                 MAVZULAR ({simulations.length})
               </h2>
-              <div className="space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
+              <div className="space-y-1 max-h-[calc(100vh-180px)] overflow-y-auto pr-1">
                 {simulations.map((sim, index) => (
                   <button
                     key={sim.id}
                     onClick={() => handleSimulationChange(sim.id)}
                     className={cn(
-                      "w-full text-left px-4 py-3 rounded-lg transition-all duration-300",
+                      "w-full text-left px-3 py-2 rounded-lg transition-all duration-300",
                       "hover:bg-secondary/80 hover:translate-x-1",
                       selectedSimulation.id === sim.id
-                        ? "bg-primary/10 border border-primary/30 text-primary scale-[1.02]"
-                        : "bg-card border border-transparent text-foreground"
+                        ? "bg-primary/10 border border-primary/30 text-primary"
+                        : "bg-card/50 border border-transparent text-foreground"
                     )}
-                    style={{ animationDelay: `${index * 0.03}s` }}
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-xl">{sim.icon}</span>
-                      <span className="text-sm font-medium">{sim.titleUz}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{sim.icon}</span>
+                      <span className="text-xs font-medium truncate">{sim.titleUz}</span>
                     </div>
                   </button>
                 ))}
@@ -81,108 +82,109 @@ const Animations = () => {
             </div>
 
             {/* Main Content */}
-            <div className="space-y-6">
-              {/* Simulation Card */}
-              <div className="glass-card p-6 glow-border scale-in" key={selectedSimulation.id}>
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h2 className="text-2xl font-bold flex items-center gap-3">
-                      <span className="text-3xl">{selectedSimulation.icon}</span>
-                      {selectedSimulation.titleUz}
-                    </h2>
-                    <p className="text-muted-foreground mt-1">
-                      {selectedSimulation.descriptionUz}
-                    </p>
+            <div className="space-y-4">
+              {/* Simulation + Parameters Row */}
+              <div className="grid xl:grid-cols-[1fr_320px] gap-4" key={selectedSimulation.id}>
+                {/* Simulation Card */}
+                <div className="glass-card p-4 glow-border scale-in">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-2xl">{selectedSimulation.icon}</span>
+                    <div>
+                      <h2 className="text-lg font-bold">{selectedSimulation.titleUz}</h2>
+                      <p className="text-muted-foreground text-xs">{selectedSimulation.descriptionUz}</p>
+                    </div>
                   </div>
+
+                  <SimulationRenderer
+                    simulationId={selectedSimulation.id}
+                    parameters={parameters}
+                  />
                 </div>
 
-                <SimulationRenderer
-                  simulationId={selectedSimulation.id}
-                  parameters={parameters}
-                />
-              </div>
-
-              {/* Parameters Panel */}
-              <div className="glass-card p-6 slide-in-bottom" style={{ animationDelay: '0.1s' }}>
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold">Parametrlar</h3>
-                  <Button variant="ghost" size="sm" onClick={resetParameters} className="group">
-                    <RotateCcw className="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-500" />
-                    Qayta o'rnatish
-                  </Button>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  {parameters.map((param, index) => (
-                    <div key={param.id} className="fade-in-up" style={{ animationDelay: `${index * 0.05}s` }}>
+                {/* Parameters Panel - Side */}
+                <div className="glass-card p-4 slide-in-right h-fit">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-semibold">Parametrlar</h3>
+                    <Button variant="ghost" size="sm" onClick={resetParameters} className="group h-7 text-xs">
+                      <RotateCcw className="w-3 h-3 mr-1 group-hover:rotate-180 transition-transform duration-500" />
+                      Qaytarish
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {parameters.map((param) => (
                       <ParameterControl
+                        key={param.id}
                         parameter={param}
                         onChange={(value) => handleParameterChange(param.id, value)}
                       />
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Theory Section */}
-              {selectedSimulation.theoryUz && (
-                <div className="glass-card overflow-hidden slide-in-bottom" style={{ animationDelay: '0.2s' }}>
-                  <button
-                    onClick={() => setShowTheory(!showTheory)}
-                    className="w-full px-6 py-4 flex items-center justify-between hover:bg-secondary/30 transition-colors group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <BookOpen className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-                      <span className="font-semibold">Nazariy qism</span>
-                    </div>
-                    <div className={cn("transition-transform duration-300", showTheory && "rotate-180")}>
-                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
-                    </div>
-                  </button>
-                  
-                  <div className={cn(
-                    "overflow-hidden transition-all duration-500 ease-in-out",
-                    showTheory ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
-                  )}>
-                    <div className="px-6 pb-6">
-                      <div className="prose prose-invert max-w-none">
-                        <p className="text-foreground whitespace-pre-line leading-relaxed">
+              {/* Theory & Formulas - Collapsible Row */}
+              <div className="grid md:grid-cols-2 gap-4">
+                {/* Theory Section */}
+                {selectedSimulation.theoryUz && (
+                  <div className="glass-card overflow-hidden">
+                    <button
+                      onClick={() => setShowTheory(!showTheory)}
+                      className="w-full px-4 py-3 flex items-center justify-between hover:bg-secondary/30 transition-colors group"
+                    >
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="w-4 h-4 text-primary" />
+                        <span className="font-semibold text-sm">Nazariy qism</span>
+                      </div>
+                      <ChevronDown className={cn("w-4 h-4 text-muted-foreground transition-transform duration-300", showTheory && "rotate-180")} />
+                    </button>
+                    
+                    <div className={cn(
+                      "overflow-hidden transition-all duration-500",
+                      showTheory ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                    )}>
+                      <div className="px-4 pb-4 max-h-[400px] overflow-y-auto">
+                        <p className="text-foreground text-sm whitespace-pre-line leading-relaxed">
                           {selectedSimulation.theoryUz}
                         </p>
                       </div>
-                      
-                      {selectedSimulation.theory && (
-                        <div className="mt-4 p-4 bg-secondary/30 rounded-lg">
-                          <p className="text-sm text-muted-foreground italic">
-                            {selectedSimulation.theory}
-                          </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Formulas */}
+                <div className="glass-card overflow-hidden">
+                  <button
+                    onClick={() => setShowFormulas(!showFormulas)}
+                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-secondary/30 transition-colors group"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Calculator className="w-4 h-4 text-primary" />
+                      <span className="font-semibold text-sm">Asosiy formulalar</span>
+                    </div>
+                    <ChevronDown className={cn("w-4 h-4 text-muted-foreground transition-transform duration-300", showFormulas && "rotate-180")} />
+                  </button>
+                  
+                  <div className={cn(
+                    "overflow-hidden transition-all duration-500",
+                    showFormulas ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  )}>
+                    <div className="px-4 pb-4 max-h-[400px] overflow-y-auto">
+                      {selectedSimulation.formulas && selectedSimulation.formulas.length > 0 ? (
+                        <div className="grid gap-3">
+                          {selectedSimulation.formulas.map((f, index) => (
+                            <FormulaCard
+                              key={index}
+                              formula={f.formula}
+                              latex={f.latex}
+                              description={f.descriptionUz}
+                            />
+                          ))}
                         </div>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 </div>
-              )}
-
-              {/* Formulas */}
-              <div className="glass-card p-6 slide-in-bottom" style={{ animationDelay: '0.3s' }}>
-                <div className="flex items-center gap-3 mb-6">
-                  <Calculator className="w-5 h-5 text-primary" />
-                  <h3 className="text-lg font-semibold">Asosiy formulalar</h3>
-                </div>
-                
-                {selectedSimulation.formulas && selectedSimulation.formulas.length > 0 ? (
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {selectedSimulation.formulas.map((f, index) => (
-                      <FormulaCard
-                        key={index}
-                        formula={f.formula}
-                        latex={f.latex}
-                        description={f.descriptionUz}
-                        delay={index}
-                      />
-                    ))}
-                  </div>
-                ) : null}
               </div>
             </div>
           </div>
@@ -195,19 +197,14 @@ const Animations = () => {
 const FormulaCard = ({ 
   formula, 
   latex, 
-  description,
-  delay 
+  description
 }: { 
   formula: string; 
   latex?: string; 
   description: string;
-  delay: number;
 }) => (
-  <div 
-    className="bg-secondary/50 rounded-lg p-4 hover:bg-secondary/70 transition-all duration-300 group hover:-translate-y-1 hover:shadow-lg fade-in-up"
-    style={{ animationDelay: `${delay * 0.05}s` }}
-  >
-    <div className="text-xl text-primary mb-2 overflow-x-auto group-hover:scale-105 transition-transform origin-left">
+  <div className="bg-secondary/50 rounded-lg p-3 hover:bg-secondary/70 transition-all duration-300">
+    <div className="text-lg text-primary mb-1 overflow-x-auto">
       {latex ? (
         <div className="katex-formula">
           <BlockMath math={latex} />
@@ -216,7 +213,7 @@ const FormulaCard = ({
         <span className="font-mono">{formula}</span>
       )}
     </div>
-    <div className="text-sm text-muted-foreground group-hover:text-foreground/70 transition-colors">{description}</div>
+    <div className="text-xs text-muted-foreground">{description}</div>
   </div>
 );
 
