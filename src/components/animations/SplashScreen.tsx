@@ -23,6 +23,19 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     }
   };
 
+  // Keyboard support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.key === "Enter" || e.key === " ") && phase === "logo") {
+        e.preventDefault();
+        handleStart();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [phase]);
+
   useEffect(() => {
     // Start audio sequence
     playSplashAudio();
