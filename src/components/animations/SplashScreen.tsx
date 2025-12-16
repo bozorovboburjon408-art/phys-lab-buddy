@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { playSplashAudio, setAudioMuted, getAudioMuted } from "@/lib/audioEffects";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, Play } from "lucide-react";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -16,6 +16,13 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     setAudioMuted(newMuted);
   };
 
+  const handleStart = () => {
+    if (phase === "logo") {
+      setPhase("exit");
+      setTimeout(() => onComplete(), 800);
+    }
+  };
+
   useEffect(() => {
     // Start audio sequence
     playSplashAudio();
@@ -25,18 +32,10 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     
     // Phase 2: Build up atoms and effects
     const logoTimer = setTimeout(() => setPhase("logo"), 2500);
-    
-    // Phase 3: Show logo
-    const exitTimer = setTimeout(() => setPhase("exit"), 4200);
-    
-    // Phase 4: Complete and unmount
-    const completeTimer = setTimeout(() => onComplete(), 5000);
 
     return () => {
       clearTimeout(buildTimer);
       clearTimeout(logoTimer);
-      clearTimeout(exitTimer);
-      clearTimeout(completeTimer);
     };
   }, [onComplete]);
 
@@ -235,16 +234,23 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
             Interaktiv o'quv platformasi
           </p>
           
-          {/* Loading bar */}
-          <div className="mt-6 w-48 h-1 bg-muted/30 rounded-full overflow-hidden mx-auto">
-            <div 
-              className="h-full rounded-full"
+          {/* Start button */}
+          <button
+            onClick={handleStart}
+            className="mt-8 px-8 py-3 rounded-full border border-primary/30 bg-background/20 backdrop-blur-sm hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 group flex items-center gap-2 mx-auto"
+          >
+            <Play className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+            <span 
+              className="text-sm font-medium"
               style={{
-                background: "linear-gradient(90deg, hsl(var(--primary)), hsl(262 83% 58%))",
-                animation: "loading-bar 1.5s ease-out forwards",
+                background: "linear-gradient(135deg, hsl(var(--primary)), hsl(262 83% 58%))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
               }}
-            />
-          </div>
+            >
+              Boshlash
+            </span>
+          </button>
         </div>
 
         {/* Floating formulas */}
