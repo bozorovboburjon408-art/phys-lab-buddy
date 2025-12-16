@@ -219,19 +219,19 @@ export const PhysicsBackground = () => {
     const waves: Wave[] = [];
     const particles: Particle[] = [];
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 8; i++) {
       atoms.push(new Atom());
     }
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 6; i++) {
       formulas.push(new Formula());
     }
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       waves.push(new Wave());
     }
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 15; i++) {
       particles.push(new Particle());
     }
 
