@@ -5,7 +5,7 @@ import { ParameterControl } from "@/components/simulations/ParameterControl";
 import { simulations } from "@/data/simulations";
 import { SimulationParameter } from "@/types/physics";
 import { cn } from "@/lib/utils";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, BookOpen, Calculator, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Animations = () => {
@@ -13,12 +13,14 @@ const Animations = () => {
   const [parameters, setParameters] = useState<SimulationParameter[]>(
     simulations[0].parameters
   );
+  const [showTheory, setShowTheory] = useState(false);
 
   const handleSimulationChange = (id: string) => {
     const simulation = simulations.find((s) => s.id === id);
     if (simulation) {
       setSelectedSimulation(simulation);
       setParameters([...simulation.parameters]);
+      setShowTheory(false);
     }
   };
 
@@ -51,9 +53,9 @@ const Animations = () => {
             {/* Sidebar - Simulation List */}
             <div className="space-y-2">
               <h2 className="text-sm font-medium text-muted-foreground mb-4 px-2">
-                MAVZULAR
+                MAVZULAR ({simulations.length})
               </h2>
-              <div className="space-y-1">
+              <div className="space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
                 {simulations.map((sim) => (
                   <button
                     key={sim.id}
@@ -118,59 +120,77 @@ const Animations = () => {
                 </div>
               </div>
 
-              {/* Formulas */}
-              <div className="glass-card p-6">
-                <h3 className="text-lg font-semibold mb-4">Asosiy formulalar</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {selectedSimulation.id === "pendulum" && (
-                    <>
-                      <FormulaCard formula="T = 2π√(L/g)" description="Tebranish davri" />
-                      <FormulaCard formula="f = 1/T" description="Chastota" />
-                    </>
-                  )}
-                  {selectedSimulation.id === "projectile" && (
-                    <>
-                      <FormulaCard formula="R = v₀²sin(2θ)/g" description="Uchish masofasi" />
-                      <FormulaCard formula="H = v₀²sin²(θ)/2g" description="Maksimal balandlik" />
-                    </>
-                  )}
-                  {selectedSimulation.id === "spring" && (
-                    <>
-                      <FormulaCard formula="T = 2π√(m/k)" description="Tebranish davri" />
-                      <FormulaCard formula="ω = √(k/m)" description="Burchak chastotasi" />
-                    </>
-                  )}
-                  {selectedSimulation.id === "wave" && (
-                    <>
-                      <FormulaCard formula="v = λf" description="To'lqin tezligi" />
-                      <FormulaCard formula="T = 1/f" description="Davr" />
-                    </>
-                  )}
-                  {selectedSimulation.id === "freefall" && (
-                    <>
-                      <FormulaCard formula="h = ½gt²" description="Bosib o'tilgan masofa" />
-                      <FormulaCard formula="v = gt" description="Tezlik" />
-                    </>
-                  )}
-                  {selectedSimulation.id === "collision" && (
-                    <>
-                      <FormulaCard formula="m₁v₁ + m₂v₂ = const" description="Impulsning saqlanishi" />
-                      <FormulaCard formula="KE = ½mv²" description="Kinetik energiya" />
-                    </>
-                  )}
-                  {selectedSimulation.id === "inclinedPlane" && (
-                    <>
-                      <FormulaCard formula="a = g(sinθ - μcosθ)" description="Tezlanish" />
-                      <FormulaCard formula="Ff = μN" description="Ishqalanish kuchi" />
-                    </>
-                  )}
-                  {selectedSimulation.id === "circularMotion" && (
-                    <>
-                      <FormulaCard formula="ac = ω²r" description="Markazga intilma tezlanish" />
-                      <FormulaCard formula="v = ωr" description="Chiziqli tezlik" />
-                    </>
+              {/* Theory Section */}
+              {selectedSimulation.theoryUz && (
+                <div className="glass-card overflow-hidden">
+                  <button
+                    onClick={() => setShowTheory(!showTheory)}
+                    className="w-full px-6 py-4 flex items-center justify-between hover:bg-secondary/30 transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <BookOpen className="w-5 h-5 text-primary" />
+                      <span className="font-semibold">Nazariy qism</span>
+                    </div>
+                    {showTheory ? (
+                      <ChevronUp className="w-5 h-5 text-muted-foreground" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                    )}
+                  </button>
+                  
+                  {showTheory && (
+                    <div className="px-6 pb-6 animate-fade-in">
+                      <div className="prose prose-invert max-w-none">
+                        <p className="text-foreground whitespace-pre-line leading-relaxed">
+                          {selectedSimulation.theoryUz}
+                        </p>
+                      </div>
+                      
+                      {selectedSimulation.theory && (
+                        <div className="mt-4 p-4 bg-secondary/30 rounded-lg">
+                          <p className="text-sm text-muted-foreground italic">
+                            {selectedSimulation.theory}
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
+              )}
+
+              {/* Formulas */}
+              <div className="glass-card p-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <Calculator className="w-5 h-5 text-primary" />
+                  <h3 className="text-lg font-semibold">Asosiy formulalar</h3>
+                </div>
+                
+                {selectedSimulation.formulas && selectedSimulation.formulas.length > 0 ? (
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {selectedSimulation.formulas.map((f, index) => (
+                      <FormulaCard
+                        key={index}
+                        formula={f.formula}
+                        description={f.descriptionUz}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {selectedSimulation.id === "pendulum" && (
+                      <>
+                        <FormulaCard formula="T = 2π√(L/g)" description="Tebranish davri" />
+                        <FormulaCard formula="f = 1/T" description="Chastota" />
+                      </>
+                    )}
+                    {selectedSimulation.id === "projectile" && (
+                      <>
+                        <FormulaCard formula="R = v₀²sin(2θ)/g" description="Uchish masofasi" />
+                        <FormulaCard formula="H = v₀²sin²(θ)/2g" description="Maksimal balandlik" />
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -181,8 +201,8 @@ const Animations = () => {
 };
 
 const FormulaCard = ({ formula, description }: { formula: string; description: string }) => (
-  <div className="bg-secondary/50 rounded-lg p-4">
-    <div className="text-xl font-mono text-primary mb-1">{formula}</div>
+  <div className="bg-secondary/50 rounded-lg p-4 hover:bg-secondary/70 transition-colors">
+    <div className="text-lg font-mono text-primary mb-1">{formula}</div>
     <div className="text-sm text-muted-foreground">{description}</div>
   </div>
 );
