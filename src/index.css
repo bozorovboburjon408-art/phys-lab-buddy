@@ -149,3 +149,39 @@
     to { opacity: 1; transform: translateY(0); }
   }
 }
+
+/* KaTeX Custom Styling */
+.katex-formula .katex {
+  font-size: 1.1em;
+  color: hsl(var(--primary));
+}
+
+.katex-formula .katex-display {
+  margin: 0;
+  padding: 0;
+}
+
+.katex-formula .katex-display > .katex {
+  text-align: left;
+}
+
+/* Better fraction styling */
+.katex .frac-line {
+  border-bottom-color: hsl(var(--primary));
+}
+
+/* Greek letters and operators */
+.katex .mord.mathnormal,
+.katex .mord.text {
+  color: hsl(var(--foreground));
+}
+
+.katex .mbin,
+.katex .mrel {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Subscripts and superscripts */
+.katex .msupsub {
+  color: hsl(var(--primary) / 0.8);
+}

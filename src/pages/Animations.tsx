@@ -7,6 +7,8 @@ import { SimulationParameter } from "@/types/physics";
 import { cn } from "@/lib/utils";
 import { RotateCcw, BookOpen, Calculator, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import "katex/dist/katex.min.css";
+import { InlineMath, BlockMath } from "react-katex";
 
 const Animations = () => {
   const [selectedSimulation, setSelectedSimulation] = useState(simulations[0]);
@@ -171,26 +173,12 @@ const Animations = () => {
                       <FormulaCard
                         key={index}
                         formula={f.formula}
+                        latex={f.latex}
                         description={f.descriptionUz}
                       />
                     ))}
                   </div>
-                ) : (
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {selectedSimulation.id === "pendulum" && (
-                      <>
-                        <FormulaCard formula="T = 2π√(L/g)" description="Tebranish davri" />
-                        <FormulaCard formula="f = 1/T" description="Chastota" />
-                      </>
-                    )}
-                    {selectedSimulation.id === "projectile" && (
-                      <>
-                        <FormulaCard formula="R = v₀²sin(2θ)/g" description="Uchish masofasi" />
-                        <FormulaCard formula="H = v₀²sin²(θ)/2g" description="Maksimal balandlik" />
-                      </>
-                    )}
-                  </div>
-                )}
+                ) : null}
               </div>
             </div>
           </div>
@@ -200,9 +188,25 @@ const Animations = () => {
   );
 };
 
-const FormulaCard = ({ formula, description }: { formula: string; description: string }) => (
-  <div className="bg-secondary/50 rounded-lg p-4 hover:bg-secondary/70 transition-colors">
-    <div className="text-lg font-mono text-primary mb-1">{formula}</div>
+const FormulaCard = ({ 
+  formula, 
+  latex, 
+  description 
+}: { 
+  formula: string; 
+  latex?: string; 
+  description: string 
+}) => (
+  <div className="bg-secondary/50 rounded-lg p-4 hover:bg-secondary/70 transition-colors group">
+    <div className="text-xl text-primary mb-2 overflow-x-auto">
+      {latex ? (
+        <div className="katex-formula">
+          <BlockMath math={latex} />
+        </div>
+      ) : (
+        <span className="font-mono">{formula}</span>
+      )}
+    </div>
     <div className="text-sm text-muted-foreground">{description}</div>
   </div>
 );

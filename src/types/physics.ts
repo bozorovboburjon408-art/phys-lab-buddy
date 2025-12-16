@@ -11,6 +11,7 @@ export interface SimulationParameter {
 
 export interface SimulationFormula {
   formula: string;
+  latex?: string;
   description: string;
   descriptionUz: string;
 }
