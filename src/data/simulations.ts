@@ -112,4 +112,43 @@ export const simulations: PhysicsSimulation[] = [
       { id: "mass", name: "Mass", nameUz: "Massa", min: 0.1, max: 5, step: 0.1, value: 1, unit: "kg" },
     ],
   },
+  {
+    id: "electricField",
+    title: "Electric Field",
+    titleUz: "Elektr maydon",
+    description: "Visualize electric field lines between point charges.",
+    descriptionUz: "Nuqtaviy zaryadlar orasidagi elektr maydon chiziqlarini vizualizatsiya qiling.",
+    icon: "⚡",
+    parameters: [
+      { id: "charge1", name: "Charge 1", nameUz: "1-zaryad", min: -5, max: 5, step: 0.5, value: 2, unit: "µC" },
+      { id: "charge2", name: "Charge 2", nameUz: "2-zaryad", min: -5, max: 5, step: 0.5, value: -2, unit: "µC" },
+      { id: "distance", name: "Distance", nameUz: "Masofa", min: 1, max: 10, step: 0.5, value: 5, unit: "m" },
+    ],
+  },
+  {
+    id: "magneticInduction",
+    title: "Magnetic Induction",
+    titleUz: "Magnit induksiya",
+    description: "Explore magnetic field in a solenoid and electromagnetic induction.",
+    descriptionUz: "Solenoiddagi magnit maydon va elektromagnit induksiyani o'rganing.",
+    icon: "🧲",
+    parameters: [
+      { id: "current", name: "Current", nameUz: "Tok kuchi", min: 0, max: 10, step: 0.5, value: 5, unit: "A" },
+      { id: "coilTurns", name: "Coil Turns", nameUz: "O'ramlar soni", min: 5, max: 30, step: 1, value: 15, unit: "" },
+      { id: "velocity", name: "Animation Speed", nameUz: "Animatsiya tezligi", min: 0.5, max: 3, step: 0.1, value: 1, unit: "" },
+    ],
+  },
+  {
+    id: "refraction",
+    title: "Light Refraction",
+    titleUz: "Nur sinishi",
+    description: "Study Snell's law and total internal reflection.",
+    descriptionUz: "Snell qonuni va to'liq ichki qaytishni o'rganing.",
+    icon: "🌈",
+    parameters: [
+      { id: "incidentAngle", name: "Incident Angle", nameUz: "Tushish burchagi", min: 0, max: 89, step: 1, value: 45, unit: "°" },
+      { id: "n1", name: "Refractive Index 1", nameUz: "Sindirish ko'rsatkichi 1", min: 1, max: 2.5, step: 0.1, value: 1.5, unit: "" },
+      { id: "n2", name: "Refractive Index 2", nameUz: "Sindirish ko'rsatkichi 2", min: 1, max: 2.5, step: 0.1, value: 1, unit: "" },
+    ],
+  },
 ];
