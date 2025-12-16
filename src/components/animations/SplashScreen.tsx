@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { playSplashAudio } from "@/lib/audioEffects";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -8,6 +9,9 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const [phase, setPhase] = useState<"enter" | "build" | "logo" | "exit">("enter");
 
   useEffect(() => {
+    // Start audio sequence
+    playSplashAudio();
+
     // Phase 1: Initial entrance
     const buildTimer = setTimeout(() => setPhase("build"), 800);
     
