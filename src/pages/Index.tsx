@@ -23,7 +23,7 @@ const Index = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="gradient-text">Fizikani</span>
               <br />
-              <span className="text-foreground">ko'rib o'rganing</span>
+              <span className="text-foreground">mustaqil o'rganing</span>
             </h1>
             
             <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
