@@ -257,6 +257,13 @@ Jism harakati uchun tanθ > μ bo'lishi kerak.`,
       { id: "mass", name: "Mass", nameUz: "Massa", min: 0.1, max: 5, step: 0.1, value: 1, unit: "kg" },
       { id: "initialAngle", name: "Initial Angle", nameUz: "Boshlang'ich burchak", min: 0, max: 360, step: 15, value: 0, unit: "°" },
     ],
+    presets: [
+      { id: "satellite", nameUz: "🛰️ Sun'iy yo'ldosh", description: "Yer atrofida aylanish", values: { radius: 4, angularVelocity: 1.5, mass: 2 } },
+      { id: "ferrisWheel", nameUz: "🎡 Charxpalak", description: "Sekin aylanadigan charxpalak", values: { radius: 5, angularVelocity: 0.5, mass: 3 } },
+      { id: "centrifuge", nameUz: "🔬 Sentrifuga", description: "Tez aylanadigan sentrifuga", values: { radius: 1, angularVelocity: 10, mass: 0.5 } },
+      { id: "carTurn", nameUz: "🚗 Avtomobil burilishi", description: "Burilishdagi avtomobil", values: { radius: 3, angularVelocity: 2, mass: 1.5 } },
+      { id: "planetOrbit", nameUz: "🌍 Sayyora orbita", description: "Quyosh atrofida aylanish", values: { radius: 4.5, angularVelocity: 0.8 } },
+    ],
     theoryUz: `Tekis aylana bo'ylab harakat - bu jism bir xil tezlik bilan aylana bo'ylab harakatlangandagi harakat turi.
 
 Markazga intilma tezlanish doimo aylana markaziga yo'nalgan.`,
@@ -281,6 +288,13 @@ Markazga intilma tezlanish doimo aylana markaziga yo'nalgan.`,
       { id: "charge2", name: "Charge 2", nameUz: "2-zaryad", min: -5, max: 5, step: 0.5, value: -2, unit: "µC" },
       { id: "distance", name: "Distance", nameUz: "Masofa", min: 1, max: 10, step: 0.5, value: 5, unit: "m" },
       { id: "fieldLines", name: "Field Lines", nameUz: "Maydon chiziqlari soni", min: 8, max: 24, step: 2, value: 12, unit: "" },
+    ],
+    presets: [
+      { id: "dipole", nameUz: "➕➖ Dipol", description: "Musbat va manfiy zaryad", values: { charge1: 3, charge2: -3, distance: 6 } },
+      { id: "sameCharges", nameUz: "➕➕ Bir xil zaryadlar", description: "Ikki musbat zaryad (itarishadi)", values: { charge1: 3, charge2: 3, distance: 5 } },
+      { id: "strongField", nameUz: "⚡ Kuchli maydon", description: "Katta zaryadlar, yaqin masofa", values: { charge1: 5, charge2: -5, distance: 3, fieldLines: 20 } },
+      { id: "weakField", nameUz: "💫 Zaif maydon", description: "Kichik zaryadlar, uzoq masofa", values: { charge1: 1, charge2: -1, distance: 8, fieldLines: 8 } },
+      { id: "asymmetric", nameUz: "⚖️ Asimmetrik", description: "Turli kattalikdagi zaryadlar", values: { charge1: 5, charge2: -2, distance: 6 } },
     ],
     theoryUz: `Elektr maydon - bu zaryadli jism atrofidagi fazoda mavjud bo'lgan maydon. U boshqa zaryadlarga kuch ta'sir qilish qobiliyatiga ega.
 
@@ -307,6 +321,13 @@ Kulon qonuni zaryadlar orasidagi kuchni tavsiflaydi. Bir nomdagi zaryadlar itari
       { id: "velocity", name: "Animation Speed", nameUz: "Animatsiya tezligi", min: 0.5, max: 3, step: 0.1, value: 1, unit: "" },
       { id: "coilLength", name: "Coil Length", nameUz: "G'altak uzunligi", min: 5, max: 30, step: 1, value: 15, unit: "sm" },
     ],
+    presets: [
+      { id: "strongMagnet", nameUz: "🧲 Kuchli magnit", description: "Yuqori tok va ko'p o'ramlar", values: { current: 10, coilTurns: 30, coilLength: 20 } },
+      { id: "weakMagnet", nameUz: "💫 Zaif magnit", description: "Past tok, kam o'ramlar", values: { current: 2, coilTurns: 8, coilLength: 10 } },
+      { id: "compactCoil", nameUz: "🔌 Ixcham g'altak", description: "Qisqa, zich g'altak", values: { coilLength: 5, coilTurns: 25 } },
+      { id: "longSolenoid", nameUz: "📏 Uzun solenoid", description: "Uzun solenoid", values: { coilLength: 30, coilTurns: 20 } },
+      { id: "motor", nameUz: "⚡ Elektr motor", description: "Motor uchun o'ram", values: { current: 8, coilTurns: 20, coilLength: 15 } },
+    ],
     theoryUz: `Magnit induksiya - bu elektr tokining magnit maydon hosil qilishi va magnit maydon o'zgarishi natijasida elektr toki paydo bo'lishi hodisasi.
 
 Solenoid ichida bir jinsli magnit maydon hosil bo'ladi. Faradey qonuni elektromagnit induksiyani tavsiflaydi.`,
@@ -332,6 +353,14 @@ Solenoid ichida bir jinsli magnit maydon hosil bo'ladi. Faradey qonuni elektroma
       { id: "n2", name: "Refractive Index 2", nameUz: "Sindirish ko'rsatkichi 2", min: 1, max: 2.5, step: 0.1, value: 1, unit: "" },
       { id: "rayIntensity", name: "Ray Intensity", nameUz: "Nur intensivligi", min: 0.3, max: 1, step: 0.1, value: 0.8, unit: "" },
     ],
+    presets: [
+      { id: "glassToAir", nameUz: "🪟 Shisha → Havo", description: "Shishadan havoga o'tish", values: { n1: 1.5, n2: 1, incidentAngle: 30 } },
+      { id: "waterToAir", nameUz: "💧 Suv → Havo", description: "Suvdan havoga o'tish", values: { n1: 1.33, n2: 1, incidentAngle: 40 } },
+      { id: "totalReflection", nameUz: "🔄 To'liq qaytish", description: "To'liq ichki qaytish", values: { n1: 1.5, n2: 1, incidentAngle: 45 } },
+      { id: "diamond", nameUz: "💎 Olmos", description: "Olmosda nur sinishi", values: { n1: 2.4, n2: 1, incidentAngle: 20 } },
+      { id: "airToWater", nameUz: "🌊 Havo → Suv", description: "Havodan suvga o'tish", values: { n1: 1, n2: 1.33, incidentAngle: 50 } },
+      { id: "fiber", nameUz: "📡 Optik tolali", description: "Optik tolada yorug'lik", values: { n1: 1.5, n2: 1.4, incidentAngle: 80 } },
+    ],
     theoryUz: `Nur sinishi - bu yorug'likning bir muhitdan ikkinchi muhitga o'tishda yo'nalishini o'zgartirishi.
 
 To'liq ichki qaytish: Agar n₁ > n₂ va θ₁ > θc (kritik burchak), yorug'lik to'liq qaytadi.`,
@@ -356,6 +385,14 @@ To'liq ichki qaytish: Agar n₁ > n₂ va θ₁ > θc (kritik burchak), yorug'li
       { id: "objectDistance", name: "Object Distance", nameUz: "Buyum masofasi", min: 10, max: 100, step: 1, value: 40, unit: "sm" },
       { id: "objectHeight", name: "Object Height", nameUz: "Buyum balandligi", min: 5, max: 30, step: 1, value: 15, unit: "sm" },
       { id: "lensType", name: "Lens Type", nameUz: "Linza turi", min: -1, max: 1, step: 2, value: 1, unit: "" },
+    ],
+    presets: [
+      { id: "magnifier", nameUz: "🔍 Lupa", description: "Kattalashtiruvchi shisha", values: { focalLength: 10, objectDistance: 15, lensType: 1 } },
+      { id: "camera", nameUz: "📷 Kamera", description: "Fotoapparat linzasi", values: { focalLength: 35, objectDistance: 80, lensType: 1 } },
+      { id: "eyeglasses", nameUz: "👓 Ko'zoynak", description: "Yaqinni ko'rish uchun", values: { focalLength: 25, objectDistance: 30, lensType: 1 } },
+      { id: "myopia", nameUz: "👁️ Miyopiya", description: "Yaqinko'rlik uchun sochuvchi linza", values: { focalLength: 20, objectDistance: 50, lensType: -1 } },
+      { id: "projector", nameUz: "📽️ Projektor", description: "Katta tasvir hosil qilish", values: { focalLength: 15, objectDistance: 18, lensType: 1 } },
+      { id: "microscope", nameUz: "🔬 Mikroskop", description: "Kuchli kattalashtirish", values: { focalLength: 5, objectDistance: 6, objectHeight: 5, lensType: 1 } },
     ],
     theoryUz: `Yupqa linza - bu qalinligi fokus masofasiga nisbatan juda kichik bo'lgan optik asbob.
 
@@ -418,6 +455,13 @@ Zarrachalar tezligi haroratga proporsional: v ∝ √T`,
       { id: "frequency", name: "Animation Speed", nameUz: "Animatsiya tezligi", min: 0.5, max: 3, step: 0.1, value: 1, unit: "" },
       { id: "screenDistance", name: "Screen Distance", nameUz: "Ekran masofasi", min: 50, max: 200, step: 10, value: 100, unit: "sm" },
     ],
+    presets: [
+      { id: "youngExperiment", nameUz: "🔬 Yung tajribasi", description: "Klassik ikki tirqishli tajriba", values: { wavelength: 50, slitDistance: 15, screenDistance: 100 } },
+      { id: "redLight", nameUz: "🔴 Qizil yorug'lik", description: "Uzun to'lqin uzunligi", values: { wavelength: 80, slitDistance: 20 } },
+      { id: "blueLight", nameUz: "🔵 Ko'k yorug'lik", description: "Qisqa to'lqin uzunligi", values: { wavelength: 30, slitDistance: 10 } },
+      { id: "wideSlits", nameUz: "📏 Keng tirqishlar", description: "Tirqishlar oralig'i katta", values: { slitDistance: 30, wavelength: 50 } },
+      { id: "closeScreen", nameUz: "📺 Yaqin ekran", description: "Ekran yaqinroq", values: { screenDistance: 50, slitDistance: 15 } },
+    ],
     theoryUz: `Interferensiya - bu ikki yoki undan ortiq to'lqinlarning ustma-ust tushishi natijasida kuchayish yoki susayish hodisasi.
 
 Konstruktiv interferensiya: to'lqinlar bir xil fazada bo'lsa (Δ = nλ)
@@ -444,6 +488,13 @@ Yung tajribasi yorug'likning to'lqin tabiatini isbotladi.`,
       { id: "voltage", name: "Voltage", nameUz: "Kuchlanish", min: 5, max: 50, step: 1, value: 12, unit: "V" },
       { id: "plateDistance", name: "Plate Distance", nameUz: "Plastinalar oralig'i", min: 1, max: 20, step: 1, value: 5, unit: "mm" },
       { id: "plateArea", name: "Plate Area", nameUz: "Plastina yuzasi", min: 10, max: 100, step: 5, value: 50, unit: "sm²" },
+    ],
+    presets: [
+      { id: "smallCapacitor", nameUz: "🔋 Kichik kondensator", description: "Kichik sig'imli kondensator", values: { capacitance: 5, voltage: 12, plateArea: 30 } },
+      { id: "powerSupply", nameUz: "⚡ Elektr manbai", description: "Yuqori kuchlanishli", values: { voltage: 50, capacitance: 20 } },
+      { id: "thinGap", nameUz: "📄 Yupqa oraliq", description: "Plastinalar oralig'i kichik", values: { plateDistance: 2, capacitance: 50 } },
+      { id: "largeArea", nameUz: "📐 Katta yuza", description: "Katta plastinali kondensator", values: { plateArea: 100, capacitance: 80 } },
+      { id: "energyStorage", nameUz: "🔌 Energiya saqlash", description: "Ko'p energiya saqlaydigan", values: { capacitance: 100, voltage: 40, plateArea: 80 } },
     ],
     theoryUz: `Kondensator - bu elektr energiyasini elektr maydon ko'rinishida saqlaydigan qurilma. Yassi kondensator ikkita parallel plastinadan iborat.
 
