@@ -7,12 +7,15 @@ import { ExternalLink, Sparkles, Globe, Plus, X } from "lucide-react";
 
 const AIAssistant = () => {
   const [customUrl, setCustomUrl] = useState("");
-  const [savedSites, setSavedSites] = useState<{ name: string; url: string }[]>([]);
+  const defaultSites = [{ name: "grok.com", url: "https://grok.com" }];
+  const [savedSites, setSavedSites] = useState<{ name: string; url: string }[]>(defaultSites);
 
   useEffect(() => {
     const saved = localStorage.getItem("savedAISites");
     if (saved) {
       setSavedSites(JSON.parse(saved));
+    } else {
+      localStorage.setItem("savedAISites", JSON.stringify(defaultSites));
     }
   }, []);
 
