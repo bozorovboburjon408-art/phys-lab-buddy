@@ -10,7 +10,7 @@ const navLinks = [
   { path: "/animations", label: "Animatsiyalar" },
   { path: "/laboratories", label: "Laboratoriyalar" },
   { path: "/formulas", label: "Formulalar" },
-  { path: "https://grok.com", label: "Grok Chat", icon: Sparkles, external: true },
+  { path: "https://grok.com", label: "AI Yordamchi", icon: Sparkles, external: true },
 ];
 
 export const Header = () => {
