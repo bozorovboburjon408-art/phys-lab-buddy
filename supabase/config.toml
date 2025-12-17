@@ -1,1 +1,7 @@
 project_id = "bcsnivdvccamgrkdnqak"
+
+[functions.ai-physics]
+verify_jwt = false
+
+[functions.deepseek-chat]
+verify_jwt = false
