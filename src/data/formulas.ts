@@ -15,7 +15,6 @@ export interface FormulaCategory {
 }
 
 export const formulaCategories: FormulaCategory[] = [
-  { id: "mechanics", name: "Mexanika", icon: "Cog", color: "hsl(220, 70%, 50%)" },
   { id: "kinematics", name: "Kinematika", icon: "MoveRight", color: "hsl(280, 70%, 50%)" },
   { id: "dynamics", name: "Dinamika", icon: "Zap", color: "hsl(340, 70%, 50%)" },
   { id: "energy", name: "Energiya va ish", icon: "Battery", color: "hsl(45, 70%, 50%)" },
