@@ -3,7 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ExternalLink, Sparkles, Globe, Plus, X } from "lucide-react";
+import { ExternalLink, Sparkles, Globe, Plus, X, MessageCircle } from "lucide-react";
 
 const AIAssistant = () => {
   const [customUrl, setCustomUrl] = useState("");
@@ -18,6 +18,10 @@ const AIAssistant = () => {
 
   const handleOpenGemini = () => {
     window.open("https://gemini.google.com/app", "_blank");
+  };
+
+  const handleOpenGrok = () => {
+    window.open("https://grok.com", "_blank");
   };
 
   const handleOpenCustomUrl = () => {
@@ -57,6 +61,31 @@ const AIAssistant = () => {
             AI Yordamchi
           </h1>
           
+          {/* Grok Chat Card */}
+          <Card className="p-8 text-center space-y-6">
+            <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
+              <MessageCircle className="w-8 h-8 text-primary" />
+            </div>
+            
+            <div className="space-y-2">
+              <h2 className="text-xl font-semibold text-foreground">
+                Grok Chat
+              </h2>
+              <p className="text-muted-foreground">
+                Fizika savollari bo'yicha yordam olish uchun Grok AI dan foydalaning.
+              </p>
+            </div>
+
+            <Button 
+              size="lg" 
+              onClick={handleOpenGrok}
+              className="gap-2"
+            >
+              <ExternalLink className="w-5 h-5" />
+              Grok ga o'tish
+            </Button>
+          </Card>
+
           {/* Google Gemini Card */}
           <Card className="p-8 text-center space-y-6">
             <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
