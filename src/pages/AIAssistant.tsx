@@ -11,12 +11,9 @@ const AIAssistant = () => {
   const [savedSites, setSavedSites] = useState<{ name: string; url: string }[]>(defaultSites);
 
   useEffect(() => {
-    const saved = localStorage.getItem("savedAISites");
-    if (saved) {
-      setSavedSites(JSON.parse(saved));
-    } else {
-      localStorage.setItem("savedAISites", JSON.stringify(defaultSites));
-    }
+    // Reset to default (only grok.com)
+    localStorage.setItem("savedAISites", JSON.stringify(defaultSites));
+    setSavedSites(defaultSites);
   }, []);
 
   const handleOpenGemini = () => {
