@@ -67,29 +67,147 @@ const Index = () => {
       {/* Topics Preview */}
       <section className="py-20 px-4 bg-card/50">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 slide-in-bottom">
+          <h2 className="text-3xl font-bold text-center mb-4 slide-in-bottom">
             Mavzular ro'yxati
           </h2>
+          <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+            Mexanika, optika, elektr, termodinamika va boshqa fizika bo'limlari bo'yicha interaktiv mavzular
+          </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              "Oddiy mayatnik",
-              "Gorizontal otilgan jism",
-              "Prujinali tebranish",
-              "To'lqin harakati",
-              "Erkin tushish",
-              "Elastik to'qnashuv",
-              "Qiya tekislik",
-              "Aylana bo'ylab harakat",
-            ].map((topic, i) => (
-              <div
-                key={topic}
-                className="glass-card p-4 text-center hover:glow-border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 fade-in-up cursor-pointer group"
-                style={{ animationDelay: `${i * 0.08}s` }}
-              >
-                <span className="text-sm group-hover:text-primary transition-colors">{topic}</span>
-              </div>
-            ))}
+          {/* Mexanika */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full"></span>
+              Mexanika
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {[
+                "Oddiy mayatnik",
+                "Gorizontal otilgan jism",
+                "Burchak ostida otilgan jism",
+                "Prujinali tebranish",
+                "Erkin tushish",
+                "Elastik to'qnashuv",
+                "Noelastik to'qnashuv",
+                "Qiya tekislik",
+                "Aylana bo'ylab harakat",
+                "Impulsning saqlanishi",
+                "Energiyaning saqlanishi",
+                "Ishqalanish kuchi",
+              ].map((topic, i) => (
+                <div
+                  key={topic}
+                  className="glass-card p-3 text-center hover:glow-border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 fade-in-up cursor-pointer group"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <span className="text-xs group-hover:text-primary transition-colors">{topic}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* To'lqinlar va Tebranishlar */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full"></span>
+              To'lqinlar va Tebranishlar
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {[
+                "To'lqin harakati",
+                "Dopler effekti",
+                "Interferensiya",
+                "Difraksiya",
+                "Rezonans",
+                "Tovush to'lqinlari",
+              ].map((topic, i) => (
+                <div
+                  key={topic}
+                  className="glass-card p-3 text-center hover:glow-border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 fade-in-up cursor-pointer group"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <span className="text-xs group-hover:text-primary transition-colors">{topic}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Optika */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full"></span>
+              Optika
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {[
+                "Yorug'lik sinishi",
+                "Linzalar",
+                "Ko'zgular",
+                "To'liq ichki qaytish",
+                "Prizma",
+                "Yorug'lik dispersiyasi",
+              ].map((topic, i) => (
+                <div
+                  key={topic}
+                  className="glass-card p-3 text-center hover:glow-border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 fade-in-up cursor-pointer group"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <span className="text-xs group-hover:text-primary transition-colors">{topic}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Elektr va Magnetizm */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full"></span>
+              Elektr va Magnetizm
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {[
+                "Elektr maydoni",
+                "Kondensator",
+                "Magnit induksiya",
+                "Elektromagnit induksiya",
+                "Kulon qonuni",
+                "Om qonuni",
+              ].map((topic, i) => (
+                <div
+                  key={topic}
+                  className="glass-card p-3 text-center hover:glow-border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 fade-in-up cursor-pointer group"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <span className="text-xs group-hover:text-primary transition-colors">{topic}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Termodinamika */}
+          <div>
+            <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full"></span>
+              Termodinamika
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {[
+                "Ideal gaz",
+                "Izotermik jarayon",
+                "Izobarik jarayon",
+                "Izoxorik jarayon",
+                "Adiabatik jarayon",
+                "Issiqlik o'tkazuvchanlik",
+              ].map((topic, i) => (
+                <div
+                  key={topic}
+                  className="glass-card p-3 text-center hover:glow-border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 fade-in-up cursor-pointer group"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <span className="text-xs group-hover:text-primary transition-colors">{topic}</span>
+                </div>
+              ))}
+            </div>
           </div>
           
         </div>
