@@ -9,6 +9,7 @@ const navLinks = [
   { path: "/", label: "Bosh sahifa" },
   { path: "/animations", label: "Animatsiyalar" },
   { path: "/laboratories", label: "Laboratoriyalar" },
+  { path: "/formulas", label: "Formulalar" },
 ];
 
 export const Header = () => {
