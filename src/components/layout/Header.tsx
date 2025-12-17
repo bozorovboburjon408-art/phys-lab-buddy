@@ -10,6 +10,7 @@ const navLinks = [
   { path: "/animations", label: "Animatsiyalar" },
   { path: "/laboratories", label: "Laboratoriyalar" },
   { path: "/formulas", label: "Formulalar" },
+  { path: "/library", label: "Kutubxona" },
   { path: "https://grok.com", label: "AI Yordamchi", icon: Sparkles, external: true },
 ];
 
