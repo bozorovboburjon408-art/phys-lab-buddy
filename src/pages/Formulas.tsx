@@ -6,8 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
@@ -59,65 +59,63 @@ const FormulaCard = ({ formula, onClick }: { formula: Formula; onClick: () => vo
   );
 };
 
-const FormulaDetail = ({ formula, onClose }: { formula: Formula; onClose: () => void }) => {
+const FormulaDetailModal = ({ formula, open, onOpenChange }: { formula: Formula | null; open: boolean; onOpenChange: (open: boolean) => void }) => {
+  if (!formula) return null;
+  
   const category = formulaCategories.find((c) => c.id === formula.category);
 
   return (
-    <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
-      <Card className="w-full max-w-2xl max-h-[90vh] overflow-hidden animate-scale-in" onClick={(e) => e.stopPropagation()}>
-        <CardHeader className="border-b border-border/50">
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
           <div className="flex items-start justify-between gap-4">
-            <div className="space-y-1">
-              <CardTitle className="text-xl">{formula.name}</CardTitle>
+            <div className="space-y-2">
+              <DialogTitle className="text-xl">{formula.name}</DialogTitle>
               {category && (
                 <Badge variant="secondary" style={{ backgroundColor: `${category.color}20`, color: category.color }}>
                   {category.name}
                 </Badge>
               )}
             </div>
-            <Button variant="ghost" size="icon" onClick={onClose}>
-              <X className="w-5 h-5" />
-            </Button>
           </div>
-        </CardHeader>
-        <ScrollArea className="max-h-[calc(90vh-100px)]">
-          <CardContent className="p-6 space-y-6">
-            <div className="p-6 rounded-xl bg-secondary/30 border border-border/30 flex items-center justify-center">
-              <div className="text-2xl">
-                <BlockMath math={formula.formula} />
-              </div>
+        </DialogHeader>
+        
+        <div className="space-y-6 pt-4">
+          <div className="p-6 rounded-xl bg-secondary/30 border border-border/30 flex items-center justify-center">
+            <div className="text-2xl">
+              <BlockMath math={formula.formula} />
             </div>
+          </div>
 
-            <div>
-              <h3 className="text-sm font-semibold text-foreground mb-2">Ta'rif</h3>
-              <p className="text-muted-foreground">{formula.description}</p>
-            </div>
+          <div>
+            <h3 className="text-sm font-semibold text-foreground mb-2">Ta'rif</h3>
+            <p className="text-muted-foreground">{formula.description}</p>
+          </div>
 
-            <div>
-              <h3 className="text-sm font-semibold text-foreground mb-3">O'zgaruvchilar</h3>
-              <div className="space-y-2">
-                {formula.variables.map((variable, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-3 rounded-lg bg-secondary/20 border border-border/30"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <InlineMath math={variable.symbol} />
-                      </div>
-                      <span className="font-medium">{variable.name}</span>
+          <div>
+            <h3 className="text-sm font-semibold text-foreground mb-3">O'zgaruvchilar</h3>
+            <div className="space-y-2">
+              {formula.variables.map((variable, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-3 rounded-lg bg-secondary/20 border border-border/30"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <InlineMath math={variable.symbol} />
                     </div>
-                    <Badge variant="outline" className="font-mono">
-                      {variable.unit}
-                    </Badge>
+                    <span className="font-medium">{variable.name}</span>
                   </div>
-                ))}
-              </div>
+                  <Badge variant="outline" className="font-mono">
+                    {variable.unit}
+                  </Badge>
+                </div>
+              ))}
             </div>
-          </CardContent>
-        </ScrollArea>
-      </Card>
-    </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
@@ -275,7 +273,11 @@ const Formulas = () => {
       </main>
 
       {/* Formula Detail Modal */}
-      {selectedFormula && <FormulaDetail formula={selectedFormula} onClose={() => setSelectedFormula(null)} />}
+      <FormulaDetailModal 
+        formula={selectedFormula} 
+        open={selectedFormula !== null} 
+        onOpenChange={(open) => !open && setSelectedFormula(null)} 
+      />
     </div>
   );
 };
