@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Atom, LogIn, LogOut, User } from "lucide-react";
+import { Menu, X, Atom, LogIn, LogOut, User, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth";
@@ -10,6 +10,7 @@ const navLinks = [
   { path: "/animations", label: "Animatsiyalar" },
   { path: "/laboratories", label: "Laboratoriyalar" },
   { path: "/formulas", label: "Formulalar" },
+  { path: "/ai-assistant", label: "AI Yordamchi", icon: Sparkles },
 ];
 
 export const Header = () => {
@@ -42,9 +43,11 @@ export const Header = () => {
                 to={link.path}
                 className={cn(
                   "nav-link relative overflow-hidden group",
-                  location.pathname === link.path && "active"
+                  location.pathname === link.path && "active",
+                  link.icon && "flex items-center gap-1"
                 )}
               >
+                {link.icon && <link.icon className="w-4 h-4 text-primary" />}
                 <span className="relative z-10 group-hover:text-primary transition-colors duration-300">{link.label}</span>
                 <span className="absolute inset-0 bg-primary/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg" />
               </Link>
@@ -102,9 +105,11 @@ export const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
                   "block py-3 px-4 text-muted-foreground hover:text-foreground transition-colors",
-                  location.pathname === link.path && "text-primary"
+                  location.pathname === link.path && "text-primary",
+                  link.icon && "flex items-center gap-2"
                 )}
               >
+                {link.icon && <link.icon className="w-4 h-4" />}
                 {link.label}
               </Link>
             ))}

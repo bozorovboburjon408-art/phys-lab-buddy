@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Animations from "./pages/Animations";
 import Laboratories from "./pages/Laboratories";
 import Formulas from "./pages/Formulas";
+import AIAssistant from "./pages/AIAssistant";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
@@ -24,6 +25,7 @@ const AnimatedRoutes = () => {
         <Route path="/animations" element={<Animations />} />
         <Route path="/laboratories" element={<Laboratories />} />
         <Route path="/formulas" element={<Formulas />} />
+        <Route path="/ai-assistant" element={<AIAssistant />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
