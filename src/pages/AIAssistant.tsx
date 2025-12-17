@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ExternalLink, Sparkles, Globe } from "lucide-react";
+import { ExternalLink, Sparkles, Globe, Plus, X } from "lucide-react";
 
 const AIAssistant = () => {
   const [customUrl, setCustomUrl] = useState("");
+  const [savedSites, setSavedSites] = useState<{ name: string; url: string }[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("savedAISites");
+    if (saved) {
+      setSavedSites(JSON.parse(saved));
+    }
+  }, []);
 
   const handleOpenGemini = () => {
     window.open("https://gemini.google.com/app", "_blank");
@@ -19,6 +27,25 @@ const AIAssistant = () => {
       url = "https://" + url;
     }
     window.open(url, "_blank");
+  };
+
+  const handleSaveSite = () => {
+    if (!customUrl.trim()) return;
+    let url = customUrl.trim();
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = "https://" + url;
+    }
+    const name = url.replace(/^https?:\/\//, "").split("/")[0];
+    const newSites = [...savedSites, { name, url }];
+    setSavedSites(newSites);
+    localStorage.setItem("savedAISites", JSON.stringify(newSites));
+    setCustomUrl("");
+  };
+
+  const handleRemoveSite = (index: number) => {
+    const newSites = savedSites.filter((_, i) => i !== index);
+    setSavedSites(newSites);
+    localStorage.setItem("savedAISites", JSON.stringify(newSites));
   };
 
   return (
@@ -62,8 +89,8 @@ const AIAssistant = () => {
                 <Globe className="w-5 h-5 text-foreground" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground">Boshqa sayt</h3>
-                <p className="text-sm text-muted-foreground">O'z saytingizni kiriting</p>
+                <h3 className="font-semibold text-foreground">Sayt qo'shish</h3>
+                <p className="text-sm text-muted-foreground">Saytni kiriting va saqlang</p>
               </div>
             </div>
             
@@ -72,12 +99,42 @@ const AIAssistant = () => {
                 placeholder="https://chatgpt.com"
                 value={customUrl}
                 onChange={(e) => setCustomUrl(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleOpenCustomUrl()}
+                onKeyDown={(e) => e.key === "Enter" && handleSaveSite()}
               />
-              <Button onClick={handleOpenCustomUrl} disabled={!customUrl.trim()}>
+              <Button onClick={handleOpenCustomUrl} disabled={!customUrl.trim()} variant="outline">
                 <ExternalLink className="w-4 h-4" />
               </Button>
+              <Button onClick={handleSaveSite} disabled={!customUrl.trim()}>
+                <Plus className="w-4 h-4" />
+              </Button>
             </div>
+
+            {/* Saved Sites */}
+            {savedSites.length > 0 && (
+              <div className="space-y-2 pt-2">
+                <p className="text-sm text-muted-foreground">Saqlangan saytlar:</p>
+                <div className="flex flex-wrap gap-2">
+                  {savedSites.map((site, index) => (
+                    <div key={index} className="flex items-center gap-1 bg-secondary rounded-lg pl-3 pr-1 py-1">
+                      <button
+                        onClick={() => window.open(site.url, "_blank")}
+                        className="text-sm text-foreground hover:text-primary"
+                      >
+                        {site.name}
+                      </button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6"
+                        onClick={() => handleRemoveSite(index)}
+                      >
+                        <X className="w-3 h-3" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </Card>
         </div>
       </main>
