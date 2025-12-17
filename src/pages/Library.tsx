@@ -129,33 +129,25 @@ const Library = () => {
     let fileUrl = null;
 
     try {
-      // Upload file if selected
+      // Upload file directly to Supabase Storage
       if (selectedFile) {
-        const reader = new FileReader();
-        const fileData = await new Promise<string>((resolve) => {
-          reader.onload = () => {
-            const base64 = (reader.result as string).split(",")[1];
-            resolve(base64);
-          };
-          reader.readAsDataURL(selectedFile);
-        });
-
         const fileName = `${Date.now()}-${selectedFile.name}`;
-        const uploadResponse = await supabase.functions.invoke("library-admin", {
-          body: {
-            action: "upload",
-            password: adminPassword,
-            fileName,
-            fileData,
-            contentType: selectedFile.type,
-          },
-        });
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from("library-files")
+          .upload(fileName, selectedFile, {
+            cacheControl: "3600",
+            upsert: true,
+          });
 
-        if (uploadResponse.error) {
-          throw new Error(uploadResponse.error.message);
+        if (uploadError) {
+          throw new Error(uploadError.message);
         }
 
-        fileUrl = uploadResponse.data.url;
+        const { data: publicUrlData } = supabase.storage
+          .from("library-files")
+          .getPublicUrl(fileName);
+
+        fileUrl = publicUrlData.publicUrl;
       }
 
       // Add item to database

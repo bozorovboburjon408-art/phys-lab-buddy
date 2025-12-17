@@ -95,37 +95,7 @@ serve(async (req) => {
         );
       }
 
-      case "upload": {
-        const { fileName, fileData, contentType } = data;
-        
-        // Decode base64 file data
-        const binaryData = Uint8Array.from(atob(fileData), c => c.charCodeAt(0));
-        
-        const { data: uploadData, error } = await supabase.storage
-          .from("library-files")
-          .upload(fileName, binaryData, {
-            contentType,
-            upsert: true,
-          });
-
-        if (error) {
-          console.error("Error uploading file:", error);
-          return new Response(
-            JSON.stringify({ error: error.message }),
-            { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-          );
-        }
-
-        const { data: publicUrl } = supabase.storage
-          .from("library-files")
-          .getPublicUrl(fileName);
-
-        console.log("File uploaded successfully:", publicUrl.publicUrl);
-        return new Response(
-          JSON.stringify({ success: true, url: publicUrl.publicUrl }),
-          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
+      // Upload action removed - files are now uploaded directly from client
 
       default:
         return new Response(
