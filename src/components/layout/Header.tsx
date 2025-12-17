@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Atom, LogIn, LogOut, User, Sparkles } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Atom, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { path: "/", label: "Bosh sahifa" },
@@ -17,13 +16,6 @@ const navLinks = [
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-  const { user, signOut } = useAuth();
-
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/");
-  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
@@ -71,36 +63,6 @@ export const Header = () => {
             ))}
           </nav>
 
-          {/* User Actions */}
-          <div className="hidden md:flex items-center gap-2">
-            {user ? (
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 text-sm">
-                  <User className="w-4 h-4 text-primary" />
-                  <span className="text-muted-foreground max-w-[150px] truncate">
-                    {user.email}
-                  </span>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleSignOut}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <LogOut className="w-4 h-4 mr-1" />
-                  Chiqish
-                </Button>
-              </div>
-            ) : (
-              <Link to="/auth">
-                <Button variant="outline" size="sm">
-                  <LogIn className="w-4 h-4 mr-1" />
-                  Kirish
-                </Button>
-              </Link>
-            )}
-          </div>
-
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
@@ -114,7 +76,7 @@ export const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-        <nav className="md:hidden py-4 border-t border-border/50 animate-slide-up">
+          <nav className="md:hidden py-4 border-t border-border/50 animate-slide-up">
             {navLinks.map((link) => (
               link.external ? (
                 <a
@@ -146,35 +108,6 @@ export const Header = () => {
                 </Link>
               )
             ))}
-            <div className="px-4 pt-4 border-t border-border/50 mt-2">
-              {user ? (
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <User className="w-4 h-4" />
-                    <span className="truncate">{user.email}</span>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => {
-                      handleSignOut();
-                      setIsMenuOpen(false);
-                    }}
-                    className="w-full justify-start"
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Chiqish
-                  </Button>
-                </div>
-              ) : (
-                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="outline" size="sm" className="w-full">
-                    <LogIn className="w-4 h-4 mr-2" />
-                    Kirish
-                  </Button>
-                </Link>
-              )}
-            </div>
           </nav>
         )}
       </div>
