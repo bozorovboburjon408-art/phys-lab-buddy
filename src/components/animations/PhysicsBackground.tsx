@@ -40,8 +40,8 @@ export const PhysicsBackground = () => {
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationSpeed = (Math.random() - 0.5) * 0.03;
         this.orbitRadius = this.radius * (Math.random() * 3 + 4);
-        this.opacity = Math.random() * 0.4 + 0.25;
-        this.color = Math.random() > 0.5 ? "187, 92%, 50%" : "262, 83%, 58%";
+        this.opacity = Math.random() * 0.5 + 0.4;
+        this.color = Math.random() > 0.5 ? "187, 92%, 60%" : "262, 83%, 65%";
         this.vx = (Math.random() - 0.5) * 0.4;
         this.vy = (Math.random() - 0.5) * 0.4;
       }
@@ -115,7 +115,7 @@ export const PhysicsBackground = () => {
         // Allow formulas anywhere on screen
         this.x = Math.random() * canvas.width;
         this.y = canvas.height + 50;
-        this.opacity = Math.random() * 0.2 + 0.12;
+        this.opacity = Math.random() * 0.35 + 0.25;
         this.speed = Math.random() * 0.5 + 0.3;
         this.size = Math.random() * 16 + 14;
         this.wobble = 0;
@@ -157,7 +157,7 @@ export const PhysicsBackground = () => {
         this.wavelength = Math.random() * 80 + 40;
         this.phase = Math.random() * Math.PI * 2;
         this.speed = Math.random() * 0.03 + 0.02;
-        this.opacity = Math.random() * 0.15 + 0.1;
+        this.opacity = Math.random() * 0.3 + 0.2;
       }
 
       draw() {
@@ -194,7 +194,7 @@ export const PhysicsBackground = () => {
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 3 + 1;
         this.speed = Math.random() * 0.5 + 0.2;
-        this.opacity = Math.random() * 0.5 + 0.2;
+        this.opacity = Math.random() * 0.6 + 0.35;
         this.color = Math.random() > 0.5 ? "187, 92%, 50%" : "262, 83%, 58%";
       }
 
@@ -277,7 +277,7 @@ export const PhysicsBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.5 }}
+      style={{ opacity: 0.75 }}
     />
   );
 };
