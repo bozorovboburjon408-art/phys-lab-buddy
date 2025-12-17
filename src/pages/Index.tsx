@@ -3,10 +3,8 @@ import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/button";
 import { Atom, FlaskConical, Sparkles, ArrowRight } from "lucide-react";
 import { PhysicsBackground } from "@/components/animations/PhysicsBackground";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-background relative">
+  return <div className="min-h-screen bg-background relative">
       <PhysicsBackground />
       <Header />
       
@@ -46,20 +44,23 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: "🎯", title: "Interaktiv simulyatsiyalar", description: "Mayatnik, erkin tushish, to'lqin harakati va boshqa mavzularda real vaqtda animatsiyalar" },
-              { icon: "🔬", title: "Virtual laboratoriyalar", description: "Maqsad, nazariya, asboblar va avtomatik hisoblashli jadvallar bilan to'liq laboratoriya ishlari" },
-              { icon: "⚡", title: "Parametrlarni boshqarish", description: "Massa, uzunlik, tezlik va boshqa parametrlarni o'zgartirib, natijalarni kuzating" },
-              { icon: "📊", title: "Avtomatik hisoblash", description: "Boshlang'ich qiymatlarni kiriting va tizim formulalar asosida natijalarni hisoblaydi" },
-            ].map((feature, i) => (
-              <FeatureCard
-                key={feature.title}
-                icon={feature.icon}
-                title={feature.title}
-                description={feature.description}
-                delay={i}
-              />
-            ))}
+            {[{
+            icon: "🎯",
+            title: "Interaktiv simulyatsiyalar",
+            description: "Mayatnik, erkin tushish, to'lqin harakati va boshqa mavzularda real vaqtda animatsiyalar"
+          }, {
+            icon: "🔬",
+            title: "Virtual laboratoriyalar",
+            description: "Maqsad, nazariya, asboblar va avtomatik hisoblashli jadvallar bilan to'liq laboratoriya ishlari"
+          }, {
+            icon: "⚡",
+            title: "Parametrlarni boshqarish",
+            description: "Massa, uzunlik, tezlik va boshqa parametrlarni o'zgartirib, natijalarni kuzating"
+          }, {
+            icon: "📊",
+            title: "Avtomatik hisoblash",
+            description: "Boshlang'ich qiymatlarni kiriting va tizim formulalar asosida natijalarni hisoblaydi"
+          }].map((feature, i) => <FeatureCard key={feature.title} icon={feature.icon} title={feature.title} description={feature.description} delay={i} />)}
           </div>
         </div>
       </section>
@@ -68,35 +69,29 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-border">
         <div className="container mx-auto text-center text-muted-foreground text-sm">
-          <p>© 2024 PhysicsLab - Interaktiv fizika platformasi</p>
+          <p>© 2025 PhysicsLab - Interaktiv fizika platformasi</p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 const FeatureCard = ({
   icon,
   title,
   description,
-  delay,
+  delay
 }: {
   icon: string;
   title: string;
   description: string;
   delay: number;
-}) => (
-  <div 
-    className="glass-card p-6 hover:glow-border transition-all duration-500 group cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 relative overflow-hidden fade-in-up"
-    style={{ animationDelay: `${delay * 0.1}s` }}
-  >
+}) => <div className="glass-card p-6 hover:glow-border transition-all duration-500 group cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 relative overflow-hidden fade-in-up" style={{
+  animationDelay: `${delay * 0.1}s`
+}}>
     <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-accent/10 transition-all duration-500" />
     <div className="relative z-10">
       <div className="text-4xl mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 inline-block">{icon}</div>
       <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{title}</h3>
       <p className="text-muted-foreground text-sm group-hover:text-foreground/80 transition-colors duration-300">{description}</p>
     </div>
-  </div>
-);
-
+  </div>;
 export default Index;
