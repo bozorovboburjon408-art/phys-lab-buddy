@@ -1,66 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Book, Search, FileText, Video, Download, ExternalLink } from "lucide-react";
+import { Book, Search, FileText, Video, Download, ExternalLink, Plus, Trash2, Lock, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface LibraryItem {
   id: string;
   title: string;
-  description: string;
-  type: "book" | "article" | "video" | "document";
+  description: string | null;
+  type: string;
   category: string;
-  downloadUrl?: string;
-  externalUrl?: string;
+  file_url: string | null;
+  external_url: string | null;
+  created_at: string;
 }
 
-const libraryItems: LibraryItem[] = [
-  {
-    id: "1",
-    title: "Mexanika asoslari",
-    description: "Klassik mexanikaning asosiy qonunlari va tamoyillari haqida to'liq qo'llanma",
-    type: "book",
-    category: "Mexanika",
-  },
-  {
-    id: "2",
-    title: "Termodinamika va issiqlik",
-    description: "Termodinamikaning asosiy qonunlari va issiqlik jarayonlari",
-    type: "book",
-    category: "Termodinamika",
-  },
-  {
-    id: "3",
-    title: "Elektr va magnetizm",
-    description: "Elektromagnit maydon nazariyasi va amaliy qo'llanmalar",
-    type: "book",
-    category: "Elektrodinamika",
-  },
-  {
-    id: "4",
-    title: "Optika va yorug'lik",
-    description: "Geometrik va to'lqin optikasi asoslari",
-    type: "book",
-    category: "Optika",
-  },
-  {
-    id: "5",
-    title: "Atom fizikasi",
-    description: "Atom tuzilishi va kvant mexanikasi asoslari",
-    type: "book",
-    category: "Atom fizikasi",
-  },
-  {
-    id: "6",
-    title: "Laboratoriya ishlari to'plami",
-    description: "Fizika bo'yicha laboratoriya ishlarining to'liq to'plami",
-    type: "document",
-    category: "Laboratoriya",
-  },
-];
-
-const getTypeIcon = (type: LibraryItem["type"]) => {
+const getTypeIcon = (type: string) => {
   switch (type) {
     case "book":
       return Book;
@@ -75,7 +37,7 @@ const getTypeIcon = (type: LibraryItem["type"]) => {
   }
 };
 
-const getTypeLabel = (type: LibraryItem["type"]) => {
+const getTypeLabel = (type: string) => {
   switch (type) {
     case "book":
       return "Kitob";
@@ -93,13 +55,165 @@ const getTypeLabel = (type: LibraryItem["type"]) => {
 const Library = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [libraryItems, setLibraryItems] = useState<LibraryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [showAddDialog, setShowAddDialog] = useState(false);
+  
+  // Form state
+  const [newItem, setNewItem] = useState({
+    title: "",
+    description: "",
+    type: "book",
+    category: "",
+    external_url: "",
+  });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    fetchLibraryItems();
+  }, []);
+
+  const fetchLibraryItems = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("library_items")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      setLibraryItems(data || []);
+    } catch (error) {
+      console.error("Error fetching library items:", error);
+      toast.error("Kutubxona ma'lumotlarini yuklashda xatolik");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAdminLogin = async () => {
+    try {
+      const response = await supabase.functions.invoke("library-admin", {
+        body: { action: "verify", password: adminPassword },
+      });
+
+      if (response.error) {
+        toast.error("Noto'g'ri parol");
+        return;
+      }
+
+      setIsAdmin(true);
+      setShowAdminLogin(false);
+      toast.success("Admin sifatida kirdingiz");
+    } catch (error) {
+      toast.error("Xatolik yuz berdi");
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  const handleAddItem = async () => {
+    if (!newItem.title || !newItem.category) {
+      toast.error("Sarlavha va kategoriya majburiy");
+      return;
+    }
+
+    setUploading(true);
+    let fileUrl = null;
+
+    try {
+      // Upload file if selected
+      if (selectedFile) {
+        const reader = new FileReader();
+        const fileData = await new Promise<string>((resolve) => {
+          reader.onload = () => {
+            const base64 = (reader.result as string).split(",")[1];
+            resolve(base64);
+          };
+          reader.readAsDataURL(selectedFile);
+        });
+
+        const fileName = `${Date.now()}-${selectedFile.name}`;
+        const uploadResponse = await supabase.functions.invoke("library-admin", {
+          body: {
+            action: "upload",
+            password: adminPassword,
+            fileName,
+            fileData,
+            contentType: selectedFile.type,
+          },
+        });
+
+        if (uploadResponse.error) {
+          throw new Error(uploadResponse.error.message);
+        }
+
+        fileUrl = uploadResponse.data.url;
+      }
+
+      // Add item to database
+      const response = await supabase.functions.invoke("library-admin", {
+        body: {
+          action: "add",
+          password: adminPassword,
+          title: newItem.title,
+          description: newItem.description || null,
+          type: newItem.type,
+          category: newItem.category,
+          file_url: fileUrl,
+          external_url: newItem.external_url || null,
+        },
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+
+      toast.success("Material muvaffaqiyatli qo'shildi");
+      setShowAddDialog(false);
+      setNewItem({ title: "", description: "", type: "book", category: "", external_url: "" });
+      setSelectedFile(null);
+      fetchLibraryItems();
+    } catch (error) {
+      console.error("Error adding item:", error);
+      toast.error("Material qo'shishda xatolik");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDeleteItem = async (id: string) => {
+    if (!confirm("Bu materialni o'chirmoqchimisiz?")) return;
+
+    try {
+      const response = await supabase.functions.invoke("library-admin", {
+        body: { action: "delete", password: adminPassword, id },
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+
+      toast.success("Material o'chirildi");
+      fetchLibraryItems();
+    } catch (error) {
+      toast.error("O'chirishda xatolik");
+    }
+  };
 
   const categories = [...new Set(libraryItems.map((item) => item.category))];
 
   const filteredItems = libraryItems.filter((item) => {
     const matchesSearch =
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+      (item.description && item.description.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesCategory = !selectedCategory || item.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -118,6 +232,140 @@ const Library = () => {
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Fizika faniga oid kitoblar, maqolalar va o'quv materiallari to'plami
           </p>
+        </div>
+
+        {/* Admin Controls */}
+        <div className="flex justify-end mb-4">
+          {!isAdmin ? (
+            <Dialog open={showAdminLogin} onOpenChange={setShowAdminLogin}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Lock className="w-4 h-4 mr-2" />
+                  Admin
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Admin kirish</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 pt-4">
+                  <div>
+                    <Label>Parol</Label>
+                    <Input
+                      type="password"
+                      value={adminPassword}
+                      onChange={(e) => setAdminPassword(e.target.value)}
+                      placeholder="Admin parolini kiriting"
+                      onKeyDown={(e) => e.key === "Enter" && handleAdminLogin()}
+                    />
+                  </div>
+                  <Button onClick={handleAdminLogin} className="w-full">
+                    Kirish
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          ) : (
+            <div className="flex gap-2">
+              <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
+                <DialogTrigger asChild>
+                  <Button>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Yangi material
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Yangi material qo'shish</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4 pt-4">
+                    <div>
+                      <Label>Sarlavha *</Label>
+                      <Input
+                        value={newItem.title}
+                        onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
+                        placeholder="Material nomi"
+                      />
+                    </div>
+                    <div>
+                      <Label>Tavsif</Label>
+                      <Textarea
+                        value={newItem.description}
+                        onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
+                        placeholder="Qisqacha tavsif"
+                        rows={3}
+                      />
+                    </div>
+                    <div>
+                      <Label>Turi</Label>
+                      <Select value={newItem.type} onValueChange={(v) => setNewItem({ ...newItem, type: v })}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="book">Kitob</SelectItem>
+                          <SelectItem value="article">Maqola</SelectItem>
+                          <SelectItem value="video">Video</SelectItem>
+                          <SelectItem value="document">Hujjat</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label>Kategoriya *</Label>
+                      <Input
+                        value={newItem.category}
+                        onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
+                        placeholder="Masalan: Mexanika"
+                      />
+                    </div>
+                    <div>
+                      <Label>Fayl yuklash</Label>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="file"
+                          onChange={handleFileChange}
+                          accept=".pdf,.doc,.docx,.epub"
+                          className="flex-1"
+                        />
+                        {selectedFile && (
+                          <Button variant="ghost" size="icon" onClick={() => setSelectedFile(null)}>
+                            <X className="w-4 h-4" />
+                          </Button>
+                        )}
+                      </div>
+                      {selectedFile && (
+                        <p className="text-sm text-muted-foreground mt-1">{selectedFile.name}</p>
+                      )}
+                    </div>
+                    <div>
+                      <Label>Tashqi havola (ixtiyoriy)</Label>
+                      <Input
+                        value={newItem.external_url}
+                        onChange={(e) => setNewItem({ ...newItem, external_url: e.target.value })}
+                        placeholder="https://..."
+                      />
+                    </div>
+                    <Button onClick={handleAddItem} className="w-full" disabled={uploading}>
+                      {uploading ? (
+                        <>
+                          <Upload className="w-4 h-4 mr-2 animate-spin" />
+                          Yuklanmoqda...
+                        </>
+                      ) : (
+                        <>
+                          <Plus className="w-4 h-4 mr-2" />
+                          Qo'shish
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+              <Button variant="outline" onClick={() => setIsAdmin(false)}>
+                Chiqish
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Search and Filter */}
@@ -152,60 +400,86 @@ const Library = () => {
           </div>
         </div>
 
-        {/* Library Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item) => {
-            const Icon = getTypeIcon(item.type);
-            return (
-              <Card
-                key={item.id}
-                className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm"
-              >
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <span className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground">
-                      {getTypeLabel(item.type)}
-                    </span>
-                  </div>
-                  <CardTitle className="mt-4 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </CardTitle>
-                  <CardDescription>{item.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">{item.category}</span>
-                    <div className="flex gap-2">
-                      {item.downloadUrl && (
-                        <Button variant="ghost" size="icon" asChild>
-                          <a href={item.downloadUrl} download>
-                            <Download className="w-4 h-4" />
-                          </a>
-                        </Button>
-                      )}
-                      {item.externalUrl && (
-                        <Button variant="ghost" size="icon" asChild>
-                          <a href={item.externalUrl} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {filteredItems.length === 0 && (
+        {/* Loading State */}
+        {loading ? (
           <div className="text-center py-12">
-            <Book className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground">Hech narsa topilmadi</p>
+            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-muted-foreground">Yuklanmoqda...</p>
           </div>
+        ) : (
+          <>
+            {/* Library Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredItems.map((item) => {
+                const Icon = getTypeIcon(item.type);
+                return (
+                  <Card
+                    key={item.id}
+                    className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm"
+                  >
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                          <Icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground">
+                            {getTypeLabel(item.type)}
+                          </span>
+                          {isAdmin && (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 text-destructive hover:text-destructive"
+                              onClick={() => handleDeleteItem(item.id)}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                      <CardTitle className="mt-4 group-hover:text-primary transition-colors">
+                        {item.title}
+                      </CardTitle>
+                      <CardDescription>{item.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">{item.category}</span>
+                        <div className="flex gap-2">
+                          {item.file_url && (
+                            <Button variant="ghost" size="icon" asChild>
+                              <a href={item.file_url} download target="_blank" rel="noopener noreferrer">
+                                <Download className="w-4 h-4" />
+                              </a>
+                            </Button>
+                          )}
+                          {item.external_url && (
+                            <Button variant="ghost" size="icon" asChild>
+                              <a href={item.external_url} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="w-4 h-4" />
+                              </a>
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+
+            {filteredItems.length === 0 && (
+              <div className="text-center py-12">
+                <Book className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <p className="text-muted-foreground">
+                  {libraryItems.length === 0
+                    ? "Kutubxona hozircha bo'sh"
+                    : "Hech narsa topilmadi"}
+                </p>
+              </div>
+            )}
+          </>
         )}
       </main>
     </div>

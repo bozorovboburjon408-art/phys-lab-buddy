@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.deepseek-chat]
 verify_jwt = false
+
+[functions.library-admin]
+verify_jwt = false
