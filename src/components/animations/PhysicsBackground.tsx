@@ -32,20 +32,18 @@ export const PhysicsBackground = () => {
       vy: number;
 
       constructor() {
-        // Keep atoms at edges, not in center
-        const angle = Math.random() * Math.PI * 2;
-        const dist = canvas.width * 0.35 + Math.random() * canvas.width * 0.15;
-        this.x = canvas.width / 2 + Math.cos(angle) * dist;
-        this.y = canvas.height / 2 + Math.sin(angle) * dist * 0.6;
+        // Allow atoms anywhere on the screen
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
         this.radius = Math.random() * 6 + 4;
         this.electrons = Math.floor(Math.random() * 3) + 2;
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationSpeed = (Math.random() - 0.5) * 0.03;
         this.orbitRadius = this.radius * (Math.random() * 3 + 4);
-        this.opacity = Math.random() * 0.35 + 0.2;
+        this.opacity = Math.random() * 0.4 + 0.25;
         this.color = Math.random() > 0.5 ? "187, 92%, 50%" : "262, 83%, 58%";
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
       }
 
       draw() {
@@ -114,12 +112,11 @@ export const PhysicsBackground = () => {
       constructor() {
         const formulas = ["E=mc²", "F=ma", "v=λf", "p=mv", "ω=2πf", "T=2π√(l/g)", "KE=½mv²", "W=Fd", "a=v²/r", "PV=nRT", "ΔE=hf", "λ=h/p"];
         this.text = formulas[Math.floor(Math.random() * formulas.length)];
-        // Keep formulas only at edges (left 25% or right 25%)
-        const side = Math.random() > 0.5;
-        this.x = side ? Math.random() * canvas.width * 0.25 : canvas.width * 0.75 + Math.random() * canvas.width * 0.25;
+        // Allow formulas anywhere on screen
+        this.x = Math.random() * canvas.width;
         this.y = canvas.height + 50;
-        this.opacity = Math.random() * 0.15 + 0.08; // Lower opacity
-        this.speed = Math.random() * 0.4 + 0.2;
+        this.opacity = Math.random() * 0.2 + 0.12;
+        this.speed = Math.random() * 0.5 + 0.3;
         this.size = Math.random() * 16 + 14;
         this.wobble = 0;
         this.wobbleSpeed = Math.random() * 0.02 + 0.01;
@@ -140,9 +137,7 @@ export const PhysicsBackground = () => {
         this.wobble += this.wobbleSpeed;
         if (this.y < -50) {
           this.y = canvas.height + 50;
-          // Reset x to edges only
-          const side = Math.random() > 0.5;
-          this.x = side ? Math.random() * canvas.width * 0.25 : canvas.width * 0.75 + Math.random() * canvas.width * 0.25;
+          this.x = Math.random() * canvas.width;
         }
       }
     }
