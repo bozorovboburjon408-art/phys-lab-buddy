@@ -37,21 +37,6 @@ const Index = () => {
                 amaliy o'rganing. Parametrlarni o'zgartiring va natijalarni real vaqtda kuzating.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-up stagger-3">
-                <Link to="/animations">
-                  <Button variant="glow" size="lg" className="w-full sm:w-auto group">
-                    <Atom className="w-5 h-5 mr-2 group-hover:rotate-180 transition-transform duration-500" />
-                    Animatsiyalar
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <Link to="/laboratories">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto group">
-                    <FlaskConical className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                    Laboratoriyalar
-                  </Button>
-                </Link>
-              </div>
             </div>
           </div>
         </div>
@@ -107,14 +92,6 @@ const Index = () => {
             ))}
           </div>
           
-          <div className="text-center mt-8 fade-in-up" style={{ animationDelay: '0.5s' }}>
-            <Link to="/animations">
-              <Button variant="ghost" className="text-primary group">
-                Barcha mavzularni ko'rish
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 
