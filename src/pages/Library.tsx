@@ -101,14 +101,19 @@ const Library = () => {
       });
 
       if (response.error) {
-        toast.error("Noto'g'ri parol");
+        toast.error("Xatolik yuz berdi");
+        return;
+      }
+
+      if (!response.data?.success) {
+        toast.error(response.data?.error || "Noto'g'ri parol");
         return;
       }
 
       setIsAdmin(true);
       setShowAdminLogin(false);
       toast.success("Admin sifatida kirdingiz");
-    } catch (error) {
+    } catch {
       toast.error("Xatolik yuz berdi");
     }
   };
@@ -168,6 +173,10 @@ const Library = () => {
         throw new Error(response.error.message);
       }
 
+      if (!response.data?.success) {
+        throw new Error(response.data?.error || "Material qo'shishda xatolik");
+      }
+
       toast.success("Material muvaffaqiyatli qo'shildi");
       setShowAddDialog(false);
       setNewItem({ title: "", description: "", type: "book", category: "", external_url: "" });
@@ -191,6 +200,10 @@ const Library = () => {
 
       if (response.error) {
         throw new Error(response.error.message);
+      }
+
+      if (!response.data?.success) {
+        throw new Error(response.data?.error || "O'chirishda xatolik");
       }
 
       toast.success("Material o'chirildi");
