@@ -24,9 +24,11 @@ serve(async (req) => {
     // Verify admin password
     if (password !== adminPassword) {
       console.log("Invalid admin password attempt");
+      // NOTE: We intentionally return 200 to avoid client/runtime hard-fail on non-2xx,
+      // while still denying admin access.
       return new Response(
-        JSON.stringify({ error: "Noto'g'ri parol" }),
-        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        JSON.stringify({ success: false, error: "Noto'g'ri parol" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
