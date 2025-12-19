@@ -15,6 +15,10 @@ import { IdealGasSimulation } from "./IdealGasSimulation";
 import { InterferenceSimulation } from "./InterferenceSimulation";
 import { CapacitorSimulation } from "./CapacitorSimulation";
 import { DopplerSimulation } from "./DopplerSimulation";
+import { AtwoodMachineSimulation } from "./AtwoodMachineSimulation";
+import { OhmsLawSimulation } from "./OhmsLawSimulation";
+import { ThermalExpansionSimulation } from "./ThermalExpansionSimulation";
+import { HarmonicOscillatorSimulation } from "./HarmonicOscillatorSimulation";
 
 interface Props {
   simulationId: string;
@@ -39,6 +43,10 @@ export const SimulationRenderer = ({ simulationId, parameters }: Props) => {
     interference: InterferenceSimulation,
     capacitor: CapacitorSimulation,
     doppler: DopplerSimulation,
+    atwoodMachine: AtwoodMachineSimulation,
+    ohmsLaw: OhmsLawSimulation,
+    thermalExpansion: ThermalExpansionSimulation,
+    harmonicOscillator: HarmonicOscillatorSimulation,
   };
 
   const SimulationComponent = simulations[simulationId];

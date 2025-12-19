@@ -542,4 +542,123 @@ Bu effekt tibbiyotda (ultrazvuk), aviatsiyada va astronomiyada keng qo'llaniladi
       { formula: "λ' = λ(c±v)/c", latex: "\\lambda' = \\lambda \\frac{c \\pm v_s}{c}", description: "Wavelength change", descriptionUz: "To'lqin uzunligi o'zgarishi" },
     ],
   },
+  {
+    id: "atwoodMachine",
+    title: "Atwood Machine",
+    titleUz: "Atvud mashinasi",
+    description: "Study the motion of two masses connected by a string over a pulley.",
+    descriptionUz: "Blok orqali ip bilan bog'langan ikki yuk harakatini o'rganing.",
+    icon: "⚖️",
+    parameters: [
+      { id: "mass1", name: "Mass 1", nameUz: "1-yuk massasi", min: 0.5, max: 10, step: 0.5, value: 2, unit: "kg" },
+      { id: "mass2", name: "Mass 2", nameUz: "2-yuk massasi", min: 0.5, max: 10, step: 0.5, value: 3, unit: "kg" },
+      { id: "gravity", name: "Gravity", nameUz: "Erkin tushish tezlanishi", min: 1, max: 25, step: 0.1, value: 9.8, unit: "m/s²" },
+    ],
+    presets: [
+      { id: "equal", nameUz: "⚖️ Teng massalar", description: "Massalar teng - muvozanat", values: { mass1: 2, mass2: 2 } },
+      { id: "double", nameUz: "📊 2:1 nisbat", description: "Ikki baravar farq", values: { mass1: 2, mass2: 4 } },
+      { id: "slight", nameUz: "🔍 Kichik farq", description: "Oz farqli massalar", values: { mass1: 2.5, mass2: 3 } },
+      { id: "moon", nameUz: "🌙 Oyda", description: "Oy gravitatsiyasida", values: { gravity: 1.62 } },
+    ],
+    theoryUz: `Atvud mashinasi - bu ikki yuk blok orqali ip bilan bog'langan tizim. Bu klassik mexanikaning asosiy tajribalaridan biri.
+
+Tizim tezlanishi: a = (m₂ - m₁)g / (m₁ + m₂)
+Ipdagi tarang kuch: T = 2m₁m₂g / (m₁ + m₂)
+
+Agar massalar teng bo'lsa, tizim muvozanatda turadi.`,
+    theory: `The Atwood machine consists of two masses connected by a string over a pulley. It's used to study uniform acceleration and tension.`,
+    formulas: [
+      { formula: "a = (m₂-m₁)g/(m₁+m₂)", latex: "a = \\frac{(m_2 - m_1)g}{m_1 + m_2}", description: "Acceleration", descriptionUz: "Tezlanish" },
+      { formula: "T = 2m₁m₂g/(m₁+m₂)", latex: "T = \\frac{2m_1 m_2 g}{m_1 + m_2}", description: "Tension", descriptionUz: "Tarang kuch" },
+      { formula: "v = at", latex: "v = at", description: "Velocity", descriptionUz: "Tezlik" },
+    ],
+  },
+  {
+    id: "ohmsLaw",
+    title: "Ohm's Law",
+    titleUz: "Om qonuni",
+    description: "Explore the relationship between voltage, current, and resistance.",
+    descriptionUz: "Kuchlanish, tok kuchi va qarshilik orasidagi bog'liqlikni o'rganing.",
+    icon: "⚡",
+    parameters: [
+      { id: "voltage", name: "Voltage", nameUz: "Kuchlanish", min: 1, max: 24, step: 1, value: 12, unit: "V" },
+      { id: "resistance", name: "Resistance", nameUz: "Qarshilik", min: 10, max: 1000, step: 10, value: 100, unit: "Ω" },
+    ],
+    presets: [
+      { id: "led", nameUz: "💡 LED", description: "LED uchun", values: { voltage: 3, resistance: 220 } },
+      { id: "phone", nameUz: "📱 Telefon zaryadkasi", description: "5V zaryadka", values: { voltage: 5, resistance: 50 } },
+      { id: "car", nameUz: "🚗 Avtomobil", description: "12V tizim", values: { voltage: 12, resistance: 100 } },
+      { id: "highV", nameUz: "⚡ Yuqori kuchlanish", description: "24V tizim", values: { voltage: 24, resistance: 200 } },
+    ],
+    theoryUz: `Om qonuni - elektr zanjirlarning asosiy qonuni. U kuchlanish, tok kuchi va qarshilik orasidagi bog'liqlikni ifodalaydi.
+
+V = I × R
+Bu yerda V - kuchlanish (Volt), I - tok kuchi (Amper), R - qarshilik (Om)`,
+    theory: `Ohm's Law states that current is directly proportional to voltage and inversely proportional to resistance.`,
+    formulas: [
+      { formula: "V = IR", latex: "V = IR", description: "Ohm's Law", descriptionUz: "Om qonuni" },
+      { formula: "I = V/R", latex: "I = \\frac{V}{R}", description: "Current", descriptionUz: "Tok kuchi" },
+      { formula: "P = VI = I²R", latex: "P = VI = I^2R", description: "Power", descriptionUz: "Quvvat" },
+    ],
+  },
+  {
+    id: "thermalExpansion",
+    title: "Thermal Expansion",
+    titleUz: "Issiqlik kengayishi",
+    description: "Observe how materials expand when heated.",
+    descriptionUz: "Materiallarning isitilganda kengayishini kuzating.",
+    icon: "🌡️",
+    parameters: [
+      { id: "initialLength", name: "Initial Length", nameUz: "Boshlang'ich uzunlik", min: 0.5, max: 3, step: 0.1, value: 1, unit: "m" },
+      { id: "temperature", name: "Final Temperature", nameUz: "Oxirgi harorat", min: 0, max: 200, step: 5, value: 100, unit: "°C" },
+      { id: "initialTemp", name: "Initial Temperature", nameUz: "Boshlang'ich harorat", min: 0, max: 50, step: 5, value: 20, unit: "°C" },
+      { id: "coefficient", name: "Expansion Coefficient", nameUz: "Kengayish koeffitsienti", min: 0.000005, max: 0.00005, step: 0.000001, value: 0.000012, unit: "1/°C" },
+    ],
+    presets: [
+      { id: "steel", nameUz: "🔩 Po'lat", description: "Po'lat (α = 12×10⁻⁶)", values: { coefficient: 0.000012 } },
+      { id: "aluminum", nameUz: "🥫 Alyuminiy", description: "Alyuminiy (α = 23×10⁻⁶)", values: { coefficient: 0.000023 } },
+      { id: "copper", nameUz: "🔶 Mis", description: "Mis (α = 17×10⁻⁶)", values: { coefficient: 0.000017 } },
+      { id: "hot", nameUz: "🔥 Juda issiq", description: "200°C gacha", values: { temperature: 200 } },
+    ],
+    theoryUz: `Chiziqli issiqlik kengayishi - bu jismning harorat oshganda uzunligining ortishi.
+
+ΔL = L₀ × α × ΔT
+Bu yerda L₀ - boshlang'ich uzunlik, α - chiziqli kengayish koeffitsienti, ΔT - harorat o'zgarishi.`,
+    theory: `Linear thermal expansion describes how a material's length changes with temperature.`,
+    formulas: [
+      { formula: "ΔL = L₀αΔT", latex: "\\Delta L = L_0 \\alpha \\Delta T", description: "Length change", descriptionUz: "Uzunlik o'zgarishi" },
+      { formula: "L = L₀(1 + αΔT)", latex: "L = L_0(1 + \\alpha \\Delta T)", description: "Final length", descriptionUz: "Oxirgi uzunlik" },
+    ],
+  },
+  {
+    id: "harmonicOscillator",
+    title: "Harmonic Oscillator",
+    titleUz: "Garmonik tebranish",
+    description: "Study simple harmonic motion with damping.",
+    descriptionUz: "So'nuvchi garmonik tebranishni o'rganing.",
+    icon: "〰️",
+    parameters: [
+      { id: "amplitude", name: "Amplitude", nameUz: "Amplituda", min: 0.1, max: 1, step: 0.05, value: 0.5, unit: "m" },
+      { id: "frequency", name: "Frequency", nameUz: "Chastota", min: 0.5, max: 3, step: 0.1, value: 1, unit: "Hz" },
+      { id: "phase", name: "Initial Phase", nameUz: "Boshlang'ich faza", min: 0, max: 6.28, step: 0.1, value: 0, unit: "rad" },
+      { id: "damping", name: "Damping", nameUz: "So'nish koeffitsienti", min: 0, max: 0.5, step: 0.02, value: 0.05, unit: "" },
+    ],
+    presets: [
+      { id: "ideal", nameUz: "✨ Ideal", description: "So'nishsiz tebranish", values: { damping: 0, amplitude: 0.5 } },
+      { id: "light", nameUz: "🌊 Yengil so'nish", description: "Sekin so'nadi", values: { damping: 0.05 } },
+      { id: "heavy", nameUz: "🛑 Kuchli so'nish", description: "Tez so'nadi", values: { damping: 0.3 } },
+      { id: "fast", nameUz: "⚡ Tez tebranish", description: "Yuqori chastota", values: { frequency: 2.5, amplitude: 0.3 } },
+    ],
+    theoryUz: `Garmonik tebranish - bu vaqt bo'yicha sinusoidal o'zgaruvchi harakat.
+
+x(t) = A × e^(-γt) × sin(ωt + φ)
+Bu yerda A - amplituda, γ - so'nish koeffitsienti, ω - burchak chastotasi, φ - boshlang'ich faza.`,
+    theory: `Simple harmonic motion is sinusoidal oscillation. Damping causes amplitude to decrease over time.`,
+    formulas: [
+      { formula: "x = A·sin(ωt + φ)", latex: "x = A \\sin(\\omega t + \\varphi)", description: "Position", descriptionUz: "Joy" },
+      { formula: "v = Aω·cos(ωt + φ)", latex: "v = A\\omega \\cos(\\omega t + \\varphi)", description: "Velocity", descriptionUz: "Tezlik" },
+      { formula: "ω = 2πf", latex: "\\omega = 2\\pi f", description: "Angular frequency", descriptionUz: "Burchak chastotasi" },
+      { formula: "T = 1/f", latex: "T = \\frac{1}{f}", description: "Period", descriptionUz: "Davr" },
+    ],
+  },
 ];
