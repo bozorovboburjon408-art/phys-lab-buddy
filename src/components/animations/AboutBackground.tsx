@@ -17,6 +17,17 @@ export const AboutBackground = () => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
+    // Color palette
+    const colors = [
+      { h: 187, s: 92, l: 60 },  // Cyan
+      { h: 262, s: 83, l: 65 },  // Purple
+      { h: 320, s: 80, l: 55 },  // Pink
+      { h: 45, s: 90, l: 55 },   // Gold
+      { h: 150, s: 70, l: 50 },  // Emerald
+    ];
+
+    const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
+
     // Floating hexagon class
     class Hexagon {
       x: number;
@@ -25,7 +36,7 @@ export const AboutBackground = () => {
       rotation: number;
       rotationSpeed: number;
       opacity: number;
-      color: string;
+      color: { h: number; s: number; l: number };
       vx: number;
       vy: number;
       pulsePhase: number;
@@ -34,26 +45,30 @@ export const AboutBackground = () => {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 40 + 20;
+        this.size = Math.random() * 50 + 25;
         this.rotation = Math.random() * Math.PI * 2;
-        this.rotationSpeed = (Math.random() - 0.5) * 0.008;
-        this.opacity = Math.random() * 0.15 + 0.05;
-        this.color = Math.random() > 0.5 ? "187, 92%, 60%" : "262, 83%, 65%";
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.01;
+        this.opacity = Math.random() * 0.2 + 0.08;
+        this.color = getRandomColor();
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
         this.pulsePhase = Math.random() * Math.PI * 2;
-        this.pulseSpeed = Math.random() * 0.02 + 0.01;
+        this.pulseSpeed = Math.random() * 0.025 + 0.015;
       }
 
       draw() {
         if (!ctx) return;
         
-        const pulse = Math.sin(this.pulsePhase) * 0.3 + 1;
+        const pulse = Math.sin(this.pulsePhase) * 0.25 + 1;
         const currentSize = this.size * pulse;
         
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
+        
+        // Outer glow
+        ctx.shadowColor = `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, 0.5)`;
+        ctx.shadowBlur = 20;
         
         ctx.beginPath();
         for (let i = 0; i < 6; i++) {
@@ -68,10 +83,11 @@ export const AboutBackground = () => {
         }
         ctx.closePath();
         
-        ctx.strokeStyle = `hsla(${this.color}, ${this.opacity})`;
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, ${this.opacity})`;
+        ctx.lineWidth = 2;
         ctx.stroke();
         
+        ctx.shadowBlur = 0;
         ctx.restore();
       }
 
@@ -81,47 +97,100 @@ export const AboutBackground = () => {
         this.x += this.vx;
         this.y += this.vy;
         
-        if (this.x < -50) this.x = canvas.width + 50;
-        if (this.x > canvas.width + 50) this.x = -50;
-        if (this.y < -50) this.y = canvas.height + 50;
-        if (this.y > canvas.height + 50) this.y = -50;
+        if (this.x < -60) this.x = canvas.width + 60;
+        if (this.x > canvas.width + 60) this.x = -60;
+        if (this.y < -60) this.y = canvas.height + 60;
+        if (this.y > canvas.height + 60) this.y = -60;
       }
     }
 
-    // Floating circle with gradient
-    class GlowCircle {
-      x: number;
+    // Aurora wave effect
+    class AuroraWave {
       y: number;
-      radius: number;
-      opacity: number;
-      color: string;
-      vx: number;
-      vy: number;
-      pulsePhase: number;
+      amplitude: number;
+      wavelength: number;
+      phase: number;
+      speed: number;
+      color: { h: number; s: number; l: number };
+      thickness: number;
 
       constructor() {
-        this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.radius = Math.random() * 80 + 40;
-        this.opacity = Math.random() * 0.08 + 0.02;
-        this.color = Math.random() > 0.5 ? "187, 92%" : "262, 83%";
-        this.vx = (Math.random() - 0.5) * 0.2;
-        this.vy = (Math.random() - 0.5) * 0.2;
-        this.pulsePhase = Math.random() * Math.PI * 2;
+        this.amplitude = Math.random() * 50 + 30;
+        this.wavelength = Math.random() * 200 + 100;
+        this.phase = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 0.015 + 0.008;
+        this.color = getRandomColor();
+        this.thickness = Math.random() * 60 + 40;
       }
 
       draw() {
         if (!ctx) return;
         
-        const pulse = Math.sin(this.pulsePhase) * 0.2 + 1;
+        const gradient = ctx.createLinearGradient(0, this.y - this.thickness, 0, this.y + this.thickness);
+        gradient.addColorStop(0, `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, 0)`);
+        gradient.addColorStop(0.5, `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, 0.08)`);
+        gradient.addColorStop(1, `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, 0)`);
+        
+        ctx.beginPath();
+        ctx.moveTo(0, this.y + Math.sin(this.phase) * this.amplitude);
+        
+        for (let x = 0; x < canvas.width; x += 4) {
+          const y = this.y + Math.sin((x / this.wavelength) + this.phase) * this.amplitude;
+          ctx.lineTo(x, y);
+        }
+        
+        ctx.lineTo(canvas.width, canvas.height);
+        ctx.lineTo(0, canvas.height);
+        ctx.closePath();
+        
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      }
+
+      update() {
+        this.phase += this.speed;
+        this.y += Math.sin(this.phase * 0.5) * 0.3;
+      }
+    }
+
+    // Floating orb with gradient
+    class GlowOrb {
+      x: number;
+      y: number;
+      radius: number;
+      opacity: number;
+      color: { h: number; s: number; l: number };
+      vx: number;
+      vy: number;
+      pulsePhase: number;
+      pulseSpeed: number;
+
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 100 + 60;
+        this.opacity = Math.random() * 0.12 + 0.04;
+        this.color = getRandomColor();
+        this.vx = (Math.random() - 0.5) * 0.25;
+        this.vy = (Math.random() - 0.5) * 0.25;
+        this.pulsePhase = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.02 + 0.01;
+      }
+
+      draw() {
+        if (!ctx) return;
+        
+        const pulse = Math.sin(this.pulsePhase) * 0.3 + 1;
         const currentRadius = this.radius * pulse;
         
         const gradient = ctx.createRadialGradient(
           this.x, this.y, 0,
           this.x, this.y, currentRadius
         );
-        gradient.addColorStop(0, `hsla(${this.color}, 60%, ${this.opacity * 2})`);
-        gradient.addColorStop(1, `hsla(${this.color}, 60%, 0)`);
+        gradient.addColorStop(0, `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, ${this.opacity * 1.5})`);
+        gradient.addColorStop(0.5, `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, ${this.opacity * 0.5})`);
+        gradient.addColorStop(1, `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, 0)`);
         
         ctx.beginPath();
         ctx.arc(this.x, this.y, currentRadius, 0, Math.PI * 2);
@@ -130,18 +199,91 @@ export const AboutBackground = () => {
       }
 
       update() {
-        this.pulsePhase += 0.015;
+        this.pulsePhase += this.pulseSpeed;
         this.x += this.vx;
         this.y += this.vy;
         
-        if (this.x < -100) this.x = canvas.width + 100;
-        if (this.x > canvas.width + 100) this.x = -100;
-        if (this.y < -100) this.y = canvas.height + 100;
-        if (this.y > canvas.height + 100) this.y = -100;
+        if (this.x < -120) this.x = canvas.width + 120;
+        if (this.x > canvas.width + 120) this.x = -120;
+        if (this.y < -120) this.y = canvas.height + 120;
+        if (this.y > canvas.height + 120) this.y = -120;
       }
     }
 
-    // Connecting lines between points
+    // Sparkle particle
+    class Sparkle {
+      x: number;
+      y: number;
+      size: number;
+      opacity: number;
+      maxOpacity: number;
+      fadeSpeed: number;
+      color: { h: number; s: number; l: number };
+      twinklePhase: number;
+
+      constructor() {
+        this.reset();
+        this.opacity = Math.random() * this.maxOpacity;
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.maxOpacity = Math.random() * 0.8 + 0.4;
+        this.opacity = 0;
+        this.fadeSpeed = Math.random() * 0.03 + 0.01;
+        this.color = getRandomColor();
+        this.twinklePhase = Math.random() * Math.PI * 2;
+      }
+
+      draw() {
+        if (!ctx || this.opacity <= 0) return;
+        
+        const twinkle = Math.sin(this.twinklePhase) * 0.5 + 0.5;
+        const currentOpacity = this.opacity * twinkle;
+        
+        // Star shape
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        ctx.shadowColor = `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, ${currentOpacity})`;
+        ctx.shadowBlur = 10;
+        
+        ctx.beginPath();
+        for (let i = 0; i < 4; i++) {
+          const angle = (Math.PI / 2) * i;
+          ctx.moveTo(0, 0);
+          ctx.lineTo(Math.cos(angle) * this.size * 2, Math.sin(angle) * this.size * 2);
+        }
+        ctx.strokeStyle = `hsla(${this.color.h}, ${this.color.s}%, 90%, ${currentOpacity})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size * 0.5, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${this.color.h}, ${this.color.s}%, 90%, ${currentOpacity})`;
+        ctx.fill();
+        
+        ctx.shadowBlur = 0;
+        ctx.restore();
+      }
+
+      update() {
+        this.twinklePhase += 0.1;
+        this.opacity += this.fadeSpeed;
+        
+        if (this.opacity >= this.maxOpacity) {
+          this.fadeSpeed = -Math.abs(this.fadeSpeed);
+        }
+        
+        if (this.opacity <= 0) {
+          this.reset();
+        }
+      }
+    }
+
+    // Connection node
     class ConnectionNode {
       x: number;
       y: number;
@@ -150,22 +292,31 @@ export const AboutBackground = () => {
       baseX: number;
       baseY: number;
       range: number;
+      color: { h: number; s: number; l: number };
 
       constructor() {
         this.baseX = Math.random() * canvas.width;
         this.baseY = Math.random() * canvas.height;
         this.x = this.baseX;
         this.y = this.baseY;
-        this.range = Math.random() * 50 + 20;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
+        this.range = Math.random() * 60 + 30;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.color = getRandomColor();
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, 0.5)`;
+        ctx.fill();
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
         
-        // Keep within range of base position
         const dx = this.x - this.baseX;
         const dy = this.y - this.baseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -177,68 +328,22 @@ export const AboutBackground = () => {
       }
     }
 
-    // Floating dots
-    class Dot {
-      x: number;
-      y: number;
-      size: number;
-      opacity: number;
-      speed: number;
-      angle: number;
-
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.opacity = Math.random() * 0.4 + 0.2;
-        this.speed = Math.random() * 0.3 + 0.1;
-        this.angle = Math.random() * Math.PI * 2;
-      }
-
-      draw() {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(187, 92%, 60%, ${this.opacity})`;
-        ctx.fill();
-      }
-
-      update() {
-        this.x += Math.cos(this.angle) * this.speed;
-        this.y += Math.sin(this.angle) * this.speed;
-        
-        if (this.x < 0) this.x = canvas.width;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.y > canvas.height) this.y = 0;
-      }
-    }
-
     // Create elements
     const hexagons: Hexagon[] = [];
-    const glowCircles: GlowCircle[] = [];
+    const auroraWaves: AuroraWave[] = [];
+    const glowOrbs: GlowOrb[] = [];
+    const sparkles: Sparkle[] = [];
     const nodes: ConnectionNode[] = [];
-    const dots: Dot[] = [];
 
-    for (let i = 0; i < 6; i++) {
-      hexagons.push(new Hexagon());
-    }
+    for (let i = 0; i < 8; i++) hexagons.push(new Hexagon());
+    for (let i = 0; i < 3; i++) auroraWaves.push(new AuroraWave());
+    for (let i = 0; i < 5; i++) glowOrbs.push(new GlowOrb());
+    for (let i = 0; i < 20; i++) sparkles.push(new Sparkle());
+    for (let i = 0; i < 15; i++) nodes.push(new ConnectionNode());
 
-    for (let i = 0; i < 4; i++) {
-      glowCircles.push(new GlowCircle());
-    }
-
-    for (let i = 0; i < 12; i++) {
-      nodes.push(new ConnectionNode());
-    }
-
-    for (let i = 0; i < 25; i++) {
-      dots.push(new Dot());
-    }
-
-    // Draw connections between nearby nodes
+    // Draw connections
     const drawConnections = () => {
-      const maxDist = 150;
+      const maxDist = 180;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -246,11 +351,15 @@ export const AboutBackground = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
           
           if (dist < maxDist) {
-            const opacity = (1 - dist / maxDist) * 0.15;
+            const opacity = (1 - dist / maxDist) * 0.2;
+            const gradient = ctx.createLinearGradient(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+            gradient.addColorStop(0, `hsla(${nodes[i].color.h}, ${nodes[i].color.s}%, ${nodes[i].color.l}%, ${opacity})`);
+            gradient.addColorStop(1, `hsla(${nodes[j].color.h}, ${nodes[j].color.s}%, ${nodes[j].color.l}%, ${opacity})`);
+            
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `hsla(262, 83%, 65%, ${opacity})`;
+            ctx.strokeStyle = gradient;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -263,14 +372,23 @@ export const AboutBackground = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw glow circles first (background)
-      glowCircles.forEach(circle => {
-        circle.update();
-        circle.draw();
+      // Draw aurora waves (background)
+      auroraWaves.forEach(wave => {
+        wave.update();
+        wave.draw();
+      });
+
+      // Draw glow orbs
+      glowOrbs.forEach(orb => {
+        orb.update();
+        orb.draw();
       });
 
       // Draw connections
-      nodes.forEach(node => node.update());
+      nodes.forEach(node => {
+        node.update();
+        node.draw();
+      });
       drawConnections();
 
       // Draw hexagons
@@ -279,10 +397,10 @@ export const AboutBackground = () => {
         hex.draw();
       });
 
-      // Draw dots
-      dots.forEach(dot => {
-        dot.update();
-        dot.draw();
+      // Draw sparkles
+      sparkles.forEach(sparkle => {
+        sparkle.update();
+        sparkle.draw();
       });
 
       animationId = requestAnimationFrame(animate);
@@ -300,7 +418,7 @@ export const AboutBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.8 }}
+      style={{ opacity: 0.85 }}
     />
   );
 };
