@@ -126,6 +126,91 @@ serve(async (req) => {
         );
       }
 
+      // Team member actions
+      case "add-team-member": {
+        const { memberData } = data;
+        
+        const { data: item, error } = await supabase
+          .from("team_members")
+          .insert({
+            name: memberData.name,
+            username: memberData.username,
+            avatar_url: memberData.avatar_url || null,
+            social_link: memberData.social_link || null,
+            sort_order: memberData.sort_order || 0,
+          })
+          .select()
+          .single();
+
+        if (error) {
+          console.error("Error adding team member:", error);
+          return new Response(
+            JSON.stringify({ success: false, error: error.message }),
+            { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+
+        console.log("Team member added successfully:", item.id);
+        return new Response(
+          JSON.stringify({ success: true, item }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      case "update-team-member": {
+        const { memberId, memberData } = data;
+        
+        const { data: item, error } = await supabase
+          .from("team_members")
+          .update({
+            name: memberData.name,
+            username: memberData.username,
+            avatar_url: memberData.avatar_url || null,
+            social_link: memberData.social_link || null,
+            sort_order: memberData.sort_order || 0,
+          })
+          .eq("id", memberId)
+          .select()
+          .single();
+
+        if (error) {
+          console.error("Error updating team member:", error);
+          return new Response(
+            JSON.stringify({ success: false, error: error.message }),
+            { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+
+        console.log("Team member updated successfully:", memberId);
+        return new Response(
+          JSON.stringify({ success: true, item }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      case "delete-team-member": {
+        const { memberId } = data;
+        
+        const { error } = await supabase
+          .from("team_members")
+          .delete()
+          .eq("id", memberId);
+
+        if (error) {
+          console.error("Error deleting team member:", error);
+          return new Response(
+            JSON.stringify({ success: false, error: error.message }),
+            { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+
+        console.log("Team member deleted successfully:", memberId);
+        return new Response(
+          JSON.stringify({ success: true }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
       default:
         return new Response(
           JSON.stringify({ success: false, error: "Noma'lum amal" }),
