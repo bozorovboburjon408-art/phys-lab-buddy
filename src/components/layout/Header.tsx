@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Atom, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import universityLogo from "@/assets/university-logo.jpg";
 
 const navLinks = [
   { path: "/", label: "Bosh sahifa" },
@@ -23,8 +24,8 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
-              <Atom className="w-6 h-6 text-primary group-hover:rotate-180 transition-transform duration-700" />
+            <div className="w-10 h-10 rounded-full overflow-hidden group-hover:scale-110 transition-all duration-300">
+              <img src={universityLogo} alt="University Logo" className="w-full h-full object-cover" />
             </div>
             <span className="font-semibold text-lg gradient-text group-hover:opacity-80 transition-opacity">PhysicsLab</span>
           </Link>
