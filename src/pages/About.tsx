@@ -1,11 +1,11 @@
 import { Header } from "@/components/layout/Header";
-import { PhysicsBackground } from "@/components/animations/PhysicsBackground";
+import { AboutBackground } from "@/components/animations/AboutBackground";
 import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail } from "lucide-react";
 
 const About = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <PhysicsBackground />
+      <AboutBackground />
       <Header />
 
       {/* Hero Section */}
