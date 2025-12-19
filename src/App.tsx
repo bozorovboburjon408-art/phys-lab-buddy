@@ -12,6 +12,7 @@ import Formulas from "./pages/Formulas";
 import Library from "./pages/Library";
 import AIAssistant from "./pages/AIAssistant";
 import Auth from "./pages/Auth";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const AnimatedRoutes = () => {
         <Route path="/library" element={<Library />} />
         <Route path="/ai-assistant" element={<AIAssistant />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageTransition>
