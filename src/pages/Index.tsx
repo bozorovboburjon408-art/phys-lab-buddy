@@ -6,6 +6,10 @@ import { PhysicsBackground } from "@/components/animations/PhysicsBackground";
 const Index = () => {
   return <div className="min-h-screen bg-background relative">
       <PhysicsBackground />
+      
+      {/* Global blur overlay */}
+      <div className="fixed inset-0 bg-background/40 backdrop-blur-[6px] z-[1]" />
+      
       <Header />
       
       {/* Hero Section */}
