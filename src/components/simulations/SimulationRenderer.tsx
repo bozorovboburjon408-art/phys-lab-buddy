@@ -19,6 +19,10 @@ import { AtwoodMachineSimulation } from "./AtwoodMachineSimulation";
 import { OhmsLawSimulation } from "./OhmsLawSimulation";
 import { ThermalExpansionSimulation } from "./ThermalExpansionSimulation";
 import { HarmonicOscillatorSimulation } from "./HarmonicOscillatorSimulation";
+import { NewtonRingsSimulation } from "./NewtonRingsSimulation";
+import { ElectromagneticInductionSimulation } from "./ElectromagneticInductionSimulation";
+import { ArchimedesSimulation } from "./ArchimedesSimulation";
+import { IlluminationSimulation } from "./IlluminationSimulation";
 
 interface Props {
   simulationId: string;
@@ -47,6 +51,10 @@ export const SimulationRenderer = ({ simulationId, parameters }: Props) => {
     ohmsLaw: OhmsLawSimulation,
     thermalExpansion: ThermalExpansionSimulation,
     harmonicOscillator: HarmonicOscillatorSimulation,
+    newtonRings: NewtonRingsSimulation,
+    electromagneticInduction: ElectromagneticInductionSimulation,
+    archimedes: ArchimedesSimulation,
+    illumination: IlluminationSimulation,
   };
 
   const SimulationComponent = simulations[simulationId];
