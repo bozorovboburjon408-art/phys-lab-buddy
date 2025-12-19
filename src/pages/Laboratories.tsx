@@ -1,49 +1,14 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { LabTable } from "@/components/laboratory/LabTable";
-import { LabEditorDialog } from "@/components/laboratory/LabEditorDialog";
-import { useLaboratories } from "@/hooks/useLaboratories";
-import { useAdmin } from "@/hooks/useAdmin";
+import { laboratories } from "@/data/laboratories";
 import { cn } from "@/lib/utils";
-import { Target, Wrench, BookOpen, ListOrdered, Table, ArrowLeft, ChevronDown, Plus, Edit, Trash2, Shield } from "lucide-react";
+import { Target, Wrench, BookOpen, ListOrdered, Table, ArrowLeft, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { LabExperiment, TableColumn } from "@/types/physics";
-
-interface LabFormData {
-  title: string;
-  title_uz: string;
-  purpose: string;
-  purpose_uz: string;
-  equipment: string[];
-  equipment_uz: string[];
-  theory: string;
-  theory_uz: string;
-  procedure: string[];
-  procedure_uz: string[];
-  table_columns: TableColumn[];
-}
 
 const Laboratories = () => {
-  const { laboratories, loading, createLaboratory, updateLaboratory, deleteLaboratory } = useLaboratories();
-  const { isAdmin } = useAdmin();
-  const [selectedLab, setSelectedLab] = useState<LabExperiment | null>(null);
+  const [selectedLab, setSelectedLab] = useState<typeof laboratories[0] | null>(null);
   const [openSections, setOpenSections] = useState<string[]>(["purpose", "equipment", "theory", "procedure", "table"]);
-  
-  // Admin state
-  const [editorOpen, setEditorOpen] = useState(false);
-  const [editingLab, setEditingLab] = useState<LabExperiment | null>(null);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [labToDelete, setLabToDelete] = useState<LabExperiment | null>(null);
 
   const toggleSection = (section: string) => {
     setOpenSections(prev => 
@@ -54,53 +19,6 @@ const Laboratories = () => {
   };
 
   const isOpen = (section: string) => openSections.includes(section);
-
-  const handleAddNew = () => {
-    setEditingLab(null);
-    setEditorOpen(true);
-  };
-
-  const handleEdit = (lab: LabExperiment, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setEditingLab(lab);
-    setEditorOpen(true);
-  };
-
-  const handleDelete = (lab: LabExperiment, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setLabToDelete(lab);
-    setDeleteDialogOpen(true);
-  };
-
-  const confirmDelete = async () => {
-    if (labToDelete) {
-      await deleteLaboratory(labToDelete.id);
-      setLabToDelete(null);
-      setDeleteDialogOpen(false);
-    }
-  };
-
-  const handleSave = async (data: LabFormData) => {
-    if (editingLab) {
-      await updateLaboratory(editingLab.id, data);
-    } else {
-      await createLaboratory(data);
-    }
-  };
-
-  const convertLabToFormData = (lab: LabExperiment): LabFormData => ({
-    title: lab.title,
-    title_uz: lab.titleUz,
-    purpose: lab.purpose,
-    purpose_uz: lab.purposeUz,
-    equipment: lab.equipment,
-    equipment_uz: lab.equipmentUz,
-    theory: lab.theory,
-    theory_uz: lab.theoryUz,
-    procedure: lab.procedure,
-    procedure_uz: lab.procedureUz,
-    table_columns: lab.tableColumns,
-  });
 
   // Lab List View
   if (!selectedLab) {
@@ -116,115 +34,44 @@ const Laboratories = () => {
               <p className="text-muted-foreground">
                 Laboratoriyani tanlang va tajribani boshlang
               </p>
-              
-              {isAdmin && (
-                <div className="mt-4 flex items-center justify-center gap-2">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm">
-                    <Shield className="w-4 h-4" />
-                    Admin rejimi
-                  </span>
-                  <Button onClick={handleAddNew} size="sm" className="gap-1">
-                    <Plus className="w-4 h-4" />
-                    Yangi qo'shish
-                  </Button>
-                </div>
-              )}
             </div>
 
-            {loading ? (
-              <div className="flex items-center justify-center py-20">
-                <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full" />
-              </div>
-            ) : (
-              /* Lab Grid */
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {laboratories.map((lab, index) => (
-                  <div
-                    key={lab.id}
-                    className="glass-card p-6 text-left hover:glow-border transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 fade-in-up relative"
-                    style={{ animationDelay: `${index * 0.05}s` }}
-                  >
-                    {isAdmin && (
-                      <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8"
-                          onClick={(e) => handleEdit(lab, e)}
-                        >
-                          <Edit className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-destructive hover:text-destructive"
-                          onClick={(e) => handleDelete(lab, e)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    )}
-                    
-                    <button
-                      onClick={() => setSelectedLab(lab)}
-                      className="w-full text-left"
-                    >
-                      <div className="flex items-start gap-4">
-                        <span className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-lg font-bold shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all">
-                          {index + 1}
-                        </span>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
-                            {lab.titleUz}
-                          </h3>
-                          <p className="text-sm text-muted-foreground line-clamp-2">
-                            {lab.purposeUz}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="mt-4 pt-4 border-t border-border/50 flex items-center justify-between">
-                        <span className="text-xs text-muted-foreground">
-                          {lab.equipmentUz.length} ta asbob
-                        </span>
-                        <span className="text-xs text-primary group-hover:translate-x-1 transition-transform">
-                          Boshlash →
-                        </span>
-                      </div>
-                    </button>
+            {/* Lab Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {laboratories.map((lab, index) => (
+                <button
+                  key={lab.id}
+                  onClick={() => setSelectedLab(lab)}
+                  className="glass-card p-6 text-left hover:glow-border transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 fade-in-up"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-lg font-bold shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all">
+                      {index + 1}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                        {lab.titleUz}
+                      </h3>
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {lab.purposeUz}
+                      </p>
+                    </div>
                   </div>
-                ))}
-              </div>
-            )}
+                  
+                  <div className="mt-4 pt-4 border-t border-border/50 flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">
+                      {lab.equipmentUz.length} ta asbob
+                    </span>
+                    <span className="text-xs text-primary group-hover:translate-x-1 transition-transform">
+                      Boshlash →
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </main>
-
-        {/* Editor Dialog */}
-        <LabEditorDialog
-          open={editorOpen}
-          onOpenChange={setEditorOpen}
-          onSave={handleSave}
-          initialData={editingLab ? convertLabToFormData(editingLab) : null}
-          isEditing={!!editingLab}
-        />
-
-        {/* Delete Confirmation */}
-        <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Laboratoriyani o'chirish</AlertDialogTitle>
-              <AlertDialogDescription>
-                "{labToDelete?.titleUz}" laboratoriyasini o'chirishni xohlaysizmi? Bu amalni qaytarib bo'lmaydi.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Bekor qilish</AlertDialogCancel>
-              <AlertDialogAction onClick={confirmDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                O'chirish
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
       </div>
     );
   }
