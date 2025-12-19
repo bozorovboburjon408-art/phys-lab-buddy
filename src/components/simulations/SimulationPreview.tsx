@@ -341,6 +341,228 @@ export const SimulationPreview = ({ simulationId }: SimulationPreviewProps) => {
       ctx.fillRect(width / 2, my, 8, 15);
     };
 
+    const drawAtwoodMachine = () => {
+      // Pulley
+      ctx.strokeStyle = "hsla(187, 92%, 50%, 0.6)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(width / 2, 12, 10, 0, Math.PI * 2);
+      ctx.stroke();
+      
+      // Rope and masses
+      const offset = Math.sin(timeRef.current * 2) * 15;
+      
+      ctx.strokeStyle = "hsla(262, 83%, 58%, 0.5)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(width / 2 - 10, 12);
+      ctx.lineTo(width / 2 - 10, 40 - offset);
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.moveTo(width / 2 + 10, 12);
+      ctx.lineTo(width / 2 + 10, 40 + offset);
+      ctx.stroke();
+      
+      // Masses
+      ctx.fillStyle = "hsl(187, 92%, 50%)";
+      ctx.fillRect(width / 2 - 18, 40 - offset, 16, 20);
+      ctx.fillStyle = "hsl(262, 83%, 58%)";
+      ctx.fillRect(width / 2 + 2, 40 + offset, 16, 14);
+    };
+
+    const drawOhmsLaw = () => {
+      // Battery
+      ctx.fillStyle = "hsl(0, 80%, 60%)";
+      ctx.fillRect(15, 35, 5, 20);
+      ctx.fillStyle = "hsl(210, 80%, 60%)";
+      ctx.fillRect(22, 30, 3, 30);
+      
+      // Wire
+      ctx.strokeStyle = "hsl(187, 92%, 50%)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(27, 45);
+      ctx.lineTo(40, 45);
+      ctx.lineTo(40, 25);
+      ctx.lineTo(60, 25);
+      ctx.lineTo(60, 45);
+      ctx.lineTo(75, 45);
+      ctx.stroke();
+      
+      // Resistor
+      ctx.strokeStyle = "hsl(262, 83%, 58%)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(40, 25);
+      for (let i = 0; i < 4; i++) {
+        ctx.lineTo(45 + i * 5, i % 2 === 0 ? 20 : 30);
+      }
+      ctx.lineTo(60, 25);
+      ctx.stroke();
+      
+      // Electrons
+      const t = timeRef.current * 3;
+      for (let i = 0; i < 3; i++) {
+        const pos = ((t + i * 30) % 80);
+        ctx.fillStyle = "hsl(45, 100%, 60%)";
+        ctx.beginPath();
+        ctx.arc(20 + pos, 45, 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+
+    const drawThermalExpansion = () => {
+      const temp = Math.sin(timeRef.current) * 0.5 + 0.5;
+      const barWidth = 50 + temp * 20;
+      
+      // Bar
+      const gradient = ctx.createLinearGradient(20, 0, 20 + barWidth, 0);
+      gradient.addColorStop(0, `hsl(${240 - temp * 200}, 80%, 50%)`);
+      gradient.addColorStop(1, `hsl(${240 - temp * 200}, 80%, 60%)`);
+      ctx.fillStyle = gradient;
+      ctx.fillRect(20, 35, barWidth, 15);
+      
+      // Thermometer
+      ctx.strokeStyle = "hsla(187, 92%, 50%, 0.5)";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(10, 20, 6, 45);
+      ctx.fillStyle = `hsl(${240 - temp * 200}, 80%, 50%)`;
+      ctx.fillRect(11, 65 - temp * 40, 4, temp * 40);
+    };
+
+    const drawHarmonicOscillator = () => {
+      const x = width / 2 + Math.sin(timeRef.current * 3) * 25;
+      const prevX = width / 2 + Math.sin((timeRef.current - 0.5) * 3) * 25;
+      
+      // Spring
+      ctx.strokeStyle = "hsla(262, 83%, 58%, 0.6)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(10, height / 2);
+      for (let i = 0; i < 8; i++) {
+        const sx = 10 + (x - 20) * (i / 8);
+        const sy = height / 2 + (i % 2 === 0 ? 8 : -8);
+        ctx.lineTo(sx, sy);
+      }
+      ctx.lineTo(x - 10, height / 2);
+      ctx.stroke();
+      
+      // Mass
+      ctx.fillStyle = "hsl(187, 92%, 50%)";
+      ctx.fillRect(x - 10, height / 2 - 10, 20, 20);
+      
+      // Velocity indicator
+      ctx.strokeStyle = "hsl(45, 100%, 60%)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x, height / 2);
+      ctx.lineTo(x + (x - prevX) * 3, height / 2);
+      ctx.stroke();
+    };
+
+    const drawNewtonRings = () => {
+      const cx = width / 2;
+      const cy = height / 2;
+      
+      for (let r = 5; r < 35; r += 5) {
+        const phase = Math.sin(r / 5 + timeRef.current * 2);
+        ctx.strokeStyle = `hsla(187, 92%, 50%, ${0.3 + phase * 0.3})`;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      
+      // Center bright spot
+      ctx.fillStyle = "hsl(187, 92%, 70%)";
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    const drawElectromagneticInduction = () => {
+      // Coil
+      ctx.strokeStyle = "hsl(262, 83%, 58%)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.ellipse(width / 2, height / 2, 30, 15, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(width / 2, height / 2 - 5, 30, 15, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      
+      // Moving magnet
+      const mx = width / 2 + Math.sin(timeRef.current * 2) * 20;
+      ctx.fillStyle = "hsl(0, 80%, 60%)";
+      ctx.fillRect(mx - 12, height / 2 - 8, 12, 16);
+      ctx.fillStyle = "hsl(210, 80%, 60%)";
+      ctx.fillRect(mx, height / 2 - 8, 12, 16);
+      
+      // Current indicator
+      const current = Math.cos(timeRef.current * 2);
+      ctx.fillStyle = `hsla(45, 100%, 60%, ${Math.abs(current) * 0.8})`;
+      ctx.beginPath();
+      ctx.arc(85, height / 2, 5, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    const drawArchimedes = () => {
+      // Water
+      ctx.fillStyle = "hsla(210, 80%, 50%, 0.3)";
+      ctx.fillRect(15, 35, 70, 40);
+      
+      // Floating object
+      const buoyancy = Math.sin(timeRef.current * 1.5) * 5;
+      const objY = 40 + buoyancy;
+      
+      ctx.fillStyle = "hsl(30, 80%, 50%)";
+      ctx.fillRect(35, objY, 30, 20);
+      
+      // Force arrows
+      ctx.strokeStyle = "hsl(0, 80%, 60%)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(50, objY + 25);
+      ctx.lineTo(50, objY + 35);
+      ctx.lineTo(47, objY + 32);
+      ctx.moveTo(50, objY + 35);
+      ctx.lineTo(53, objY + 32);
+      ctx.stroke();
+      
+      ctx.strokeStyle = "hsl(187, 92%, 50%)";
+      ctx.beginPath();
+      ctx.moveTo(50, objY - 5);
+      ctx.lineTo(50, objY - 15);
+      ctx.lineTo(47, objY - 12);
+      ctx.moveTo(50, objY - 15);
+      ctx.lineTo(53, objY - 12);
+      ctx.stroke();
+    };
+
+    const drawIllumination = () => {
+      // Light source
+      const pulse = 0.7 + Math.sin(timeRef.current * 3) * 0.3;
+      ctx.fillStyle = `hsla(45, 100%, 60%, ${pulse})`;
+      ctx.beginPath();
+      ctx.arc(20, height / 2, 10, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Light rays
+      ctx.strokeStyle = `hsla(45, 100%, 60%, ${pulse * 0.5})`;
+      ctx.lineWidth = 1;
+      for (let i = -2; i <= 2; i++) {
+        ctx.beginPath();
+        ctx.moveTo(30, height / 2);
+        ctx.lineTo(85, height / 2 + i * 15);
+        ctx.stroke();
+      }
+      
+      // Surface
+      ctx.fillStyle = "hsla(187, 92%, 50%, 0.4)";
+      ctx.fillRect(80, 15, 10, 55);
+    };
+
     const animations: Record<string, () => void> = {
       pendulum: drawPendulum,
       projectile: drawProjectile,
@@ -358,6 +580,14 @@ export const SimulationPreview = ({ simulationId }: SimulationPreviewProps) => {
       capacitor: drawCapacitor,
       doppler: drawDoppler,
       magneticInduction: drawMagneticInduction,
+      atwoodMachine: drawAtwoodMachine,
+      ohmsLaw: drawOhmsLaw,
+      thermalExpansion: drawThermalExpansion,
+      harmonicOscillator: drawHarmonicOscillator,
+      newtonRings: drawNewtonRings,
+      electromagneticInduction: drawElectromagneticInduction,
+      archimedes: drawArchimedes,
+      illumination: drawIllumination,
     };
 
     const animate = () => {
