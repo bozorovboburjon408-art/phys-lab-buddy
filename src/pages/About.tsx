@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { AboutBackground } from "@/components/animations/AboutBackground";
-import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink } from "lucide-react";
+import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 interface TeamMember {
   id: string;
   name: string;
-  username: string;
+  username: string | null;
   avatar_url: string | null;
   social_link: string | null;
   sort_order: number;
@@ -29,9 +29,10 @@ const About = () => {
     name: "",
     username: "",
     avatar_url: "",
-    social_link: "",
-    sort_order: 0
+    social_link: ""
   });
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -70,12 +71,35 @@ const About = () => {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", username: "", avatar_url: "", social_link: "", sort_order: 0 });
+    setFormData({ name: "", username: "", avatar_url: "", social_link: "" });
+    setAvatarFile(null);
     setEditingMember(null);
+  };
+
+  const uploadAvatar = async (file: File): Promise<string | null> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+    
+    const { error } = await supabase.storage
+      .from('team-avatars')
+      .upload(fileName, file);
+    
+    if (error) {
+      console.error("Avatar upload error:", error);
+      return null;
+    }
+    
+    const { data: urlData } = supabase.storage
+      .from('team-avatars')
+      .getPublicUrl(fileName);
+    
+    return urlData.publicUrl;
   };
 
   const handleSave = async () => {
     try {
+      setUploading(true);
+      
       const { data: authData } = await supabase.functions.invoke("lab-admin", {
         body: { password: adminPassword, action: "verify" }
       });
@@ -85,13 +109,33 @@ const About = () => {
         return;
       }
 
+      let avatarUrl = formData.avatar_url;
+      
+      // Upload avatar if file is selected
+      if (avatarFile) {
+        const uploadedUrl = await uploadAvatar(avatarFile);
+        if (uploadedUrl) {
+          avatarUrl = uploadedUrl;
+        } else {
+          toast({ title: "Rasm yuklanmadi", variant: "destructive" });
+          return;
+        }
+      }
+
+      const memberData = {
+        name: formData.name,
+        username: formData.username || null,
+        avatar_url: avatarUrl || null,
+        social_link: formData.social_link || null
+      };
+
       if (editingMember) {
         const { error } = await supabase.functions.invoke("lab-admin", {
           body: {
             password: adminPassword,
             action: "update-team-member",
             memberId: editingMember.id,
-            memberData: formData
+            memberData
           }
         });
         if (error) throw error;
@@ -101,7 +145,7 @@ const About = () => {
           body: {
             password: adminPassword,
             action: "add-team-member",
-            memberData: formData
+            memberData
           }
         });
         if (error) throw error;
@@ -113,6 +157,8 @@ const About = () => {
       fetchTeamMembers();
     } catch (error) {
       toast({ title: "Xatolik yuz berdi", variant: "destructive" });
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -137,11 +183,11 @@ const About = () => {
     setEditingMember(member);
     setFormData({
       name: member.name,
-      username: member.username,
+      username: member.username || "",
       avatar_url: member.avatar_url || "",
-      social_link: member.social_link || "",
-      sort_order: member.sort_order
+      social_link: member.social_link || ""
     });
+    setAvatarFile(null);
     setShowAddDialog(true);
   };
 
@@ -333,7 +379,7 @@ const About = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold truncate">{member.name}</p>
-                        {member.social_link ? (
+                        {member.social_link && member.username ? (
                           <a
                             href={member.social_link}
                             target="_blank"
@@ -343,9 +389,9 @@ const About = () => {
                             @{member.username}
                             <ExternalLink className="w-3 h-3" />
                           </a>
-                        ) : (
+                        ) : member.username ? (
                           <p className="text-sm text-muted-foreground">@{member.username}</p>
-                        )}
+                        ) : null}
                       </div>
                       {isAdmin && (
                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -395,7 +441,7 @@ const About = () => {
               />
             </div>
             <div>
-              <Label>Username</Label>
+              <Label>Username (ixtiyoriy)</Label>
               <Input
                 value={formData.username}
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
@@ -403,12 +449,20 @@ const About = () => {
               />
             </div>
             <div>
-              <Label>Avatar URL (ixtiyoriy)</Label>
-              <Input
-                value={formData.avatar_url}
-                onChange={(e) => setFormData({ ...formData, avatar_url: e.target.value })}
-                placeholder="https://example.com/avatar.jpg"
-              />
+              <Label>Rasm yuklash</Label>
+              <div className="flex items-center gap-2">
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setAvatarFile(e.target.files?.[0] || null)}
+                  className="flex-1"
+                />
+              </div>
+              {(formData.avatar_url || avatarFile) && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  {avatarFile ? avatarFile.name : "Joriy rasm mavjud"}
+                </p>
+              )}
             </div>
             <div>
               <Label>Ijtimoiy tarmoq havolasi (ixtiyoriy)</Label>
@@ -418,15 +472,9 @@ const About = () => {
                 placeholder="https://t.me/username"
               />
             </div>
-            <div>
-              <Label>Tartib raqami</Label>
-              <Input
-                type="number"
-                value={formData.sort_order}
-                onChange={(e) => setFormData({ ...formData, sort_order: parseInt(e.target.value) || 0 })}
-              />
-            </div>
-            <Button onClick={handleSave} className="w-full">Saqlash</Button>
+            <Button onClick={handleSave} className="w-full" disabled={uploading}>
+              {uploading ? "Yuklanmoqda..." : editingMember ? "Saqlash" : "Qo'shish"}
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
