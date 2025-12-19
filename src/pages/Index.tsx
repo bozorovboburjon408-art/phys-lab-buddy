@@ -15,9 +15,6 @@ const Index = () => {
         
         <div className="container mx-auto relative">
           <div className="max-w-3xl mx-auto text-center">
-            {/* Glass/Liquid effect backdrop */}
-            <div className="absolute inset-0 -mx-8 -my-4 bg-card/30 backdrop-blur-[2px] rounded-3xl border border-primary/10 shadow-lg shadow-primary/5" />
-            
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm mb-8 fade-in-up">
                 <Sparkles className="w-4 h-4" />
