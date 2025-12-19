@@ -8,7 +8,7 @@ const Index = () => {
       <PhysicsBackground />
       
       {/* Global blur overlay */}
-      <div className="fixed inset-0 bg-background/40 backdrop-blur-[6px] z-[1]" />
+      <div className="fixed inset-0 bg-background/30 backdrop-blur-[3px] z-[1]" />
       
       <Header />
       
