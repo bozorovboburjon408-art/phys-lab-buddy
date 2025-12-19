@@ -17,13 +17,13 @@ export const AboutBackground = () => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Color palette
+    // Color palette - Blue theme
     const colors = [
-      { h: 187, s: 92, l: 60 },  // Cyan
-      { h: 262, s: 83, l: 65 },  // Purple
-      { h: 320, s: 80, l: 55 },  // Pink
-      { h: 45, s: 90, l: 55 },   // Gold
-      { h: 150, s: 70, l: 50 },  // Emerald
+      { h: 217, s: 91, l: 50 },  // Primary Blue
+      { h: 199, s: 89, l: 48 },  // Sky Blue
+      { h: 210, s: 80, l: 55 },  // Light Blue
+      { h: 225, s: 75, l: 60 },  // Soft Blue
+      { h: 195, s: 85, l: 45 },  // Ocean Blue
     ];
 
     const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];

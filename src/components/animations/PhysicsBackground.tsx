@@ -41,7 +41,7 @@ export const PhysicsBackground = () => {
         this.rotationSpeed = (Math.random() - 0.5) * 0.03;
         this.orbitRadius = this.radius * (Math.random() * 3 + 4);
         this.opacity = Math.random() * 0.5 + 0.4;
-        this.color = Math.random() > 0.5 ? "187, 92%, 60%" : "262, 83%, 65%";
+        this.color = Math.random() > 0.5 ? "217, 91%, 50%" : "199, 89%, 48%";
         this.vx = (Math.random() - 0.5) * 0.4;
         this.vy = (Math.random() - 0.5) * 0.4;
       }
@@ -125,8 +125,8 @@ export const PhysicsBackground = () => {
       draw() {
         if (!ctx) return;
         ctx.font = `bold ${this.size}px 'JetBrains Mono', monospace`;
-        ctx.fillStyle = `hsla(187, 92%, 50%, ${this.opacity})`;
-        ctx.shadowColor = `hsla(187, 92%, 50%, 0.3)`;
+        ctx.fillStyle = `hsla(217, 91%, 50%, ${this.opacity})`;
+        ctx.shadowColor = `hsla(217, 91%, 50%, 0.3)`;
         ctx.shadowBlur = 10;
         ctx.fillText(this.text, this.x + Math.sin(this.wobble) * 10, this.y);
         ctx.shadowBlur = 0;
@@ -170,7 +170,7 @@ export const PhysicsBackground = () => {
           ctx.lineTo(x, y);
         }
         
-        ctx.strokeStyle = `hsla(262, 83%, 58%, ${this.opacity})`;
+        ctx.strokeStyle = `hsla(199, 89%, 48%, ${this.opacity})`;
         ctx.lineWidth = 2;
         ctx.stroke();
       }
@@ -195,7 +195,7 @@ export const PhysicsBackground = () => {
         this.size = Math.random() * 3 + 1;
         this.speed = Math.random() * 0.5 + 0.2;
         this.opacity = Math.random() * 0.6 + 0.35;
-        this.color = Math.random() > 0.5 ? "187, 92%, 50%" : "262, 83%, 58%";
+        this.color = Math.random() > 0.5 ? "217, 91%, 50%" : "199, 89%, 48%";
       }
 
       draw() {
