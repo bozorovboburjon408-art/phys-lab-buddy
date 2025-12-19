@@ -661,4 +661,118 @@ Bu yerda A - amplituda, γ - so'nish koeffitsienti, ω - burchak chastotasi, φ 
       { formula: "T = 1/f", latex: "T = \\frac{1}{f}", description: "Period", descriptionUz: "Davr" },
     ],
   },
+  {
+    id: "newtonRings",
+    title: "Newton's Rings",
+    titleUz: "Nyuton halqalari",
+    description: "Observe interference patterns formed by light reflected from curved and flat surfaces.",
+    descriptionUz: "Qavariq va tekis sirtlardan qaytgan yorug'lik interferensiyasini kuzating.",
+    icon: "🔴",
+    parameters: [
+      { id: "wavelength", name: "Wavelength", nameUz: "To'lqin uzunligi", min: 400, max: 700, step: 10, value: 550, unit: "nm" },
+      { id: "radius", name: "Lens Radius", nameUz: "Linza radiusi", min: 0.5, max: 5, step: 0.1, value: 2, unit: "m" },
+      { id: "refractiveIndex", name: "Refractive Index", nameUz: "Sindirish ko'rsatkichi", min: 1, max: 1.5, step: 0.01, value: 1, unit: "" },
+    ],
+    presets: [
+      { id: "red", nameUz: "🔴 Qizil", description: "Qizil yorug'lik (700 nm)", values: { wavelength: 700 } },
+      { id: "green", nameUz: "🟢 Yashil", description: "Yashil yorug'lik (550 nm)", values: { wavelength: 550 } },
+      { id: "blue", nameUz: "🔵 Ko'k", description: "Ko'k yorug'lik (450 nm)", values: { wavelength: 450 } },
+      { id: "largeRadius", nameUz: "📐 Katta radius", description: "Katta radiusli linza", values: { radius: 5 } },
+    ],
+    theoryUz: `Nyuton halqalari - bu qavariq linza va tekis shisha orasidagi havo qatlamida hosil bo'ladigan interferensiya hodisasi.
+
+Halqalar radiusi: r = √(mλR)
+m-chi yorug' halqa uchun: r_m = √(mλR)`,
+    theory: `Newton's rings are interference patterns formed between a convex lens and a flat glass plate.`,
+    formulas: [
+      { formula: "r = √(mλR)", latex: "r_m = \\sqrt{m\\lambda R}", description: "Ring radius", descriptionUz: "Halqa radiusi" },
+      { formula: "2t = mλ", latex: "2t = m\\lambda", description: "Bright ring condition", descriptionUz: "Yorug' halqa sharti" },
+    ],
+  },
+  {
+    id: "electromagneticInduction",
+    title: "Electromagnetic Induction",
+    titleUz: "Elektromagnit induksiya",
+    description: "Study Faraday's law of electromagnetic induction.",
+    descriptionUz: "Faradey elektromagnit induksiya qonunini o'rganing.",
+    icon: "🧲",
+    parameters: [
+      { id: "magnetStrength", name: "Magnet Strength", nameUz: "Magnit kuchi", min: 0.1, max: 2, step: 0.1, value: 1, unit: "T" },
+      { id: "coilTurns", name: "Coil Turns", nameUz: "O'ramlar soni", min: 5, max: 50, step: 5, value: 20, unit: "" },
+      { id: "velocity", name: "Magnet Velocity", nameUz: "Magnit tezligi", min: 1, max: 10, step: 0.5, value: 5, unit: "m/s" },
+    ],
+    presets: [
+      { id: "fast", nameUz: "⚡ Tez harakat", description: "Tez harakatlanuvchi magnit", values: { velocity: 10 } },
+      { id: "strong", nameUz: "🧲 Kuchli magnit", description: "Kuchli magnit maydoni", values: { magnetStrength: 2 } },
+      { id: "manyTurns", nameUz: "🔄 Ko'p o'ram", description: "Ko'p o'ramli g'altak", values: { coilTurns: 50 } },
+      { id: "slow", nameUz: "🐢 Sekin", description: "Sekin harakat", values: { velocity: 2 } },
+    ],
+    theoryUz: `Elektromagnit induksiya - bu magnit oqimining o'zgarishi natijasida o'tkazgichda EYK hosil bo'lishi.
+
+Faradey qonuni: ε = -N(dΦ/dt)
+Magnit harakatlanganda g'altakda induksion tok hosil bo'ladi.`,
+    theory: `Electromagnetic induction is the production of EMF due to changing magnetic flux through a coil.`,
+    formulas: [
+      { formula: "ε = -N(dΦ/dt)", latex: "\\varepsilon = -N\\frac{d\\Phi}{dt}", description: "Faraday's Law", descriptionUz: "Faradey qonuni" },
+      { formula: "Φ = BA", latex: "\\Phi = BA", description: "Magnetic flux", descriptionUz: "Magnit oqimi" },
+    ],
+  },
+  {
+    id: "archimedes",
+    title: "Archimedes' Principle",
+    titleUz: "Arximed qonuni",
+    description: "Explore buoyancy and floating objects.",
+    descriptionUz: "Suzish va cho'kish hodisalarini o'rganing.",
+    icon: "🚢",
+    parameters: [
+      { id: "objectDensity", name: "Object Density", nameUz: "Jism zichligi", min: 200, max: 2000, step: 50, value: 800, unit: "kg/m³" },
+      { id: "fluidDensity", name: "Fluid Density", nameUz: "Suyuqlik zichligi", min: 500, max: 1500, step: 50, value: 1000, unit: "kg/m³" },
+      { id: "objectVolume", name: "Object Volume", nameUz: "Jism hajmi", min: 0.001, max: 0.01, step: 0.001, value: 0.005, unit: "m³" },
+      { id: "gravity", name: "Gravity", nameUz: "Gravitatsiya", min: 1, max: 25, step: 0.1, value: 9.8, unit: "m/s²" },
+    ],
+    presets: [
+      { id: "wood", nameUz: "🪵 Yog'och", description: "Yog'och suvda suzadi", values: { objectDensity: 600 } },
+      { id: "iron", nameUz: "🔩 Temir", description: "Temir suvda cho'kadi", values: { objectDensity: 7800 } },
+      { id: "ice", nameUz: "🧊 Muz", description: "Muz suvda suzadi", values: { objectDensity: 917 } },
+      { id: "oil", nameUz: "🛢️ Neftda", description: "Neft suyuqligi", values: { fluidDensity: 800 } },
+      { id: "saltWater", nameUz: "🌊 Sho'r suv", description: "Dengiz suvi", values: { fluidDensity: 1025 } },
+    ],
+    theoryUz: `Arximed qonuni: Suyuqlikka botirilgan jismga suyuqlik tomonidan yuqoriga yo'nalgan kuch ta'sir etadi.
+
+Arximed kuchi: F = ρVg
+Bu kuch jism siqib chiqargan suyuqlik og'irligiga teng.`,
+    theory: `Archimedes' principle states that a body submerged in fluid experiences an upward force equal to the weight of displaced fluid.`,
+    formulas: [
+      { formula: "F = ρVg", latex: "F_a = \\rho V g", description: "Buoyant force", descriptionUz: "Arximed kuchi" },
+      { formula: "ρ_jism < ρ_suv → suzadi", latex: "\\rho_{obj} < \\rho_{fluid} \\rightarrow \\text{floats}", description: "Floating condition", descriptionUz: "Suzish sharti" },
+    ],
+  },
+  {
+    id: "illumination",
+    title: "Illumination Law",
+    titleUz: "Yoritilganlik qonuni",
+    description: "Study how light intensity varies with distance and angle.",
+    descriptionUz: "Yorug'lik intensivligining masofa va burchakka bog'liqligini o'rganing.",
+    icon: "💡",
+    parameters: [
+      { id: "luminousIntensity", name: "Luminous Intensity", nameUz: "Yorug'lik kuchi", min: 100, max: 2000, step: 100, value: 1000, unit: "cd" },
+      { id: "distance", name: "Distance", nameUz: "Masofa", min: 1, max: 10, step: 0.5, value: 2, unit: "m" },
+      { id: "angle", name: "Incident Angle", nameUz: "Tushish burchagi", min: 0, max: 80, step: 5, value: 0, unit: "°" },
+    ],
+    presets: [
+      { id: "close", nameUz: "📍 Yaqin", description: "Yaqin masofa", values: { distance: 1 } },
+      { id: "far", nameUz: "📏 Uzoq", description: "Uzoq masofa", values: { distance: 8 } },
+      { id: "angled", nameUz: "📐 Burchakli", description: "45° burchakda", values: { angle: 45 } },
+      { id: "bright", nameUz: "🔆 Yorqin", description: "Kuchli yorug'lik", values: { luminousIntensity: 2000 } },
+    ],
+    theoryUz: `Yoritilganlik - bu yuzaga tushayotgan yorug'lik oqimi zichligi.
+
+E = I·cos(θ) / r²
+Bu yerda I - yorug'lik kuchi, θ - tushish burchagi, r - masofa.`,
+    theory: `Illumination follows the inverse square law and depends on the angle of incidence.`,
+    formulas: [
+      { formula: "E = I/r²", latex: "E = \\frac{I}{r^2}", description: "Inverse square law", descriptionUz: "Teskari kvadrat qonuni" },
+      { formula: "E = I·cos(θ)/r²", latex: "E = \\frac{I \\cos\\theta}{r^2}", description: "With angle", descriptionUz: "Burchak bilan" },
+    ],
+  },
 ];
