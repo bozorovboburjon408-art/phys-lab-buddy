@@ -13,7 +13,7 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
+      <section className="relative pt-32 pb-20 px-4 overflow-hidden z-[2]">
         <div className="absolute inset-0 physics-grid opacity-50" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
         
@@ -42,7 +42,7 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 relative z-[2]">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[{
@@ -68,7 +68,7 @@ const Index = () => {
 
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-border">
+      <footer className="py-8 px-4 border-t border-border relative z-[2]">
         <div className="container mx-auto text-center text-muted-foreground text-sm">
           <p>© 2025 PhysicsLab - Interaktiv fizika platformasi</p>
         </div>
@@ -85,14 +85,17 @@ const FeatureCard = ({
   title: string;
   description: string;
   delay: number;
-}) => <div className="glass-card p-6 hover:glow-border transition-all duration-500 group cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 relative overflow-hidden fade-in-up" style={{
-  animationDelay: `${delay * 0.1}s`
-}}>
+}) => (
+  <div 
+    className="p-6 hover:glow-border transition-all duration-500 group cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/20 relative overflow-hidden fade-in-up bg-card/95 backdrop-blur-sm border border-primary/15 rounded-xl shadow-lg" 
+    style={{ animationDelay: `${delay * 0.1}s` }}
+  >
     <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-accent/10 transition-all duration-500" />
     <div className="relative z-10">
       <div className="text-4xl mb-4 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 inline-block">{icon}</div>
       <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{title}</h3>
       <p className="text-muted-foreground text-sm group-hover:text-foreground/80 transition-colors duration-300">{description}</p>
     </div>
-  </div>;
+  </div>
+);
 export default Index;
