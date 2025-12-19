@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.library-admin]
 verify_jwt = false
+
+[functions.lab-admin]
+verify_jwt = false
