@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { AboutBackground } from "@/components/animations/AboutBackground";
-import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload } from "lucide-react";
+import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -450,18 +450,43 @@ const About = () => {
             </div>
             <div>
               <Label>Rasm yuklash</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setAvatarFile(e.target.files?.[0] || null)}
-                  className="flex-1"
-                />
-              </div>
-              {(formData.avatar_url || avatarFile) && (
-                <p className="text-xs text-muted-foreground mt-1">
-                  {avatarFile ? avatarFile.name : "Joriy rasm mavjud"}
-                </p>
+              {formData.avatar_url && !avatarFile ? (
+                <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/50 border border-border">
+                  <img src={formData.avatar_url} alt="Avatar" className="w-10 h-10 rounded-full object-cover" />
+                  <span className="flex-1 text-sm text-muted-foreground truncate">Joriy rasm</span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setFormData({ ...formData, avatar_url: "" })}
+                    className="h-8 w-8 text-destructive hover:text-destructive"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setAvatarFile(e.target.files?.[0] || null)}
+                    className="flex-1"
+                  />
+                </div>
+              )}
+              {avatarFile && (
+                <div className="flex items-center gap-2 mt-2 p-2 rounded-lg bg-muted/50 border border-border">
+                  <span className="flex-1 text-sm text-muted-foreground truncate">{avatarFile.name}</span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setAvatarFile(null)}
+                    className="h-8 w-8 text-destructive hover:text-destructive"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
               )}
             </div>
             <div>
