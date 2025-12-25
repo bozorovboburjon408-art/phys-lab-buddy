@@ -446,7 +446,7 @@ const About = () => {
                 qo'shilmoqda.
               </p>
               
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/30">
+              <div className="flex flex-col items-center gap-4 p-4 rounded-xl bg-muted/30 text-center">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl">
                   👨‍💻
                 </div>
