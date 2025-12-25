@@ -595,9 +595,9 @@ const About = () => {
                       <div className="w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-accent to-primary flex items-center justify-center flex-shrink-0">
                         {teacher.avatar_url ? <img src={teacher.avatar_url} alt={teacher.name} className="w-full h-full object-cover" /> : <span className="text-lg font-bold text-white">{teacher.name.charAt(0)}</span>}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold truncate">{teacher.name}</p>
-                        {teacher.position && <p className="text-xs text-accent truncate">{teacher.position}</p>}
+                      <div className="flex-1">
+                        <p className="font-semibold">{teacher.name}</p>
+                        {teacher.position && <p className="text-xs text-accent">{teacher.position}</p>}
                         {teacher.social_link ? <a href={teacher.social_link.startsWith('http') ? teacher.social_link : `https://${teacher.social_link}`} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex items-center gap-1">
                             {teacher.username ? `@${teacher.username}` : 'Telegram'}
                             <ExternalLink className="w-3 h-3" />
