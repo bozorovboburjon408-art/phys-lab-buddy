@@ -379,14 +379,14 @@ const About = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold truncate">{member.name}</p>
-                        {member.social_link && member.username ? (
+                        {member.social_link ? (
                           <a
-                            href={member.social_link}
+                            href={member.social_link.startsWith('http') ? member.social_link : `https://${member.social_link}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-sm text-primary hover:underline flex items-center gap-1"
                           >
-                            @{member.username}
+                            {member.username ? `@${member.username}` : 'Telegram'}
                             <ExternalLink className="w-3 h-3" />
                           </a>
                         ) : member.username ? (
