@@ -131,6 +131,42 @@ export type Database = {
         }
         Relationships: []
       }
+      teachers: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          id: string
+          name: string
+          position: string | null
+          social_link: string | null
+          sort_order: number
+          updated_at: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          position?: string | null
+          social_link?: string | null
+          sort_order?: number
+          updated_at?: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          position?: string | null
+          social_link?: string | null
+          sort_order?: number
+          updated_at?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
       team_members: {
         Row: {
           avatar_url: string | null
