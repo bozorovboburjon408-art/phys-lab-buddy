@@ -623,11 +623,19 @@ const About = () => {
                 <p className="text-muted-foreground text-sm mb-2">
                   Takliflar va savollar uchun biz bilan bog'laning
                 </p>
-                <div className="flex items-center gap-2 justify-center text-sm">
-                  <Phone className="w-4 h-4 text-primary" />
-                  <a href="tel:+998901234567" className="text-foreground hover:text-primary transition-colors">
-                    +998 90 123 45 67
-                  </a>
+                <div className="flex flex-col gap-1 items-center text-sm">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-primary" />
+                    <a href="tel:+998912508281" className="text-foreground hover:text-primary transition-colors">
+                      +998 91 250 82 81
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-primary" />
+                    <a href="tel:+998886852277" className="text-foreground hover:text-primary transition-colors">
+                      +998 88 685 22 77
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
