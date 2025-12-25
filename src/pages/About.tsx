@@ -547,11 +547,11 @@ const About = () => {
                   Hozircha jamoa a'zolari qo'shilmagan
                 </p> : <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {teamMembers.map(member => <div key={member.id} className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border/50 hover:border-primary/30 transition-colors group">
-                      <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                      <div className="w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
                         {member.avatar_url ? <img src={member.avatar_url} alt={member.name} className="w-full h-full object-cover" /> : <span className="text-lg font-bold text-white">{member.name.charAt(0)}</span>}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold truncate">{member.name}</p>
+                      <div className="flex-1">
+                        <p className="font-semibold">{member.name}</p>
                         {member.social_link ? <a href={member.social_link.startsWith('http') ? member.social_link : `https://${member.social_link}`} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex items-center gap-1">
                             {member.username ? `@${member.username}` : 'Telegram'}
                             <ExternalLink className="w-3 h-3" />
