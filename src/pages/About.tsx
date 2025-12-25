@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { AboutBackground } from "@/components/animations/AboutBackground";
-import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload, X, Award, Phone } from "lucide-react";
+import { Atom, Users, Target, BookOpen, Code, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload, X, Award, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -479,32 +479,6 @@ const About = () => {
                   Platformadan foydalanish butunlay bepul. Hech qanday ro'yxatdan o'tish 
                   yoki to'lov talab qilinmaydi.
                 </p>
-              </div>
-            </div>
-
-            {/* Developer Section */}
-            <div className="glass-card p-8 fade-in-up bg-card/90">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-primary" />
-                </div>
-                <h2 className="text-2xl font-bold">Yaratuvchi haqida</h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Ushbu platforma O'zbekistondagi o'quvchilar va talabalar uchun fizikani 
-                oson va qiziqarli o'rganish imkoniyatini berish maqsadida yaratilgan. 
-                Loyiha doimiy rivojlanmoqda va yangi animatsiyalar, laboratoriya ishlari 
-                qo'shilmoqda.
-              </p>
-              
-              <div className="flex flex-col items-center gap-4 p-4 rounded-xl bg-muted/30 text-center">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl">
-                  👨‍💻
-                </div>
-                <div>
-                  <p className="font-semibold">Elite jamoasi</p>
-                  <p className="text-sm text-muted-foreground">O'zbekiston</p>
-                </div>
               </div>
             </div>
 
