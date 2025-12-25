@@ -545,26 +545,24 @@ const About = () => {
 
               {teamMembers.length === 0 ? <p className="text-muted-foreground text-center py-8">
                   Hozircha jamoa a'zolari qo'shilmagan
-                </p> : <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {teamMembers.map(member => <div key={member.id} className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border/50 hover:border-primary/30 transition-colors group">
-                      <div className="w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
-                        {member.avatar_url ? <img src={member.avatar_url} alt={member.name} className="w-full h-full object-cover" /> : <span className="text-lg font-bold text-white">{member.name.charAt(0)}</span>}
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-semibold">{member.name}</p>
-                        {member.social_link ? <a href={member.social_link.startsWith('http') ? member.social_link : `https://${member.social_link}`} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex items-center gap-1">
-                            {member.username ? `@${member.username}` : 'Telegram'}
-                            <ExternalLink className="w-3 h-3" />
-                          </a> : member.username ? <p className="text-sm text-muted-foreground">@{member.username}</p> : null}
-                      </div>
-                      {isAdmin && <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Button variant="ghost" size="icon" onClick={() => openEditDialog(member)}>
-                            <Pencil className="w-4 h-4" />
+                </p> : <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {teamMembers.map(member => <div key={member.id} className="flex flex-col items-center text-center p-6 rounded-2xl bg-muted/30 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 group relative">
+                      {isAdmin && <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditDialog(member)}>
+                            <Pencil className="w-3 h-3" />
                           </Button>
-                          <Button variant="ghost" size="icon" onClick={() => handleDelete(member.id)}>
-                            <Trash2 className="w-4 h-4 text-destructive" />
+                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => handleDelete(member.id)}>
+                            <Trash2 className="w-3 h-3 text-destructive" />
                           </Button>
                         </div>}
+                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-primary to-accent flex items-center justify-center ring-4 ring-primary/20 mb-4">
+                        {member.avatar_url ? <img src={member.avatar_url} alt={member.name} className="w-full h-full object-cover" /> : <span className="text-2xl font-bold text-white">{member.name.charAt(0)}</span>}
+                      </div>
+                      <p className="font-semibold text-foreground mb-1">{member.name}</p>
+                      {member.social_link ? <a href={member.social_link.startsWith('http') ? member.social_link : `https://${member.social_link}`} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex items-center gap-1">
+                          {member.username ? `@${member.username}` : 'Telegram'}
+                          <ExternalLink className="w-3 h-3" />
+                        </a> : member.username ? <p className="text-sm text-muted-foreground">@{member.username}</p> : null}
                     </div>)}
                 </div>}
             </div>
@@ -590,27 +588,25 @@ const About = () => {
 
               {teachers.length === 0 ? <p className="text-muted-foreground text-center py-8">
                   Hozircha ustozlar qo'shilmagan
-                </p> : <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {teachers.map(teacher => <div key={teacher.id} className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border/50 hover:border-accent/30 transition-colors group">
-                      <div className="w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-accent to-primary flex items-center justify-center flex-shrink-0">
-                        {teacher.avatar_url ? <img src={teacher.avatar_url} alt={teacher.name} className="w-full h-full object-cover" /> : <span className="text-lg font-bold text-white">{teacher.name.charAt(0)}</span>}
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-semibold">{teacher.name}</p>
-                        {teacher.position && <p className="text-xs text-accent">{teacher.position}</p>}
-                        {teacher.social_link ? <a href={teacher.social_link.startsWith('http') ? teacher.social_link : `https://${teacher.social_link}`} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex items-center gap-1">
-                            {teacher.username ? `@${teacher.username}` : 'Telegram'}
-                            <ExternalLink className="w-3 h-3" />
-                          </a> : teacher.username ? <p className="text-sm text-muted-foreground">@{teacher.username}</p> : null}
-                      </div>
-                      {isAdmin && <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Button variant="ghost" size="icon" onClick={() => openEditTeacherDialog(teacher)}>
-                            <Pencil className="w-4 h-4" />
+                </p> : <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {teachers.map(teacher => <div key={teacher.id} className="flex flex-col items-center text-center p-6 rounded-2xl bg-muted/30 border border-border/50 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/10 transition-all duration-300 hover:-translate-y-1 group relative">
+                      {isAdmin && <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditTeacherDialog(teacher)}>
+                            <Pencil className="w-3 h-3" />
                           </Button>
-                          <Button variant="ghost" size="icon" onClick={() => handleDeleteTeacher(teacher.id)}>
-                            <Trash2 className="w-4 h-4 text-destructive" />
+                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => handleDeleteTeacher(teacher.id)}>
+                            <Trash2 className="w-3 h-3 text-destructive" />
                           </Button>
                         </div>}
+                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-accent to-primary flex items-center justify-center ring-4 ring-accent/20 mb-4">
+                        {teacher.avatar_url ? <img src={teacher.avatar_url} alt={teacher.name} className="w-full h-full object-cover" /> : <span className="text-2xl font-bold text-white">{teacher.name.charAt(0)}</span>}
+                      </div>
+                      <p className="font-semibold text-foreground mb-1">{teacher.name}</p>
+                      {teacher.position && <p className="text-xs text-accent mb-2">{teacher.position}</p>}
+                      {teacher.social_link ? <a href={teacher.social_link.startsWith('http') ? teacher.social_link : `https://${teacher.social_link}`} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline flex items-center gap-1">
+                          {teacher.username ? `@${teacher.username}` : 'Telegram'}
+                          <ExternalLink className="w-3 h-3" />
+                        </a> : teacher.username ? <p className="text-sm text-muted-foreground">@{teacher.username}</p> : null}
                     </div>)}
                 </div>}
             </div>
