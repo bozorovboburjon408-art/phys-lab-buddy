@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { AboutBackground } from "@/components/animations/AboutBackground";
-import { Atom, Users, Target, BookOpen, Code, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload, X, Award, Phone } from "lucide-react";
+import { Atom, Users, Target, Plus, Pencil, Trash2, ExternalLink, Upload, X, Award, Phone, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -427,60 +427,6 @@ const About = () => {
               </p>
             </div>
 
-            {/* Features Grid */}
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="glass-card p-6 fade-in-up stagger-1 bg-card/90">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-lg font-semibold">20+ Interaktiv Animatsiyalar</h3>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  Mayatnik harakati, erkin tushish, to'lqinlar, elektr maydon va boshqa ko'plab 
-                  fizik hodisalarni real vaqtda kuzating.
-                </p>
-              </div>
-
-              <div className="glass-card p-6 fade-in-up stagger-2 bg-card/90">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <GraduationCap className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-lg font-semibold">Virtual Laboratoriyalar</h3>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  To'liq jihozlangan virtual laboratoriyalarda tajribalar o'tkazing, ma'lumotlarni 
-                  yig'ing va natijalarni tahlil qiling.
-                </p>
-              </div>
-
-              <div className="glass-card p-6 fade-in-up stagger-3 bg-card/90">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <Code className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-lg font-semibold">Avtomatik Hisoblash</h3>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  Boshlang'ich qiymatlarni kiriting va tizim formulalar asosida barcha 
-                  natijalarni avtomatik hisoblaydi.
-                </p>
-              </div>
-
-              <div className="glass-card p-6 fade-in-up stagger-4 bg-card/90">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <Users className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-lg font-semibold">Barcha Uchun Bepul</h3>
-                </div>
-                <p className="text-muted-foreground text-sm">
-                  Platformadan foydalanish butunlay bepul. Hech qanday ro'yxatdan o'tish 
-                  yoki to'lov talab qilinmaydi.
-                </p>
-              </div>
-            </div>
 
             {/* Team Members Section */}
             <div className="glass-card p-8 mt-8 fade-in-up bg-card/90">
