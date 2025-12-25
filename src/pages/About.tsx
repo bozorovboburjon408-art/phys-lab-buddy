@@ -502,7 +502,7 @@ const About = () => {
                   👨‍💻
                 </div>
                 <div>
-                  <p className="font-semibold">Bobur's jamoasi</p>
+                  <p className="font-semibold">Alpha jamoasi</p>
                   <p className="text-sm text-muted-foreground">O'zbekiston</p>
                 </div>
               </div>
