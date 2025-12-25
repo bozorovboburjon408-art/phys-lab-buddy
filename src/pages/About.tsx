@@ -592,7 +592,7 @@ const About = () => {
                   Hozircha ustozlar qo'shilmagan
                 </p> : <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {teachers.map(teacher => <div key={teacher.id} className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border/50 hover:border-accent/30 transition-colors group">
-                      <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-accent to-primary flex items-center justify-center flex-shrink-0">
                         {teacher.avatar_url ? <img src={teacher.avatar_url} alt={teacher.name} className="w-full h-full object-cover" /> : <span className="text-lg font-bold text-white">{teacher.name.charAt(0)}</span>}
                       </div>
                       <div className="flex-1 min-w-0">
