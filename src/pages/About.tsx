@@ -588,7 +588,7 @@ const About = () => {
 
               {teachers.length === 0 ? <p className="text-muted-foreground text-center py-8">
                   Hozircha ustozlar qo'shilmagan
-                </p> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                </p> : <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {teachers.map(teacher => <div key={teacher.id} className="flex flex-col items-center text-center p-6 rounded-2xl bg-muted/30 border border-border/50 shadow-md shadow-accent/5 hover:border-accent/50 hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 hover:-translate-y-2 group relative backdrop-blur-sm">
                       {isAdmin && <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditTeacherDialog(teacher)}>
