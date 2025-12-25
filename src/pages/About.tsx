@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { AboutBackground } from "@/components/animations/AboutBackground";
-import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload, X, Award } from "lucide-react";
+import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload, X, Award, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -620,9 +620,15 @@ const About = () => {
                   <Mail className="w-5 h-5 text-primary" />
                   <span className="font-medium">Aloqa</span>
                 </div>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm mb-2">
                   Takliflar va savollar uchun biz bilan bog'laning
                 </p>
+                <div className="flex items-center gap-2 justify-center text-sm">
+                  <Phone className="w-4 h-4 text-primary" />
+                  <a href="tel:+998901234567" className="text-foreground hover:text-primary transition-colors">
+                    +998 90 123 45 67
+                  </a>
+                </div>
               </div>
             </div>
           </div>
