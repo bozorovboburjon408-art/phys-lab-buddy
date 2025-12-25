@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { AboutBackground } from "@/components/animations/AboutBackground";
-import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload, X } from "lucide-react";
+import { Atom, Users, Target, BookOpen, Code, Heart, GraduationCap, Mail, Plus, Pencil, Trash2, ExternalLink, Upload, X, Award } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,25 +18,47 @@ interface TeamMember {
   sort_order: number;
 }
 
+interface Teacher {
+  id: string;
+  name: string;
+  username: string | null;
+  avatar_url: string | null;
+  social_link: string | null;
+  position: string | null;
+  sort_order: number;
+}
+
 const About = () => {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdminDialog, setShowAdminDialog] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
   const [showAddDialog, setShowAddDialog] = useState(false);
+  const [showTeacherDialog, setShowTeacherDialog] = useState(false);
   const [editingMember, setEditingMember] = useState<TeamMember | null>(null);
+  const [editingTeacher, setEditingTeacher] = useState<Teacher | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
     avatar_url: "",
     social_link: ""
   });
+  const [teacherFormData, setTeacherFormData] = useState({
+    name: "",
+    username: "",
+    avatar_url: "",
+    social_link: "",
+    position: ""
+  });
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [teacherAvatarFile, setTeacherAvatarFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     fetchTeamMembers();
+    fetchTeachers();
   }, []);
 
   const fetchTeamMembers = async () => {
@@ -47,6 +69,17 @@ const About = () => {
     
     if (!error && data) {
       setTeamMembers(data);
+    }
+  };
+
+  const fetchTeachers = async () => {
+    const { data, error } = await supabase
+      .from("teachers")
+      .select("*")
+      .order("sort_order", { ascending: true });
+    
+    if (!error && data) {
+      setTeachers(data);
     }
   };
 
@@ -74,6 +107,12 @@ const About = () => {
     setFormData({ name: "", username: "", avatar_url: "", social_link: "" });
     setAvatarFile(null);
     setEditingMember(null);
+  };
+
+  const resetTeacherForm = () => {
+    setTeacherFormData({ name: "", username: "", avatar_url: "", social_link: "", position: "" });
+    setTeacherAvatarFile(null);
+    setEditingTeacher(null);
   };
 
   const uploadAvatar = async (file: File): Promise<string | null> => {
@@ -177,6 +216,103 @@ const About = () => {
     } catch (error) {
       toast({ title: "Xatolik yuz berdi", variant: "destructive" });
     }
+  };
+
+  // Teacher CRUD functions
+  const handleSaveTeacher = async () => {
+    try {
+      setUploading(true);
+      
+      const { data: authData } = await supabase.functions.invoke("lab-admin", {
+        body: { password: adminPassword, action: "verify" }
+      });
+
+      if (!authData?.success) {
+        toast({ title: "Admin huquqi yo'q", variant: "destructive" });
+        return;
+      }
+
+      let avatarUrl = teacherFormData.avatar_url;
+      
+      if (teacherAvatarFile) {
+        const uploadedUrl = await uploadAvatar(teacherAvatarFile);
+        if (uploadedUrl) {
+          avatarUrl = uploadedUrl;
+        } else {
+          toast({ title: "Rasm yuklanmadi", variant: "destructive" });
+          return;
+        }
+      }
+
+      const teacherData = {
+        name: teacherFormData.name,
+        username: teacherFormData.username || null,
+        avatar_url: avatarUrl || null,
+        social_link: teacherFormData.social_link || null,
+        position: teacherFormData.position || null
+      };
+
+      if (editingTeacher) {
+        const { error } = await supabase.functions.invoke("lab-admin", {
+          body: {
+            password: adminPassword,
+            action: "update-teacher",
+            teacherId: editingTeacher.id,
+            teacherData
+          }
+        });
+        if (error) throw error;
+        toast({ title: "Ustoz yangilandi" });
+      } else {
+        const { error } = await supabase.functions.invoke("lab-admin", {
+          body: {
+            password: adminPassword,
+            action: "add-teacher",
+            teacherData
+          }
+        });
+        if (error) throw error;
+        toast({ title: "Ustoz qo'shildi" });
+      }
+
+      setShowTeacherDialog(false);
+      resetTeacherForm();
+      fetchTeachers();
+    } catch (error) {
+      toast({ title: "Xatolik yuz berdi", variant: "destructive" });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDeleteTeacher = async (id: string) => {
+    try {
+      const { error } = await supabase.functions.invoke("lab-admin", {
+        body: {
+          password: adminPassword,
+          action: "delete-teacher",
+          teacherId: id
+        }
+      });
+      if (error) throw error;
+      toast({ title: "Ustoz o'chirildi" });
+      fetchTeachers();
+    } catch (error) {
+      toast({ title: "Xatolik yuz berdi", variant: "destructive" });
+    }
+  };
+
+  const openEditTeacherDialog = (teacher: Teacher) => {
+    setEditingTeacher(teacher);
+    setTeacherFormData({
+      name: teacher.name,
+      username: teacher.username || "",
+      avatar_url: teacher.avatar_url || "",
+      social_link: teacher.social_link || "",
+      position: teacher.position || ""
+    });
+    setTeacherAvatarFile(null);
+    setShowTeacherDialog(true);
   };
 
   const openEditDialog = (member: TeamMember) => {
@@ -409,6 +545,74 @@ const About = () => {
               )}
             </div>
 
+            {/* Teachers Section */}
+            <div className="glass-card p-8 mt-8 fade-in-up bg-card/90">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <Award className="w-6 h-6 text-accent" />
+                  </div>
+                  <h2 className="text-2xl font-bold">Ustozlarimiz</h2>
+                </div>
+                
+                {isAdmin && (
+                  <Button onClick={() => { resetTeacherForm(); setShowTeacherDialog(true); }} size="sm">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Ustoz qo'shish
+                  </Button>
+                )}
+              </div>
+
+              {teachers.length === 0 ? (
+                <p className="text-muted-foreground text-center py-8">
+                  Hozircha ustozlar qo'shilmagan
+                </p>
+              ) : (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {teachers.map((teacher) => (
+                    <div key={teacher.id} className="flex items-center gap-3 p-4 rounded-xl bg-muted/30 border border-border/50 hover:border-accent/30 transition-colors group">
+                      <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-accent to-primary flex items-center justify-center">
+                        {teacher.avatar_url ? (
+                          <img src={teacher.avatar_url} alt={teacher.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <span className="text-lg font-bold text-white">{teacher.name.charAt(0)}</span>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold truncate">{teacher.name}</p>
+                        {teacher.position && (
+                          <p className="text-xs text-accent truncate">{teacher.position}</p>
+                        )}
+                        {teacher.social_link ? (
+                          <a
+                            href={teacher.social_link.startsWith('http') ? teacher.social_link : `https://${teacher.social_link}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-primary hover:underline flex items-center gap-1"
+                          >
+                            {teacher.username ? `@${teacher.username}` : 'Telegram'}
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        ) : teacher.username ? (
+                          <p className="text-sm text-muted-foreground">@{teacher.username}</p>
+                        ) : null}
+                      </div>
+                      {isAdmin && (
+                        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button variant="ghost" size="icon" onClick={() => openEditTeacherDialog(teacher)}>
+                            <Pencil className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="icon" onClick={() => handleDeleteTeacher(teacher.id)}>
+                            <Trash2 className="w-4 h-4 text-destructive" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Contact Section */}
             <div className="mt-8 text-center fade-in-up">
               <div className="glass-card p-6 inline-block bg-card/90">
@@ -499,6 +703,93 @@ const About = () => {
             </div>
             <Button onClick={handleSave} className="w-full" disabled={uploading}>
               {uploading ? "Yuklanmoqda..." : editingMember ? "Saqlash" : "Qo'shish"}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add/Edit Teacher Dialog */}
+      <Dialog open={showTeacherDialog} onOpenChange={(open) => { setShowTeacherDialog(open); if (!open) resetTeacherForm(); }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{editingTeacher ? "Ustozni tahrirlash" : "Yangi ustoz qo'shish"}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div>
+              <Label>Ism</Label>
+              <Input
+                value={teacherFormData.name}
+                onChange={(e) => setTeacherFormData({ ...teacherFormData, name: e.target.value })}
+                placeholder="Masalan: Azamat Karimov"
+              />
+            </div>
+            <div>
+              <Label>Lavozim (ixtiyoriy)</Label>
+              <Input
+                value={teacherFormData.position}
+                onChange={(e) => setTeacherFormData({ ...teacherFormData, position: e.target.value })}
+                placeholder="Masalan: Fizika o'qituvchisi"
+              />
+            </div>
+            <div>
+              <Label>Username (ixtiyoriy)</Label>
+              <Input
+                value={teacherFormData.username}
+                onChange={(e) => setTeacherFormData({ ...teacherFormData, username: e.target.value })}
+                placeholder="Masalan: Azamat3434"
+              />
+            </div>
+            <div>
+              <Label>Rasm yuklash</Label>
+              {teacherFormData.avatar_url && !teacherAvatarFile ? (
+                <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/50 border border-border">
+                  <img src={teacherFormData.avatar_url} alt="Avatar" className="w-10 h-10 rounded-full object-cover" />
+                  <span className="flex-1 text-sm text-muted-foreground truncate">Joriy rasm</span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setTeacherFormData({ ...teacherFormData, avatar_url: "" })}
+                    className="h-8 w-8 text-destructive hover:text-destructive"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setTeacherAvatarFile(e.target.files?.[0] || null)}
+                    className="flex-1"
+                  />
+                </div>
+              )}
+              {teacherAvatarFile && (
+                <div className="flex items-center gap-2 mt-2 p-2 rounded-lg bg-muted/50 border border-border">
+                  <span className="flex-1 text-sm text-muted-foreground truncate">{teacherAvatarFile.name}</span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setTeacherAvatarFile(null)}
+                    className="h-8 w-8 text-destructive hover:text-destructive"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              )}
+            </div>
+            <div>
+              <Label>Ijtimoiy tarmoq havolasi (ixtiyoriy)</Label>
+              <Input
+                value={teacherFormData.social_link}
+                onChange={(e) => setTeacherFormData({ ...teacherFormData, social_link: e.target.value })}
+                placeholder="https://t.me/username"
+              />
+            </div>
+            <Button onClick={handleSaveTeacher} className="w-full" disabled={uploading}>
+              {uploading ? "Yuklanmoqda..." : editingTeacher ? "Saqlash" : "Qo'shish"}
             </Button>
           </div>
         </DialogContent>
