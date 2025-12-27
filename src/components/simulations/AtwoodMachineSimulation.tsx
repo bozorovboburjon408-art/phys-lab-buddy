@@ -90,8 +90,8 @@ export const AtwoodMachineSimulation = ({ parameters }: Props) => {
 
       // Update physics
       velocity += acceleration * 0.016;
-      y1 += velocity * 0.5;
-      y2 -= velocity * 0.5;
+      y1 -= velocity * 0.5;  // mass1 goes up when mass2 is heavier
+      y2 += velocity * 0.5;  // mass2 goes down when mass2 is heavier
 
       // Clamp positions
       if (y1 > maxY || y2 < minY) {
