@@ -775,4 +775,61 @@ Bu yerda I - yorug'lik kuchi, θ - tushish burchagi, r - masofa.`,
       { formula: "E = I·cos(θ)/r²", latex: "E = \\frac{I \\cos\\theta}{r^2}", description: "With angle", descriptionUz: "Burchak bilan" },
     ],
   },
+  {
+    id: "transformerEfficiency",
+    title: "Transformer Efficiency",
+    titleUz: "Transformator FIK",
+    description: "Study transformer efficiency and power losses.",
+    descriptionUz: "Transformatorning foydali ish koeffitsientini va quvvat yo'qotishlarini o'rganing.",
+    icon: "🔌",
+    parameters: [
+      { id: "primaryVoltage", name: "Primary Voltage", nameUz: "Birlamchi kuchlanish", min: 100, max: 500, step: 10, value: 220, unit: "V" },
+      { id: "primaryTurns", name: "Primary Turns", nameUz: "Birlamchi o'ramlar", min: 100, max: 1000, step: 50, value: 500, unit: "" },
+      { id: "secondaryTurns", name: "Secondary Turns", nameUz: "Ikkilamchi o'ramlar", min: 50, max: 500, step: 25, value: 250, unit: "" },
+      { id: "loadPower", name: "Load Power", nameUz: "Yuk quvvati", min: 50, max: 500, step: 10, value: 200, unit: "W" },
+      { id: "coreLoss", name: "Core Loss", nameUz: "Yadro yo'qotishi", min: 0, max: 50, step: 2, value: 10, unit: "W" },
+      { id: "copperLoss", name: "Copper Loss", nameUz: "Mis yo'qotishi", min: 0, max: 50, step: 2, value: 8, unit: "W" },
+    ],
+    presets: [
+      { id: "ideal", nameUz: "✨ Ideal transformator", description: "Yo'qotishsiz ideal holat", values: { coreLoss: 0, copperLoss: 0 } },
+      { id: "highEfficiency", nameUz: "⚡ Yuqori FIK", description: "95%+ samaradorlik", values: { coreLoss: 5, copperLoss: 5, loadPower: 300 } },
+      { id: "lowEfficiency", nameUz: "📉 Past FIK", description: "Ko'p yo'qotishlar bilan", values: { coreLoss: 40, copperLoss: 35, loadPower: 150 } },
+      { id: "stepDown", nameUz: "⬇️ Pasaytiruvchi", description: "Kuchlanishni pasaytiradi", values: { primaryTurns: 1000, secondaryTurns: 100 } },
+      { id: "stepUp", nameUz: "⬆️ Ko'taruvchi", description: "Kuchlanishni ko'taradi", values: { primaryTurns: 200, secondaryTurns: 400 } },
+      { id: "industrial", nameUz: "🏭 Sanoat", description: "Sanoat transformatori", values: { primaryVoltage: 380, loadPower: 400, coreLoss: 15, copperLoss: 12 } },
+    ],
+    theoryUz: `Transformator - bu o'zgaruvchan tokning kuchlanishini o'zgartirish uchun ishlatiladigan elektromagnit qurilma. U ikki yoki undan ortiq elektr o'tkazgichlarning birgalikdagi magnit oqimi orqali ishlaydi.
+
+Transformatorning asosiy qismlari:
+• Birlamchi chulg'am (primer) - kirishga ulangan
+• Ikkilamchi chulg'am (sekunder) - chiqishga ulangan  
+• Yadro - magnit oqimini o'tkazadi
+
+Foydali ish koeffitsienti (FIK) - bu chiqish quvvatining kirish quvvatiga nisbati:
+
+η = P₂/P₁ × 100% = P₂/(P₂ + ΔP) × 100%
+
+Bu yerda:
+• P₁ - kirish quvvati
+• P₂ - chiqish (foydali) quvvati
+• ΔP - quvvat yo'qotishlari
+
+Quvvat yo'qotishlari ikki turga bo'linadi:
+1. Yadro yo'qotishlari (temir yo'qotishlari) - gisterezis va girdobli toklar
+2. Mis yo'qotishlari - chulg'amlardagi qarshilikda issiqlik ajralishi
+
+Ideal transformatorda FIK = 100%, ammo real transformatorlarda 90-99% oralig'ida bo'ladi.
+
+Transformatsiya koeffitsienti: k = U₂/U₁ = n₂/n₁
+Bu yerda n₁ va n₂ - mos ravishda birlamchi va ikkilamchi o'ramlar soni.`,
+    theory: `A transformer is an electromagnetic device that changes AC voltage levels through mutual induction between two or more windings sharing a common magnetic flux.`,
+    formulas: [
+      { formula: "η = P₂/P₁ × 100%", latex: "\\eta = \\frac{P_2}{P_1} \\times 100\\%", description: "Efficiency", descriptionUz: "Foydali ish koeffitsienti" },
+      { formula: "η = P₂/(P₂+ΔP)", latex: "\\eta = \\frac{P_2}{P_2 + \\Delta P}", description: "Efficiency with losses", descriptionUz: "Yo'qotishlar bilan FIK" },
+      { formula: "k = U₂/U₁ = n₂/n₁", latex: "k = \\frac{U_2}{U_1} = \\frac{n_2}{n_1}", description: "Transformation ratio", descriptionUz: "Transformatsiya koeffitsienti" },
+      { formula: "P₁ = P₂ + ΔP", latex: "P_1 = P_2 + \\Delta P", description: "Power balance", descriptionUz: "Quvvat balansi" },
+      { formula: "ΔP = Pyadro + Pmis", latex: "\\Delta P = P_{yadro} + P_{mis}", description: "Total losses", descriptionUz: "Umumiy yo'qotishlar" },
+      { formula: "I₁U₁ = I₂U₂ (ideal)", latex: "I_1 U_1 = I_2 U_2 \\text{ (ideal)}", description: "Ideal transformer", descriptionUz: "Ideal transformator" },
+    ],
+  },
 ];
