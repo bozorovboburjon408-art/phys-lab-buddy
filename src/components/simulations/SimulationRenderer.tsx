@@ -23,6 +23,7 @@ import { NewtonRingsSimulation } from "./NewtonRingsSimulation";
 import { ElectromagneticInductionSimulation } from "./ElectromagneticInductionSimulation";
 import { ArchimedesSimulation } from "./ArchimedesSimulation";
 import { IlluminationSimulation } from "./IlluminationSimulation";
+import { TransformerEfficiencySimulation } from "./TransformerEfficiencySimulation";
 
 interface Props {
   simulationId: string;
@@ -55,6 +56,7 @@ export const SimulationRenderer = ({ simulationId, parameters }: Props) => {
     electromagneticInduction: ElectromagneticInductionSimulation,
     archimedes: ArchimedesSimulation,
     illumination: IlluminationSimulation,
+    transformerEfficiency: TransformerEfficiencySimulation,
   };
 
   const SimulationComponent = simulations[simulationId];
